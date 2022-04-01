@@ -1,0 +1,19 @@
+@import './assets/styles/_variables.scss';
+
+*,
+body {
+  box-sizing: border-box;
+}
+
+body {
+  // height: $screen-height;
+  // width: $screen-width;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  #root {
+    @extend body;
+  }
+}

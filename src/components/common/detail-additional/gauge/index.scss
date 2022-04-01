@@ -1,0 +1,11 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins/font-face';
+
+.gauge {
+  &-image {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 32px;
+    background-image: url(../../../../assets/images/draft/white-panel.png);
+  }
+}

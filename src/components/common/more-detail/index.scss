@@ -1,0 +1,43 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+
+.more-detail {
+  padding: 26px 0 26px 44px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  @include font-face(400, 1em);
+
+  &-image {
+    display: flex;
+    flex-direction: column;
+    .show-image {
+      height: 200px;
+      width: 200px;
+      margin-bottom: 20px;
+      background-image: url(../../../assets/images/draft/white-panel.png);
+    }
+
+    .category-info {
+      margin-bottom: 15px;
+
+      span {
+        display: inline-block;
+        height: 17px;
+        width: 17px;
+        margin-left: 22px;
+        background-image: url(../../../assets/images/icons/zoom.png);
+      }
+    }
+  }
+
+  &-spec {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .spec-header {
+      margin-bottom: 20px;
+    }
+  }
+}

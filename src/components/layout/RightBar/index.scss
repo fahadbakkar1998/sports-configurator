@@ -1,0 +1,48 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+@import '../../../assets/styles/mixins/custom-scrollbar';
+
+.right-bar {
+  $root: &;
+  display: flex;
+  flex-direction: column;
+  // width: 368px;
+  height: 100%;
+  background-color: $background-color;
+  color: $primary-color;
+
+  #{$root}-categories {
+    height: $top-bar-height;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: $right-bar-padding;
+    @include font-face(400, 1em);
+    border-bottom: $primary-border;
+
+    & > p {
+      margin: 0;
+    }
+  }
+}
+
+.right-bar-inner {
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @include custom-scrollbar();
+
+  .right-bar-content {
+    flex-grow: 1;
+    width: 350px;
+  }
+
+  .scrollbar {
+    flex-grow: 1;
+    width: 20px;
+  }
+}

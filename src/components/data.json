@@ -1,0 +1,19 @@
+{
+  "Category": {
+    "Building": [],
+    "Sports Court": [],
+    "Turf": [],
+    "Rubber Flooring": [
+      { "Tiles": [] },
+      { "Rolls": ["Confetti", "Black", "Isometric"] }
+    ],
+    "Playground Surfaces": [],
+    "Indoor Netting Solutions": [],
+    "Outdoor Batting Cage Frames": [],
+    "Outdoor Lighting": [],
+    "Hoops": [],
+    "Backstop/Barrier Nets": [],
+    "Accessories": [],
+    "Wall Padding": []
+  }
+}

@@ -1,0 +1,14 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+
+.title {
+  margin-bottom: 12px;
+}
+
+.items {
+  .item {
+    margin-top: 0;
+    margin-right: 23px;
+    margin-bottom: 15px;
+  }
+}

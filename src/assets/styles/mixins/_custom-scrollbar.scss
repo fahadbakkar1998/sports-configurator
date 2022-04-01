@@ -1,0 +1,17 @@
+@import '../variables';
+
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    border-left: $primary-border;
+    width: 18px;
+    &-track {
+      background-color: transparent;
+    }
+    &-thumb {
+      background-color: $primary-color;
+      border-radius: 8px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+    }
+  }
+}

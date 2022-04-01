@@ -1,0 +1,37 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+
+.total-cart {
+  .add-cart {
+    height: 177px;
+    // width: 350px;
+    padding: 16px 0 0 44px;
+    border-bottom: $primary-border;
+    border-right: $primary-border;
+    @include font-face(400, 1em);
+
+    .cart-button {
+      margin-left: 182px;
+      margin-bottom: 26px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .cart-label {
+    margin-bottom: 16px;
+    @include font-face(700, 1em);
+  }
+
+  .bill-content {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 35px;
+
+    > div {
+      margin-right: 23px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+
+.menu-item {
+  $root: &;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: $category-item-height;
+  padding-left: $menu-item-padding-left;
+  color: $primary-color;
+  border-bottom: $primary-border;
+  border-right: $primary-border;
+  @include font-face(400, 1em);
+
+  .menu-icon {
+    margin-right: 5.29px;
+    transition: transform 0.3s;
+  }
+}
+
+.open {
+  .menu-icon {
+    transform: rotate(90deg);
+  }
+}
+
+.top-menu {
+  .menu-inner-item {
+    @include font-face(700, 1em);
+  }
+}

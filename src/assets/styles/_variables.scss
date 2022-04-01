@@ -1,0 +1,27 @@
+@import './core/colors';
+
+// Desktop resolution
+$screen-height: 1080px;
+$screen-width: 1920px;
+
+// Common border
+$primary-border: 1px solid $primary-border-color;
+$top-bar-height: 55px;
+$common-scrool-width: 22px;
+
+// Left bar
+$left-bar-width: 436px;
+$top-bar-item-height: 40px;
+$top-bar-item-width: 40px;
+$category-list-width: 416px;
+$category-item-height: 60px;
+$category-item-width: 415px;
+$category-indent: 26px;
+$category-item-subitem-padding-left: 88.95px;
+$menu-item-padding-left: 26px;
+$submenu-padding-left: 16.63px;
+// Right bar
+$right-bar-padding: 13px 48px 14px 18px;
+
+// Main screen
+$title-bar-padding: 18px 12px 13px 23px;

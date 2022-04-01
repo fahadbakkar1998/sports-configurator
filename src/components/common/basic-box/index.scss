@@ -1,0 +1,52 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+
+.basic-box {
+  // border-bottom: $primary-border;
+  // border-right: $primary-border;
+  // padding: 26px 0 27px 44px;
+  .box-header {
+    $root: &;
+    padding-right: 34px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 26px;
+    &-label {
+      @include font-face(700, 1em);
+      margin-right: 20px;
+    }
+  }
+
+  .box-inner-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 34px;
+
+    .dimentions-item {
+      margin-right: 37px;
+    }
+
+    > div {
+      margin-bottom: 26px;
+      @include font-face(400, 1em);
+    }
+
+    div:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.box-header-icon {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  border: $primary-border;
+  line-height: 30px;
+  text-align: center;
+  font-style: italic;
+  @include font-face(400, 1em);
+}

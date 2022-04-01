@@ -1,0 +1,62 @@
+@import './assets/styles/variables';
+
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+}
+
+@media screen and (min-width: 1920px) {
+  // .main {
+  //   width: 100%;
+  // }
+
+  .left-bar {
+    flex-shrink: 1;
+    .categories-list {
+      width: 100%;
+    }
+  }
+
+  .main-screen {
+    flex: 4;
+  }
+
+  .right-bar {
+    flex: 1;
+  }
+
+  .inspector {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .left-bar {
+    width: 20%;
+  }
+
+  .right-bar {
+    $right-bar: &;
+    width: 22%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .left-bar,
+  .right-bar {
+    width: 20%;
+  }
+
+  .main-screen {
+    width: 100%;
+    height: 100vh;
+  }
+}

@@ -1,0 +1,19 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins/font-face';
+
+.mesh-size {
+  .mesh-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    > p {
+      margin: 0;
+      margin-right: 37px;
+    }
+  }
+}

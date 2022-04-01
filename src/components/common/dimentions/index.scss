@@ -1,0 +1,29 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins/font-face';
+
+.title {
+  @include font-face(700, 1em);
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .item {
+    height: 28px;
+    margin-right: 50px;
+    margin-top: 26px;
+    @include font-face(400, 1em);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.selected {
+      border: $primary-border;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 2px;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+@mixin font-face($weight, $size) {
+  font-family: 'Roboto';
+  font-weight: $weight;
+  font-size: $size;
+}

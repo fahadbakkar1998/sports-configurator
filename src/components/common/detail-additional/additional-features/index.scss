@@ -1,0 +1,9 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins/font-face';
+
+.lane-image {
+  height: 285px;
+  width: 220px;
+  margin-left: 20px;
+  background-image: url(../../../../assets/images/draft/lane-door-small.png);
+}

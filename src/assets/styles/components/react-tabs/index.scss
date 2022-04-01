@@ -1,0 +1,65 @@
+@import '../../variables';
+@import '../../mixins/font-face';
+
+.react-tabs {
+  // -webkit-tap-highlight-color: transparent;
+
+  &__tab-list {
+    height: 51px;
+    line-height: 51px;
+    border-bottom: $primary-border;
+    border-right: $primary-border;
+    margin: 0;
+    padding-left: 43px;
+    @include font-face(400, 1em);
+  }
+
+  &__tab {
+    display: inline-block;
+    // border: 1px solid transparent;
+    // border-bottom: $primary-border;
+    // bottom: -1px;
+    position: relative;
+    list-style: none;
+    // padding: 6px 12px;
+    margin-right: 30px;
+    cursor: pointer;
+
+    &--selected {
+      // background: $background-color;
+      // border-color: $primary-color;
+      @include font-face(700, 1em);
+      color: $primary-color;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &--disabled {
+      // color: GrayText;
+      // cursor: default;
+    }
+
+    // &:focus {
+    //   outline: none;
+
+    //   &:after {
+    //     content: '';
+    //     position: absolute;
+    //     height: 5px;
+    //     left: -4px;
+    //     right: -4px;
+    //     bottom: -5px;
+    //     background: #fff;
+    //   }
+    // }
+  }
+
+  &__tab-panel {
+    display: none;
+
+    &--selected {
+      display: block;
+    }
+  }
+}
