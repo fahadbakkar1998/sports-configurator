@@ -1,14 +1,13 @@
 import React from 'react';
-import MainScreen from './components/layout/MainScreen';
-import LeftBar from './components/layout/LeftBar';
-import RightBar from './components/layout/RightBar';
-
-import './app.scss';
+import LeftBar from './components/LeftBar/LeftBar';
+import Scene from './components/Scene/Scene';
+import RightBar from './components/RightBar/RightBar';
+import './App.scss';
 
 const App = () => (
-  <div className="main">
+  <div className="App">
     <LeftBar />
-    <MainScreen />
+    <Scene />
     <RightBar />
   </div>
 );

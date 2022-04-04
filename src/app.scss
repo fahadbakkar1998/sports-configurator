@@ -1,62 +1,171 @@
-@import './assets/styles/variables';
+$headerHeight: 2vw;
+$fontPadding: 0.2vw;
 
-.main {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  // justify-content: center;
+$foreColor: #fefefe;
+$backColor: #484848;
+$backMediumColor: #2c2c2c;
+$backDarkColor: #000000;
+$borderColor: #eee;
+$commonHeight: 2vw;
+
+* {
+  color: $foreColor;
+  background-color: $backColor;
+  border-color: $borderColor;
+  line-height: 1;
 }
 
-@media screen and (min-width: 1920px) {
-  // .main {
-  //   width: 100%;
-  // }
+.App {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 
-  .left-bar {
-    flex-shrink: 1;
-    .categories-list {
+  .LeftBar {
+    width: 20%;
+    height: 100%;
+    order: 1;
+
+    .LeftBar_Header {
       width: 100%;
+      height: $headerHeight;
+      display: flex;
+      padding: $fontPadding;
+      gap: $fontPadding;
+      border: 1px solid $borderColor;
+
+      .item {
+        padding: $fontPadding;
+        font-size: calc($headerHeight - 5 * $fontPadding);
+        background-color: $backMediumColor;
+        border-radius: $fontPadding;
+        cursor: pointer;
+
+        &.active {
+          background-color: $backDarkColor;
+        }
+      }
+    }
+
+    .LeftBar_List {
+      width: 100%;
+      height: calc(100% - $headerHeight);
+      border: 1px solid $borderColor;
+      overflow-x: hidden;
+      overflow-y: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      align-items: center;
+
+      .LeftBar_List_Item {
+        width: 100%;
+        height: $commonHeight;
+        display: flex;
+        gap: $fontPadding;
+        align-items: center;
+        padding: $fontPadding;
+        cursor: pointer;
+
+        div {
+          padding: $fontPadding;
+        }
+      }
+
+      .LeftBar_List_Leaf {
+        width: 33.33%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: $fontPadding;
+        padding: $fontPadding;
+
+        .image {
+          width: 90%;
+          cursor: pointer;
+        }
+      }
     }
   }
 
-  .main-screen {
-    flex: 4;
+  .Scene {
+    width: 60%;
+    height: 100%;
+    order: 2;
+
+    .Scene_Header {
+      width: 100%;
+      height: $headerHeight;
+      border: 1px solid $borderColor;
+    }
+
+    .Scene_Content {
+      position: relative;
+      width: 100%;
+      height: calc(100% - $headerHeight);
+      border: 1px solid $borderColor;
+
+      #floor_planner {
+        background-color: white;
+      }
+
+      #three {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hide {
+        display: none;
+      }
+    }
   }
 
-  .right-bar {
-    flex: 1;
-  }
+  .RightBar {
+    width: 20%;
+    height: 100%;
+    order: 3;
 
-  .inspector {
-    width: 100%;
+    .RightBar_Header {
+      width: 100%;
+      height: $headerHeight;
+      border: 1px solid $borderColor;
+    }
+
+    .RightBar_Content {
+      width: 100%;
+      height: calc(100% - $headerHeight);
+      border: 1px solid $borderColor;
+    }
   }
 }
 
-@media screen and (max-width: 1600px) {
-  .left-bar {
-    width: 20%;
+@media screen and (max-width: 768px) {
+  .App {
+    flex-direction: column;
   }
 
-  .right-bar {
-    $right-bar: &;
-    width: 22%;
-  }
-}
-
-@media screen and (max-width: 1500px) {
-  .main {
-    width: 100%;
-    height: 100vh;
+  .LeftBar {
+    width: 100% !important;
+    height: fit-content !important;
+    order: 2 !important;
   }
 
-  .left-bar,
-  .right-bar {
-    width: 20%;
+  .Scene {
+    width: 100% !important;
+    height: fit-content !important;
+    order: 1 !important;
+
+    .Scene_Content {
+      height: 100vw !important;
+    }
   }
 
-  .main-screen {
-    width: 100%;
-    height: 100vh;
+  .RightBar {
+    width: 100% !important;
+    height: fit-content !important;
+    order: 3 !important;
   }
 }
