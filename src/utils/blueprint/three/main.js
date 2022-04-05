@@ -352,17 +352,10 @@ export class Main extends EventDispatcher {
   updateWindowSize() {
     let scope = this;
 
-    // scope.heightMargin = scope.element.offset().top;
-    // scope.widthMargin = scope.element.offset().left;
     scope.heightMargin = 0;
     scope.widthMargin = 0;
     scope.elementWidth = scope.element.innerWidth();
-
-    if (scope.options.resize) {
-      scope.elementHeight = scope.element.innerHeight() - scope.heightMargin;
-    } else {
-      scope.elementHeight = scope.element.innerHeight();
-    }
+    scope.elementHeight = scope.element.innerHeight();
 
     scope.orthocamera.left = -scope.element.innerWidth() / 1.0;
     scope.orthocamera.right = scope.element.innerWidth() / 1.0;
@@ -388,6 +381,7 @@ export class Main extends EventDispatcher {
     scope.controls.target = pan;
     let distance = scope.model.floorplan.getSize().z * 1.5;
     let offset = pan.clone().add(new Vector3(0, distance, distance));
+    console.log(offset);
     // scope.controls.setOffset(offset);
     scope.camera.position.copy(offset);
     scope.controls.update();

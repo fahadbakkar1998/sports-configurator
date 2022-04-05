@@ -1,12 +1,12 @@
-$headerHeight: 2vw;
-$fontPadding: 0.2vw;
+$headerHeight: 2vmax;
+$fontPadding: 0.2vmax;
 
 $foreColor: #fefefe;
 $backColor: #484848;
 $backMediumColor: #2c2c2c;
 $backDarkColor: #000000;
 $borderColor: #eee;
-$commonHeight: 2vw;
+$commonHeight: 2vmax;
 
 * {
   color: $foreColor;
@@ -20,11 +20,13 @@ $commonHeight: 2vw;
   height: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   .LeftBar {
     width: 20%;
     height: 100%;
     order: 1;
+    z-index: 1;
 
     .LeftBar_Header {
       width: 100%;
@@ -50,7 +52,9 @@ $commonHeight: 2vw;
     .LeftBar_List {
       width: 100%;
       height: calc(100% - $headerHeight);
-      border: 1px solid $borderColor;
+      border-left: 1px solid $borderColor;
+      border-right: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
       overflow-x: hidden;
       overflow-y: auto;
       display: flex;
@@ -66,9 +70,13 @@ $commonHeight: 2vw;
         align-items: center;
         padding: $fontPadding;
         cursor: pointer;
+        border-top: 1px solid $borderColor;
+        border-bottom: 1px solid $borderColor;
+        border-right: 1px solid $borderColor;
 
         div {
           padding: $fontPadding;
+          font-size: calc($commonHeight - 5 * $fontPadding);
         }
       }
 
@@ -76,50 +84,47 @@ $commonHeight: 2vw;
         width: 33.33%;
         display: flex;
         align-items: center;
-        flex-direction: column;
-        gap: $fontPadding;
+        justify-content: center;
         padding: $fontPadding;
 
-        .image {
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: $fontPadding;
           width: 90%;
-          cursor: pointer;
+          border: 1px solid $borderColor;
+          border-radius: 0.5vmax;
+
+          .image {
+            width: 100%;
+            cursor: pointer;
+          }
+
+          .name {
+            font-size: calc($commonHeight - 6 * $fontPadding);
+          }
         }
       }
     }
   }
 
   .Scene {
+    position: relative;
     width: 60%;
-    height: 100%;
+    height: fit-content;
     order: 2;
+    z-index: 1;
 
     .Scene_Header {
       width: 100%;
       height: $headerHeight;
       border: 1px solid $borderColor;
-    }
-
-    .Scene_Content {
-      position: relative;
-      width: 100%;
-      height: calc(100% - $headerHeight);
-      border: 1px solid $borderColor;
-
-      #floor_planner {
-        background-color: white;
-      }
-
-      #three {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .hide {
-        display: none;
-      }
+      display: flex;
+      padding: $fontPadding;
+      align-items: center;
+      line-height: 1;
+      font-size: calc($headerHeight - 3 * $fontPadding);
     }
   }
 
@@ -127,11 +132,17 @@ $commonHeight: 2vw;
     width: 20%;
     height: 100%;
     order: 3;
+    z-index: 1;
 
     .RightBar_Header {
       width: 100%;
       height: $headerHeight;
       border: 1px solid $borderColor;
+      padding: $fontPadding;
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      font-size: calc($headerHeight - 3 * $fontPadding);
     }
 
     .RightBar_Content {
@@ -142,25 +153,46 @@ $commonHeight: 2vw;
   }
 }
 
+.Scene_Content {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  #floor_planner {
+    position: absolute;
+    background-color: white;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #three {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .App {
-    flex-direction: column;
+    flex-direction: column !important;
   }
 
   .LeftBar {
     width: 100% !important;
     height: fit-content !important;
     order: 2 !important;
+    margin-top: calc(100vh - $headerHeight) !important;
   }
 
   .Scene {
     width: 100% !important;
-    height: fit-content !important;
     order: 1 !important;
-
-    .Scene_Content {
-      height: 100vw !important;
-    }
   }
 
   .RightBar {

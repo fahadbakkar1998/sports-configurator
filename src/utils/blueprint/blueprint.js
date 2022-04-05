@@ -188,7 +188,7 @@ export { Skybox } from './three/skybox.js';
 
 export { OBJExporter } from './exporters/OBJExporter.js';
 
-// 
+//
 // /** VestaDesigner core application. */
 export class BlueprintJS {
   /**

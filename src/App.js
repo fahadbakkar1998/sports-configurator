@@ -2,6 +2,7 @@ import React from 'react';
 import LeftBar from './components/LeftBar/LeftBar';
 import Scene from './components/Scene/Scene';
 import RightBar from './components/RightBar/RightBar';
+import Scene_Content from './components/Scene/Scene_Content';
 import './App.scss';
 
 const App = () => (
@@ -9,6 +10,7 @@ const App = () => (
     <LeftBar />
     <Scene />
     <RightBar />
+    <Scene_Content></Scene_Content>
   </div>
 );
 

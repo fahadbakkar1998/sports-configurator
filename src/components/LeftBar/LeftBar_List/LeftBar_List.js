@@ -8,19 +8,12 @@ const LeftBar_List = () => {
     if (item.children) {
       return (
         <>
-          <LeftBar_List_Item
-            name={item.name}
-            depth={depth}
-            key={`${depth}_${i}`}></LeftBar_List_Item>
+          <LeftBar_List_Item name={item.name} depth={depth}></LeftBar_List_Item>
           {item.children.map((item, j) => recursiveItem(item, depth + 1, j))}
         </>
       );
     } else {
-      return (
-        <LeftBar_List_Leaf
-          item={item}
-          key={`${depth}_${i}`}></LeftBar_List_Leaf>
-      );
+      return <LeftBar_List_Leaf item={item}></LeftBar_List_Leaf>;
     }
   };
 
