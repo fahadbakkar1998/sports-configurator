@@ -12,6 +12,12 @@ const useZustand = create((set) => ({
     set((state) => ({
       aWall,
     })),
+
+  floorPlanMode: '', // New, Save, Load, Move, Draw, Delete, "Empty"
+  setFloorPlanMode: (floorPlanMode) =>
+    set((state) => ({
+      floorPlanMode,
+    })),
 }));
 
 export default useZustand;

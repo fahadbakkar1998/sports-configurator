@@ -1,5 +1,6 @@
 import React from 'react';
 import useZustand from '../../utils/useZustand';
+import { updateFloorPlan } from '../../utils/bpSupport';
 import cn from 'classnames';
 
 const LeftBar_Header = () => {
@@ -17,7 +18,7 @@ const LeftBar_Header = () => {
         className={cn('item', { active: editMode === '3D' })}
         onClick={() => {
           setEditMode('3D');
-          blueprintJS.model.floorplan.update();
+          updateFloorPlan();
         }}>
         3D
       </div>

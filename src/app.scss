@@ -95,15 +95,37 @@ $commonHeight: 2vmax;
           width: 90%;
           border: 1px solid $borderColor;
           border-radius: 0.5vmax;
+          padding: $fontPadding;
 
           .image {
-            width: 100%;
+            width: 90%;
             cursor: pointer;
+            border-radius: 0.5vmax;
           }
 
           .name {
+            text-align: center;
+            width: 90%;
             font-size: calc($commonHeight - 6 * $fontPadding);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
           }
+        }
+      }
+
+      .floor-plan-item {
+        width: 100%;
+        padding: $fontPadding;
+        border: 1px solid $borderColor;
+        margin: $fontPadding;
+        text-align: center;
+        line-height: 1;
+        font-size: calc($commonHeight - 5 * $fontPadding);
+        cursor: pointer;
+
+        &.active {
+          color: $backMediumColor;
         }
       }
     }

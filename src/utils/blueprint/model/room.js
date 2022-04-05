@@ -431,7 +431,7 @@ export class Room extends EventDispatcher {
         edge = new HalfEdge(this, wallFrom, false);
       } else {
         // something horrible has happened
-        console.log('corners arent connected by a wall, uh oh');
+        console.log("corners aren't connected by a wall, uh oh");
       }
 
       if (i == 0) {

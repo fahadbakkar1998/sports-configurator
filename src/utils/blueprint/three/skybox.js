@@ -193,7 +193,7 @@ export class Skybox extends EventDispatcher {
       },
       undefined,
       function () {
-        console.log('ERROR LOADEING FILE');
+        console.log('ERROR LOADING FILE');
       },
     );
   }

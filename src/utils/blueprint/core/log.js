@@ -49,7 +49,7 @@ export function log(context, level, message) {
       tPrefix = '[INFO_] ';
       break;
     case ELogLevel.Warning:
-      tPrefix = '[WARNG] ';
+      tPrefix = '[WARN_] ';
       break;
     case ELogLevel.Error:
       tPrefix = '[ERROR] ';

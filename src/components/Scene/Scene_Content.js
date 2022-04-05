@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import * as Blueprint from '../../utils/blueprint/blueprint';
 import useZustand from '../../utils/useZustand';
-import { rectHome } from '../../utils/resource';
-import { wallProperties } from '../../utils/common';
+import { loadDefaultDesign } from '../../utils/bpSupport';
 import cn from 'classnames';
 
 const Scene_Content = () => {
@@ -10,7 +9,6 @@ const Scene_Content = () => {
   const setAWall = useZustand((state) => state.setAWall);
 
   useEffect(() => {
-    if (window.blueprintJS) return;
     // init
     window.blueprintJS = new Blueprint.BlueprintJS({
       floorplannerElement: 'floor_planner',
@@ -20,9 +18,13 @@ const Scene_Content = () => {
     });
 
     // load home
-    blueprintJS.model.loadSerialized(rectHome);
+    loadDefaultDesign();
 
-    // events
+    // init events
+    initEvents();
+  }, []);
+
+  const initEvents = () => {
     blueprintJS.three.addEventListener(
       Blueprint.EVENT_WALL_CLICKED,
       function (o) {
@@ -54,7 +56,7 @@ const Scene_Content = () => {
         console.log('EVENT_NOTHING_CLICKED: ', o);
       },
     );
-  }, []);
+  };
 
   return (
     <div className="Scene_Content">

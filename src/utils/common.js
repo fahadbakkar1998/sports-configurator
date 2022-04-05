@@ -13,37 +13,37 @@ export var wallProperties = function () {
     ['assets/rooms/textures/hardwood.png', false, 300],
   ];
 
-  this.floormaterialname = 0;
-  this.wallmaterialname = 0;
+  this.floorMaterialName = 0;
+  this.wallMaterialName = 0;
 
   this.forAllWalls = false;
 
   this.currentWall = null;
   this.currentFloor = null;
 
-  this.wchanged = function () {
+  this.wallChanged = function () {
     if (this.currentWall) {
       this.currentWall.setTexture(
-        this.textures[this.wallmaterialname][0],
-        this.textures[this.wallmaterialname][1],
-        this.textures[this.wallmaterialname][2],
+        this.textures[this.wallMaterialName][0],
+        this.textures[this.wallMaterialName][1],
+        this.textures[this.wallMaterialName][2],
       );
     }
     if (this.currentFloor && this.forAllWalls) {
       this.currentFloor.setRoomWallsTexture(
-        this.textures[this.wallmaterialname][0],
-        this.textures[this.wallmaterialname][1],
-        this.textures[this.wallmaterialname][2],
+        this.textures[this.wallMaterialName][0],
+        this.textures[this.wallMaterialName][1],
+        this.textures[this.wallMaterialName][2],
       );
     }
   };
 
-  this.fchanged = function () {
+  this.floorChanged = function () {
     if (this.currentFloor) {
       this.currentFloor.setTexture(
-        this.textures[this.floormaterialname][0],
-        this.textures[this.floormaterialname][1],
-        this.textures[this.floormaterialname][2],
+        this.textures[this.floorMaterialName][0],
+        this.textures[this.floorMaterialName][1],
+        this.textures[this.floorMaterialName][2],
       );
     }
   };

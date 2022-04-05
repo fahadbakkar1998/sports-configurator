@@ -134,7 +134,6 @@ export class Floor extends EventDispatcher
 
 	showRoof(flag)
 	{
-		console.log(flag);
-		// this.roofPlane.visible = flag;
+		this.roofPlane.visible = flag;
 	}
 }

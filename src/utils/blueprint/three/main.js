@@ -381,7 +381,6 @@ export class Main extends EventDispatcher {
     scope.controls.target = pan;
     let distance = scope.model.floorplan.getSize().z * 1.5;
     let offset = pan.clone().add(new Vector3(0, distance, distance));
-    console.log(offset);
     // scope.controls.setOffset(offset);
     scope.camera.position.copy(offset);
     scope.controls.update();
