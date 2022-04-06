@@ -25,17 +25,17 @@ import { WallTypes } from '../core/constants.js';
 import { Utils } from '../core/utils.js';
 import { HalfEdge } from './half_edge.js';
 
-/** Default texture to be used if nothing is provided. */
+/* Default texture to be used if nothing is provided. */
 export const defaultRoomTexture = {
   url: 'assets/rooms/textures/hardwood.png',
   scale: 400,
 };
 
-/**
+/*
  * A Room is the combination of a Floorplan with a floor plane.
  */
 export class Room extends EventDispatcher {
-  /**
+  /*
    *  ordered CCW
    */
   constructor(floorplan, corners) {
@@ -132,14 +132,14 @@ export class Room extends EventDispatcher {
     }
   }
 
-  /**
+  /*
    * textureStretch always true, just an argument for consistency with walls
    */
   setTexture(textureUrl, textureStretch, textureScale) {
     let uuid = this.getUuid();
     this.floorplan.setFloorTexture(uuid, textureUrl, textureScale);
     this.dispatchEvent({ type: EVENT_CHANGED, item: this });
-    //		this.floorChangeCallbacks.fire();
+    // this.floorChangeCallbacks.fire();
   }
 
   generateRoofPlane() {
@@ -290,10 +290,10 @@ export class Room extends EventDispatcher {
     this._polygonPoints = [];
 
     //The below makes this routine too slow
-    //		this.updateWalls();
-    //		this.updateInteriorCorners();
-    //		this.generatePlane();
-    //		this.generateRoofPlane();
+    // this.updateWalls();
+    // this.updateInteriorCorners();
+    // this.generatePlane();
+    // this.generateRoofPlane();
 
     for (let i = 0; i < this.corners.length; i++) {
       let firstCorner = this.corners[i];
@@ -329,11 +329,11 @@ export class Room extends EventDispatcher {
       return;
     }
 
-    //		this.corners.forEach((corner) => {
-    //			let co = new Vector2(corner.x,corner.y);
-    //			this.areaCenter.add(co);
-    //			points.push(co);
-    //		});
+    // this.corners.forEach((corner) => {
+    // let co = new Vector2(corner.x,corner.y);
+    // this.areaCenter.add(co);
+    // points.push(co);
+    // });
 
     N = this.corners.length;
 
@@ -371,9 +371,9 @@ export class Room extends EventDispatcher {
       b = points[inext];
       //Another irregular polygon method based on the url below
       //https://www.mathsisfun.com/geometry/area-irregular-polygons.html
-      //			let width = a.x - b.x;
-      //			let height = (a.y + b.y) * 0.5;
-      //			let delta = Math.abs(width * height);
+      // let width = a.x - b.x;
+      // let height = (a.y + b.y) * 0.5;
+      // let delta = Math.abs(width * height);
       ax_by = a.x * b.y;
       ay_bx = a.y * b.x;
       delta = ax_by - ay_bx;
@@ -381,9 +381,9 @@ export class Room extends EventDispatcher {
     }
     this._polygonPoints = points;
     this.area = Math.abs(area) * 0.5;
-    //		if we are using the method in url https://www.mathsisfun.com/geometry/area-irregular-polygons.html
-    //		then we dont have to multiply the area by 0.5;
-    //		this.area = Math.abs(area);
+    // if we are using the method in url https://www.mathsisfun.com/geometry/area-irregular-polygons.html
+    // then we dont have to multiply the area by 0.5;
+    // this.area = Math.abs(area);
     this.dispatchEvent({
       type: EVENT_ROOM_ATTRIBUTES_CHANGED,
       item: this,
@@ -409,7 +409,7 @@ export class Room extends EventDispatcher {
     return 0;
   }
 
-  /**
+  /*
    * Populates each wall's half edge relating to this room
    * this creates a fancy doubly connected edge list (DCEL)
    */

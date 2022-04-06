@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-/**
+/*
  * FirstPersonControls class
  * 
  * @author mrdoob / http://mrdoob.com/
@@ -8,7 +8,7 @@ import * as THREE from 'three';
  * @author paulirish / http://paulirish.com/
  */
 class FirstPersonControls {
-	/**
+	/*
 	 * Constructor
 	 * 
 	 * @param {object}
@@ -76,7 +76,7 @@ class FirstPersonControls {
 		this.bindEvents();
 	}
 
-	/**
+	/*
 	 * HandleResize function
 	 */
 	handleResize() {
@@ -89,7 +89,7 @@ class FirstPersonControls {
 		}
 	}
 
-	/**
+	/*
 	 * BindEvents function
 	 */
 	bindEvents() {
@@ -102,7 +102,7 @@ class FirstPersonControls {
 		window.addEventListener( 'keyup', this._onKeyUp, false );
 	}
 
-	/**
+	/*
 	 * OnMouseDown function
 	 * 
 	 * @param {object}
@@ -134,7 +134,7 @@ class FirstPersonControls {
 		this.mouseDragOn = true;
 	}
 
-	/**
+	/*
 	 * OnMouseUp function
 	 * 
 	 * @param {object}
@@ -162,7 +162,7 @@ class FirstPersonControls {
 		this.mouseDragOn = false;
 	}
 
-	/**
+	/*
 	 * OnMouseMove function
 	 * 
 	 * @param {object}
@@ -182,7 +182,7 @@ class FirstPersonControls {
 		}
 	}
 
-	/**
+	/*
 	 * OnKeyDown function
 	 * 
 	 * @param {object}
@@ -224,7 +224,7 @@ class FirstPersonControls {
 		}
 	}
 
-	/**
+	/*
 	 * OnKeyUp function
 	 * 
 	 * @param {object}
@@ -266,7 +266,7 @@ class FirstPersonControls {
 		}
 	}
 
-	/**
+	/*
 	 * Update function
 	 * 
 	 * @param {object}
@@ -346,7 +346,7 @@ class FirstPersonControls {
 		this.object.lookAt( targetPosition );
 	}
 
-	/**
+	/*
 	 * ContextMenu function
 	 * 
 	 * @param {object}
@@ -360,7 +360,7 @@ class FirstPersonControls {
 		event.preventDefault();
 	}
 
-	/**
+	/*
 	 * Dispose function
 	 */
 	dispose() {

@@ -126,7 +126,7 @@ export class Main extends EventDispatcher {
     this.clippingEmpty = Object.freeze([]);
     this.clippingEnabled = false;
 
-    //		console.log('THIS ON MOBILE DEVICE ::: ', isMobile, isTablet);
+    // console.log('THIS ON MOBILE DEVICE ::: ', isMobile, isTablet);
 
     this.init();
   }
@@ -144,7 +144,7 @@ export class Main extends EventDispatcher {
     renderer.setClearColor(0xffffff, 1);
     renderer.clippingPlanes = this.clippingEmpty;
     renderer.localClippingEnabled = false;
-    //		renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.setPixelRatio(window.devicePixelRatio);
     // renderer.sortObjects = false;
 
     return renderer;
@@ -240,7 +240,7 @@ export class Main extends EventDispatcher {
     );
 
     function animate() {
-      //			requestAnimationFrame(animate);
+      // requestAnimationFrame(animate);
       scope.renderer.setAnimationLoop(function () {
         scope.render();
       });
@@ -413,9 +413,9 @@ export class Main extends EventDispatcher {
     console.groupEnd();
   }
 
-  switchWireframe(flag) {
-    this.model.switchWireframe(flag);
-    this.floorplan.switchWireframe(flag);
+  switchWireFrame(flag) {
+    this.model.switchWireFrame(flag);
+    this.floorplan.switchWireFrame(flag);
     this.render(true);
   }
 
@@ -540,8 +540,8 @@ export class Main extends EventDispatcher {
       this.fpscontrols.unlock();
     }
 
-    this.model.switchWireframe(false);
-    this.floorplan.switchWireframe(false);
+    this.model.switchWireFrame(false);
+    this.floorplan.switchWireFrame(false);
     this.render(true);
   }
 

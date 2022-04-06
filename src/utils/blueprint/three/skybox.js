@@ -99,7 +99,7 @@ export class Skybox extends EventDispatcher {
       this.heightSegments,
     );
     this.sky = new Mesh(this.skyGeo, this.skyMat);
-    //		this.sky.position.x += this.sphereRadius*0.5;
+    // this.sky.position.x += this.sphereRadius*0.5;
 
     var groundT = new TextureLoader().load(
       'assets/rooms/textures/Ground_4K.jpg',
@@ -108,7 +108,7 @@ export class Skybox extends EventDispatcher {
     groundT.wrapS = groundT.wrapT = RepeatWrapping;
     groundT.repeat.set(10, 10);
 
-    //		var uniforms2 = {topColor: {type: 'c',value: new Color(0xFFFFFF)},bottomColor: {type: 'c',value: new Color(0x999999)},offset: {type: 'f',value: this.verticalOffset}, exponent: {type:'f', value: this.exponent}};
+    // var uniforms2 = {topColor: {type: 'c',value: new Color(0xFFFFFF)},bottomColor: {type: 'c',value: new Color(0x999999)},offset: {type: 'f',value: this.verticalOffset}, exponent: {type:'f', value: this.exponent}};
     this.groundGeo = new PlaneGeometry(10000, 10000, 10);
     this.groundMat = new MeshBasicMaterial({
       color: 0xeaeaea,
@@ -152,7 +152,7 @@ export class Skybox extends EventDispatcher {
       this.scene.add(this.sky);
       this.scene.add(this.ground);
     }
-    //		this.sky.visible = this.ground.visible = flag;
+    // this.sky.visible = this.ground.visible = flag;
   }
 
   toggleEnvironment(flag) {

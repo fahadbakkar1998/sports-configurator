@@ -15,10 +15,11 @@ export let ELogLevel = Enum(
   'Fatal',
   'Debug',
 );
-/** The current log context. To be set when initializing the Application. */
+
+/* The current log context. To be set when initializing the Application. */
 export let logContext = ELogContext.None;
 
-/** Pre-check if logging for specified context and/or level is enabled.
+/* Pre-check if logging for specified context and/or level is enabled.
  * This may be used to avoid compilation of complex logs.
  * @param context The log context to be verified.
  * @param level The log level to be verified.
@@ -34,7 +35,7 @@ export function isLogging(context, level) {
   );
 }
 
-/** Log the passed message in the context and with given level.
+/* Log the passed message in the context and with given level.
  * @param context The context in which the message should be logged.
  * @param level The level of the message.
  * @param message The messages to be logged.

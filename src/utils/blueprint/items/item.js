@@ -15,12 +15,12 @@ import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
 
-/**
+/*
  * An Item is an abstract entity for all things placed in the scene, e.g. at
  * walls or on the floor.
  */
 export class Item extends Mesh {
-  /**
+  /*
    * Constructs an item.
    *
    * @param model
@@ -46,43 +46,43 @@ export class Item extends Mesh {
     position,
     rotation,
     scale,
-    isgltf = false,
+    isGltf = false,
   ) {
     super();
 
     this.model = model;
     this.metadata = metadata;
 
-    /** */
+    /* */
     this.errorGlow = new Mesh();
-    /** */
+    /* */
     this.hover = false;
-    /** */
+    /* */
     this.selected = false;
-    /** */
+    /* */
     this.highlighted = false;
-    /** */
+    /* */
     this.error = false;
-    /** */
+    /* */
     this.emissiveColor = 0x444444;
-    /** Does this object affect other floor items */
+    /* Does this object affect other floor items */
     this.obstructFloorMoves = true;
-    /** */
+    /* */
     this.position_set = false;
-    /** Show rotate option in context menu */
+    /* Show rotate option in context menu */
     this.allowRotate = true;
-    /** */
+    /* */
     this.fixed = false;
-    /** dragging */
+    /* dragging */
     this.dragOffset = new Vector3();
-    /** */
+    /* */
     this.halfSize = new Vector3(0, 0, 0);
     this.bhelper = null;
 
     this.scene = this.model.scene;
     this._freePosition = true;
 
-    if (!isgltf) {
+    if (!isGltf) {
       this.geometry = geometry;
       this.material = material;
       // center in its boundingbox
@@ -272,16 +272,16 @@ export class Item extends Mesh {
     material.map.needsUpdate = true;
   }
 
-  switchWireframe(flag) {
+  switchWireFrame(flag) {
     this.material = flag ? this.wirematerial : this.originalmaterial;
   }
 
-  /** */
+  /* */
   remove() {
     this.scene.removeItem(this);
   }
 
-  /** */
+  /* */
   resize(height, width, depth) {
     let x = width / this.getWidth();
     let y = height / this.getHeight();
@@ -323,7 +323,7 @@ export class Item extends Mesh {
     this.material.color = c;
   }
 
-  /** */
+  /* */
   setScale(x, y, z) {
     let scaleVec = new Vector3(x, y, z);
     this.halfSize.multiply(scaleVec);
@@ -334,7 +334,7 @@ export class Item extends Mesh {
       this.bhelper.update();
     }
 
-    //		this.updateCanvasTexture(canvas, context, material, w, h);
+    // this.updateCanvasTexture(canvas, context, material, w, h);
     this.updateCanvasTexture(
       this.canvasWH,
       this.canvascontextWH,
@@ -365,33 +365,33 @@ export class Item extends Mesh {
     this.resizeProportionally = flag;
   }
 
-  /** */
+  /* */
   setFixed(fixed) {
     this.fixed = fixed;
   }
 
-  /** Subclass can define to take action after a resize. */
+  /* Subclass can define to take action after a resize. */
   resized() {}
 
-  /** */
+  /* */
   getHeight() {
     return this.halfSize.y * 2.0;
   }
 
-  /** */
+  /* */
   getWidth() {
     return this.halfSize.x * 2.0;
   }
 
-  /** */
+  /* */
   getDepth() {
     return this.halfSize.z * 2.0;
   }
 
-  /** */
+  /* */
   placeInRoom() {}
 
-  /** */
+  /* */
   initObject() {
     this.placeInRoom();
     // An ugly hack to increase the size of gltf models
@@ -409,10 +409,10 @@ export class Item extends Mesh {
     this.scene.needsUpdate = true;
   }
 
-  /** */
+  /* */
   removed() {}
 
-  /** on is a bool */
+  /* on is a bool */
   updateHighlight() {
     let on = this.hover || this.selected;
     this.highlighted = on;
@@ -431,19 +431,19 @@ export class Item extends Mesh {
     }
   }
 
-  /** */
+  /* */
   mouseOver() {
     this.hover = true;
     this.updateHighlight();
   }
 
-  /** */
+  /* */
   mouseOff() {
     this.hover = false;
     this.updateHighlight();
   }
 
-  /** */
+  /* */
   setSelected() {
     this.setScale(1, 1, 1);
     this.selected = true;
@@ -452,7 +452,7 @@ export class Item extends Mesh {
     this.updateHighlight();
   }
 
-  /** */
+  /* */
   setUnselected() {
     this.selected = false;
     this.bhelper.visible = false;
@@ -460,12 +460,12 @@ export class Item extends Mesh {
     this.updateHighlight();
   }
 
-  /** intersection has attributes point (vec3) and object (THREE.Mesh) */
+  /* intersection has attributes point (vec3) and object (THREE.Mesh) */
   clickPressed(intersection) {
     this.dragOffset.copy(intersection.point).sub(this.position);
   }
 
-  /** */
+  /* */
   clickDragged(intersection) {
     if (intersection) {
       this.moveToPosition(
@@ -475,7 +475,7 @@ export class Item extends Mesh {
     }
   }
 
-  /** */
+  /* */
   rotate(intersection) {
     if (intersection) {
       let angle = Utils.angle(
@@ -497,7 +497,7 @@ export class Item extends Mesh {
     }
   }
 
-  /** */
+  /* */
   moveToPosition(vec3) {
     this.position.copy(vec3);
     if (this.bhelper) {
@@ -505,14 +505,14 @@ export class Item extends Mesh {
     }
   }
 
-  /** */
+  /* */
   clickReleased() {
     if (this.error) {
       this.hideError();
     }
   }
 
-  /**
+  /*
    * Returns an array of planes to use other than the ground plane for passing
    * intersection to clickPressed and clickDragged
    */
@@ -520,7 +520,7 @@ export class Item extends Mesh {
     return [];
   }
 
-  /**
+  /*
    * returns the 2d corners of the bounding polygon
    *
    * offset is Vector3 (used for getting corners of object at a new position)
@@ -563,12 +563,12 @@ export class Item extends Mesh {
     return corners;
   }
 
-  /** */
+  /* */
   isValidPosition() {
     return false;
   }
 
-  /** */
+  /* */
   showError(vec3) {
     vec3 = vec3 || this.position;
     if (!this.error) {
@@ -579,7 +579,7 @@ export class Item extends Mesh {
     this.errorGlow.position.copy(vec3);
   }
 
-  /** */
+  /* */
   hideError() {
     if (this.error) {
       this.error = false;
@@ -587,7 +587,7 @@ export class Item extends Mesh {
     }
   }
 
-  /** */
+  /* */
   objectHalfSize() {
     // let objectBox = new Box3();
     // objectBox.setFromObject(this);
@@ -596,7 +596,7 @@ export class Item extends Mesh {
     return objectBox.max.clone().sub(objectBox.min).divideScalar(2);
   }
 
-  /** */
+  /* */
   createGlow(color, opacity, ignoreDepth) {
     ignoreDepth = ignoreDepth || false;
     opacity = opacity || 0.2;
@@ -615,28 +615,28 @@ export class Item extends Mesh {
   }
 
   getMetaData() {
-    let matattribs = [];
+    let matAttribs = [];
     if (this.material.length) {
       this.material.forEach((mat) => {
-        matattribs.push('#' + mat.color.getHexString());
+        matAttribs.push('#' + mat.color.getHexString());
       });
     } else {
-      matattribs.push('#' + this.material.color.getHexString());
+      matAttribs.push('#' + this.material.color.getHexString());
     }
     return {
       item_name: this.metadata.itemName,
       item_type: this.metadata.itemType,
       format: this.metadata.format,
       model_url: this.metadata.modelUrl,
-      xpos: this.position.x,
-      ypos: this.position.y,
-      zpos: this.position.z,
+      xPos: this.position.x,
+      yPos: this.position.y,
+      zPos: this.position.z,
       rotation: this.rotation.y,
       scale_x: this.scale.x,
       scale_y: this.scale.y,
       scale_z: this.scale.z,
       fixed: this.fixed,
-      material_colors: matattribs,
+      material_colors: matAttribs,
     };
   }
 }

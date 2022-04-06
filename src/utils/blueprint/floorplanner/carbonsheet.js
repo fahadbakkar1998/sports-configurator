@@ -3,17 +3,17 @@ import { EVENT_UPDATED } from '../core/events.js';
 import { cmPerPixel, pixelsPerCm, Dimensioning } from '../core/dimensioning.js';
 import { Configuration } from '../core/configuration.js';
 
-/**
+/*
  * The View to be used by a Floorplanner to render in/interact with.
  */
 export class CarbonSheet extends EventDispatcher {
-  constructor(floorplan, viewmodel, canvas) {
+  constructor(floorplan, viewModel, canvas) {
     super();
     this.canvasElement = document.getElementById(canvas);
     this.canvas = canvas;
     this.context = this.canvasElement.getContext('2d');
     this.floorplan = floorplan;
-    this.viewmodel = viewmodel;
+    this.viewModel = viewModel;
 
     this._url = '';
     this._image = new Image();
@@ -23,18 +23,20 @@ export class CarbonSheet extends EventDispatcher {
     this._x = this._y = 0.0;
     this._anchorX = 0;
     this._anchorY = 0;
-    //The values in pixels for width and height that will reflect the image's original size
+
+    // The values in pixels for width and height that will reflect the image's original size
     this._rawWidthPixels = this._rawHeightPixels = 1.0;
+
     //The values in cms for width and height that will reflect the images's original size
     this._rawWidth = this._rawHeight = 1.0;
 
-    //The values in pixels for widht and height that will reflect the scaling of user to floorplan system
+    //The values in pixels for width and height that will reflect the scaling of user to floorplan system
     this._widthPixels = this._heightPixels = 1.0;
-    //		The values in cms for widht and height that will reflect the scaling of user to floorplan system
+
+    // The values in cms for width and height that will reflect the scaling of user to floorplan system
     this._width = this._height = 1.0;
 
     this._drawWidthPixels = this._drawHeightPixels = 1.0;
-
     this._scaleX = this._scaleY = 1.0;
     this._maintainProportion = true;
     this._widthByHeightRatio = 1.0;
@@ -130,7 +132,7 @@ export class CarbonSheet extends EventDispatcher {
 
   set x(val) {
     this._x = val;
-    //		this._anchorX = val;
+    // this._anchorX = val;
     this._updated();
   }
 
@@ -140,7 +142,7 @@ export class CarbonSheet extends EventDispatcher {
 
   set y(val) {
     this._y = val;
-    //		this._anchorY = val;
+    // this._anchorY = val;
     this._updated();
   }
 
@@ -203,21 +205,21 @@ export class CarbonSheet extends EventDispatcher {
   drawOriginCrossHair() {
     let ox = 0;
     let oy = 0;
-    //draw origin crosshair
+    // draw origin crosshair
     this.context.fillStyle = '#FF0000';
     this.context.fillRect(ox - 1.5, oy - 15, 3, 30);
     this.context.fillRect(ox - 15, oy - 1.5, 30, 3);
-    //		this.context.lineWidth = 1;
-    //		this.context.strokeStyle = '#FF0000';
-    //		this.context.strokeRect(ox-1.5, oy-15, 1.5, 30);
-    //		this.context.strokeRect(ox-15, oy-1.5, 28, 1.5);
+    // this.context.lineWidth = 1;
+    // this.context.strokeStyle = '#FF0000';
+    // this.context.strokeRect(ox-1.5, oy-15, 1.5, 30);
+    // this.context.strokeRect(ox-15, oy-1.5, 28, 1.5);
   }
 
-  /** */
+  /* */
   draw() {
     if (this._loaded) {
-      let conX = this.viewmodel.convertX(this._x);
-      let conY = this.viewmodel.convertY(this._y);
+      let conX = this.viewModel.convertX(this._x);
+      let conY = this.viewModel.convertY(this._y);
       this.context.translate(conX, conY);
 
       this.context.globalAlpha = this._transparency;

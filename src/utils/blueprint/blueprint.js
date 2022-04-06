@@ -189,9 +189,9 @@ export { Skybox } from './three/skybox.js';
 export { OBJExporter } from './exporters/OBJExporter.js';
 
 //
-// /** VestaDesigner core application. */
+// /* VestaDesigner core application. */
 export class BlueprintJS {
-  /**
+  /*
    * Creates an instance of BlueprintJS. This is the entry point for the application
    *
    * @param {Object} - options The initialization options.
@@ -206,17 +206,17 @@ export class BlueprintJS {
   constructor(options) {
     Configuration.setValue(configDimUnit, dimMeter);
 
-    /**
+    /*
      * @property {Object} options
      * @type {Object}
      **/
     this.options = options;
-    /**
+    /*
      * @property {Model} model
      * @type {Model}
      **/
     this.model = new Model(options.textureDir);
-    /**
+    /*
      * @property {Main} three
      * @type {Main}
      **/
@@ -228,7 +228,7 @@ export class BlueprintJS {
     );
 
     if (!options.widget) {
-      /**
+      /*
        * @property {Floorplanner2D} floorplanner
        * @type {Floorplanner2D}
        **/

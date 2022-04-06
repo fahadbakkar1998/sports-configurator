@@ -2,7 +2,7 @@ export const degToRad = (angle) => {
   return (angle * Math.PI) / 180;
 };
 
-export var wallProperties = function () {
+export var WallProperties = function () {
   this.textures = [
     ['assets/rooms/textures/wallmap.png', true, 1],
     ['assets/rooms/textures/wallmap_yellow.png', true, 1],
@@ -55,4 +55,16 @@ export var wallProperties = function () {
   this.setFloor = function (floor) {
     this.currentFloor = floor;
   };
+};
+
+export const getUFloat = (val) => {
+  let newVal = parseFloat(val);
+  (!newVal || newVal < 0) && (newVal = 0);
+  return newVal;
+};
+
+export const getFloat = (val) => {
+  let newVal = parseFloat(val);
+  !newVal && (newVal = 0);
+  return newVal;
 };

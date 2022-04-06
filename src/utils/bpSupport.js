@@ -1,5 +1,4 @@
 import { rectHome } from './resource';
-import * as Blueprint from './blueprint/blueprint';
 
 export const saveDesign = (name) => {
   let data = blueprintJS.model.exportSerialized();
@@ -30,10 +29,10 @@ export const addItem = (item) => {
   };
   if (
     [2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 &&
-    aWall &&
-    aWall.currentWall
+    item.aWall &&
+    item.aWall.currentWall
   ) {
-    var placeAt = aWall.currentWall.center.clone();
+    var placeAt = item.aWall.currentWall.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,
       item.model,
@@ -42,10 +41,10 @@ export const addItem = (item) => {
       null,
       null,
       false,
-      { position: placeAt, edge: aWall.currentWall },
+      { position: placeAt, edge: item.aWall.currentWall },
     );
-  } else if (aWall && aWall.currentFloor) {
-    var placeAt = aWall.currentFloor.center.clone();
+  } else if (item.aWall && item.aWall.currentFloor) {
+    var placeAt = item.aWall.currentFloor.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,
       item.model,
@@ -62,15 +61,5 @@ export const addItem = (item) => {
 };
 
 export const updateFloorPlanMode = (mode) => {
-  switch (mode) {
-    case 'Move':
-      blueprintJS.floorplanner.setMode(Blueprint.floorplannerModes.MOVE);
-      break;
-    case 'Draw':
-      blueprintJS.floorplanner.setMode(Blueprint.floorplannerModes.DRAW);
-      break;
-    case 'Delete':
-      blueprintJS.floorplanner.setMode(Blueprint.floorplannerModes.DELETE);
-      break;
-  }
+  blueprintJS.floorplanner.setMode(mode);
 };

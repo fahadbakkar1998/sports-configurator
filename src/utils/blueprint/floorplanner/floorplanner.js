@@ -31,67 +31,67 @@ import {
 import { EVENT_NOTHING_CLICKED } from '../core/events.js';
 import { FloorplannerView2D, floorplannerModes } from './floorplanner_view.js';
 
-/** how much will we move a corner to make a wall axis aligned (cm) */
+/* how much will we move a corner to make a wall axis aligned (cm) */
 //export const snapTolerance = 25;//In CMS
-/**
+/*
  * The Floorplanner implements an interactive tool for creation of floorplans in
  * 2D.
  */
 export class Floorplanner2D extends EventDispatcher {
-  /** */
+  /* */
   constructor(canvas, floorplan) {
     super();
-    /** */
+    /* */
     this.mode = 0;
-    /** */
+    /* */
     this.activeWall = null;
-    /** */
+    /* */
     this.activeCorner = null;
-    /** */
+    /* */
     this.activeRoom = null;
 
-    /** */
+    /* */
     this._clickedWall = null;
-    /** */
+    /* */
     this._clickedWallControl = null;
-    /** */
+    /* */
     this._clickedCorner = null;
-    /** */
+    /* */
     this._clickedRoom = null;
-    /** */
+    /* */
     this.originX = 0;
-    /** */
+    /* */
     this.originY = 0;
-    /** */
+    /* */
     this.unScaledOriginX = 0;
-    /** */
+    /* */
     this.unScaledOriginY = 0;
-    /** drawing state */
+    /* drawing state */
     this.targetX = 0;
-    /** drawing state */
+    /* drawing state */
     this.targetY = 0;
-    /** drawing state */
+    /* drawing state */
     this.lastNode = null;
-    /** */
+    /* */
     this.wallWidth = 0;
-    /** */
+    /* */
     this.modeResetCallbacks = null;
 
-    /** */
+    /* */
     this.mouseDown = false;
-    /** */
+    /* */
     this.mouseMoved = false;
-    /** in ThreeJS coords */
+    /* in ThreeJS coords */
     this.mouseX = 0;
-    /** in ThreeJS coords */
+    /* in ThreeJS coords */
     this.mouseY = 0;
-    /** in ThreeJS coords */
+    /* in ThreeJS coords */
     this.rawMouseX = 0;
-    /** in ThreeJS coords */
+    /* in ThreeJS coords */
     this.rawMouseY = 0;
-    /** mouse position at last click */
+    /* mouse position at last click */
     this.lastX = 0;
-    /** mouse position at last click */
+    /* mouse position at last click */
     this.lastY = 0;
 
     this.canvas = canvas;
@@ -99,17 +99,17 @@ export class Floorplanner2D extends EventDispatcher {
     this.canvasElement = $('#' + canvas);
     this.view = new FloorplannerView2D(this.floorplan, this, canvas);
 
-    //		let cmPerFoot = cmPerFoot;
-    //		let pixelsPerFoot = pixelsPerFoot;
+    // let cmPerFoot = cmPerFoot;
+    // let pixelsPerFoot = pixelsPerFoot;
     this.cmPerPixel = cmPerPixel;
     this.pixelsPerCm = pixelsPerCm;
 
     this.wallWidth = Dimensioning.cmToPixel(
       Configuration.getNumericValue('wallThickness'),
     );
-    //		this.wallWidth = 10.0 * this.pixelsPerCm;
-    this.gridsnapmode = false;
-    this.shiftkey = false;
+    // this.wallWidth = 10.0 * this.pixelsPerCm;
+    this.gridSnapMode = false;
+    this.shiftKey = false;
     // Initialization:
 
     this.setMode(floorplannerModes.MOVE);
@@ -128,7 +128,7 @@ export class Floorplanner2D extends EventDispatcher {
       scope.mouseleave(event);
     });
     this.canvasElement.bind('dblclick', (event) => {
-      scope.doubleclick(event);
+      scope.doubleClick(event);
     });
 
     document.addEventListener('keyup', function (event) {
@@ -141,8 +141,10 @@ export class Floorplanner2D extends EventDispatcher {
       scope.reset();
     });
 
-    function updateView() {
+    function updateView(o) {
       scope.view.draw();
+      console.log(o);
+      scope.dispatchEvent({ type: EVENT_CORNER_ATTRIBUTES_CHANGED });
     }
     floorplan.addEventListener(EVENT_CORNER_ATTRIBUTES_CHANGED, updateView);
     floorplan.addEventListener(EVENT_WALL_ATTRIBUTES_CHANGED, updateView);
@@ -165,8 +167,8 @@ export class Floorplanner2D extends EventDispatcher {
     return this.view.carbonSheet;
   }
 
-  doubleclick() {
-    let userinput, cid;
+  doubleClick() {
+    let userInput, cid;
     function getAValidInput(message, current) {
       let uinput = window.prompt(message, current);
       if (uinput != null) {
@@ -187,15 +189,15 @@ export class Floorplanner2D extends EventDispatcher {
       this.activeCorner.elevation = getAValidInput(
         `Elevation at this point (in ${units},\n${cid}): `,
         Dimensioning.cmToMeasureRaw(this.activeCorner.elevation),
-      ); //Number(userinput);
+      ); //Number(userInput);
       let x = getAValidInput(
         `Location: X (${Dimensioning.cmToMeasureRaw(this.activeCorner.x)}): `,
         Dimensioning.cmToMeasureRaw(this.activeCorner.x),
-      ); //Number(userinput);
+      ); //Number(userInput);
       let y = getAValidInput(
         `Location: Y (${Dimensioning.cmToMeasureRaw(this.activeCorner.y)}): `,
         Dimensioning.cmToMeasureRaw(this.activeCorner.y),
-      ); //Number(userinput);
+      ); //Number(userInput);
       this.activeCorner.move(
         Dimensioning.cmFromMeasureRaw(x),
         Dimensioning.cmFromMeasureRaw(y),
@@ -216,12 +218,12 @@ export class Floorplanner2D extends EventDispatcher {
       if (!Configuration.getNumericValue('systemUI')) {
         return;
       }
-      userinput = window.prompt(
+      userInput = window.prompt(
         'Enter a name for this Room: ',
         this.activeRoom.name,
       );
-      if (userinput != null) {
-        this.activeRoom.name = userinput;
+      if (userInput != null) {
+        this.activeRoom.name = userInput;
       }
       this.view.draw();
     }
@@ -231,23 +233,23 @@ export class Floorplanner2D extends EventDispatcher {
     if (e.keyCode == 27) {
       this.escapeKey();
     }
-    this.gridsnapmode = false;
-    this.shiftkey = false;
+    this.gridSnapMode = false;
+    this.shiftKey = false;
   }
 
   keyDown(e) {
     if (e.shiftKey || e.keyCode == 16) {
-      this.shiftkey = true;
+      this.shiftKey = true;
     }
-    this.gridsnapmode = this.shiftkey;
+    this.gridSnapMode = this.shiftKey;
   }
 
-  /** */
+  /* */
   escapeKey() {
     this.setMode(floorplannerModes.MOVE);
   }
 
-  /** */
+  /* */
   updateTarget() {
     if (this.mode == floorplannerModes.DRAW && this.lastNode) {
       if (
@@ -271,7 +273,7 @@ export class Floorplanner2D extends EventDispatcher {
       this.targetY = this.mouseY;
     }
 
-    if (this.gridsnapmode || Configuration.getNumericValue('snapToGrid')) {
+    if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
       this.targetX =
         Math.floor(
           this.targetX / Configuration.getNumericValue(snapTolerance),
@@ -281,21 +283,21 @@ export class Floorplanner2D extends EventDispatcher {
           this.targetY / Configuration.getNumericValue(snapTolerance),
         ) * Configuration.getNumericValue(snapTolerance);
 
-      //The below will not work, the snapTolerance is necessary for X, Y axis snapping, where as grid snapping is for snapping to grid lines
-      //			this.targetX = Math.floor(this.targetX / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
-      //			this.targetY = Math.floor(this.targetY / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
+      // The below will not work, the snapTolerance is necessary for X, Y axis snapping, where as grid snapping is for snapping to grid lines
+      // this.targetX = Math.floor(this.targetX / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
+      // this.targetY = Math.floor(this.targetY / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
     }
 
     this.view.draw();
   }
 
-  /** */
+  /* */
   mousedown(event) {
     this.mouseDown = true;
     this.mouseMoved = false;
     if (event.touches) {
-      //			event.stopPropagation();
-      //			event.preventDefault();
+      // event.stopPropagation();
+      // event.preventDefault();
       this.rawMouseX = event.touches[0].clientX;
       this.rawMouseY = event.touches[0].clientY;
       //The below line is very important for touch events to work
@@ -313,7 +315,7 @@ export class Floorplanner2D extends EventDispatcher {
         this.activeWall.remove();
       } else {
         //Continue the mode of deleting walls, this is necessary for deleting multiple walls
-        //				this.setMode(floorplannerModes.MOVE);
+        // 	this.setMode(floorplannerModes.MOVE);
       }
     }
 
@@ -324,8 +326,8 @@ export class Floorplanner2D extends EventDispatcher {
       Dimensioning.pixelToCm(event.clientY - this.canvasElement.offset().top) +
       Dimensioning.pixelToCm(this.originY);
 
-    //		this.mouseX = (event.clientX - this.canvasElement.offset().left)  * this.cmPerPixel + this.originX * this.cmPerPixel;
-    //		this.mouseY = (event.clientY - this.canvasElement.offset().top) * this.cmPerPixel + this.originY * this.cmPerPixel;
+    // this.mouseX = (event.clientX - this.canvasElement.offset().left)  * this.cmPerPixel + this.originX * this.cmPerPixel;
+    // this.mouseY = (event.clientY - this.canvasElement.offset().top) * this.cmPerPixel + this.originY * this.cmPerPixel;
 
     if (this._clickedWall) {
       this._clickedWallControl = this.floorplan.overlappedControlPoint(
@@ -380,7 +382,7 @@ export class Floorplanner2D extends EventDispatcher {
     this.view.draw();
   }
 
-  /** */
+  /* */
   mousemove(event) {
     this.mouseMoved = true;
 
@@ -401,8 +403,8 @@ export class Floorplanner2D extends EventDispatcher {
       Dimensioning.pixelToCm(event.clientY - this.canvasElement.offset().top) +
       Dimensioning.pixelToCm(this.originY);
 
-    //		this.mouseX = (event.clientX - this.canvasElement.offset().left)  * this.cmPerPixel + this.originX * this.cmPerPixel;
-    //		this.mouseY = (event.clientY - this.canvasElement.offset().top) * this.cmPerPixel + this.originY * this.cmPerPixel;
+    // this.mouseX = (event.clientX - this.canvasElement.offset().left)  * this.cmPerPixel + this.originX * this.cmPerPixel;
+    // this.mouseY = (event.clientY - this.canvasElement.offset().top) * this.cmPerPixel + this.originY * this.cmPerPixel;
 
     // update target (snapped position of actual mouse)
     if (
@@ -422,7 +424,7 @@ export class Floorplanner2D extends EventDispatcher {
       let hoverRoom = this.floorplan.overlappedRoom(this.mouseX, this.mouseY);
       let draw = false;
 
-      // corner takes precendence
+      // corner takes precedence
       if (hoverCorner != this.activeCorner && this.activeWall == null) {
         this.activeCorner = hoverCorner;
         this.floorplan.dispatchEvent({
@@ -475,9 +477,9 @@ export class Floorplanner2D extends EventDispatcher {
       !this.activeWall &&
       !this._clickedWallControl
     ) {
-      //		else if (this.mouseDown && (this.activeCorner==null) && (this.activeWall==null) && (this._clickedWallControl == null))
-      //		else if (this.mouseDown && (!this._clickedCorner) && (!this._clickedWall) && (this._clickedWallControl == null))
-      //			console.log('PANNING :: ', this.activeCorner, this.activeWall);
+      // else if (this.mouseDown && (this.activeCorner==null) && (this.activeWall==null) && (this._clickedWallControl == null))
+      // else if (this.mouseDown && (!this._clickedCorner) && (!this._clickedWall) && (this._clickedWallControl == null))
+      // console.log('PANNING :: ', this.activeCorner, this.activeWall);
       this.originX += this.lastX - this.rawMouseX;
       this.originY += this.lastY - this.rawMouseY;
       this.unScaledOriginX +=
@@ -492,11 +494,11 @@ export class Floorplanner2D extends EventDispatcher {
     }
     // dragging
     if (this.mode == floorplannerModes.MOVE && this.mouseDown) {
-      //		if (this.mode == floorplannerModes.MOVE && this.mouseDown && (this._clickedCorner || this._clickedWall || this._clickedWallControl != null))
+      // if (this.mode == floorplannerModes.MOVE && this.mouseDown && (this._clickedCorner || this._clickedWall || this._clickedWallControl != null))
       if (this._clickedWallControl != null) {
         mx = this.mouseX;
         my = this.mouseY;
-        if (this.gridsnapmode || Configuration.getNumericValue('snapToGrid')) {
+        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
           mx =
             Math.floor(
               this.mouseX / Configuration.getNumericValue(snapTolerance),
@@ -514,9 +516,9 @@ export class Floorplanner2D extends EventDispatcher {
         return;
       }
       if (this.activeCorner) {
-        if (this.gridsnapmode || Configuration.getNumericValue('snapToGrid')) {
-          //					let mx = (Math.abs(this.mouseX - this.activeCorner.x) < Configuration.getNumericValue(snapTolerance)) ? this.activeCorner.x : this.mouseX;
-          //					let my = (Math.abs(this.mouseY - this.activeCorner.y) < Configuration.getNumericValue(snapTolerance)) ? this.activeCorner.y : this.mouseY;
+        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
+          // 		let mx = (Math.abs(this.mouseX - this.activeCorner.x) < Configuration.getNumericValue(snapTolerance)) ? this.activeCorner.x : this.mouseX;
+          // 		let my = (Math.abs(this.mouseY - this.activeCorner.y) < Configuration.getNumericValue(snapTolerance)) ? this.activeCorner.y : this.mouseY;
 
           mx =
             Math.floor(
@@ -531,12 +533,12 @@ export class Floorplanner2D extends EventDispatcher {
         } else {
           this.activeCorner.move(this.mouseX, this.mouseY);
         }
-        //				if(this.shiftkey)
-        //				{
-        //					this.activeCorner.snapToAxis(Configuration.getNumericValue(snapTolerance));
-        //				}
+        // 	if(this.shiftKey)
+        // 	{
+        // 		this.activeCorner.snapToAxis(Configuration.getNumericValue(snapTolerance));
+        // 	}
       } else if (this.activeWall) {
-        if (this.gridsnapmode || Configuration.getNumericValue('snapToGrid')) {
+        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
           let dx = Dimensioning.pixelToCm(this.rawMouseX - this.lastX);
           let dy = Dimensioning.pixelToCm(this.rawMouseY - this.lastY);
           mx =
@@ -553,8 +555,8 @@ export class Floorplanner2D extends EventDispatcher {
           );
         }
 
-        //				this.activeWall.relativeMove((this.rawMouseX - this.lastX) * this.cmPerPixel, (this.rawMouseY - this.lastY) * this.cmPerPixel);
-        if (this.gridsnapmode || Configuration.getNumericValue('snapToGrid')) {
+        // 	this.activeWall.relativeMove((this.rawMouseX - this.lastX) * this.cmPerPixel, (this.rawMouseY - this.lastY) * this.cmPerPixel);
+        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
           this.activeWall.snapToAxis(
             Configuration.getNumericValue(snapTolerance),
           );
@@ -566,14 +568,14 @@ export class Floorplanner2D extends EventDispatcher {
     }
   }
 
-  /** */
+  /* */
   mouseup(/*event*/) {
     this.mouseDown = false;
-    //		if(event.touches)
-    //		{
-    //			event.stopPropagation();
-    //			event.preventDefault();
-    //		}
+    // if(event.touches)
+    // {
+    // event.stopPropagation();
+    // event.preventDefault();
+    // }
     // drawing
     if (this.mode == floorplannerModes.DRAW && !this.mouseMoved) {
       // This creates the corner already
@@ -609,7 +611,7 @@ export class Floorplanner2D extends EventDispatcher {
     this.view.draw();
   }
 
-  /** */
+  /* */
   mouseleave() {
     this.mouseDown = false;
     // scope.setMode(scope.modes.MOVE);
@@ -617,7 +619,7 @@ export class Floorplanner2D extends EventDispatcher {
 
   __updateInteractiveElements() {}
 
-  /** */
+  /* */
   reset() {
     this.view.carbonSheet.clear();
     this.resizeView();
@@ -626,12 +628,12 @@ export class Floorplanner2D extends EventDispatcher {
     this.view.draw();
   }
 
-  /** */
+  /* */
   resizeView() {
     this.view.handleWindowResize();
   }
 
-  /** */
+  /* */
   setMode(mode) {
     this.lastNode = null;
     this.mode = mode;
@@ -640,7 +642,7 @@ export class Floorplanner2D extends EventDispatcher {
     this.updateTarget();
   }
 
-  /** Sets the origin so that floorplan is centered */
+  /* Sets the origin so that floorplan is centered */
   resetOrigin() {
     let centerX = this.canvasElement.innerWidth() / 2.0;
     let centerY = this.canvasElement.innerHeight() / 2.0;
@@ -654,8 +656,8 @@ export class Floorplanner2D extends EventDispatcher {
     this.unScaledOriginY =
       Dimensioning.cmToPixel(centerFloorplan.z, false) - centerY;
 
-    //		this.originX = centerFloorplan.x * this.pixelsPerCm - centerX;
-    //		this.originY = centerFloorplan.z * this.pixelsPerCm - centerY;
+    // this.originX = centerFloorplan.x * this.pixelsPerCm - centerX;
+    // this.originY = centerFloorplan.z * this.pixelsPerCm - centerY;
   }
 
   zoom() {
@@ -674,15 +676,15 @@ export class Floorplanner2D extends EventDispatcher {
     this.originY = currentPan.y;
   }
 
-  /** Convert from THREEjs coords to canvas coords. */
+  /* Convert from THREEjs coords to canvas coords. */
   convertX(x) {
     return Dimensioning.cmToPixel(x - Dimensioning.pixelToCm(this.originX));
-    //		return (x - (this.originX * this.cmPerPixel)) * this.pixelsPerCm;
+    // return (x - (this.originX * this.cmPerPixel)) * this.pixelsPerCm;
   }
 
-  /** Convert from THREEjs coords to canvas coords. */
+  /* Convert from THREEjs coords to canvas coords. */
   convertY(y) {
     return Dimensioning.cmToPixel(y - Dimensioning.pixelToCm(this.originY));
-    //		return (y - (this.originY * this.cmPerPixel)) * this.pixelsPerCm;
+    // return (y - (this.originY * this.cmPerPixel)) * this.pixelsPerCm;
   }
 }

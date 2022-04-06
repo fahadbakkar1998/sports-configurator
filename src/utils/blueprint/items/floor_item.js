@@ -2,7 +2,7 @@ import { Vector2 } from 'three';
 import { Item } from './item.js';
 import { Utils } from '../core/utils.js';
 
-/**
+/*
  * A Floor Item is an entity to be placed related to a floor.
  */
 export class FloorItem extends Item {
@@ -14,7 +14,7 @@ export class FloorItem extends Item {
     position,
     rotation,
     scale,
-    isgltf = false,
+    isGltf = false,
   ) {
     super(
       model,
@@ -24,12 +24,12 @@ export class FloorItem extends Item {
       position,
       rotation,
       scale,
-      isgltf,
+      isGltf,
     );
     this._freePosition = false;
   }
 
-  /** */
+  /* */
   placeInRoom() {
     if (!this.position_set) {
       let center = this.model.floorplan.getCenter();
@@ -41,12 +41,12 @@ export class FloorItem extends Item {
     }
   }
 
-  /** Take action after a resize */
+  /* Take action after a resize */
   resized() {
     this.position.y = this.halfSize.y;
   }
 
-  /** */
+  /* */
   moveToPosition(vec3) {
     // keeps the position in the room and on the floor
     if (!this.isValidPosition(vec3)) {
@@ -55,12 +55,12 @@ export class FloorItem extends Item {
     } else {
       this.hideError();
       vec3.y = this.position.y; // keep it on the floor!
-      //			this.position.copy(vec3);
+      // this.position.copy(vec3);
       super.moveToPosition(vec3);
     }
   }
 
-  /** */
+  /* */
   isValidPosition(vec3) {
     let corners = this.getCorners('x', 'z', vec3);
     // check if we are in a room
@@ -78,9 +78,9 @@ export class FloorItem extends Item {
       }
     }
     if (!isInARoom) {
-      //We do not want to check if the object is in room or not
-      //It is upto the user to place it anywhere he/she wants however
-      //			return false;
+      // We do not want to check if the object is in room or not
+      // It is upto the user to place it anywhere he/she wants however
+      // return false;
       return true;
     }
 

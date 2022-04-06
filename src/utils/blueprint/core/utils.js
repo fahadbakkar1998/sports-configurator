@@ -3,7 +3,7 @@ import { Math as THREEMath } from 'three';
 import { checkIntersection } from 'line-intersect';
 
 export class Utils {
-  /** Determines the distance of a point from a line.
+  /* Determines the distance of a point from a line.
    * @param point The Point coordinates as THREE.Vector2
    * @param start The starting coordinates of the line as THREE.Vector2
    * @param end The ending coordinates of the line as THREE.Vector2
@@ -16,7 +16,7 @@ export class Utils {
     return Math.sqrt(tDx * tDx + tDy * tDy);
   }
 
-  /** Gets the projection of a point onto a line.
+  /* Gets the projection of a point onto a line.
    * @param point the point
    * @param start the starting coordinates of the line as THREE.Vector2
    * @param end the ending coordinates of the line as THREE.Vector2
@@ -49,7 +49,7 @@ export class Utils {
     return new Vector2(tXx, tYy);
   }
 
-  /** Gets the distance of two points.
+  /* Gets the distance of two points.
    * @param start the starting coordinate of the line as Vector2
    * @param end the ending coordinate of the line as Vector2
    * @returns The distance.
@@ -60,7 +60,7 @@ export class Utils {
     );
   }
 
-  /**  Gets the angle between point1 -> start and 0,0 -> point2 (-pi to pi)
+  /*  Gets the angle between point1 -> start and 0,0 -> point2 (-pi to pi)
    * @returns The angle.
    */
   static angle(start, end) {
@@ -70,7 +70,7 @@ export class Utils {
     return tAngle;
   }
 
-  /** shifts angle to be 0 to 2pi */
+  /* shifts angle to be 0 to 2pi */
   static angle2pi(start, end) {
     let tTheta = Utils.angle(start, end);
     if (tTheta < 0) {
@@ -79,7 +79,7 @@ export class Utils {
     return tTheta;
   }
 
-  /** shifts angle to be 0 to 2pi */
+  /* shifts angle to be 0 to 2pi */
   static getCyclicOrder(points, start = undefined) {
     if (!start) {
       start = new Vector2(0, 0);
@@ -88,13 +88,13 @@ export class Utils {
     let i;
     for (i = 0; i < points.length; i++) {
       let point = points[i];
-      let vect = point.clone().sub(start);
-      let radians = Math.atan2(vect.y, vect.x);
+      let vector = point.clone().sub(start);
+      let radians = Math.atan2(vector.y, vector.x);
       let degrees = THREEMath.radToDeg(radians);
       degrees = degrees > 0 ? degrees : (degrees + 360) % 360;
       angles.push(degrees);
     }
-    let indices = Utils.argsort(angles);
+    let indices = Utils.argSort(angles);
     let sortedAngles = [];
     let sortedPoints = [];
     for (i = 0; i < indices.length; i++) {
@@ -104,7 +104,7 @@ export class Utils {
     return { indices: indices, angles: sortedAngles, points: sortedPoints };
   }
 
-  static argsort(numericalValues, direction = 1) {
+  static argSort(numericalValues, direction = 1) {
     let indices = Array.from(
       new Array(numericalValues.length),
       (val, index) => index,
@@ -115,7 +115,7 @@ export class Utils {
       .map(([, item]) => item); // extract the sorted items
   }
 
-  /** Checks if an array of points is clockwise.
+  /* Checks if an array of points is clockwise.
    * @param points Is array of points with x,y attributes
    * @returns True if clockwise.
    */
@@ -130,6 +130,7 @@ export class Utils {
         }),
       ),
     );
+
     let tSubY = Math.min(
       0,
       Math.min.apply(
@@ -163,7 +164,7 @@ export class Utils {
     return tSum >= 0;
   }
 
-  /** Creates a Guide.
+  /* Creates a Guide.
    * @returns A new Guide.
    */
   static guide() {
@@ -188,7 +189,7 @@ export class Utils {
     );
   }
 
-  /** both arguments are arrays of corners with x,y attributes */
+  /* both arguments are arrays of corners with x,y attributes */
   static polygonPolygonIntersect(firstCorners, secondCorners) {
     for (let tI = 0; tI < firstCorners.length; tI++) {
       let tFirstCorner = firstCorners[tI],
@@ -213,7 +214,7 @@ export class Utils {
     return false;
   }
 
-  /** Corners is an array of points with x,y attributes */
+  /* Corners is an array of points with x,y attributes */
   static linePolygonIntersect(point, point2, corners) {
     for (let tI = 0; tI < corners.length; tI++) {
       let tFirstCorner = corners[tI],
@@ -237,7 +238,7 @@ export class Utils {
     return false;
   }
 
-  /** */
+  /* */
   static lineLineIntersectPoint(aStart, aEnd, bStart, bEnd) {
     let result = checkIntersection(
       aStart.x,
@@ -255,7 +256,7 @@ export class Utils {
     return undefined;
   }
 
-  /** */
+  /* */
   static lineLineIntersect(lineAStart, lineAEnd, lineBStart, lineBEnd) {
     function tCCW(p1, p2, p3) {
       let tA = p1.x,
@@ -276,7 +277,7 @@ export class Utils {
     );
   }
 
-  /**
+  /*
      @param corners Is an array of points with x,y attributes
       @param startX X start coord for raycast
       @param startY Y start coord for raycast
@@ -300,7 +301,7 @@ export class Utils {
     return inside;
   }
 
-  /**
+  /*
      @param corners Is an array of points with x,y attributes
       @param startX X start coord for raycast
       @param startY Y start coord for raycast
@@ -310,7 +311,7 @@ export class Utils {
     let startX = start.x || 0;
     let startY = start.y || 0;
 
-    //ensure that point(startX, startY) is outside the polygon consists of corners
+    // ensure that point(startX, startY) is outside the polygon consists of corners
     let tMinX = 0,
       tMinY = 0;
     let tI = 0;
@@ -351,7 +352,7 @@ export class Utils {
     return tIntersects % 2 == 1;
   }
 
-  /** Checks if all corners of insideCorners are inside the polygon described by outsideCorners */
+  /* Checks if all corners of insideCorners are inside the polygon described by outsideCorners */
   static polygonInsidePolygon(insideCorners, outsideCorners, start) {
     start.x = start.x || 0;
     start.y = start.y || 0;
@@ -371,7 +372,7 @@ export class Utils {
     return true;
   }
 
-  /** Checks if any corners of firstCorners is inside the polygon described by secondCorners */
+  /* Checks if any corners of firstCorners is inside the polygon described by secondCorners */
   static polygonOutsidePolygon(insideCorners, outsideCorners, start) {
     start.x = start.x || 0;
     start.y = start.y || 0;
@@ -413,7 +414,7 @@ export class Utils {
     return tResult;
   }
 
-  /** Remove elements in array if func(element) returns true */
+  /* Remove elements in array if func(element) returns true */
   static removeIf(array, func) {
     let tResult = [];
     array.forEach((element) => {
@@ -424,7 +425,7 @@ export class Utils {
     return tResult;
   }
 
-  /** Shift the items in an array by shift (positive integer) */
+  /* Shift the items in an array by shift (positive integer) */
   static cycle(arr, shift) {
     let tReturn = arr.slice(0);
     for (let tI = 0; tI < shift; tI++) {
@@ -434,7 +435,7 @@ export class Utils {
     return tReturn;
   }
 
-  /** Returns in the unique elemnts in arr */
+  /* Returns in the unique elements in arr */
   static unique(arr, hashFunc) {
     let tResults = [];
     let tMap = {};
@@ -447,7 +448,7 @@ export class Utils {
     return tResults;
   }
 
-  /** Remove value from array, if it is present */
+  /* Remove value from array, if it is present */
   static removeValue(array, value) {
     for (let tI = array.length - 1; tI >= 0; tI--) {
       if (array[tI] === value) {
@@ -456,7 +457,7 @@ export class Utils {
     }
   }
 
-  /** Checks if value is in array */
+  /* Checks if value is in array */
   static hasValue(array, value) {
     for (let tI = 0; tI < array.length; tI++) {
       if (array[tI] === value) {
@@ -466,7 +467,7 @@ export class Utils {
     return false;
   }
 
-  /** Subtracts the elements in subArray from array */
+  /* Subtracts the elements in subArray from array */
   static subtract(array, subArray) {
     return Utils.removeIf(array, function (el) {
       return Utils.hasValue(subArray, el);

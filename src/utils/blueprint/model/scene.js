@@ -16,11 +16,11 @@ import {
   EVENT_ITEM_REMOVED,
 } from '../core/events.js';
 
-/**
+/*
  * The Scene is a manager of Items and also links to a ThreeJS scene.
  */
 export class Scene extends EventDispatcher {
-  /**
+  /*
    * Constructs a scene.
    * @param model The associated model.
    * @param textureDir The directory from which to load the textures.
@@ -30,11 +30,11 @@ export class Scene extends EventDispatcher {
     this.model = model;
     this.textureDir = textureDir;
 
-    //		let grid = new GridHelper(4000, 200);
+    // let grid = new GridHelper(4000, 200);
 
     this.scene = new ThreeScene();
     this.scene.background = new Color(0xffffff);
-    //		this.scene.fog = new Fog(0xFAFAFA, 0.001, 6000);
+    // this.scene.fog = new Fog(0xFAFAFA, 0.001, 6000);
     this.items = [];
     this.needsUpdate = false;
     // init item loader
@@ -49,17 +49,17 @@ export class Scene extends EventDispatcher {
     this.itemLoadingCallbacks = null;
     this.itemLoadedCallbacks = null;
     this.itemRemovedCallbacks = null;
-    //		this.add(grid);
+    // this.add(grid);
   }
 
-  /** Adds a non-item, basically a mesh, to the scene.
+  /* Adds a non-item, basically a mesh, to the scene.
    * @param mesh The mesh to be added.
    */
   add(mesh) {
     this.scene.add(mesh);
   }
 
-  /** Removes a non-item, basically a mesh, from the scene.
+  /* Removes a non-item, basically a mesh, from the scene.
    * @param mesh The mesh to be removed.
    */
   remove(mesh) {
@@ -67,28 +67,28 @@ export class Scene extends EventDispatcher {
     Utils.removeValue(this.items, mesh);
   }
 
-  /** Gets the scene.
+  /* Gets the scene.
    * @returns The scene.
    */
   getScene() {
     return this.scene;
   }
 
-  /** Gets the items.
+  /* Gets the items.
    * @returns The items.
    */
   getItems() {
     return this.items;
   }
 
-  /** Gets the count of items.
+  /* Gets the count of items.
    * @returns The count.
    */
   itemCount() {
     return this.items.length;
   }
 
-  /** Removes all items. */
+  /* Removes all items. */
   clearItems() {
     // let items_copy = this.items ;
     let scope = this;
@@ -98,7 +98,7 @@ export class Scene extends EventDispatcher {
     this.items = [];
   }
 
-  /**
+  /*
    * Removes an item.
    * @param item The item to be removed.
    * @param dontRemove If not set, also remove the item from the items list.
@@ -115,13 +115,13 @@ export class Scene extends EventDispatcher {
     }
   }
 
-  switchWireframe(flag) {
+  switchWireFrame(flag) {
     this.items.forEach((item) => {
-      item.switchWireframe(flag);
+      item.switchWireFrame(flag);
     });
   }
 
-  /**
+  /*
    * Creates an item and adds it to the scene.
    * @param itemType The type of the item given by an enumerator.
    * @param fileName The name of the file to load.
@@ -159,8 +159,8 @@ export class Scene extends EventDispatcher {
       return [materials, materials.length - 1];
     }
 
-    let loaderCallback = function (geometry, materials, isgltf = false) {
-      //			let item = new (Factory.getClass(itemType))(scope.model, metadata, geometry, new MeshFaceMaterial(materials), position, rotation, scale);
+    let loaderCallback = function (geometry, materials, isGltf = false) {
+      // let item = new (Factory.getClass(itemType))(scope.model, metadata, geometry, new MeshFaceMaterial(materials), position, rotation, scale);
       let item = new (Factory.getClass(itemType))(
         scope.model,
         metadata,
@@ -169,7 +169,7 @@ export class Scene extends EventDispatcher {
         position,
         rotation,
         scale,
-        isgltf,
+        isGltf,
       );
       item.fixed = fixed || false;
       scope.items.push(item);
@@ -207,14 +207,14 @@ export class Scene extends EventDispatcher {
           if (child.geometry.isBufferGeometry) {
             let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
             tGeometry.faces.forEach((face) => {
-              //							face.materialIndex = face.materialIndex + newmaterials.length;
+              // 				face.materialIndex = face.materialIndex + newmaterials.length;
               face.materialIndex = materialindices[face.materialIndex];
             });
             child.updateMatrix();
             newGeometry.merge(tGeometry, child.matrix);
           } else {
             child.geometry.faces.forEach((face) => {
-              //							face.materialIndex = face.materialIndex + newmaterials.length;
+              // 				face.materialIndex = face.materialIndex + newmaterials.length;
               face.materialIndex = materialindices[face.materialIndex];
             });
             child.updateMatrix();

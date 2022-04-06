@@ -20,13 +20,13 @@ export class Floorplan3D extends EventDispatcher
 		this.floorplan.addEventListener(EVENT_UPDATED, this.updatedroomsevent);
 	}
 
-	switchWireframe(flag)
+	switchWireFrame(flag)
 	{
 		this.floors.forEach((floor)=>{
-			floor.switchWireframe(flag);
+			floor.switchWireFrame(flag);
 		});
 		this.edges.forEach((edge)=>{
-			edge.switchWireframe(flag);
+			edge.switchWireFrame(flag);
 		});
 	}
 

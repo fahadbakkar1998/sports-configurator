@@ -11,11 +11,11 @@ import { OBJExporter } from '../exporters/OBJExporter.js';
 
 import GLTFExporter from 'three-gltf-exporter';
 
-/**
+/*
  * A Model is an abstract concept the has the data structuring a floorplan. It connects a {@link Floorplan} and a {@link Scene}
  */
 export class Model extends EventDispatcher {
-  /** Constructs a new model.
+  /* Constructs a new model.
    * @param textureDir The directory containing the textures.
    */
   constructor(textureDir) {
@@ -28,21 +28,21 @@ export class Model extends EventDispatcher {
     this.roomDeletedCallbacks = null;
   }
 
-  switchWireframe(flag) {
-    this.scene.switchWireframe(flag);
+  switchWireFrame(flag) {
+    this.scene.switchWireFrame(flag);
   }
 
   loadSerialized(json) {
     // TODO: better documentation on serialization format.
     // TODO: a much better serialization format.
     this.dispatchEvent({ type: EVENT_LOADING, item: this });
-    //      this.roomLoadingCallbacks.fire();
+    // this.roomLoadingCallbacks.fire();
 
     let data = JSON.parse(json);
     this.newRoom(data.floorplan, data.items);
 
     this.dispatchEvent({ type: EVENT_LOADED, item: this });
-    //      this.roomLoadedCallbacks.fire();
+    // this.roomLoadedCallbacks.fire();
   }
 
   exportMeshAsObj() {
@@ -52,7 +52,7 @@ export class Model extends EventDispatcher {
 
   exportForBlender() {
     let scope = this;
-    let gltfexporter = new GLTFExporter();
+    let gltfExporter = new GLTFExporter();
     let meshes = [];
     this.scene.getScene().traverse(function (child) {
       if (child instanceof Mesh) {
@@ -70,7 +70,7 @@ export class Model extends EventDispatcher {
       }
     });
 
-    gltfexporter.parse(meshes, function (result) {
+    gltfExporter.parse(meshes, function (result) {
       let output = JSON.stringify(result, null, 2);
       scope.dispatchEvent({ type: EVENT_GLTF_READY, item: this, gltf: output });
     });
@@ -81,7 +81,7 @@ export class Model extends EventDispatcher {
     let objects = this.scene.getItems();
     for (let i = 0; i < objects.length; i++) {
       let obj = objects[i];
-      //			items_arr[i] = {item_name: obj.metadata.itemName,item_type: obj.metadata.itemType,model_url: obj.metadata.modelUrl,xpos: obj.position.x,ypos: obj.position.y,zpos: obj.position.z,rotation: obj.rotation.y,scale_x: obj.scale.x,scale_y: obj.scale.y,scale_z: obj.scale.z,fixed: obj.fixed};
+      // items_arr[i] = {item_name: obj.metadata.itemName,item_type: obj.metadata.itemType,model_url: obj.metadata.modelUrl,xPos: obj.position.x,yPos: obj.position.y,zPos: obj.position.z,rotation: obj.rotation.y,scale_x: obj.scale.x,scale_y: obj.scale.y,scale_z: obj.scale.z,fixed: obj.fixed};
       items_arr[i] = obj.getMetaData();
     }
 
@@ -94,7 +94,7 @@ export class Model extends EventDispatcher {
     this.floorplan.loadFloorplan(floorplan);
     items.forEach((item) => {
       let matColors = item.material_colors ? item.material_colors : [];
-      let position = new Vector3(item.xpos, item.ypos, item.zpos);
+      let position = new Vector3(item.xPos, item.yPos, item.zPos);
       let metadata = {
         itemName: item.item_name,
         resizable: item.resizable,

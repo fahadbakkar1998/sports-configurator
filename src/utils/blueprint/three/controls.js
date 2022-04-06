@@ -2,7 +2,7 @@ import {EventDispatcher, Vector2, Vector3} from 'three';
 import $ from 'jquery';
 import {EVENT_CAMERA_MOVED} from '../core/events.js';
 
-/**
+/*
 This file is a modified version of THREE.OrbitControls
 Contributors:
  * @author qiao / https://github.com/qiao
@@ -55,7 +55,7 @@ export class Controls extends EventDispatcher
 		this.needsUpdate = true;
 
 		// internals
-//		let window = $(window);
+// let window = $(window);
 		
 		this.EPS = 0.000001;
 		this.rotateStart = new Vector2();
@@ -191,7 +191,7 @@ export class Controls extends EventDispatcher
 
 	panXY(x, y)
 	{
-//		this.pan(new Vector2(x, y));
+// this.pan(new Vector2(x, y));
 		this.updatePan(new Vector2(x, y));
 	}
 
@@ -258,7 +258,7 @@ export class Controls extends EventDispatcher
 		this.scale = 1;
 		this.pan.set(0, 0, 0);
 
-//		this.cameraMovedCallbacks.fire();
+// this.cameraMovedCallbacks.fire();
 		this.dispatchEvent({type:EVENT_CAMERA_MOVED});
 		this.needsUpdate = true;
 	}
@@ -352,7 +352,7 @@ export class Controls extends EventDispatcher
 			}
 			this.panEnd.set(event.clientX, event.clientY);
 			this.panDelta.subVectors(this.panEnd, this.panStart);
-//			this.pan(this.panDelta);
+// this.pan(this.panDelta);
 			this.updatePan(this.panDelta);
 			this.panStart.copy(this.panEnd);
 		}
@@ -421,19 +421,19 @@ export class Controls extends EventDispatcher
 		switch (event.keyCode) 
 		{
 		case this.keys.UP:
-//			this.pan(new Vector2(0, this.keyPanSpeed));
+// this.pan(new Vector2(0, this.keyPanSpeed));
 			this.updatePan(new Vector2(0, this.keyPanSpeed));
 			break;
 		case this.keys.BOTTOM:
-//			this.pan(new Vector2(0, -this.keyPanSpeed));
+// this.pan(new Vector2(0, -this.keyPanSpeed));
 			this.updatePan(new Vector2(0, -this.keyPanSpeed));
 			break;
 		case this.keys.LEFT:
-//			this.pan(new Vector2(this.keyPanSpeed, 0));
+// this.pan(new Vector2(this.keyPanSpeed, 0));
 			this.updatePan(new Vector2(this.keyPanSpeed, 0));
 			break;
 		case this.keys.RIGHT:
-//			this.pan(new Vector2(-this.keyPanSpeed, 0));
+// this.pan(new Vector2(-this.keyPanSpeed, 0));
 			this.updatePan(new Vector2(-this.keyPanSpeed, 0));
 			break;
 		}

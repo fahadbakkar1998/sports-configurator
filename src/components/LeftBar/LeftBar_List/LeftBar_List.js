@@ -8,6 +8,7 @@ import {
   updateFloorPlanMode,
 } from '../../../utils/bpSupport';
 import useZustand from '../../../utils/useZustand';
+import * as Blueprint from '../../../utils/blueprint/blueprint';
 import cn from 'classnames';
 
 const LeftBar_List = () => {
@@ -20,7 +21,9 @@ const LeftBar_List = () => {
       return (
         <>
           <LeftBar_List_Item name={item.name} depth={depth}></LeftBar_List_Item>
-          {item.children.map((item) => recursiveItem(item, depth + 1))}
+          {React.Children.toArray(
+            item.children.map((item) => recursiveItem(item, depth + 1)),
+          )}
         </>
       );
     } else {
@@ -33,22 +36,16 @@ const LeftBar_List = () => {
       {editMode === 'Floor Plan' && (
         <>
           <div
-            className={cn('floor-plan-item', {
-              active: floorPlanMode === 'New',
-            })}
+            className={cn('floor-plan-item')}
             onClick={() => {
-              setFloorPlanMode('New');
               loadDefaultDesign();
             }}
             title="New Layout">
             New Layout
           </div>
           <div
-            className={cn('floor-plan-item', {
-              active: floorPlanMode === 'Save',
-            })}
+            className={cn('floor-plan-item')}
             onClick={() => {
-              setFloorPlanMode('Save');
               saveDesign('design.3d');
             }}
             title="Save Layout">
@@ -56,40 +53,41 @@ const LeftBar_List = () => {
           </div>
           <div
             className={cn('floor-plan-item', {
-              active: floorPlanMode === 'Move',
+              active: floorPlanMode === Blueprint.floorplannerModes.MOVE,
             })}
             onClick={() => {
-              setFloorPlanMode('Move');
-              updateFloorPlanMode('Move');
+              setFloorPlanMode(Blueprint.floorplannerModes.MOVE);
+              updateFloorPlanMode(Blueprint.floorplannerModes.MOVE);
             }}
             title="Move Walls">
             Move Walls
           </div>
           <div
             className={cn('floor-plan-item', {
-              active: floorPlanMode === 'Draw',
+              active: floorPlanMode === Blueprint.floorplannerModes.DRAW,
             })}
             onClick={() => {
-              setFloorPlanMode('Draw');
-              updateFloorPlanMode('Draw');
+              setFloorPlanMode(Blueprint.floorplannerModes.DRAW);
+              updateFloorPlanMode(Blueprint.floorplannerModes.DRAW);
             }}
             title="Draw New Walls">
             Draw New Walls
           </div>
           <div
             className={cn('floor-plan-item', {
-              active: floorPlanMode === 'Delete',
+              active: floorPlanMode === Blueprint.floorplannerModes.DELETE,
             })}
             onClick={() => {
-              setFloorPlanMode('Delete');
-              updateFloorPlanMode('Delete');
+              setFloorPlanMode(Blueprint.floorplannerModes.DELETE);
+              updateFloorPlanMode(Blueprint.floorplannerModes.DELETE);
             }}
             title="Delete Walls">
             Delete Walls
           </div>
         </>
       )}
-      {editMode === '3D' && items.map((item) => recursiveItem(item, 0))}
+      {editMode === '3D' &&
+        React.Children.toArray(items.map((item) => recursiveItem(item, 0)))}
     </div>
   );
 };

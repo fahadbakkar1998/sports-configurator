@@ -71,9 +71,9 @@ export class Controller extends EventDispatcher {
   }
 
   init() {
-    //		this.element.mousedown(this.mousedownevent);
-    //		this.element.mouseup(this.mouseupevent);
-    //		this.element.mousemove(this.mousemoveevent);
+    // this.element.mousedown(this.mousedownevent);
+    // this.element.mouseup(this.mouseupevent);
+    // this.element.mousemove(this.mousemoveevent);
 
     this.element.bind('touchstart mousedown', this.mousedownevent);
     this.element.bind('touchmove mousemove', this.mousemoveevent);

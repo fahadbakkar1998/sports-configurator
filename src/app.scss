@@ -6,7 +6,7 @@ $backColor: #484848;
 $backMediumColor: #2c2c2c;
 $backDarkColor: #000000;
 $borderColor: #eee;
-$commonHeight: 2vmax;
+$commonHeight: 1.8vmax;
 
 * {
   color: $foreColor;
@@ -124,6 +124,10 @@ $commonHeight: 2vmax;
         font-size: calc($commonHeight - 5 * $fontPadding);
         cursor: pointer;
 
+        &:active {
+          color: $backMediumColor;
+        }
+
         &.active {
           color: $backMediumColor;
         }
@@ -141,7 +145,8 @@ $commonHeight: 2vmax;
     .Scene_Header {
       width: 100%;
       height: $headerHeight;
-      border: 1px solid $borderColor;
+      border-top: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
       display: flex;
       padding: $fontPadding;
       align-items: center;
@@ -170,7 +175,39 @@ $commonHeight: 2vmax;
     .RightBar_Content {
       width: 100%;
       height: calc(100% - $headerHeight);
-      border: 1px solid $borderColor;
+      border-left: 1px solid $borderColor;
+      border-right: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
+
+      .property-header {
+        width: 100%;
+        border-top: 1px solid $borderColor;
+        border-bottom: 1px solid $borderColor;
+        margin-bottom: $fontPadding;
+        font-size: calc($commonHeight - 3 * $fontPadding);
+        padding: $fontPadding;
+      }
+
+      .input-group {
+        margin-top: $fontPadding;
+        margin-left: $fontPadding;
+        margin-right: $fontPadding;
+        padding: $fontPadding;
+        display: flex;
+        justify-content: space-between;
+        width: 99%;
+        align-items: center;
+        font-size: calc($commonHeight - 5 * $fontPadding);
+
+        .input {
+          height: $commonHeight;
+          font-size: calc($commonHeight - 5 * $fontPadding);
+          width: 60%;
+          border: 1px solid $borderColor;
+          outline: none;
+          border-radius: $fontPadding;
+        }
+      }
     }
   }
 }

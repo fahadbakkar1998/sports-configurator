@@ -11,7 +11,7 @@ const LeftBar_List_Leaf = ({ item }) => {
           className="image"
           src={item.image}
           onClick={() => {
-            addItem(item);
+            addItem({ ...item, aWall });
           }}></img>
         <div className="name" title={item.name}>
           {item.name}

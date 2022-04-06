@@ -1,24 +1,24 @@
 import Enum from 'es6-enum';
 
-export const VIEW_TOP = 'topview';
-export const VIEW_FRONT = 'frontview';
-export const VIEW_RIGHT = 'rightview';
-export const VIEW_LEFT = 'leftview';
-export const VIEW_ISOMETRY = 'isometryview';
+export const VIEW_TOP = 'TOP_VIEW';
+export const VIEW_FRONT = 'FRONT_VIEW';
+export const VIEW_RIGHT = 'RIGHT_VIEW';
+export const VIEW_LEFT = 'LEFT_VIEW';
+export const VIEW_ISOMETRY = 'ISOMETRY_VIEW';
 
 export const WallTypes = Enum('STRAIGHT', 'CURVED');
 
-/** Dimensioning in Inch. */
+/* Dimensioning in Inch. */
 export const dimInch = 'inch';
 
-/** Dimensioning in Inch. */
+/* Dimensioning in Inch. */
 export const dimFeetAndInch = 'feetAndInch';
 
-/** Dimensioning in Meter. */
+/* Dimensioning in Meter. */
 export const dimMeter = 'm';
 
-/** Dimensioning in Centi Meter. */
+/* Dimensioning in CentiMeter. */
 export const dimCentiMeter = 'cm';
 
-/** Dimensioning in Milli Meter. */
+/* Dimensioning in MilliMeter. */
 export const dimMilliMeter = 'mm';

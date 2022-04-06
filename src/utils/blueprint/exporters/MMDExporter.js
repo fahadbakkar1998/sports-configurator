@@ -1,4 +1,4 @@
-/**
+/*
  * @author takahiro / http://github.com/takahirox
  *
  * Dependencies

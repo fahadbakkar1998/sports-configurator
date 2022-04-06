@@ -15,7 +15,7 @@ export class Floor extends EventDispatcher
 		this.init();
 	}
 
-	switchWireframe(flag)
+	switchWireFrame(flag)
 	{
 		this.floorPlane.visible = !flag;
 		this.roofPlane.visible = !flag;
@@ -23,7 +23,7 @@ export class Floor extends EventDispatcher
 
 	init()
 	{
-//		this.room.fireOnFloorChange(redraw);
+// this.room.fireOnFloorChange(redraw);
 		this.room.addEventListener(EVENT_CHANGED, this.changedevent);
 
 		this.floorPlane = this.buildFloor();
@@ -44,7 +44,7 @@ export class Floor extends EventDispatcher
 	{
 		let textureSettings = this.room.getTexture();
 		// setup texture
-//		let floorTexture = ImageUtils.loadTexture(textureSettings.url);
+// let floorTexture = ImageUtils.loadTexture(textureSettings.url);
 		let floorTexture = new TextureLoader().load(textureSettings.url);
 		floorTexture.wrapS = RepeatWrapping;
 		floorTexture.wrapT = RepeatWrapping;

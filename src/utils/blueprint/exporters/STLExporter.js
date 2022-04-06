@@ -1,4 +1,4 @@
-/**
+/*
  * @author kovacsv / http://kovacsv.hu/
  * @author mrdoob / http://mrdoob.com/
  * @author mudcube / http://mudcu.be/
