@@ -35,16 +35,17 @@ $commonHeight: 1.8vmax;
       padding: $fontPadding;
       gap: $fontPadding;
       border: 1px solid $borderColor;
+      align-items: center;
 
       .item {
         padding: $fontPadding;
-        font-size: calc($headerHeight - 5 * $fontPadding);
-        background-color: $backMediumColor;
+        font-size: calc($headerHeight - 3 * $fontPadding);
         border-radius: $fontPadding;
         cursor: pointer;
+        line-height: 1;
 
         &.active {
-          background-color: $backDarkColor;
+          color: $backMediumColor;
         }
       }
     }
@@ -65,7 +66,6 @@ $commonHeight: 1.8vmax;
       .LeftBar_List_Item {
         width: 100%;
         height: $commonHeight;
-        display: flex;
         gap: $fontPadding;
         align-items: center;
         padding: $fontPadding;
@@ -73,19 +73,40 @@ $commonHeight: 1.8vmax;
         border-top: 1px solid $borderColor;
         border-bottom: 1px solid $borderColor;
         border-right: 1px solid $borderColor;
+        height: $commonHeight;
+        transition: 0.2s;
+        display: none;
+
+        &.show {
+          display: flex;
+        }
 
         div {
           padding: $fontPadding;
           font-size: calc($commonHeight - 5 * $fontPadding);
         }
+
+        .arrow {
+          width: fit-content;
+          transition: 0.2s;
+
+          &.open {
+            transform: rotate(90deg);
+          }
+        }
       }
 
       .LeftBar_List_Leaf {
         width: 33.33%;
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
         padding: $fontPadding;
+        transition: 0.2s;
+
+        &.show {
+          display: flex;
+        }
 
         .container {
           display: flex;
@@ -170,6 +191,13 @@ $commonHeight: 1.8vmax;
       align-items: center;
       line-height: 1;
       font-size: calc($headerHeight - 3 * $fontPadding);
+      justify-content: space-around;
+
+      .item {
+        padding: $fontPadding;
+        line-height: 1;
+        text-align: center;
+      }
     }
 
     .RightBar_Content {
@@ -179,38 +207,68 @@ $commonHeight: 1.8vmax;
       border-right: 1px solid $borderColor;
       border-bottom: 1px solid $borderColor;
 
-      .property-header {
+      .RightBar_Content_Header {
         width: 100%;
-        border-top: 1px solid $borderColor;
-        border-bottom: 1px solid $borderColor;
-        margin-bottom: $fontPadding;
-        font-size: calc($commonHeight - 3 * $fontPadding);
-        padding: $fontPadding;
-      }
-
-      .input-group {
-        margin-top: $fontPadding;
-        margin-left: $fontPadding;
-        margin-right: $fontPadding;
-        padding: $fontPadding;
+        height: $commonHeight;
         display: flex;
-        justify-content: space-between;
-        width: 99%;
-        align-items: center;
-        font-size: calc($commonHeight - 5 * $fontPadding);
 
-        .input {
-          height: $commonHeight;
-          font-size: calc($commonHeight - 5 * $fontPadding);
-          width: 60%;
-          border: 1px solid $borderColor;
-          outline: none;
-          border-radius: $fontPadding;
+        .item {
+          width: 50%;
+          padding: $fontPadding;
+          font-size: calc($commonHeight - 3 * $fontPadding);
+          text-align: center;
+          line-height: 1;
+          border-bottom: 1px solid $borderColor;
+          border-right: 1px solid $borderColor;
+          cursor: pointer;
+
+          &.active {
+            color: $backMediumColor;
+          }
         }
       }
 
-      .test {
-        width: 99%;
+      .RightBar_Content_Inspector {
+        width: 100%;
+        height: calc(100% - $commonHeight);
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .property-header {
+          width: 100%;
+          border-bottom: 1px solid $borderColor;
+          margin-bottom: $fontPadding;
+          font-size: calc($commonHeight - 3 * $fontPadding);
+          padding: $fontPadding;
+        }
+
+        .input-group {
+          margin-top: $fontPadding;
+          margin-left: $fontPadding;
+          margin-right: $fontPadding;
+          padding: $fontPadding;
+          display: flex;
+          justify-content: space-between;
+          width: 99%;
+          align-items: center;
+          font-size: calc($commonHeight - 5 * $fontPadding);
+
+          .input {
+            height: $commonHeight;
+            font-size: calc($commonHeight - 5 * $fontPadding);
+            width: 60%;
+            border: 1px solid $borderColor;
+            outline: none;
+            border-radius: $fontPadding;
+          }
+        }
+      }
+
+      .RightBar_Content_Total {
+        width: 100%;
+        height: calc(100% - $commonHeight);
+        overflow-x: hidden;
+        overflow-y: auto;
       }
     }
   }

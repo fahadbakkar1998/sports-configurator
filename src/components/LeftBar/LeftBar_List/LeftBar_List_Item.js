@@ -1,16 +1,42 @@
 import React from 'react';
+import useZustand from '../../../utils/useZustand';
+import { addItem } from '../../../utils/bpSupport';
+import cn from 'classnames';
 
-const LeftBar_List_Item = ({ name, depth }) => {
+const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
+  const aWall = useZustand((state) => state.aWall);
+
   const style = {
     marginLeft: `${depth * 1}vw`,
   };
+
   return (
-    <div className="LeftBar_List_Item">
-      <div className="arrow" style={style}>
-        &gt;
-      </div>
-      <div className="name">{name}</div>
-    </div>
+    <>
+      {item.children ? (
+        <div
+          className={cn('LeftBar_List_Item', { show: isOpen })}
+          onClick={onClick}>
+          <div className={cn('arrow', { open: openChildren })} style={style}>
+            &gt;
+          </div>
+          <div className="name">{item.name}</div>
+        </div>
+      ) : (
+        <div className={cn('LeftBar_List_Leaf', { show: isOpen })}>
+          <div className="container">
+            <img
+              className="image"
+              src={item.image}
+              onClick={() => {
+                addItem({ ...item, aWall });
+              }}></img>
+            <div className="name" title={item.name}>
+              {item.name}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

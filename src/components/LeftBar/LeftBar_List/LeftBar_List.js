@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LeftBar_List_Item from './LeftBar_List_Item';
-import LeftBar_List_Leaf from './LeftBar_List_Leaf';
 import { items } from '../../../utils/resource';
 import {
   saveDesign,
@@ -12,28 +11,43 @@ import useZustand from '../../../utils/useZustand';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import cn from 'classnames';
 
+const recursiveItem = ({ item, depth, isOpen, initialOpenDepth }) => {
+  const [openChildren, setOpenChildren] = useState(isOpen);
+
+  useEffect(() => {
+    !isOpen && setOpenChildren(isOpen);
+  }, [isOpen]);
+
+  return (
+    <>
+      <LeftBar_List_Item
+        item={item}
+        depth={depth}
+        isOpen={isOpen}
+        openChildren={openChildren}
+        onClick={() => setOpenChildren(!openChildren)}></LeftBar_List_Item>
+      {item.children &&
+        React.Children.toArray(
+          item.children.map((child) =>
+            recursiveItem({
+              item: child,
+              depth: depth + 1,
+              isOpen: openChildren,
+              initialOpenDepth,
+            }),
+          ),
+        )}
+    </>
+  );
+};
+
 const LeftBar_List = () => {
   const editMode = useZustand((state) => state.editMode);
   const floorPlanMode = useZustand((state) => state.floorPlanMode);
 
-  const recursiveItem = (item, depth) => {
-    if (item.children) {
-      return (
-        <>
-          <LeftBar_List_Item name={item.name} depth={depth}></LeftBar_List_Item>
-          {React.Children.toArray(
-            item.children.map((item) => recursiveItem(item, depth + 1)),
-          )}
-        </>
-      );
-    } else {
-      return <LeftBar_List_Leaf item={item}></LeftBar_List_Leaf>;
-    }
-  };
-
   return (
     <div className="LeftBar_List">
-      {editMode === 'Floor Plan' && (
+      {editMode === 'FLOOR PLAN' && (
         <>
           <div
             className={cn('floor-plan-item')}
@@ -106,7 +120,16 @@ const LeftBar_List = () => {
         </>
       )}
       {editMode === '3D' &&
-        React.Children.toArray(items.map((item) => recursiveItem(item, 0)))}
+        React.Children.toArray(
+          items.map((item) =>
+            recursiveItem({
+              item,
+              isOpen: true,
+              depth: 0,
+              initialOpenDepth: 0,
+            }),
+          ),
+        )}
     </div>
   );
 };

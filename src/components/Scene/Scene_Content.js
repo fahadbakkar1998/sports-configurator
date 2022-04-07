@@ -61,6 +61,7 @@ const Scene_Content = () => {
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_NOTHING_CLICKED, (o) => {
       console.log('EVENT_NOTHING_CLICKED: ', o);
+      setCur3dItemEvent(null);
     });
 
     blueprintJS.three.addEventListener(
@@ -156,7 +157,7 @@ const Scene_Content = () => {
     <div className="Scene_Content">
       <canvas
         id="floor_planner"
-        className={cn({ hide: editMode !== 'Floor Plan' })}></canvas>
+        className={cn({ hide: editMode !== 'FLOOR PLAN' })}></canvas>
       <div id="three" className={cn({ hide: editMode !== '3D' })}></div>
     </div>
   );

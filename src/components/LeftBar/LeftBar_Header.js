@@ -9,9 +9,9 @@ const LeftBar_Header = () => {
   return (
     <div className="LeftBar_Header">
       <div
-        className={cn('item', { active: editMode === 'Floor Plan' })}
+        className={cn('item', { active: editMode === 'FLOOR PLAN' })}
         onClick={() => {
-          setEditMode('Floor Plan');
+          setEditMode('FLOOR PLAN');
         }}>
         Floor Plan
       </div>

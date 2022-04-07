@@ -283,6 +283,7 @@ export class Item extends Mesh {
 
   /* */
   resize({ height, width, depth }) {
+    if (!this.resizable) return;
     if (!width) width = this.getWidth();
     if (!height) height = this.getHeight();
     if (!depth) depth = this.getDepth();
