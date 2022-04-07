@@ -74,13 +74,13 @@ export class Main extends EventDispatcher {
     this.perspectivecamera = null;
     this.camera = null;
     this.savedcameraposition = null;
-    this.fpscamera = null;
+    this.fpsCamera = null;
 
     this.cameraNear = 10;
     this.cameraFar = 10000;
 
     this.controls = null;
-    this.fpscontrols = null;
+    this.fpsControls = null;
     this.fpsclock = new Clock(true);
     this.firstpersonmode = false;
 
@@ -160,7 +160,7 @@ export class Main extends EventDispatcher {
 
     scope.domElement = scope.element.get(0);
 
-    scope.fpscamera = new PerspectiveCamera(60, 1, 1, 10000);
+    scope.fpsCamera = new PerspectiveCamera(60, 1, 1, 10000);
     scope.perspectivecamera = new PerspectiveCamera(
       45,
       10,
@@ -193,13 +193,13 @@ export class Main extends EventDispatcher {
     scope.controls.minZoom = 0.9;
     scope.controls.screenSpacePanning = true;
 
-    scope.fpscontrols = new PointerLockControls(scope.fpscamera);
-    scope.fpscontrols.characterHeight = 160;
+    scope.fpsControls = new PointerLockControls(scope.fpsCamera);
+    scope.fpsControls.characterHeight = 160;
 
-    this.scene.add(scope.fpscontrols.getObject());
-    this.fpscontrols.getObject().position.set(0, 200, 0);
+    this.scene.add(scope.fpsControls.getObject());
+    this.fpsControls.getObject().position.set(0, 200, 0);
 
-    this.fpscontrols.addEventListener('unlock', function () {
+    this.fpsControls.addEventListener('unlock', function () {
       scope.switchFPSMode(false);
       scope.dispatchEvent({ type: EVENT_FPS_EXIT });
     });
@@ -215,15 +215,11 @@ export class Main extends EventDispatcher {
     );
 
     // handle window resizing
-    setTimeout(() => {
-      scope.updateWindowSize();
-    }, 100);
+    scope.updateWindowSize();
 
     if (scope.options.resize) {
       $(window).resize(() => {
-        setTimeout(() => {
-          scope.updateWindowSize();
-        }, 100);
+        scope.updateWindowSize();
       });
     }
     // setup camera nicely
@@ -366,8 +362,8 @@ export class Main extends EventDispatcher {
     scope.perspectivecamera.aspect = scope.elementWidth / scope.elementHeight;
     scope.perspectivecamera.updateProjectionMatrix();
 
-    scope.fpscamera.aspect = scope.elementWidth / scope.elementHeight;
-    scope.fpscamera.updateProjectionMatrix();
+    scope.fpsCamera.aspect = scope.elementWidth / scope.elementHeight;
+    scope.fpsCamera.updateProjectionMatrix();
 
     scope.renderer.setSize(scope.elementWidth, scope.elementHeight);
     scope.needsUpdate = true;
@@ -527,17 +523,17 @@ export class Main extends EventDispatcher {
 
   switchFPSMode(flag) {
     this.firstpersonmode = flag;
-    this.fpscontrols.enabled = flag;
+    this.fpsControls.enabled = flag;
     this.controls.enabled = !flag;
     this.controller.enabled = !flag;
     this.controls.dispatchEvent({ type: EVENT_CAMERA_ACTIVE_STATUS });
 
     if (flag) {
       this.skybox.toggleEnvironment(true);
-      this.fpscontrols.lock();
+      this.fpsControls.lock();
     } else {
       this.skybox.toggleEnvironment(false);
-      this.fpscontrols.unlock();
+      this.fpsControls.unlock();
     }
 
     this.model.switchWireFrame(false);
@@ -575,8 +571,8 @@ export class Main extends EventDispatcher {
 
     scope.spin();
     if (scope.firstpersonmode) {
-      scope.fpscontrols.update(scope.fpsclock.getDelta());
-      scope.renderer.render(scope.scene.getScene(), scope.fpscamera);
+      scope.fpsControls.update(scope.fpsclock.getDelta());
+      scope.renderer.render(scope.scene.getScene(), scope.fpsCamera);
     } else {
       if (this.shouldRender() || forced) {
         scope.renderer.render(scope.scene.getScene(), scope.camera);

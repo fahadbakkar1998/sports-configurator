@@ -53,6 +53,7 @@ export {
   EVENT_CORNER_2D_CLICKED,
   EVENT_CORNER_2D_DOUBLE_CLICKED,
   EVENT_CORNER_2D_HOVER,
+  EVENT_CORNER_2D_MOVED,
 } from './core/events.js';
 export {
   EVENT_WALL_2D_CLICKED,
@@ -111,7 +112,7 @@ export {
   VIEW_LEFT,
   VIEW_ISOMETRY,
 } from './core/constants.js';
-export { WallTypes } from './core/constants.js';
+export { WallTypes, sphereRadius } from './core/constants.js';
 
 // Classes from model module
 export { HalfEdge } from './model/half_edge.js';

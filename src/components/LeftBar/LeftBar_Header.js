@@ -1,6 +1,5 @@
 import React from 'react';
 import useZustand from '../../utils/useZustand';
-import { updateFloorPlan } from '../../utils/bpSupport';
 import cn from 'classnames';
 
 const LeftBar_Header = () => {
@@ -11,14 +10,15 @@ const LeftBar_Header = () => {
     <div className="LeftBar_Header">
       <div
         className={cn('item', { active: editMode === 'Floor Plan' })}
-        onClick={() => setEditMode('Floor Plan')}>
+        onClick={() => {
+          setEditMode('Floor Plan');
+        }}>
         Floor Plan
       </div>
       <div
         className={cn('item', { active: editMode === '3D' })}
         onClick={() => {
           setEditMode('3D');
-          updateFloorPlan();
         }}>
         3D
       </div>

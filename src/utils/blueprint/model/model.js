@@ -76,7 +76,7 @@ export class Model extends EventDispatcher {
     });
   }
 
-  exportSerialized() {
+  exportDataObj() {
     let items_arr = [];
     let objects = this.scene.getItems();
     for (let i = 0; i < objects.length; i++) {
@@ -86,7 +86,7 @@ export class Model extends EventDispatcher {
     }
 
     let room = { floorplan: this.floorplan.saveFloorplan(), items: items_arr };
-    return JSON.stringify(room);
+    return room;
   }
 
   newRoom(floorplan, items) {

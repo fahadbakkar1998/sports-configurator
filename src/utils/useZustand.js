@@ -2,7 +2,7 @@ import create from 'zustand';
 import * as Blueprint from './blueprint/blueprint';
 
 const useZustand = create((set) => ({
-  editMode: 'Floor Plan', // Floor Plan, 3D
+  editMode: '3D', // Floor Plan, 3D
   setEditMode: (editMode) =>
     set((state) => ({
       editMode,
@@ -20,16 +20,16 @@ const useZustand = create((set) => ({
       floorPlanMode,
     })),
 
-  curEvent: '',
-  setCurEvent: (curEvent) =>
+  cur2dItemEvent: null,
+  setCur2dItemEvent: (cur2dItemEvent) =>
     set((state) => ({
-      curEvent,
+      cur2dItemEvent,
     })),
 
-  cur2dItem: null,
-  setCur2dItem: (cur2dItem) =>
+  cur3dItemEvent: null,
+  setCur3dItemEvent: (cur3dItemEvent) =>
     set((state) => ({
-      cur2dItem,
+      cur3dItemEvent,
     })),
 }));
 

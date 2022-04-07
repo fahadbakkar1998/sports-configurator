@@ -195,7 +195,8 @@ export class Controller extends EventDispatcher {
       this.mouseDown = true;
 
       if (event.touches) {
-        //In case if this is a touch device do the necessary to click and drag items
+        console.log('event.touches');
+        // In case if this is a touch device do the necessary to click and drag items
         this.mouse.x = event.touches[0].clientX;
         this.mouse.y = event.touches[0].clientY;
         this.alternateMouse.x = event.touches[0].clientX;
@@ -206,6 +207,7 @@ export class Controller extends EventDispatcher {
 
       switch (this.state) {
         case states.SELECTED:
+          console.log(this.state);
           if (this.rotateMouseOver) {
             this.switchState(states.ROTATING);
           } else if (this.intersectedObject != null) {

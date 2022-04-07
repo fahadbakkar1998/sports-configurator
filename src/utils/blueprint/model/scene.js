@@ -148,14 +148,14 @@ export class Scene extends EventDispatcher {
 
     let scope = this;
 
-    function addToMaterials(materials, newmaterial) {
+    function addToMaterials(materials, newMaterial) {
       for (let i = 0; i < materials.length; i++) {
         let mat = materials[i];
-        if (mat.name == newmaterial.name) {
+        if (mat.name == newMaterial.name) {
           return [materials, i];
         }
       }
-      materials.push(newmaterial);
+      materials.push(newMaterial);
       return [materials, materials.length - 1];
     }
 
@@ -185,45 +185,45 @@ export class Scene extends EventDispatcher {
       }
     };
     let gltfCallback = function (gltfModel, a, b, c) {
-      let newmaterials = [];
+      let newMaterials = [];
       let newGeometry = new Geometry();
 
       gltfModel.scene.traverse(function (child) {
         if (child.type == 'Mesh') {
-          let materialindices = [];
+          let materialIndices = [];
           let newItems;
           if (child.material.length) {
             for (let k = 0; k < child.material.length; k++) {
-              newItems = addToMaterials(newmaterials, child.material[k]);
-              newmaterials = newItems[0];
-              materialindices.push(newItems[1]);
+              newItems = addToMaterials(newMaterials, child.material[k]);
+              newMaterials = newItems[0];
+              materialIndices.push(newItems[1]);
             }
           } else {
-            newItems = addToMaterials(newmaterials, child.material); //materials.push(child.material);
-            newmaterials = newItems[0];
-            materialindices.push(newItems[1]);
+            newItems = addToMaterials(newMaterials, child.material); //materials.push(child.material);
+            newMaterials = newItems[0];
+            materialIndices.push(newItems[1]);
           }
 
           if (child.geometry.isBufferGeometry) {
             let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
             tGeometry.faces.forEach((face) => {
-              // 				face.materialIndex = face.materialIndex + newmaterials.length;
-              face.materialIndex = materialindices[face.materialIndex];
+              // face.materialIndex = face.materialIndex + newMaterials.length;
+              face.materialIndex = materialIndices[face.materialIndex];
             });
             child.updateMatrix();
             newGeometry.merge(tGeometry, child.matrix);
           } else {
             child.geometry.faces.forEach((face) => {
-              // 				face.materialIndex = face.materialIndex + newmaterials.length;
-              face.materialIndex = materialindices[face.materialIndex];
+              // face.materialIndex = face.materialIndex + newMaterials.length;
+              face.materialIndex = materialIndices[face.materialIndex];
             });
             child.updateMatrix();
             newGeometry.mergeMesh(child);
           }
         }
       });
-      loaderCallback(newGeometry, newmaterials);
-      // loaderCallback(gltfModel.scene, newmaterials, true);
+      loaderCallback(newGeometry, newMaterials);
+      // loaderCallback(gltfModel.scene, newMaterials, true);
     };
 
     let objCallback = function (object) {

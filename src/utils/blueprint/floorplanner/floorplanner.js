@@ -7,7 +7,11 @@ import {
   Configuration,
 } from '../core/configuration.js';
 //import {gridSpacing} from '../core/configuration.js';
-import { EVENT_MODE_RESET, EVENT_LOADED } from '../core/events.js';
+import {
+  EVENT_MODE_RESET,
+  EVENT_LOADED,
+  EVENT_MOVED,
+} from '../core/events.js';
 import {
   EVENT_CORNER_ATTRIBUTES_CHANGED,
   EVENT_WALL_ATTRIBUTES_CHANGED,
@@ -28,6 +32,7 @@ import {
   EVENT_ROOM_2D_DOUBLE_CLICKED,
   EVENT_WALL_2D_DOUBLE_CLICKED,
 } from '../core/events.js';
+import { EVENT_CORNER_2D_MOVED } from '../core/events.js';
 import { EVENT_NOTHING_CLICKED } from '../core/events.js';
 import { FloorplannerView2D, floorplannerModes } from './floorplanner_view.js';
 
@@ -107,11 +112,12 @@ export class Floorplanner2D extends EventDispatcher {
     this.wallWidth = Dimensioning.cmToPixel(
       Configuration.getNumericValue('wallThickness'),
     );
+
     // this.wallWidth = 10.0 * this.pixelsPerCm;
     this.gridSnapMode = false;
     this.shiftKey = false;
-    // Initialization:
 
+    // Initialization:
     this.setMode(floorplannerModes.MOVE);
 
     let scope = this;
@@ -130,7 +136,6 @@ export class Floorplanner2D extends EventDispatcher {
     this.canvasElement.bind('dblclick', (event) => {
       scope.doubleClick(event);
     });
-
     document.addEventListener('keyup', function (event) {
       scope.keyUp(event);
     });
@@ -140,15 +145,15 @@ export class Floorplanner2D extends EventDispatcher {
     floorplan.addEventListener(EVENT_LOADED, function () {
       scope.reset();
     });
-
-    function updateView(o) {
-      scope.view.draw();
-      console.log(o);
-      scope.dispatchEvent({ type: EVENT_CORNER_ATTRIBUTES_CHANGED });
-    }
-    floorplan.addEventListener(EVENT_CORNER_ATTRIBUTES_CHANGED, updateView);
-    floorplan.addEventListener(EVENT_WALL_ATTRIBUTES_CHANGED, updateView);
-    floorplan.addEventListener(EVENT_ROOM_ATTRIBUTES_CHANGED, updateView);
+    floorplan.addEventListener(EVENT_CORNER_ATTRIBUTES_CHANGED, (o) => {
+      this.updateView();
+    });
+    floorplan.addEventListener(EVENT_WALL_ATTRIBUTES_CHANGED, (o) => {
+      this.updateView();
+    });
+    floorplan.addEventListener(EVENT_ROOM_ATTRIBUTES_CHANGED, (o) => {
+      this.updateView();
+    });
   }
 
   get selectedCorner() {
@@ -167,12 +172,16 @@ export class Floorplanner2D extends EventDispatcher {
     return this.view.carbonSheet;
   }
 
+  updateView() {
+    this.view.draw();
+  }
+
   doubleClick() {
     let userInput, cid;
     function getAValidInput(message, current) {
-      let uinput = window.prompt(message, current);
-      if (uinput != null) {
-        return uinput;
+      let uInput = window.prompt(message, current);
+      if (uInput != null) {
+        return uInput;
       }
       return current;
     }
@@ -225,7 +234,7 @@ export class Floorplanner2D extends EventDispatcher {
       if (userInput != null) {
         this.activeRoom.name = userInput;
       }
-      this.view.draw();
+      this.updateView();
     }
   }
 
@@ -288,7 +297,7 @@ export class Floorplanner2D extends EventDispatcher {
       // this.targetY = Math.floor(this.targetY / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
     }
 
-    this.view.draw();
+    this.updateView();
   }
 
   /* */
@@ -306,6 +315,8 @@ export class Floorplanner2D extends EventDispatcher {
 
     this.lastX = this.rawMouseX;
     this.lastY = this.rawMouseY;
+
+    // console.log('active corner: ', this.activeCorner);
 
     // delete
     if (this.mode == floorplannerModes.DELETE) {
@@ -336,7 +347,7 @@ export class Floorplanner2D extends EventDispatcher {
         this.mouseY,
       );
       if (this._clickedWallControl != null) {
-        this.view.draw();
+        this.updateView();
         return;
       }
     }
@@ -344,6 +355,7 @@ export class Floorplanner2D extends EventDispatcher {
     let mDownCorner = this.floorplan.overlappedCorner(this.mouseX, this.mouseY);
     let mDownWall = this.floorplan.overlappedWall(this.mouseX, this.mouseY);
     let mDownRoom = this.floorplan.overlappedRoom(this.mouseX, this.mouseY);
+    // console.log(mDownCorner, mDownWall, mDownRoom);
     this._clickedWallControl = null;
 
     if (mDownCorner == null && mDownWall == null && mDownRoom == null) {
@@ -360,6 +372,9 @@ export class Floorplanner2D extends EventDispatcher {
         type: EVENT_CORNER_2D_CLICKED,
         item: this._clickedCorner,
       });
+      mDownCorner.addEventListener(EVENT_MOVED, (o) =>
+        this.floorplan.dispatchEvent({ ...o, type: EVENT_CORNER_2D_MOVED }),
+      );
     } else if (mDownWall != null) {
       this._clickedCorner = undefined;
       this._clickedWall = undefined;
@@ -379,7 +394,7 @@ export class Floorplanner2D extends EventDispatcher {
         item: this._clickedRoom,
       });
     }
-    this.view.draw();
+    this.updateView();
   }
 
   /* */
@@ -465,7 +480,7 @@ export class Floorplanner2D extends EventDispatcher {
       }
 
       if (draw) {
-        this.view.draw();
+        this.updateView();
       }
     }
 
@@ -490,7 +505,7 @@ export class Floorplanner2D extends EventDispatcher {
         (1 / Configuration.getNumericValue('scale'));
       this.lastX = this.rawMouseX;
       this.lastY = this.rawMouseY;
-      this.view.draw();
+      this.updateView();
     }
     // dragging
     if (this.mode == floorplannerModes.MOVE && this.mouseDown) {
@@ -512,7 +527,7 @@ export class Floorplanner2D extends EventDispatcher {
         this._clickedWallControl.x = mx;
         this._clickedWallControl.y = my;
         this._clickedWall.updateControlVectors();
-        this.view.draw();
+        this.updateView();
         return;
       }
       if (this.activeCorner) {
@@ -564,7 +579,7 @@ export class Floorplanner2D extends EventDispatcher {
         this.lastX = this.rawMouseX;
         this.lastY = this.rawMouseY;
       }
-      this.view.draw();
+      this.updateView();
     }
   }
 
@@ -587,7 +602,7 @@ export class Floorplanner2D extends EventDispatcher {
       if (this.lastNode != null) {
         this.floorplan.newWall(this.lastNode, corner);
         this.floorplan.newWallsForIntersections(this.lastNode, corner);
-        this.view.draw();
+        this.updateView();
       }
       if (corner.mergeWithIntersected() && this.lastNode != null) {
         this.setMode(floorplannerModes.MOVE);
@@ -608,7 +623,7 @@ export class Floorplanner2D extends EventDispatcher {
         this._clickedWall.updateAttachedRooms(true);
       }
     }
-    this.view.draw();
+    this.updateView();
   }
 
   /* */
@@ -625,7 +640,7 @@ export class Floorplanner2D extends EventDispatcher {
     this.resizeView();
     this.setMode(floorplannerModes.MOVE);
     this.resetOrigin();
-    this.view.draw();
+    this.updateView();
   }
 
   /* */

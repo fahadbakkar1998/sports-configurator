@@ -68,20 +68,14 @@ export class FloorplannerView2D {
     this.floorplan.carbonSheet = this._carbonsheet;
 
     $(window).resize(() => {
-      setTimeout(() => {
-        scope.handleWindowResize();
-      }, 100);
+      scope.handleWindowResize();
     });
 
     $(window).on('orientationchange', () => {
-      setTimeout(() => {
-        scope.handleWindowResize();
-      }, 100);
+      scope.handleWindowResize();
     });
 
-    setTimeout(() => {
-      this.handleWindowResize();
-    }, 100);
+    this.handleWindowResize();
   }
 
   get carbonSheet() {
@@ -89,9 +83,7 @@ export class FloorplannerView2D {
   }
 
   orientationChange() {
-    setTimeout(() => {
-      this.handleWindowResize();
-    }, 100);
+    this.handleWindowResize();
   }
 
   /* */

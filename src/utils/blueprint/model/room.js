@@ -56,18 +56,15 @@ export class Room extends EventDispatcher {
     this.roofPlane = null;
     this.customTexture = false;
     this.floorChangeCallbacks = null;
-    this.updateWalls();
-    this.updateInteriorCorners();
-    this.generatePlane();
-    this.generateRoofPlane();
+    this.update();
 
-    let cornerids = [];
+    let cornerIds = [];
     for (let i = 0; i < this.corners.length; i++) {
       let c = this.corners[i];
       c.attachRoom(this);
-      cornerids.push(c.id);
+      cornerIds.push(c.id);
     }
-    this._roomByCornersId = cornerids.join(',');
+    this._roomByCornersId = cornerIds.join(',');
   }
 
   get roomCornerPoints() {
@@ -79,24 +76,31 @@ export class Room extends EventDispatcher {
   }
 
   set name(value) {
-    let oldname = this._name;
+    let oldName = this._name;
     this._name = value;
     this.dispatchEvent({
       type: EVENT_ROOM_ATTRIBUTES_CHANGED,
       item: this,
-      info: { from: oldname, to: this._name },
+      info: { from: oldName, to: this._name },
     });
   }
   get name() {
     return this._name;
   }
 
+  update() {
+    this.updateWalls();
+    this.updateInteriorCorners();
+    this.generatePlane();
+    this.generateRoofPlane();
+  }
+
   roomIdentifier() {
-    let cornerids = [];
+    let cornerIds = [];
     this.corners.forEach((corner) => {
-      cornerids.push(corner.id);
+      cornerIds.push(corner.id);
     });
-    let ids = cornerids.join(',');
+    let ids = cornerIds.join(',');
     return ids;
   }
 
@@ -227,9 +231,9 @@ export class Room extends EventDispatcher {
   }
 
   updateArea() {
-    let oldarea = this.area;
+    let oldArea = this.area;
     let points = [];
-    let allpoints = [];
+    let allPoints = [];
     this.areaCenter = new Vector2();
     this._polygonPoints = [];
 
@@ -246,28 +250,28 @@ export class Room extends EventDispatcher {
           let begin = corner.location.clone().sub(wall.bezier.get(0)).length();
           let p;
           let stepIndex;
-          allpoints.push(corner.location.clone());
+          allPoints.push(corner.location.clone());
 
           if (begin < 1e-6) {
             for (stepIndex = 1; stepIndex < 20; stepIndex++) {
               p = wall.bezier.get(stepIndex / 20);
-              allpoints.push(new Vector2(p.x, p.y));
+              allPoints.push(new Vector2(p.x, p.y));
             }
           } else {
             for (stepIndex = 19; stepIndex > 0; stepIndex--) {
               p = wall.bezier.get(stepIndex / 20);
-              allpoints.push(new Vector2(p.x, p.y));
+              allPoints.push(new Vector2(p.x, p.y));
             }
           }
         } else {
-          allpoints.push(corner.location.clone());
+          allPoints.push(corner.location.clone());
         }
       } else {
-        allpoints.push(corner.location.clone());
+        allPoints.push(corner.location.clone());
       }
     }
 
-    points = allpoints;
+    points = allPoints;
     region = new Region(points);
     this.area = Math.abs(region.area());
     this.areaCenter = region.centroid();
@@ -275,14 +279,14 @@ export class Room extends EventDispatcher {
     this.dispatchEvent({
       type: EVENT_ROOM_ATTRIBUTES_CHANGED,
       item: this,
-      info: { from: oldarea, to: this.area },
+      info: { from: oldArea, to: this.area },
     });
   }
 
   updateArea2() {
     let scope = this;
     let isComplexRoom = false;
-    let oldarea = this.area;
+    let oldArea = this.area;
     let points = [];
     let N = 0;
     let area = 0;
@@ -324,7 +328,7 @@ export class Room extends EventDispatcher {
       this.dispatchEvent({
         type: EVENT_ROOM_ATTRIBUTES_CHANGED,
         item: this,
-        info: { from: oldarea, to: this.area },
+        info: { from: oldArea, to: this.area },
       });
       return;
     }
@@ -387,7 +391,7 @@ export class Room extends EventDispatcher {
     this.dispatchEvent({
       type: EVENT_ROOM_ATTRIBUTES_CHANGED,
       item: this,
-      info: { from: oldarea, to: this.area },
+      info: { from: oldArea, to: this.area },
     });
   }
 

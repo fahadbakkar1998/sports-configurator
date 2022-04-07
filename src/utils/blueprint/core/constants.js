@@ -22,3 +22,5 @@ export const dimCentiMeter = 'cm';
 
 /* Dimensioning in MilliMeter. */
 export const dimMilliMeter = 'mm';
+
+export const sphereRadius = 4000;

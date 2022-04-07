@@ -1194,103 +1194,259 @@ export const items = [
   },
 ];
 
-export const rectHome = `
-{
-  "floorplan": {
-      "corners": {
-          "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2": {
-              "x": 0,
-              "y": 0,
-              "elevation": 4
-          },
-          "f90da5e3-9e0e-eba7-173d-eb0b071e838e": {
-              "x": 0,
-              "y": 5,
-              "elevation": 4
-          },
-          "da026c08-d76a-a944-8e7b-096b752da9ed": {
-              "x": 5,
-              "y": 5,
-              "elevation": 4
-          },
-          "4e3d65cb-54c0-0681-28bf-bddcc7bdb571": {
-              "x": 5,
-              "y": 0,
-              "elevation": 4
-          }
+// export const rectHome = `
+// {
+//   "floorplan": {
+//       "corners": {
+//           "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2": {
+//               "x": 0,
+//               "y": 0,
+//               "elevation": 4
+//           },
+//           "f90da5e3-9e0e-eba7-173d-eb0b071e838e": {
+//               "x": 0,
+//               "y": 5,
+//               "elevation": 4
+//           },
+//           "da026c08-d76a-a944-8e7b-096b752da9ed": {
+//               "x": 5,
+//               "y": 5,
+//               "elevation": 4
+//           },
+//           "4e3d65cb-54c0-0681-28bf-bddcc7bdb571": {
+//               "x": 5,
+//               "y": 0,
+//               "elevation": 4
+//           }
+//       },
+//       "walls": [{
+//           "corner1": "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2",
+//           "corner2": "f90da5e3-9e0e-eba7-173d-eb0b071e838e",
+//           "frontTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           },
+//           "backTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           }
+//       }, {
+//           "corner1": "f90da5e3-9e0e-eba7-173d-eb0b071e838e",
+//           "corner2": "da026c08-d76a-a944-8e7b-096b752da9ed",
+//           "frontTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           },
+//           "backTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           }
+//       }, {
+//           "corner1": "da026c08-d76a-a944-8e7b-096b752da9ed",
+//           "corner2": "4e3d65cb-54c0-0681-28bf-bddcc7bdb571",
+//           "frontTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           },
+//           "backTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           }
+//       }, {
+//           "corner1": "4e3d65cb-54c0-0681-28bf-bddcc7bdb571",
+//           "corner2": "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2",
+//           "frontTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           },
+//           "backTexture": {
+//               "url": "/assets/rooms/textures/wallmap.png",
+//               "stretch": true,
+//               "scale": 0
+//           }
+//       }],
+//       "rooms": {
+//           "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2,4e3d65cb-54c0-0681-28bf-bddcc7bdb571,da026c08-d76a-a944-8e7b-096b752da9ed,f90da5e3-9e0e-eba7-173d-eb0b071e838e": {
+//               "name": "A New Room"
+//           }
+//       },
+//       "wallTextures": [],
+//       "floorTextures": {},
+//       "newFloorTextures": {},
+//       "carbonSheet": {
+//           "url": "",
+//           "transparency": 1,
+//           "x": 0,
+//           "y": 0,
+//           "anchorX": 0,
+//           "anchorY": 0,
+//           "width": 0.01,
+//           "height": 0.01
+//       }
+//   },
+//   "items": []
+// }
+// `;
+
+export const rectHome = JSON.stringify({
+  floorplan: {
+    version: '0.0.2a',
+    corners: {
+      '71d4f128-ae80-3d58-9bd2-711c6ce6cdf2': { x: 0, y: 0, elevation: 4 },
+      'f90da5e3-9e0e-eba7-173d-eb0b071e838e': { x: 0, y: 5, elevation: 4 },
+      'da026c08-d76a-a944-8e7b-096b752da9ed': { x: 5, y: 5, elevation: 4 },
+      '4e3d65cb-54c0-0681-28bf-bddcc7bdb571': { x: 5, y: 0, elevation: 4 },
+    },
+    walls: [
+      {
+        corner1: '71d4f128-ae80-3d58-9bd2-711c6ce6cdf2',
+        corner2: 'f90da5e3-9e0e-eba7-173d-eb0b071e838e',
+        frontTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        backTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: -176.77669529663686, y: 176.7766952966369 },
+        b: { x: -176.7766952966369, y: 323.22330470336317 },
       },
-      "walls": [{
-          "corner1": "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2",
-          "corner2": "f90da5e3-9e0e-eba7-173d-eb0b071e838e",
-          "frontTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          },
-          "backTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          }
-      }, {
-          "corner1": "f90da5e3-9e0e-eba7-173d-eb0b071e838e",
-          "corner2": "da026c08-d76a-a944-8e7b-096b752da9ed",
-          "frontTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          },
-          "backTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          }
-      }, {
-          "corner1": "da026c08-d76a-a944-8e7b-096b752da9ed",
-          "corner2": "4e3d65cb-54c0-0681-28bf-bddcc7bdb571",
-          "frontTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          },
-          "backTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          }
-      }, {
-          "corner1": "4e3d65cb-54c0-0681-28bf-bddcc7bdb571",
-          "corner2": "71d4f128-ae80-3d58-9bd2-711c6ce6cdf2",
-          "frontTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          },
-          "backTexture": {
-              "url": "/assets/rooms/textures/wallmap.png",
-              "stretch": true,
-              "scale": 0
-          }
-      }],
-      "rooms": {
-          "f90da5e3-9e0e-eba7-173d-eb0b071e838e,71d4f128-ae80-3d58-9bd2-711c6ce6cdf2,4e3d65cb-54c0-0681-28bf-bddcc7bdb571,da026c08-d76a-a944-8e7b-096b752da9ed": {
-              "name": "A New Room"
-          }
+      {
+        corner1: 'f90da5e3-9e0e-eba7-173d-eb0b071e838e',
+        corner2: 'da026c08-d76a-a944-8e7b-096b752da9ed',
+        frontTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        backTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 176.7766952966369, y: 676.7766952966368 },
+        b: { x: 323.22330470336317, y: 676.776695296637 },
       },
-      "wallTextures": [],
-      "floorTextures": {},
-      "newFloorTextures": {},
-      "carbonSheet": {
-          "url": "",
-          "transparency": 1,
-          "x": 0,
-          "y": 0,
-          "anchorX": 0,
-          "anchorY": 0,
-          "width": 0.01,
-          "height": 0.01
-      }
+      {
+        corner1: 'da026c08-d76a-a944-8e7b-096b752da9ed',
+        corner2: '4e3d65cb-54c0-0681-28bf-bddcc7bdb571',
+        frontTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        backTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 676.7766952966368, y: 323.2233047033631 },
+        b: { x: 676.776695296637, y: 176.77669529663686 },
+      },
+      {
+        corner1: '4e3d65cb-54c0-0681-28bf-bddcc7bdb571',
+        corner2: '71d4f128-ae80-3d58-9bd2-711c6ce6cdf2',
+        frontTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        backTexture: {
+          url: '/assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 323.2233047033631, y: -176.77669529663686 },
+        b: { x: 176.77669529663686, y: -176.7766952966369 },
+      },
+    ],
+    rooms: {
+      '71d4f128-ae80-3d58-9bd2-711c6ce6cdf2,4e3d65cb-54c0-0681-28bf-bddcc7bdb571,da026c08-d76a-a944-8e7b-096b752da9ed,f90da5e3-9e0e-eba7-173d-eb0b071e838e':
+        { name: 'Mine' },
+    },
+    wallTextures: [],
+    floorTextures: {},
+    newFloorTextures: {},
+    carbonSheet: {
+      url: '',
+      transparency: 1,
+      x: 0,
+      y: 0,
+      anchorX: 0,
+      anchorY: 0,
+      width: 0.01,
+      height: 0.01,
+    },
   },
-  "items": []
-}
-`;
+  items: [
+    {
+      item_name: '3',
+      item_type: '3',
+      model_url: 'assets/models/js/whitewindow.js',
+      xPos: 147.71110311399423,
+      yPos: 197.39903662054166,
+      zPos: 0.4999999999999991,
+      rotation: -1.812609019796174e-18,
+      scale_x: 1,
+      scale_y: 1,
+      scale_z: 1,
+      fixed: false,
+      material_colors: [
+        '#ffffff',
+        '#a09050',
+        '#a09050',
+        '#ffffff',
+        '#ffffff',
+        '#6c6c6c',
+        '#000000',
+        '#000000',
+        '#ffffff',
+        '#ffffff',
+        '#6c6c6c',
+        '#ffffff',
+      ],
+    },
+    {
+      item_name: '9',
+      item_type: '9',
+      model_url: 'assets/models/js/cb-clapboard_baked.js',
+      xPos: 340.18815523448933,
+      yPos: 67.89999754396,
+      zPos: 30.4,
+      rotation: -1.812609019796174e-18,
+      scale_x: 1,
+      scale_y: 1,
+      scale_z: 1,
+      fixed: false,
+      material_colors: ['#ffffff'],
+    },
+    {
+      item_name: 'Bedside table - Shale',
+      item_type: '1',
+      model_url: 'assets/models/js/bd-shalebedside-smoke_baked.js',
+      xPos: 218.20764719172064,
+      yPos: 26.155249745364998,
+      zPos: 176.77149898378866,
+      rotation: 1.1787969372688563,
+      scale_x: 1,
+      scale_y: 1,
+      scale_z: 1,
+      fixed: false,
+      material_colors: ['#ffffff'],
+    },
+  ],
+});

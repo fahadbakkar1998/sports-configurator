@@ -1,22 +1,28 @@
 import { rectHome } from './resource';
 
-export const saveDesign = (name) => {
-  let data = blueprintJS.model.exportSerialized();
+export const saveDesign = () => {
+  let data = blueprintJS.model.exportDataObj();
   let a = window.document.createElement('a');
-  let blob = new Blob([data], { type: 'text' });
+  let blob = new Blob([JSON.stringify(data)], { type: 'text' });
   a.href = window.URL.createObjectURL(blob);
-  a.download = name;
+  a.download =
+    Object.values(data.floorplan.rooms)
+      .map((e) => e.name)
+      .join(',') + '.3d';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 };
 
-export const loadDefaultDesign = () => {
-  blueprintJS.model.loadSerialized(rectHome);
+export const loadDesign = (data) => {
+  console.log('design data: ', JSON.parse(data));
+  blueprintJS.model.loadSerialized(data);
+  updateFloorPlan();
 };
 
-export const updateFloorPlan = () => {
-  blueprintJS.model.floorplan.update();
+export const loadDefaultDesign = () => {
+  blueprintJS.model.loadSerialized(rectHome);
+  updateFloorPlan();
 };
 
 export const addItem = (item) => {
@@ -62,4 +68,8 @@ export const addItem = (item) => {
 
 export const updateFloorPlanMode = (mode) => {
   blueprintJS.floorplanner.setMode(mode);
+};
+
+export const updateFloorPlan = () => {
+  blueprintJS.model.floorplan.update();
 };

@@ -129,7 +129,8 @@ export class Corner extends EventDispatcher {
   }
 
   set x(value) {
-    let oldvalue = this._x;
+    // console.log('set corner x: ', value);
+    let oldValue = this._x;
     if (Math.abs(value - this._x) > 1e-6) {
       this._hasChanged = true;
     }
@@ -141,7 +142,7 @@ export class Corner extends EventDispatcher {
       this.dispatchEvent({
         type: EVENT_CORNER_ATTRIBUTES_CHANGED,
         item: this,
-        info: { from: oldvalue, to: this._x },
+        info: { from: oldValue, to: this._x },
       });
     }
   }
@@ -151,7 +152,7 @@ export class Corner extends EventDispatcher {
   }
 
   set y(value) {
-    let oldvalue = this._y;
+    let oldValue = this._y;
     if (Math.abs(value - this._y) > 1e-6) {
       this._hasChanged = true;
     }
@@ -163,14 +164,14 @@ export class Corner extends EventDispatcher {
       this.dispatchEvent({
         type: EVENT_CORNER_ATTRIBUTES_CHANGED,
         item: this,
-        info: { from: oldvalue, to: this._y },
+        info: { from: oldValue, to: this._y },
       });
     }
   }
 
   /* @type {Number} elevation The elevation value at this corner*/
   set elevation(value) {
-    let oldvalue = this._elevation;
+    let oldValue = this._elevation;
     if (value - this._elevation < 1e-6) {
       this._hasChanged = true;
     }
@@ -179,7 +180,7 @@ export class Corner extends EventDispatcher {
       this.dispatchEvent({
         type: EVENT_CORNER_ATTRIBUTES_CHANGED,
         item: this,
-        info: { from: oldvalue, to: this._elevation },
+        info: { from: oldValue, to: this._elevation },
       });
     }
   }
@@ -609,13 +610,13 @@ export class Corner extends EventDispatcher {
     for (i = 0; i < rooms.length; i++) {
       let room = rooms[i];
       //Below returns the roomname object
-      let roomname = this.floorplan.metaroomsdata[room.roomByCornersId];
+      let roomname = this.floorplan.metaRoomsData[room.roomByCornersId];
       if (roomname) {
         let oldId = room.roomByCornersId;
         let newId = oldId.replace(corner.id, this.id);
-        this.floorplan.metaroomsdata[newId] = {};
-        this.floorplan.metaroomsdata[newId]['name'] = roomname['name'];
-        delete this.floorplan.metaroomsdata[oldId];
+        this.floorplan.metaRoomsData[newId] = {};
+        this.floorplan.metaRoomsData[newId]['name'] = roomname['name'];
+        delete this.floorplan.metaRoomsData[oldId];
       }
     }
 

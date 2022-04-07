@@ -4,6 +4,7 @@ import LeftBar_List_Leaf from './LeftBar_List_Leaf';
 import { items } from '../../../utils/resource';
 import {
   saveDesign,
+  loadDesign,
   loadDefaultDesign,
   updateFloorPlanMode,
 } from '../../../utils/bpSupport';
@@ -14,7 +15,6 @@ import cn from 'classnames';
 const LeftBar_List = () => {
   const editMode = useZustand((state) => state.editMode);
   const floorPlanMode = useZustand((state) => state.floorPlanMode);
-  const setFloorPlanMode = useZustand((state) => state.setFloorPlanMode);
 
   const recursiveItem = (item, depth) => {
     if (item.children) {
@@ -40,23 +40,44 @@ const LeftBar_List = () => {
             onClick={() => {
               loadDefaultDesign();
             }}
-            title="New Layout">
-            New Layout
+            title="New Design">
+            New Design
           </div>
           <div
             className={cn('floor-plan-item')}
             onClick={() => {
-              saveDesign('design.3d');
+              saveDesign();
             }}
-            title="Save Layout">
-            Save Layout
+            title="Save Design">
+            Save Design
           </div>
+          <label className={cn('floor-plan-item')} htmlFor="upload">
+            Load Design
+            <input
+              id="upload"
+              style={{ display: 'none' }}
+              type="file"
+              onClick={(e) => {
+                e.target.value = null;
+              }}
+              onChange={(e) => {
+                const [file] = e.target.files;
+                if (file) {
+                  const reader = new FileReader();
+                  reader.readAsText(file);
+                  reader.onload = (e) => {
+                    loadDesign(e.target.result);
+                    return true;
+                  };
+                }
+              }}
+            />
+          </label>
           <div
             className={cn('floor-plan-item', {
               active: floorPlanMode === Blueprint.floorplannerModes.MOVE,
             })}
             onClick={() => {
-              setFloorPlanMode(Blueprint.floorplannerModes.MOVE);
               updateFloorPlanMode(Blueprint.floorplannerModes.MOVE);
             }}
             title="Move Walls">
@@ -67,7 +88,6 @@ const LeftBar_List = () => {
               active: floorPlanMode === Blueprint.floorplannerModes.DRAW,
             })}
             onClick={() => {
-              setFloorPlanMode(Blueprint.floorplannerModes.DRAW);
               updateFloorPlanMode(Blueprint.floorplannerModes.DRAW);
             }}
             title="Draw New Walls">
@@ -78,7 +98,6 @@ const LeftBar_List = () => {
               active: floorPlanMode === Blueprint.floorplannerModes.DELETE,
             })}
             onClick={() => {
-              setFloorPlanMode(Blueprint.floorplannerModes.DELETE);
               updateFloorPlanMode(Blueprint.floorplannerModes.DELETE);
             }}
             title="Delete Walls">

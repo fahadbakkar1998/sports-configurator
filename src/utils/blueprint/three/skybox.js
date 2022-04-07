@@ -13,6 +13,7 @@ import { RepeatWrapping } from 'three';
 import { GroundSceneReflector } from 'three-reflector2';
 
 import { AxesHelper } from 'three';
+import { sphereRadius } from '../core/constants';
 
 export class Skybox extends EventDispatcher {
   constructor(scene, renderer) {
@@ -35,7 +36,6 @@ export class Skybox extends EventDispatcher {
     this.scene = scene;
     this.renderer = renderer;
 
-    this.sphereRadius = 4000;
     this.widthSegments = 32;
     this.heightSegments = 15;
     this.sky = null;
@@ -94,12 +94,12 @@ export class Skybox extends EventDispatcher {
     });
 
     this.skyGeo = new SphereGeometry(
-      this.sphereRadius,
+      sphereRadius,
       this.widthSegments,
       this.heightSegments,
     );
     this.sky = new Mesh(this.skyGeo, this.skyMat);
-    // this.sky.position.x += this.sphereRadius*0.5;
+    // this.sky.position.x += sphereRadius*0.5;
 
     var groundT = new TextureLoader().load(
       'assets/rooms/textures/Ground_4K.jpg',

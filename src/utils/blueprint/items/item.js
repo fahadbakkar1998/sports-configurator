@@ -181,7 +181,7 @@ export class Item extends Mesh {
 
     this.add(this.canvasPlaneWH);
     this.add(this.canvasPlaneWD);
-    this.resizeProportionally = true;
+    this.resizeProportionally = false;
 
     if (rotation) {
       this.rotation.y = rotation;
@@ -282,7 +282,10 @@ export class Item extends Mesh {
   }
 
   /* */
-  resize(height, width, depth) {
+  resize({ height, width, depth }) {
+    if (!width) width = this.getWidth();
+    if (!height) height = this.getHeight();
+    if (!depth) depth = this.getDepth();
     let x = width / this.getWidth();
     let y = height / this.getHeight();
     let z = depth / this.getDepth();
@@ -396,11 +399,11 @@ export class Item extends Mesh {
     this.placeInRoom();
     // An ugly hack to increase the size of gltf models
     if (this.halfSize.x < 1.0) {
-      this.resize(
-        this.getHeight() * 300,
-        this.getWidth() * 300,
-        this.getDepth() * 300,
-      );
+      this.resize({
+        height: this.getHeight() * 300,
+        width: this.getWidth() * 300,
+        depth: this.getDepth() * 300,
+      });
     }
     this.bhelper = new BoxHelper(this);
     this.scene.add(this.bhelper);

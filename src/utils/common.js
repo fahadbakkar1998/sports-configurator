@@ -15,9 +15,7 @@ export var WallProperties = function () {
 
   this.floorMaterialName = 0;
   this.wallMaterialName = 0;
-
   this.forAllWalls = false;
-
   this.currentWall = null;
   this.currentFloor = null;
 
