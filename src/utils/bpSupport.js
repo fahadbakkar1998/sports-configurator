@@ -75,10 +75,14 @@ export const updateFloorPlan = () => {
   blueprintJS.model.floorplan.update();
 };
 
-export const updateWireFrame = (flag) => {
+export const updateWireFrameMode = (flag) => {
   blueprintJS.three.switchWireFrame(flag);
 };
 
 export const updateUnit = (unit) => {
   Blueprint.Configuration.setValue(Blueprint.configDimUnit, unit);
+};
+
+export const updateRoofMode = (flag) => {
+  console.log(blueprintJS.three.floorplan.showRoof(flag));
 };

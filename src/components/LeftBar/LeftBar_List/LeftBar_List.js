@@ -120,6 +120,7 @@ const LeftBar_List = () => {
         </div>
       </div>
       <div className={cn('content', { active: editMode === '3D' })}>
+        <div className="header">Categories</div>
         {React.Children.toArray(
           items.map((item) =>
             recursiveItem({

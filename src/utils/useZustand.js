@@ -49,6 +49,12 @@ const useZustand = create((set) => ({
     set((state) => ({
       curUnit,
     })),
+
+  showRoof: false,
+  setShowRoof: (showRoof) =>
+    set((state) => ({
+      showRoof,
+    })),
 }));
 
 export default useZustand;

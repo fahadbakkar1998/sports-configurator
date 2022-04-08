@@ -19,7 +19,7 @@ export class Skybox extends EventDispatcher {
   constructor(scene, renderer) {
     super();
 
-    this.defaultEnvironment = 'assets/rooms/textures/envs/Garden.png';
+    this.defaultEnvironment = 'assets/rooms/textures/envs/Sky.jpg';
     this.useEnvironment = false;
     this.topColor = 0x92b2ce; //0xe9e9e9; //0xf9f9f9;//0x565e63
     this.bottomColor = 0xffffff; //0xD8ECF9
@@ -88,7 +88,7 @@ export class Skybox extends EventDispatcher {
       color: 0xeaeaea,
       side: DoubleSide,
       map: new TextureLoader().load(
-        'assets/rooms/textures/envs/Garden.png',
+        'assets/rooms/textures/envs/Sky.jpg',
         function () {},
       ),
     });

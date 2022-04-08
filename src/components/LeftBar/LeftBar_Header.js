@@ -8,20 +8,18 @@ const LeftBar_Header = () => {
 
   return (
     <div className="LeftBar_Header">
-      {/* <div
-        className={cn('item', { active: editMode === 'FLOOR PLAN' })}
+      <img
+        className={cn('item')}
+        src="assets/images/icon-search.png"
         onClick={() => {
-          setEditMode('FLOOR PLAN');
-        }}>
-        Floor Plan
-      </div>
-      <div
-        className={cn('item', { active: editMode === '3D' })}
+          console.log('search');
+        }}></img>
+      <img
+        className={cn('item')}
+        src="assets/images/icon-hand.png"
         onClick={() => {
-          setEditMode('3D');
-        }}>
-        3D
-      </div> */}
+          console.log('hand');
+        }}></img>
     </div>
   );
 };

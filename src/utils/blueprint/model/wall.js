@@ -8,6 +8,7 @@ import {
   configWallHeight,
 } from '../core/configuration.js';
 import { Utils } from '../core/utils.js';
+import { getFloat, getUFloat } from '../../../utils/common';
 
 /* The default wall texture. */
 export const defaultWallTexture = {
@@ -259,21 +260,23 @@ export class Wall extends EventDispatcher {
   }
 
   set wallSize(value) {
+    if (getUFloat(value) <= 0.5) return;
+    console.log('wallSize: ', value);
     if (this.wallType == WallTypes.STRAIGHT) {
       let vector = this.getEnd().location.clone().sub(this.getStart().location);
       let currentLength = this.wallLength();
       let changeInLength = value / currentLength;
 
-      let neighboursCountStart = this.getStart().adjacentCorners().length == 1;
-      let neighboursCountEnd = this.getEnd().adjacentCorners().length == 1;
+      let neighborsCountStart = this.getStart().adjacentCorners().length == 1;
+      let neighborsCountEnd = this.getEnd().adjacentCorners().length == 1;
 
       let changeInLengthOffset, movementVector, startPoint, endPoint;
 
       changeInLengthOffset = changeInLength - 1;
 
       if (
-        (!neighboursCountStart && !neighboursCountEnd) ||
-        (neighboursCountStart && neighboursCountEnd)
+        (!neighborsCountStart && !neighborsCountEnd) ||
+        (neighborsCountStart && neighborsCountEnd)
       ) {
         changeInLengthOffset *= 0.5;
         movementVector = vector.clone().multiplyScalar(changeInLengthOffset);
@@ -282,14 +285,14 @@ export class Wall extends EventDispatcher {
           .multiplyScalar(-1)
           .add(this.getStart().location);
         endPoint = movementVector.clone().add(this.getEnd().location);
-      } else if (neighboursCountStart) {
+      } else if (neighborsCountStart) {
         movementVector = vector.clone().multiplyScalar(changeInLengthOffset);
         startPoint = movementVector
           .clone()
           .multiplyScalar(-1)
           .add(this.getStart().location);
         endPoint = this.getEnd().location;
-      } else if (neighboursCountEnd) {
+      } else if (neighborsCountEnd) {
         movementVector = vector.clone().multiplyScalar(changeInLengthOffset);
         endPoint = movementVector.clone().add(this.getEnd().location);
         startPoint = this.getStart().location;

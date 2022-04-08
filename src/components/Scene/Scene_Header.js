@@ -1,6 +1,6 @@
 import React from 'react';
 import useZustand from '../../utils/useZustand';
-import { updateWireFrame } from '../../utils/bpSupport';
+import { updateWireFrameMode, updateRoofMode } from '../../utils/bpSupport';
 import cn from 'classnames';
 
 const Scene_Header = () => {
@@ -8,6 +8,8 @@ const Scene_Header = () => {
   const setEditMode = useZustand((state) => state.setEditMode);
   const isWireFrame = useZustand((state) => state.isWireFrame);
   const setIsWireFrame = useZustand((state) => state.setIsWireFrame);
+  const showRoof = useZustand((state) => state.showRoof);
+  const setShowRoof = useZustand((state) => state.setShowRoof);
 
   return (
     <div className="Scene_Header">
@@ -28,10 +30,18 @@ const Scene_Header = () => {
       <div
         className={cn('item', { active: isWireFrame })}
         onClick={() => {
-          updateWireFrame(!isWireFrame);
+          updateWireFrameMode(!isWireFrame);
           setIsWireFrame(!isWireFrame);
         }}>
         WireFrame
+      </div>
+      <div
+        className={cn('item', { active: showRoof })}
+        onClick={() => {
+          updateRoofMode(!showRoof);
+          setShowRoof(!showRoof);
+        }}>
+        Show Roof
       </div>
     </div>
   );

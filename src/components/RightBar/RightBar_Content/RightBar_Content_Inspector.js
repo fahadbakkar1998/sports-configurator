@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useZustand from '../../../utils/useZustand';
 import { updateUnit } from '../../../utils/bpSupport';
 import { getFloat, getUFloat } from '../../../utils/common';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
+
+let isDot = false;
 
 const RightBar_Content_Inspector = () => {
   const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
@@ -15,14 +17,23 @@ const RightBar_Content_Inspector = () => {
   const dimUnit = Blueprint.Configuration.getStringValue(
     Blueprint.configDimUnit,
   );
+  const inputSuffix = isDot ? '.' : '';
+
+  useEffect(() => {
+    isDot = false;
+  }, [isDot]);
 
   /* 2D */
   const updateCur2dItemNum = (obj) => {
     const cloneCur2dItemEvent = { ...cur2dItemEvent };
     Object.entries(obj).forEach(([key, value]) => {
-      const cm = Blueprint.Dimensioning.cmFromMeasureRaw(value);
+      isDot =
+        value &&
+        value.toString().lastIndexOf('.') === value.toString().length - 1;
+      let cm = Blueprint.Dimensioning.cmFromMeasureRaw(value);
       cloneCur2dItemEvent.item[key] = cm;
     });
+    console.log('cloneCur2dItemEvent: ', cloneCur2dItemEvent);
     setCur2dItemEvent(cloneCur2dItemEvent);
   };
 
@@ -39,6 +50,9 @@ const RightBar_Content_Inspector = () => {
     const cloneCur3dItemEvent = { ...cur3dItemEvent };
     const itemSize = {};
     Object.entries(obj).forEach(([key, value]) => {
+      isDot =
+        value &&
+        value.toString().lastIndexOf('.') === value.toString().length - 1;
       const cm = Blueprint.Dimensioning.cmFromMeasureRaw(value);
       itemSize[key] = cm;
     });
@@ -53,6 +67,41 @@ const RightBar_Content_Inspector = () => {
     });
     setCur2dItemEvent(cloneCur3dItemEvent);
   };
+
+  const cur2dItemX =
+    (cur2dItemEvent &&
+      cur2dItemEvent.item &&
+      cur2dItemEvent.item.x &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.x)) ||
+    0;
+
+  const cur2dItemY =
+    (cur2dItemEvent &&
+      cur2dItemEvent.item &&
+      cur2dItemEvent.item.y &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.y)) ||
+    0;
+
+  const cur2dItemElevation =
+    (cur2dItemEvent &&
+      cur2dItemEvent.item &&
+      cur2dItemEvent.item.elevation &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.elevation)) ||
+    0;
+
+  const cur2dItemWallSize =
+    (cur2dItemEvent &&
+      cur2dItemEvent.item &&
+      cur2dItemEvent.item.wallSize &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.wallSize)) ||
+    0;
+
+  const cur3dItemWidth =
+    (cur3dItemEvent &&
+      cur3dItemEvent.item &&
+      cur3dItemEvent.item.getWidth &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getWidth())) ||
+    0;
 
   return (
     <div className="RightBar_Content_Inspector">
@@ -92,20 +141,15 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`X(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.x,
-              )}
+              value={cur2dItemX}
               setValue={(x) => updateCur2dItemNum({ x: getFloat(x) })}
               offset={0.01}></DragLabel>
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.x,
-              )}
+              value={cur2dItemX + inputSuffix}
               onChange={(e) => {
-                const x = getFloat(e.target.value);
-                updateCur2dItemNum({ x });
+                updateCur2dItemNum({ x: getFloat(e.target.value) });
               }}></input>
           </div>
 
@@ -113,20 +157,15 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Y(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.y,
-              )}
+              value={cur2dItemY}
               setValue={(y) => updateCur2dItemNum({ y: getFloat(y) })}
               offset={0.01}></DragLabel>
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.y,
-              )}
+              value={cur2dItemY + inputSuffix}
               onChange={(e) => {
-                const y = getFloat(e.target.value);
-                updateCur2dItemNum({ y });
+                updateCur2dItemNum({ y: getFloat(e.target.value) });
               }}></input>
           </div>
 
@@ -134,9 +173,7 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Elevation(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.elevation,
-              )}
+              value={cur2dItemElevation}
               setValue={(elevation) =>
                 updateCur2dItemNum({ elevation: getUFloat(elevation) })
               }
@@ -144,12 +181,9 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.elevation,
-              )}
+              value={cur2dItemElevation + inputSuffix}
               onChange={(e) => {
-                const elevation = getUFloat(e.target.value);
-                updateCur2dItemNum({ elevation });
+                updateCur2dItemNum({ elevation: getUFloat(e.target.value) });
               }}></input>
           </div>
         </>
@@ -163,9 +197,7 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Length(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.wallSize,
-              )}
+              value={cur2dItemWallSize}
               setValue={(wallSize) =>
                 updateCur2dItemNum({ wallSize: getUFloat(wallSize) })
               }
@@ -173,12 +205,9 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur2dItemEvent.item.wallSize,
-              )}
+              value={cur2dItemWallSize + inputSuffix}
               onChange={(e) => {
-                const wallSize = getUFloat(e.target.value);
-                updateCur2dItemNum({ wallSize });
+                updateCur2dItemNum({ wallSize: getUFloat(e.target.value) });
               }}></input>
           </div>
         </>
@@ -196,8 +225,7 @@ const RightBar_Content_Inspector = () => {
               type="text"
               value={cur2dItemEvent.item.name}
               onChange={(e) => {
-                const name = e.target.value;
-                updateCur2dItemValue({ name });
+                updateCur2dItemValue({ name: e.target.value });
               }}></input>
           </div>
         </>
@@ -211,9 +239,7 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Width(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur3dItemEvent.item.getWidth(),
-              )}
+              value={cur3dItemWidth}
               setValue={(width) =>
                 updateCur3dItemSize({ width: getUFloat(width) })
               }
@@ -221,12 +247,9 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
-                cur3dItemEvent.item.getWidth(),
-              )}
+              value={cur3dItemWidth + inputSuffix}
               onChange={(e) => {
-                const width = getUFloat(e.target.value);
-                updateCur3dItemSize({ width });
+                updateCur3dItemSize({ width: getUFloat(e.target.value) });
               }}></input>
           </div>
 
@@ -234,9 +257,9 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Height(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
+              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
                 cur3dItemEvent.item.getHeight(),
-              )}
+              )}`}
               setValue={(height) =>
                 updateCur3dItemSize({ height: getUFloat(height) })
               }
@@ -244,12 +267,11 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
+              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
                 cur3dItemEvent.item.getHeight(),
-              )}
+              )}`}
               onChange={(e) => {
-                const height = getUFloat(e.target.value);
-                updateCur3dItemSize({ height });
+                updateCur3dItemSize({ height: getUFloat(e.target.value) });
               }}></input>
           </div>
 
@@ -257,9 +279,9 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Height(${dimUnit}):`}
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
+              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
                 cur3dItemEvent.item.getDepth(),
-              )}
+              )}`}
               setValue={(depth) =>
                 updateCur3dItemSize({ depth: getUFloat(depth) })
               }
@@ -267,12 +289,11 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={Blueprint.Dimensioning.cmToMeasureRaw(
+              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
                 cur3dItemEvent.item.getDepth(),
-              )}
+              )}`}
               onChange={(e) => {
-                const depth = getUFloat(e.target.value);
-                updateCur3dItemSize({ depth });
+                updateCur3dItemSize({ depth: getUFloat(e.target.value) });
               }}></input>
           </div>
 
@@ -284,8 +305,7 @@ const RightBar_Content_Inspector = () => {
               type="checkbox"
               checked={cur3dItemEvent.item.resizable || false}
               onChange={(e) => {
-                const resizable = e.target.checked;
-                updateCur3dItemValue({ resizable });
+                updateCur3dItemValue({ resizable: e.target.checked });
               }}></input>
           </div>
 
@@ -297,8 +317,9 @@ const RightBar_Content_Inspector = () => {
               type="checkbox"
               checked={cur3dItemEvent.item.resizeProportionally || false}
               onChange={(e) => {
-                const resizeProportionally = e.target.checked;
-                updateCur3dItemValue({ resizeProportionally });
+                updateCur3dItemValue({
+                  resizeProportionally: e.target.checked,
+                });
               }}></input>
           </div>
         </>
