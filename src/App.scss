@@ -42,7 +42,6 @@ $commonHeight: 1.8vmax;
         font-size: calc($headerHeight - 3 * $fontPadding);
         border-radius: $fontPadding;
         cursor: pointer;
-        line-height: 1;
 
         &.active {
           color: $backMediumColor;
@@ -180,8 +179,22 @@ $commonHeight: 1.8vmax;
       display: flex;
       padding: $fontPadding;
       align-items: center;
-      line-height: 1;
+      gap: $fontPadding;
       font-size: calc($headerHeight - 3 * $fontPadding);
+
+      .item {
+        padding: $fontPadding;
+        border-radius: $fontPadding;
+        cursor: pointer;
+
+        &:active {
+          color: $backMediumColor;
+        }
+
+        &.active {
+          color: $backMediumColor;
+        }
+      }
     }
   }
 

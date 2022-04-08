@@ -1,4 +1,5 @@
 import { rectHome } from './resource';
+import * as Blueprint from './blueprint/blueprint';
 
 export const saveDesign = () => {
   let data = blueprintJS.model.exportDataObj();
@@ -72,4 +73,12 @@ export const updateFloorPlanMode = (mode) => {
 
 export const updateFloorPlan = () => {
   blueprintJS.model.floorplan.update();
+};
+
+export const updateWireFrame = (flag) => {
+  blueprintJS.three.switchWireFrame(flag);
+};
+
+export const updateUnit = (unit) => {
+  Blueprint.Configuration.setValue(Blueprint.configDimUnit, unit);
 };

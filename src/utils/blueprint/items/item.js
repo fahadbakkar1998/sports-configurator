@@ -425,12 +425,16 @@ export class Item extends Mesh {
       if (this.material.length) {
         this.material.forEach((material) => {
           // TODO_Ekki emissive doesn't exist anymore?
-          material.emissive.setHex(hex);
-          this.material.emissive = new Color(hex);
+          if (material.emissive) {
+            material.emissive.setHex(hex);
+            material.emissive = new Color(hex);
+          }
         });
       } else {
-        this.material.emissive.setHex(hex);
-        this.material.emissive = new Color(hex);
+        if (this.material.emissive) {
+          this.material.emissive.setHex(hex);
+          this.material.emissive = new Color(hex);
+        }
       }
     }
   }

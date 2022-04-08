@@ -8,7 +8,7 @@ const LeftBar_Header = () => {
 
   return (
     <div className="LeftBar_Header">
-      <div
+      {/* <div
         className={cn('item', { active: editMode === 'FLOOR PLAN' })}
         onClick={() => {
           setEditMode('FLOOR PLAN');
@@ -21,7 +21,7 @@ const LeftBar_Header = () => {
           setEditMode('3D');
         }}>
         3D
-      </div>
+      </div> */}
     </div>
   );
 };

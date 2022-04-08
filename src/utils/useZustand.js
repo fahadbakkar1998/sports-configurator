@@ -37,6 +37,18 @@ const useZustand = create((set) => ({
     set((state) => ({
       rightBarMode,
     })),
+
+  isWireFrame: false,
+  setIsWireFrame: (isWireFrame) =>
+    set((state) => ({
+      isWireFrame,
+    })),
+
+  curUnit: Blueprint.dimMeter,
+  setCurUnit: (curUnit) =>
+    set((state) => ({
+      curUnit,
+    })),
 }));
 
 export default useZustand;

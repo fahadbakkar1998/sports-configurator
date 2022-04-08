@@ -1,5 +1,6 @@
 import React from 'react';
 import useZustand from '../../../utils/useZustand';
+import { updateUnit } from '../../../utils/bpSupport';
 import { getFloat, getUFloat } from '../../../utils/common';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
@@ -8,6 +9,8 @@ const RightBar_Content_Inspector = () => {
   const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
   const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
   const cur3dItemEvent = useZustand((state) => state.cur3dItemEvent);
+  const curUnit = useZustand((state) => state.curUnit);
+  const setCurUnit = useZustand((state) => state.setCurUnit);
 
   const dimUnit = Blueprint.Configuration.getStringValue(
     Blueprint.configDimUnit,
@@ -53,6 +56,34 @@ const RightBar_Content_Inspector = () => {
 
   return (
     <div className="RightBar_Content_Inspector">
+      <div className="property-header">Setting</div>
+
+      {/* Select unit */}
+      <div className="input-group">
+        <div>Unit:</div>
+
+        <select
+          className="input"
+          value={curUnit}
+          onChange={(e) => {
+            const unit = e.target.value;
+            updateUnit(unit);
+            setCurUnit(unit);
+          }}>
+          <option value={Blueprint.dimMeter}>{Blueprint.dimMeter}</option>
+          <option value={Blueprint.dimCentiMeter}>
+            {Blueprint.dimCentiMeter}
+          </option>
+          <option value={Blueprint.dimMilliMeter}>
+            {Blueprint.dimMilliMeter}
+          </option>
+          <option value={Blueprint.dimInch}>{Blueprint.dimInch}</option>
+          <option value={Blueprint.dimFeetAndInch}>
+            {Blueprint.dimFeetAndInch}
+          </option>
+        </select>
+      </div>
+
       {cur2dItemEvent && cur2dItemEvent.type === 'CORNER' && (
         <>
           <div className="property-header">Corner</div>
