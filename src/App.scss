@@ -9,8 +9,6 @@ $borderColor: #eee;
 $commonHeight: 1.8vmax;
 
 * {
-  color: $foreColor;
-  background-color: $backColor;
   border-color: $borderColor;
   line-height: 1;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
@@ -29,6 +27,8 @@ $commonHeight: 1.8vmax;
     height: 100%;
     order: 1;
     z-index: 1;
+    color: $foreColor;
+    background-color: $backColor;
 
     .LeftBar_Header {
       width: 100%;
@@ -194,6 +194,8 @@ $commonHeight: 1.8vmax;
       align-items: center;
       gap: calc(4 * $fontPadding);
       font-size: calc($headerHeight - 3 * $fontPadding);
+      color: $foreColor;
+      background-color: $backColor;
 
       .item {
         border-radius: $fontPadding;
@@ -215,6 +217,8 @@ $commonHeight: 1.8vmax;
     height: 100%;
     order: 3;
     z-index: 1;
+    color: $foreColor;
+    background-color: $backColor;
 
     .RightBar_Header {
       width: 100%;
@@ -272,6 +276,25 @@ $commonHeight: 1.8vmax;
         overflow-x: hidden;
         overflow-y: auto;
 
+        .item-info-container {
+          width: 100%;
+          padding: $fontPadding;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: $fontPadding;
+
+          .item-info-logo {
+            width: 70%;
+            border: 0.3vw solid $borderColor;
+            border-radius: calc(5 * $fontPadding);
+          }
+
+          .item-info {
+            font-size: calc($commonHeight - 4 * $fontPadding);
+          }
+        }
+
         .property-header {
           width: 100%;
           border-bottom: 1px solid $borderColor;
@@ -299,6 +322,44 @@ $commonHeight: 1.8vmax;
             border: 1px solid $borderColor;
             outline: none;
             border-radius: $fontPadding;
+            position: relative;
+
+            &.pointer {
+              cursor: pointer;
+            }
+          }
+
+          & .react-colorful {
+            border: 0;
+            display: none;
+            top: calc(-3 * $fontPadding);
+            height: 100%;
+
+            &.active {
+              display: block;
+            }
+          }
+
+          & .react-colorful__saturation {
+            border-bottom: calc(($commonHeight - 3 * $fontPadding) / 2) solid
+              #000;
+            width: calc(100% - ($commonHeight - 3 * $fontPadding) / 2);
+            height: 10vw;
+          }
+
+          & .react-colorful__saturation-pointer {
+            width: calc($commonHeight - 3 * $fontPadding);
+            height: calc($commonHeight - 3 * $fontPadding);
+          }
+
+          & .react-colorful__hue {
+            width: calc(100% - ($commonHeight - 3 * $fontPadding) / 2);
+            height: calc($commonHeight - 3 * $fontPadding);
+          }
+
+          & .react-colorful__hue-pointer {
+            width: calc($commonHeight - 3 * $fontPadding);
+            height: calc($commonHeight - 3 * $fontPadding);
           }
         }
       }

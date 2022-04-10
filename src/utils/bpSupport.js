@@ -27,12 +27,14 @@ export const loadDefaultDesign = () => {
 };
 
 export const addItem = (item) => {
+  console.log('new item: ', item);
   let metadata = {
     itemName: item.name,
     resizable: true,
     modelUrl: item.model,
     itemType: item.type,
     format: item.format,
+    image: item.image,
   };
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     var placeAt = item.selectedWall.item.center.clone();
@@ -83,6 +85,10 @@ export const updateSnapToRect = (flag) => {
   Blueprint.Configuration.setValue('snapToRect', flag);
 };
 
+export const updateSameElevation = (flag) => {
+  Blueprint.Configuration.setValue('sameElevation', flag);
+};
+
 export const updateRoofMode = (flag) => {
-  console.log(blueprintJS.three.floorplan.showRoof(flag));
+  blueprintJS.three.floorplan.showRoof(flag);
 };

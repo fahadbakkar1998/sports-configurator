@@ -26,6 +26,7 @@ export let config = {
   snapTolerance: 50,
   gridSpacing: 25,
   snapToRect: true,
+  sameElevation: true,
 };
 
 export let wallInformation = {
@@ -81,6 +82,7 @@ export class Configuration {
       case snapTolerance:
       case gridSpacing:
       case 'snapToRect':
+      case 'sameElevation':
         // return Number(this.data[key]);
         return Number(Configuration.getData()[key]);
       default:

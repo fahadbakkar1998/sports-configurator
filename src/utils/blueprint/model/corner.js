@@ -182,6 +182,17 @@ export class Corner extends EventDispatcher {
         info: { from: oldValue, to: this._elevation },
       });
     }
+    if (Configuration.getNumericValue('sameElevation')) {
+      console.log('sameElevation');
+      this.setAllElevation(value);
+    }
+  }
+
+  setAllElevation(value) {
+    this.floorplan.getCorners().forEach((corner) => {
+      corner._elevation = Number(value);
+    });
+    this.floorplan.update();
   }
 
   /* @type {Number} elevation The elevation value at this corner*/

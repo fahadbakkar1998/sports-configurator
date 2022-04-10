@@ -67,6 +67,12 @@ const useZustand = create((set) => ({
     set((state) => ({
       snapToRect,
     })),
+
+  sameElevation: Blueprint.config.sameElevation,
+  setSameElevation: (sameElevation) =>
+    set((state) => ({
+      sameElevation,
+    })),
 }));
 
 export default useZustand;

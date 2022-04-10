@@ -43,12 +43,14 @@ export class Floor extends EventDispatcher {
     // roofs look weird, so commented out
     // this.roofPlane = this.buildRoofUniformHeight();
     this.roofPlane = this.buildRoofVaryingHeight();
+    this.roofPlane.visible = false;
   }
 
   redraw() {
     this.removeFromScene();
     this.floorPlane = this.buildFloor();
     this.roofPlane = this.buildRoofVaryingHeight();
+    this.roofPlane.visible = false;
     this.addToScene();
   }
 

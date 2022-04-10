@@ -19,3 +19,17 @@ export const getFloat = (val) => {
   val && dotIndex === val.length - 1 && (newVal += '.');
   return newVal;
 };
+
+export const componentToHex = (c) => {
+  const hex = c.toString(16);
+  return hex.length == 1 ? '0' + hex : hex;
+};
+
+export const rgbToHex = ({ r, g, b }) => {
+  const hex =
+    '#' +
+    componentToHex(parseInt(r * 255)) +
+    componentToHex(parseInt(g * 255)) +
+    componentToHex(parseInt(b * 255));
+  return hex;
+};

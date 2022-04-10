@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useZustand from '../../../utils/useZustand';
 import { updateUnit } from '../../../utils/bpSupport';
-import { getFloat, getUFloat } from '../../../utils/common';
+import { getFloat, getUFloat, rgbToHex } from '../../../utils/common';
 import { wallTextures } from '../../../utils/resource';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
+import { HexColorPicker } from 'react-colorful';
+import cn from 'classnames';
+import { Color } from 'three';
 
 let isDot = false;
 
@@ -14,7 +17,6 @@ const RightBar_Content_Inspector = () => {
 
   const selectedFloor = useZustand((state) => state.selectedFloor);
   const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
-  // console.log(selectedFloor && selectedFloor.item.curTextureIndex);
 
   const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
   const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
@@ -45,7 +47,6 @@ const RightBar_Content_Inspector = () => {
       let cm = Blueprint.Dimensioning.cmFromMeasureRaw(value);
       cloneCur2dItemEvent.item[key] = cm;
     });
-    console.log('cloneCur2dItemEvent: ', cloneCur2dItemEvent);
     setCur2dItemEvent(cloneCur2dItemEvent);
   };
 
@@ -114,6 +115,11 @@ const RightBar_Content_Inspector = () => {
       cur3dItemEvent.item.getWidth &&
       Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getWidth())) ||
     0;
+
+  console.log(
+    'mat0 selected:',
+    cur3dItemEvent && cur3dItemEvent.item.material[0],
+  );
 
   return (
     <div className="RightBar_Content_Inspector">
@@ -185,7 +191,6 @@ const RightBar_Content_Inspector = () => {
               value={selectedFloor.item.curTextureIndex}
               onChange={(e) => {
                 const j = e.target.value;
-                console.log(j);
                 const cloneSelectedFloor = selectedFloor;
                 const texture = wallTextures[j];
                 cloneSelectedFloor.item.curTextureIndex = j;
@@ -306,6 +311,16 @@ const RightBar_Content_Inspector = () => {
 
       {cur3dItemEvent && (
         <>
+          <div className="item-info-container">
+            <img
+              className="item-info-logo"
+              src={cur3dItemEvent.item.metadata.image}></img>
+            <div className="item-info">
+              {cur3dItemEvent.item.metadata.itemName}
+            </div>
+            <div className="item-info">Cost: $123</div>
+          </div>
+
           <div className="property-header">Dimensions</div>
 
           {/* Dimension width */}
@@ -395,6 +410,45 @@ const RightBar_Content_Inspector = () => {
                 });
               }}></input>
           </div>
+
+          <div className="property-header">Color</div>
+
+          {React.Children.toArray(
+            cur3dItemEvent.item.material.map((mat, index) => (
+              <>
+                <div className="input-group">
+                  <div>{mat.name}:</div>
+                  <div
+                    className="input pointer"
+                    onClick={() => {
+                      const clone = { ...cur3dItemEvent };
+                      clone.item.material[index].selected = !mat.selected;
+                      setCur3dItemEvent(clone);
+                    }}
+                    style={{
+                      backgroundColor: rgbToHex(mat.color),
+                    }}></div>
+                </div>
+                <div className="input-group">
+                  <div></div>
+                  <HexColorPicker
+                    className={cn('input', {
+                      active: mat.selected,
+                    })}
+                    color={rgbToHex(mat.color)}
+                    onChange={(color) => {
+                      const clone = { ...cur3dItemEvent };
+                      const newColor = new Color(color);
+                      clone.item.material[index].color = clone.item.material[
+                        index
+                      ].emissive = newColor;
+                      clone.item.material[index].needsUpdate = true;
+                      setCur3dItemEvent(clone);
+                    }}></HexColorPicker>
+                </div>
+              </>
+            )),
+          )}
         </>
       )}
     </div>

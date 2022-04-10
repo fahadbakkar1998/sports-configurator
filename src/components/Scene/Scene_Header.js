@@ -3,6 +3,7 @@ import useZustand from '../../utils/useZustand';
 import {
   updateWireFrameMode,
   updateSnapToRect,
+  updateSameElevation,
   updateRoofMode,
 } from '../../utils/bpSupport';
 import cn from 'classnames';
@@ -14,6 +15,8 @@ const Scene_Header = () => {
   const setIsWireFrame = useZustand((state) => state.setIsWireFrame);
   const snapToRect = useZustand((state) => state.snapToRect);
   const setSnapToRect = useZustand((state) => state.setSnapToRect);
+  const sameElevation = useZustand((state) => state.sameElevation);
+  const setSameElevation = useZustand((state) => state.setSameElevation);
   const showRoof = useZustand((state) => state.showRoof);
   const setShowRoof = useZustand((state) => state.setShowRoof);
 
@@ -48,6 +51,14 @@ const Scene_Header = () => {
           setSnapToRect(!snapToRect);
         }}>
         Snap To Rect
+      </div>
+      <div
+        className={cn('item', { active: sameElevation })}
+        onClick={() => {
+          updateSameElevation(!sameElevation);
+          setSameElevation(!sameElevation);
+        }}>
+        Same Elevation
       </div>
       <div
         className={cn('item', { active: showRoof })}
