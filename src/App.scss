@@ -40,7 +40,6 @@ $commonHeight: 1.8vmax;
       align-items: center;
 
       .item {
-        padding: $fontPadding;
         height: calc($headerHeight - 2 * $fontPadding);
         border-radius: $fontPadding;
         cursor: pointer;
@@ -197,7 +196,6 @@ $commonHeight: 1.8vmax;
       font-size: calc($headerHeight - 3 * $fontPadding);
 
       .item {
-        padding: $fontPadding;
         border-radius: $fontPadding;
         cursor: pointer;
 
@@ -230,7 +228,6 @@ $commonHeight: 1.8vmax;
       justify-content: space-around;
 
       .item {
-        padding: $fontPadding;
         line-height: 1;
         text-align: center;
         cursor: pointer;

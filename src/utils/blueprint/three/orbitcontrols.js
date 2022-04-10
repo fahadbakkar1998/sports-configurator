@@ -101,6 +101,8 @@ function OrbitControls(object, domElement) {
   this.position0 = this.object.position.clone();
   this.zoom0 = this.object.zoom;
 
+  this.disableDownPanning = true;
+
   //
   // public methods
   //
@@ -190,6 +192,11 @@ function OrbitControls(object, domElement) {
 
       // move target to panned location
       scope.target.add(panOffset);
+
+      // If in down padding, move the target to the previous position.
+      if (this.disableDownPanning && scope.target.y < 10) {
+        scope.target.add(new Vector3(0, -panOffset.y, 0));
+      }
 
       offset.setFromSpherical(spherical);
 
@@ -495,8 +502,6 @@ function OrbitControls(object, domElement) {
   }
 
   function handleMouseMovePan(event) {
-    // console.log( 'handleMouseMovePan' );
-
     panEnd.set(event.clientX, event.clientY);
 
     panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);

@@ -8,10 +8,16 @@ const useZustand = create((set) => ({
       editMode,
     })),
 
-  aWall: null,
-  setAWall: (aWall) =>
+  selectedWall: null,
+  setSelectedWall: (selectedWall) =>
     set((state) => ({
-      aWall,
+      selectedWall,
+    })),
+
+  selectedFloor: null,
+  setSelectedFloor: (selectedFloor) =>
+    set((state) => ({
+      selectedFloor,
     })),
 
   floorPlanMode: Blueprint.floorplannerModes.MOVE,
@@ -54,6 +60,12 @@ const useZustand = create((set) => ({
   setShowRoof: (showRoof) =>
     set((state) => ({
       showRoof,
+    })),
+
+  snapToRect: Blueprint.config.snapToRect,
+  setSnapToRect: (snapToRect) =>
+    set((state) => ({
+      snapToRect,
     })),
 }));
 

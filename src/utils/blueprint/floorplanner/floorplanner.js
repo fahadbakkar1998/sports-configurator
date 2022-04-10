@@ -7,11 +7,7 @@ import {
   Configuration,
 } from '../core/configuration.js';
 //import {gridSpacing} from '../core/configuration.js';
-import {
-  EVENT_MODE_RESET,
-  EVENT_LOADED,
-  EVENT_MOVED,
-} from '../core/events.js';
+import { EVENT_MODE_RESET, EVENT_LOADED, EVENT_MOVED } from '../core/events.js';
 import {
   EVENT_CORNER_ATTRIBUTES_CHANGED,
   EVENT_WALL_ATTRIBUTES_CHANGED,
@@ -101,6 +97,7 @@ export class Floorplanner2D extends EventDispatcher {
 
     this.canvas = canvas;
     this.floorplan = floorplan;
+    this.floorplan.floorplanner = this;
     this.canvasElement = $('#' + canvas);
     this.view = new FloorplannerView2D(this.floorplan, this, canvas);
 
@@ -261,21 +258,38 @@ export class Floorplanner2D extends EventDispatcher {
   /* */
   updateTarget() {
     if (this.mode == floorplannerModes.DRAW && this.lastNode) {
-      if (
-        Math.abs(this.mouseX - this.lastNode.x) <
-        Configuration.getNumericValue(snapTolerance)
-      ) {
-        this.targetX = this.lastNode.x;
+      console.log(
+        Math.abs(this.mouseX - this.lastNode.x),
+        Math.abs(this.mouseY - this.lastNode.y),
+      );
+      if (Configuration.getNumericValue('snapToRect')) {
+        if (
+          Math.abs(this.mouseX - this.lastNode.x) <
+          Math.abs(this.mouseY - this.lastNode.y)
+        ) {
+          this.targetX = this.lastNode.x;
+          this.targetY = this.mouseY;
+        } else {
+          this.targetX = this.mouseX;
+          this.targetY = this.lastNode.y;
+        }
       } else {
-        this.targetX = this.mouseX;
-      }
-      if (
-        Math.abs(this.mouseY - this.lastNode.y) <
-        Configuration.getNumericValue(snapTolerance)
-      ) {
-        this.targetY = this.lastNode.y;
-      } else {
-        this.targetY = this.mouseY;
+        if (
+          Math.abs(this.mouseX - this.lastNode.x) <
+          Configuration.getNumericValue(snapTolerance)
+        ) {
+          this.targetX = this.lastNode.x;
+        } else {
+          this.targetX = this.mouseX;
+        }
+        if (
+          Math.abs(this.mouseY - this.lastNode.y) <
+          Configuration.getNumericValue(snapTolerance)
+        ) {
+          this.targetY = this.lastNode.y;
+        } else {
+          this.targetY = this.mouseY;
+        }
       }
     } else {
       this.targetX = this.mouseX;
@@ -548,10 +562,11 @@ export class Floorplanner2D extends EventDispatcher {
         } else {
           this.activeCorner.move(this.mouseX, this.mouseY);
         }
-        // 	if(this.shiftKey)
-        // 	{
-        // 		this.activeCorner.snapToAxis(Configuration.getNumericValue(snapTolerance));
-        // 	}
+        if (this.shiftKey) {
+          this.activeCorner.snapToAxis(
+            Configuration.getNumericValue(snapTolerance),
+          );
+        }
       } else if (this.activeWall) {
         if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
           let dx = Dimensioning.pixelToCm(this.rawMouseX - this.lastX);

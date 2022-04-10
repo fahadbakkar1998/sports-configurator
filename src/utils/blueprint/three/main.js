@@ -34,6 +34,7 @@ import {
   VIEW_RIGHT,
   VIEW_LEFT,
   VIEW_ISOMETRY,
+  sphereRadius,
 } from '../core/constants.js';
 
 import { OrbitControls } from './orbitcontrols.js';
@@ -44,6 +45,8 @@ import { HUD } from './hud.js';
 import { Floorplan3D } from './floorPlan.js';
 import { Lights } from './lights.js';
 import { Skybox } from './skybox.js';
+
+import { defaultWallTexture, selectedWallTexture } from '../model/wall';
 
 export class Main extends EventDispatcher {
   constructor(model, element, canvasElement, opts) {
@@ -77,7 +80,7 @@ export class Main extends EventDispatcher {
     this.fpsCamera = null;
 
     this.cameraNear = 10;
-    this.cameraFar = 10000;
+    this.cameraFar = sphereRadius * 2;
 
     this.controls = null;
     this.fpsControls = null;
@@ -189,7 +192,7 @@ export class Main extends EventDispatcher {
     scope.controls.enableDamping = true;
     scope.controls.dampingFactor = 0.5;
     scope.controls.maxPolarAngle = Math.PI * 0.5;
-    scope.controls.maxDistance = 3000;
+    scope.controls.maxDistance = sphereRadius * 0.8;
     scope.controls.minZoom = 0.9;
     scope.controls.screenSpacePanning = true;
 
@@ -277,6 +280,8 @@ export class Main extends EventDispatcher {
   }
 
   wallIsClicked(wall) {
+    wall.room.showWallsTexture();
+    wall.showSelTexture();
     this.dispatchEvent({ type: EVENT_WALL_CLICKED, item: wall, wall: wall });
   }
 
@@ -285,6 +290,9 @@ export class Main extends EventDispatcher {
   }
 
   nothingIsClicked() {
+    this.floorplan.floorplan.rooms.forEach((room) => {
+      room.showWallsTexture();
+    });
     this.dispatchEvent({ type: EVENT_NOTHING_CLICKED });
   }
 
@@ -411,7 +419,7 @@ export class Main extends EventDispatcher {
 
   switchWireFrame(flag) {
     this.model.switchWireFrame(flag);
-    this.floorplan.switchWireFrame(flag);
+    // this.floorplan.switchWireFrame(flag);
     this.render(true);
   }
 

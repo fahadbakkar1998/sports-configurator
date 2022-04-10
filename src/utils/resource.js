@@ -1218,17 +1218,15 @@ export const rectHome = JSON.stringify({
   floorplan: {
     version: '0.0.2a',
     corners: {
-      '0aa75210-89c5-5e9e-c448-d8bd28b59a13': { x: 0, y: 0, elevation: 4 },
-      'ae03ae97-343e-3f57-cd75-0371c774532a': { x: 2.5, y: 0, elevation: 5.5 },
-      '7e559e03-cd33-509c-827d-8694357510f7': { x: 5, y: 0, elevation: 4 },
-      '7af103b3-4c53-dc1c-f32c-710c583973ec': { x: 5, y: 5, elevation: 4 },
-      '8438c43c-e1fd-d813-9702-d50e6b37fc1a': { x: 2.5, y: 5, elevation: 5.5 },
-      'ac39ff27-f5ce-9817-2401-7e0e3a1caeec': { x: 0, y: 5, elevation: 4 },
+      '91c6749e-0958-1552-5b9a-77bcfb1ea6f9': { x: 0, y: 0, elevation: 4 },
+      '46383e10-843b-577d-8702-68457b06efc6': { x: 5, y: 0, elevation: 4 },
+      'e354fa91-26dd-3d14-0aa3-aeebba07b762': { x: 5, y: 5, elevation: 4 },
+      '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1': { x: 0, y: 5, elevation: 4 },
     },
     walls: [
       {
-        corner1: '0aa75210-89c5-5e9e-c448-d8bd28b59a13',
-        corner2: 'ae03ae97-343e-3f57-cd75-0371c774532a',
+        corner1: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
+        corner2: '46383e10-843b-577d-8702-68457b06efc6',
         frontTexture: {
           url: 'assets/rooms/textures/wallmap.png',
           stretch: true,
@@ -1240,12 +1238,12 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 20.45107345282986, y: -40.10252654717023 },
-        b: { x: 109.7249265471702, y: -40.102526547170214 },
+        a: { x: 178.58091752452765, y: 175.2118615245278 },
+        b: { x: 321.4190824754721, y: 175.21186152452782 },
       },
       {
-        corner1: 'ae03ae97-343e-3f57-cd75-0371c774532a',
-        corner2: '7e559e03-cd33-509c-827d-8694357510f7',
+        corner1: '46383e10-843b-577d-8702-68457b06efc6',
+        corner2: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
         frontTexture: {
           url: 'assets/rooms/textures/wallmap.png',
           stretch: true,
@@ -1257,12 +1255,12 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 331.71685785999966, y: -33.63674214000048 },
-        b: { x: 426.3471421400004, y: -33.63674214000045 },
+        a: { x: 325.1554937819452, y: 174.8445062180548 },
+        b: { x: 325.1554937819452, y: 319.6904377819452 },
       },
       {
-        corner1: '7e559e03-cd33-509c-827d-8694357510f7',
-        corner2: '7af103b3-4c53-dc1c-f32c-710c583973ec',
+        corner1: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
+        corner2: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
         frontTexture: {
           url: 'assets/rooms/textures/wallmap.png',
           stretch: true,
@@ -1274,12 +1272,12 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 325.0498530943403, y: 67.66054690565966 },
-        b: { x: 325.0498530943403, y: 246.20825309434034 },
+        a: { x: 322.5275116306755, y: 317.0624556306756 },
+        b: { x: 175.50448836932438, y: 317.0624556306755 },
       },
       {
-        corner1: '7af103b3-4c53-dc1c-f32c-710c583973ec',
-        corner2: '8438c43c-e1fd-d813-9702-d50e6b37fc1a',
+        corner1: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
+        corner2: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
         frontTexture: {
           url: 'assets/rooms/textures/wallmap.png',
           stretch: true,
@@ -1291,48 +1289,16 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 419.162937243145, y: 340.3213372431451 },
-        b: { x: 318.58106275685486, y: 340.321337243145 },
-      },
-      {
-        corner1: '8438c43c-e1fd-d813-9702-d50e6b37fc1a',
-        corner2: 'ac39ff27-f5ce-9817-2401-7e0e3a1caeec',
-        frontTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: { x: 91.56018801622666, y: 356.12658801622683 },
-        b: { x: 4.071811983773159, y: 356.12658801622683 },
-      },
-      {
-        corner1: 'ac39ff27-f5ce-9817-2401-7e0e3a1caeec',
-        corner2: '0aa75210-89c5-5e9e-c448-d8bd28b59a13',
-        frontTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: { x: 119.0190903334584, y: 251.23719652213904 },
-        b: { x: 123.185203477861, y: 72.68949033345837 },
+        a: { x: 173.57229929074228, y: 320.3862308546328 },
+        b: { x: 174.1487131453672, y: 175.54029929074235 },
       },
     ],
     rooms: {
       '71d4f128-ae80-3d58-9bd2-711c6ce6cdf2,4e3d65cb-54c0-0681-28bf-bddcc7bdb571,da026c08-d76a-a944-8e7b-096b752da9ed,f90da5e3-9e0e-eba7-173d-eb0b071e838e':
         { name: 'A New Room' },
       '0aa75210-89c5-5e9e-c448-d8bd28b59a13,ae03ae97-343e-3f57-cd75-0371c774532a,7e559e03-cd33-509c-827d-8694357510f7,7af103b3-4c53-dc1c-f32c-710c583973ec,8438c43c-e1fd-d813-9702-d50e6b37fc1a,ac39ff27-f5ce-9817-2401-7e0e3a1caeec':
+        { name: 'A New Room' },
+      '91c6749e-0958-1552-5b9a-77bcfb1ea6f9,46383e10-843b-577d-8702-68457b06efc6,e354fa91-26dd-3d14-0aa3-aeebba07b762,5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1':
         { name: 'A New Room' },
     },
     wallTextures: [],
@@ -1351,3 +1317,36 @@ export const rectHome = JSON.stringify({
   },
   items: [],
 });
+
+export const wallTextures = [
+  {
+    name: 'Grey',
+    url: 'assets/rooms/textures/wallmap.png',
+    stretch: true,
+    scale: 1,
+  },
+  {
+    name: 'Bricks',
+    url: 'assets/rooms/textures/light_brick.jpg',
+    stretch: false,
+    scale: 50,
+  },
+  {
+    name: 'Marble',
+    url: 'assets/rooms/textures/marbletiles.jpg',
+    stretch: false,
+    scale: 300,
+  },
+  {
+    name: 'LightWood',
+    url: 'assets/rooms/textures/light_fine_wood.jpg',
+    stretch: false,
+    scale: 300,
+  },
+  {
+    name: 'HardWood',
+    url: 'assets/rooms/textures/hardwood.png',
+    stretch: false,
+    scale: 300,
+  },
+];

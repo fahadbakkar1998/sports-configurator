@@ -2,21 +2,33 @@ import React, { useEffect, useState } from 'react';
 import useZustand from '../../../utils/useZustand';
 import { updateUnit } from '../../../utils/bpSupport';
 import { getFloat, getUFloat } from '../../../utils/common';
+import { wallTextures } from '../../../utils/resource';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
 
 let isDot = false;
 
 const RightBar_Content_Inspector = () => {
+  const selectedWall = useZustand((state) => state.selectedWall);
+  const setSelectedWall = useZustand((state) => state.setSelectedWall);
+
+  const selectedFloor = useZustand((state) => state.selectedFloor);
+  const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
+  // console.log(selectedFloor && selectedFloor.item.curTextureIndex);
+
   const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
   const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
+
   const cur3dItemEvent = useZustand((state) => state.cur3dItemEvent);
+  const setCur3dItemEvent = useZustand((state) => state.setCur3dItemEvent);
+
   const curUnit = useZustand((state) => state.curUnit);
   const setCurUnit = useZustand((state) => state.setCurUnit);
 
   const dimUnit = Blueprint.Configuration.getStringValue(
     Blueprint.configDimUnit,
   );
+
   const inputSuffix = isDot ? '.' : '';
 
   useEffect(() => {
@@ -57,7 +69,7 @@ const RightBar_Content_Inspector = () => {
       itemSize[key] = cm;
     });
     cloneCur3dItemEvent.item.resize(itemSize);
-    setCur2dItemEvent(cloneCur3dItemEvent);
+    setCur3dItemEvent(cloneCur3dItemEvent);
   };
 
   const updateCur3dItemValue = (obj) => {
@@ -65,7 +77,7 @@ const RightBar_Content_Inspector = () => {
     Object.entries(obj).forEach(([key, value]) => {
       cloneCur3dItemEvent.item[key] = value;
     });
-    setCur2dItemEvent(cloneCur3dItemEvent);
+    setCur3dItemEvent(cloneCur3dItemEvent);
   };
 
   const cur2dItemX =
@@ -132,6 +144,67 @@ const RightBar_Content_Inspector = () => {
           </option>
         </select>
       </div>
+
+      {selectedWall && (
+        <>
+          <div className="property-header">Wall</div>
+
+          <div className="input-group">
+            <div>Material:</div>
+
+            <select
+              className="input"
+              value={selectedWall.item.curTextureIndex}
+              onChange={(e) => {
+                const index = e.target.value;
+                const cloneSelectedWall = selectedWall;
+                cloneSelectedWall.item.curTexture = wallTextures[index];
+                cloneSelectedWall.item.curTextureIndex = index;
+                cloneSelectedWall.item.showCurTexture();
+                setSelectedWall(cloneSelectedWall);
+              }}>
+              {wallTextures.map((texture, index) => (
+                <option value={index} key={`wall_${index}`}>
+                  {texture.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
+      )}
+
+      {/* {selectedFloor && (
+        <>
+          <div className="property-header">Floor</div>
+
+          <div className="input-group">
+            <div>Material:</div>
+
+            <select
+              className="input"
+              value={selectedFloor.item.curTextureIndex}
+              onChange={(e) => {
+                const j = e.target.value;
+                console.log(j);
+                const cloneSelectedFloor = selectedFloor;
+                const texture = wallTextures[j];
+                cloneSelectedFloor.item.curTextureIndex = j;
+                cloneSelectedFloor.item.setTexture(
+                  texture.url,
+                  texture.stretch,
+                  texture.scale,
+                );
+                setSelectedFloor(cloneSelectedFloor);
+              }}>
+              {wallTextures.map((texture, j) => (
+                <option value={j} key={`floor_${j}`}>
+                  {texture.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
+      )} */}
 
       {cur2dItemEvent && cur2dItemEvent.type === 'CORNER' && (
         <>

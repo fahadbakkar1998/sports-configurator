@@ -12,6 +12,7 @@ import {
 import { EVENT_REDRAW } from '../core/events.js';
 import { Utils } from '../core/utils.js';
 import { WallTypes } from '../core/constants.js';
+import { defaultWallTexture } from './wall';
 
 /*
  * Half Edges are created by Room.
@@ -156,6 +157,20 @@ export class HalfEdge extends EventDispatcher {
     } else {
       this.wall.backEdge = this;
     }
+
+    this.selTexture = {
+      url: 'assets/rooms/textures/wallmap_yellow.png',
+      stretch: true,
+      scale: 1,
+    };
+
+    this.curTexture = {
+      url: 'assets/rooms/textures/wallmap.png',
+      stretch: true,
+      scale: 1,
+    };
+
+    this.curTextureIndex = 0;
   }
 
   /*
@@ -178,6 +193,7 @@ export class HalfEdge extends EventDispatcher {
    * @emits {EVENT_REDRAW}
    */
   setTexture(textureUrl, textureStretch, textureScale) {
+    if (!textureStretch) textureStretch = defaultWallTexture;
     let texture = {
       url: textureUrl,
       stretch: textureStretch,
@@ -191,6 +207,22 @@ export class HalfEdge extends EventDispatcher {
 
     //this.redrawCallbacks.fire();
     this.dispatchEvent({ type: EVENT_REDRAW, item: this });
+  }
+
+  showSelTexture() {
+    this.setTexture(
+      this.selTexture.url,
+      this.selTexture.stretch,
+      this.selTexture.scale,
+    );
+  }
+
+  showCurTexture() {
+    this.setTexture(
+      this.curTexture.url,
+      this.curTexture.stretch,
+      this.curTexture.scale,
+    );
   }
 
   /*

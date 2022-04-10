@@ -129,7 +129,6 @@ export class Corner extends EventDispatcher {
   }
 
   set x(value) {
-    // console.log('set corner x: ', value);
     let oldValue = this._x;
     if (Math.abs(value - this._x) > 1e-6) {
       this._hasChanged = true;
@@ -323,21 +322,94 @@ export class Corner extends EventDispatcher {
    * @param {Number} newX The new x position.
    * @param {Number} newY The new y position.
    */
-  move(newX, newY, mergeWithIntersections = true) {
-    // this.x = newX;
-    // this.y = newY;
-    this._x = newX;
-    this._y = newY;
-    this._co.x = newX;
-    this._co.y = newY;
+  move(
+    newX,
+    newY,
+    mergeWithIntersections = true,
+    visitCornerLocations = [],
+    prevCorner = null,
+    snapToRect = true,
+  ) {
+    const oldPos = new Vector2(this._x, this._y);
+    this.location = new Vector2(newX, newY);
 
-    if (mergeWithIntersections) {
-      //The below line is crashing after makign the changes for curved walls
-      //While release v1.0.0 is stable even with this line enabled
-      this.mergeWithIntersected();
-      if (this.floorplan.rooms.length < 10) {
-        this.updateAttachedRooms(true);
+    if (Configuration.getNumericValue('snapToRect') && snapToRect) {
+      if (prevCorner) {
+        if (this.location === prevCorner.location) {
+          this.location = oldPos;
+          return false;
+        }
+        if (
+          Math.max(
+            Math.abs(this._x - prevCorner._x),
+            Math.abs(this._y - prevCorner._y),
+          ) < 200
+        ) {
+          return false;
+        }
       }
+
+      let canMove = true;
+      visitCornerLocations.push(this._co);
+
+      for (var i in this.wallStarts) {
+        let wall = this.wallStarts[i];
+
+        if (visitCornerLocations.indexOf(wall.end._co) > -1) {
+          if (
+            Math.abs(this._x - wall.end._x) > Math.abs(this._y - wall.end._y)
+          ) {
+            this.location = new Vector2(this._x, wall.end._y);
+          } else {
+            this.location = new Vector2(wall.end._x, this._y);
+          }
+        } else {
+          const deltaX = Math.abs(this._x - wall.end._x);
+          const deltaY = Math.abs(this._y - wall.end._y);
+          if (deltaX > deltaY) {
+            if (deltaX < 200) {
+              this.location = oldPos;
+              return false;
+            }
+            canMove = wall.end.move(
+              wall.end._x,
+              this._y,
+              mergeWithIntersections,
+              visitCornerLocations,
+              this,
+              true,
+            );
+          } else {
+            if (deltaY < 200) {
+              this.location = oldPos;
+              return false;
+            }
+            canMove = wall.end.move(
+              this._x,
+              wall.end._y,
+              mergeWithIntersections,
+              visitCornerLocations,
+              this,
+              true,
+            );
+          }
+        }
+
+        if (!canMove) {
+          this.location = oldPos;
+          return false;
+        }
+      }
+    } else {
+      if (mergeWithIntersections) {
+        // The below line is crashing after making the changes for curved walls
+        // While release v1.0.0 is stable even with this line enabled
+        this.mergeWithIntersected();
+        if (this.floorplan.rooms.length < 10) {
+          this.updateAttachedRooms(true);
+        }
+      }
+      ``;
     }
 
     this.dispatchEvent({
@@ -354,9 +426,11 @@ export class Corner extends EventDispatcher {
     this.wallEnds.forEach((wall) => {
       wall.fireMoved();
     });
+
+    return true;
   }
 
-  //Angle is in degrees 0 - 360
+  // Angle is in degrees 0 - 360
   closestAngle(angle) {
     let neighbors = this.adjacentCorners();
     let delta = 999999;
@@ -453,7 +527,6 @@ export class Corner extends EventDispatcher {
     if (!this._hasChanged && !explicit) {
       return;
     }
-    // console.log('UPDATE ALL ATTACHED ROOMS :: ');
     this.attachedRooms.forEach((room) => {
       room.updateArea();
     });
@@ -502,7 +575,6 @@ export class Corner extends EventDispatcher {
    **/
   distanceFrom(point) {
     let distance = Utils.distance(point, new Vector2(this.x, this.y));
-    //console.log('x,y ' + x + ',' + y + ' to ' + this.getX() + ',' + this.getY() + ' is ' + distance);
     return distance;
   }
 
@@ -628,7 +700,6 @@ export class Corner extends EventDispatcher {
 
   mergeWithIntersected(updateFloorPlan = true) {
     let i = 0;
-    //console.log('mergeWithIntersected for object: ' + this.type);
     // check corners
     for (i = 0; i < this.floorplan.getCorners().length; i++) {
       let corner = this.floorplan.getCorners()[i];

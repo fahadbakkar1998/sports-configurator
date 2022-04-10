@@ -106,10 +106,10 @@ export class Skybox extends EventDispatcher {
       function () {},
     );
     groundT.wrapS = groundT.wrapT = RepeatWrapping;
-    groundT.repeat.set(10, 10);
+    groundT.repeat.set(sphereRadius / 100, sphereRadius / 100);
 
     // var uniforms2 = {topColor: {type: 'c',value: new Color(0xFFFFFF)},bottomColor: {type: 'c',value: new Color(0x999999)},offset: {type: 'f',value: this.verticalOffset}, exponent: {type:'f', value: this.exponent}};
-    this.groundGeo = new PlaneGeometry(10000, 10000, 10);
+    this.groundGeo = new PlaneGeometry(sphereRadius * 2, sphereRadius * 2, 10);
     this.groundMat = new MeshBasicMaterial({
       color: 0xeaeaea,
       side: DoubleSide,

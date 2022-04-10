@@ -323,17 +323,19 @@ export class Floorplan extends EventDispatcher {
     });
     corner.addEventListener(EVENT_CORNER_ATTRIBUTES_CHANGED, function (o) {
       scope.dispatchEvent(o);
-      var updateCorners = o.item.adjacentCorners();
-      updateCorners.push(o.item);
-      scope.update(false, updateCorners);
+      // var updateCorners = o.item.adjacentCorners();
+      // updateCorners.push(o.item);
+      // scope.update(false, updateCorners);
       // scope.update(false);//For debug reasons
+      scope.update();
     });
     corner.addEventListener(EVENT_MOVED, function (o) {
       scope.dispatchEvent(o);
-      var updateCorners = o.item.adjacentCorners();
-      updateCorners.push(o.item);
-      scope.update(false, updateCorners);
+      // var updateCorners = o.item.adjacentCorners();
+      // updateCorners.push(o.item);
+      // scope.update(false, updateCorners);
       // scope.update(false);//For debug reasons
+      scope.update();
     });
 
     this.dispatchEvent({ type: EVENT_NEW, item: this, newItem: corner });

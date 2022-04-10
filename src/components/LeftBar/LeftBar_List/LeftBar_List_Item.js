@@ -4,7 +4,7 @@ import { addItem } from '../../../utils/bpSupport';
 import cn from 'classnames';
 
 const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
-  const aWall = useZustand((state) => state.aWall);
+  const selectedWall = useZustand((state) => state.selectedWall);
 
   const style = {
     marginLeft: `${depth * 1}vw`,
@@ -28,7 +28,7 @@ const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
               className="image"
               src={item.image}
               onClick={() => {
-                addItem({ ...item, aWall });
+                addItem({ ...item, selectedWall });
               }}></img>
             <div className="name" title={item.name}>
               {item.name}

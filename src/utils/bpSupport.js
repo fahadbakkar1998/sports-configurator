@@ -34,12 +34,8 @@ export const addItem = (item) => {
     itemType: item.type,
     format: item.format,
   };
-  if (
-    [2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 &&
-    item.aWall &&
-    item.aWall.currentWall
-  ) {
-    var placeAt = item.aWall.currentWall.center.clone();
+  if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
+    var placeAt = item.selectedWall.item.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,
       item.model,
@@ -48,10 +44,10 @@ export const addItem = (item) => {
       null,
       null,
       false,
-      { position: placeAt, edge: item.aWall.currentWall },
+      { position: placeAt, edge: item.selectedWall.item },
     );
-  } else if (item.aWall && item.aWall.currentFloor) {
-    var placeAt = item.aWall.currentFloor.center.clone();
+  } else if (item.selectedFloor) {
+    var placeAt = item.selectedFloor.item.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,
       item.model,
@@ -81,6 +77,10 @@ export const updateWireFrameMode = (flag) => {
 
 export const updateUnit = (unit) => {
   Blueprint.Configuration.setValue(Blueprint.configDimUnit, unit);
+};
+
+export const updateSnapToRect = (flag) => {
+  Blueprint.Configuration.setValue('snapToRect', flag);
 };
 
 export const updateRoofMode = (flag) => {

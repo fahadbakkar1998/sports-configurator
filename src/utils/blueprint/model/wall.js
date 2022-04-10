@@ -17,6 +17,12 @@ export const defaultWallTexture = {
   scale: 0,
 };
 
+export const selectedWallTexture = {
+  url: 'assets/rooms/textures/wallmap_yellow.png',
+  stretch: true,
+  scale: 0,
+};
+
 /*
  * A Wall is the basic element to create Rooms.
  *
@@ -260,7 +266,7 @@ export class Wall extends EventDispatcher {
   }
 
   set wallSize(value) {
-    if (getUFloat(value) <= 0.5) return;
+    if (getUFloat(value) <= 100) return;
     console.log('wallSize: ', value);
     if (this.wallType == WallTypes.STRAIGHT) {
       let vector = this.getEnd().location.clone().sub(this.getStart().location);

@@ -65,6 +65,8 @@ export class Room extends EventDispatcher {
       cornerIds.push(c.id);
     }
     this._roomByCornersId = cornerIds.join(',');
+
+    this.curTextureIndex = 0;
   }
 
   get roomCornerPoints() {
@@ -122,17 +124,17 @@ export class Room extends EventDispatcher {
     return tex || defaultRoomTexture;
   }
 
-  setRoomWallsTexture(textureUrl, textureStretch, textureScale) {
+  showWallsTexture() {
     let edge = this.edgePointer;
     let iterateWhile = true;
-    edge.setTexture(textureUrl, textureStretch, textureScale);
+    edge.showCurTexture();
     while (iterateWhile) {
       if (edge.next === this.edgePointer) {
         break;
       } else {
         edge = edge.next;
       }
-      edge.setTexture(textureUrl, textureStretch, textureScale);
+      edge.showCurTexture();
     }
   }
 

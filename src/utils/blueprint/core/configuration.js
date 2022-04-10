@@ -20,11 +20,12 @@ export let config = {
   dimUnit: dimCentiMeter,
   wallHeight: 250,
   wallThickness: 10,
-  systemUI: false,
+  systemUI: true,
   scale: 1,
   snapToGrid: false,
-  snapTolerance: 25,
+  snapTolerance: 50,
   gridSpacing: 25,
+  snapToRect: true,
 };
 
 export let wallInformation = {
@@ -79,6 +80,7 @@ export class Configuration {
       case snapToGrid:
       case snapTolerance:
       case gridSpacing:
+      case 'snapToRect':
         // return Number(this.data[key]);
         return Number(Configuration.getData()[key]);
       default:
