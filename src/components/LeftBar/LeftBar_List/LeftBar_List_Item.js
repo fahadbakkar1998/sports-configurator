@@ -3,8 +3,21 @@ import useZustand from '../../../utils/useZustand';
 import { addItem } from '../../../utils/bpSupport';
 import cn from 'classnames';
 
+const itemTypes = {
+  0: 'Item',
+  1: 'FloorItem',
+  2: 'WallItem',
+  3: 'InWallItem',
+  4: 'RoofItem',
+  5: 'OutItem',
+  7: 'InWallFloorItem',
+  8: 'OnFloorItem',
+  9: 'WallFloorItem',
+};
+
 const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
   const selectedWall = useZustand((state) => state.selectedWall);
+  const selectedFloor = useZustand((state) => state.selectedFloor);
 
   const style = {
     marginLeft: `${depth * 1}vw`,
@@ -28,10 +41,10 @@ const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
               className="image"
               src={item.image}
               onClick={() => {
-                addItem({ ...item, selectedWall });
+                addItem({ ...item, selectedWall, selectedFloor });
               }}></img>
             <div className="name" title={item.name}>
-              {item.name}
+              {`(${itemTypes[item.type]})${item.name}`}
             </div>
           </div>
         </div>

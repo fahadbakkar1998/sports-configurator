@@ -10,13 +10,6 @@ export const items = [
         format: 'gltf',
       },
       {
-        name: 'Simplecabinet',
-        image: 'assets/models/thumbnails_new/SimpleCabinet.png',
-        model: 'assets/models/gltf/SimpleCabinet.glb',
-        type: '9',
-        format: 'gltf',
-      },
-      {
         name: 'Bathroomcabinet',
         image: 'assets/models/thumbnails_new/bathroomCabinet.png',
         model: 'assets/models/gltf/bathroomCabinet.glb',
@@ -24,10 +17,57 @@ export const items = [
         format: 'gltf',
       },
       {
+        name: '3',
+        image: 'assets/models/thumbnails/thumbnail_window.png',
+        model: 'assets/models/js/whitewindow.js',
+        type: '3',
+      },
+      {
+        name: '4',
+        image: 'assets/models/thumbnails_new/ceilingFan.png',
+        model: 'assets/models/gltf/ceilingFan.gltf',
+        type: '4',
+        format: 'gltf',
+      },
+      {
+        name: 'Stairs',
+        image: 'assets/models/thumbnails_new/stairs.png',
+        model: 'assets/models/gltf/stairs.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: '7',
+        image:
+          'assets/models/thumbnails/thumbnail_Screen_Shot_2014-10-27_at_8.04.12_PM.png',
+        model: 'assets/models/js/closed-door28x80_baked.js',
+        type: '7',
+      },
+      {
+        name: '8',
+        image: 'assets/models/thumbnails/thumbnail_cb-blue-block60x96.png',
+        model: 'assets/models/js/cb-blue-block-60x96.js',
+        type: '8',
+      },
+      {
+        name: 'Simplecabinet',
+        image: 'assets/models/thumbnails_new/SimpleCabinet.png',
+        model: 'assets/models/gltf/SimpleCabinet.glb',
+        type: '9',
+        format: 'gltf',
+      },
+      {
         name: 'Bathroomcabinetdrawer',
         image: 'assets/models/thumbnails_new/bathroomCabinetDrawer.png',
         model: 'assets/models/gltf/bathroomCabinetDrawer.glb',
         type: '9',
+        format: 'gltf',
+      },
+      {
+        name: '0',
+        image: 'assets/models/thumbnails_new/books.png',
+        model: 'assets/models/gltf/books.glb',
+        type: '0',
         format: 'gltf',
       },
       {
@@ -78,13 +118,6 @@ export const items = [
     name: 'Sports Court',
     children: [
       {
-        name: '0',
-        image: 'assets/models/thumbnails_new/books.png',
-        model: 'assets/models/gltf/books.glb',
-        type: '0',
-        format: 'gltf',
-      },
-      {
         name: '1',
         image:
           'assets/models/thumbnails/thumbnail_Church-Chair-oak-white_1024x1024.jpg',
@@ -96,32 +129,6 @@ export const items = [
         image: 'assets/models/thumbnails/thumbnail_nyc2.jpg',
         model: 'assets/models/js/nyc-poster2.js',
         type: '2',
-      },
-      {
-        name: '3',
-        image: 'assets/models/thumbnails/thumbnail_window.png',
-        model: 'assets/models/js/whitewindow.js',
-        type: '3',
-      },
-      {
-        name: '4',
-        image: 'assets/models/thumbnails_new/ceilingFan.png',
-        model: 'assets/models/gltf/ceilingFan.gltf',
-        type: '4',
-        format: 'gltf',
-      },
-      {
-        name: '7',
-        image:
-          'assets/models/thumbnails/thumbnail_Screen_Shot_2014-10-27_at_8.04.12_PM.png',
-        model: 'assets/models/js/closed-door28x80_baked.js',
-        type: '7',
-      },
-      {
-        name: '8',
-        image: 'assets/models/thumbnails/thumbnail_cb-blue-block60x96.png',
-        model: 'assets/models/js/cb-blue-block-60x96.js',
-        type: '8',
       },
       {
         name: '9',
@@ -975,13 +982,6 @@ export const items = [
         format: 'gltf',
       },
       {
-        name: 'Stairs',
-        image: 'assets/models/thumbnails_new/stairs.png',
-        model: 'assets/models/gltf/stairs.glb',
-        type: '1',
-        format: 'gltf',
-      },
-      {
         name: 'Stairscorner',
         image: 'assets/models/thumbnails_new/stairsCorner.png',
         model: 'assets/models/gltf/stairsCorner.glb',
@@ -1219,18 +1219,22 @@ export const rectHome = JSON.stringify({
     version: '0.0.2a',
     corners: {
       '91c6749e-0958-1552-5b9a-77bcfb1ea6f9': { x: 0, y: 0, elevation: 4 },
-      '46383e10-843b-577d-8702-68457b06efc6': { x: 5, y: 0, elevation: 4 },
-      'e354fa91-26dd-3d14-0aa3-aeebba07b762': { x: 5, y: 5, elevation: 4 },
-      '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1': { x: 0, y: 5, elevation: 4 },
+      '46383e10-843b-577d-8702-68457b06efc6': { x: 10, y: 0, elevation: 4 },
+      'e354fa91-26dd-3d14-0aa3-aeebba07b762': { x: 10, y: 10, elevation: 4 },
+      '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1': { x: 0, y: 10, elevation: 4 },
     },
     walls: [
       {
         corner1: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
         corner2: '46383e10-843b-577d-8702-68457b06efc6',
         frontTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
+          url: 'assets/rooms/textures/hardwood.png',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1245,9 +1249,13 @@ export const rectHome = JSON.stringify({
         corner1: '46383e10-843b-577d-8702-68457b06efc6',
         corner2: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
         frontTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
+          url: 'assets/rooms/textures/hardwood.png',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1262,9 +1270,13 @@ export const rectHome = JSON.stringify({
         corner1: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
         corner2: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
         frontTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
+          url: 'assets/rooms/textures/hardwood.png',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1279,9 +1291,13 @@ export const rectHome = JSON.stringify({
         corner1: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
         corner2: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
         frontTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
+          url: 'assets/rooms/textures/hardwood.png',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1294,10 +1310,6 @@ export const rectHome = JSON.stringify({
       },
     ],
     rooms: {
-      '71d4f128-ae80-3d58-9bd2-711c6ce6cdf2,4e3d65cb-54c0-0681-28bf-bddcc7bdb571,da026c08-d76a-a944-8e7b-096b752da9ed,f90da5e3-9e0e-eba7-173d-eb0b071e838e':
-        { name: 'A New Room' },
-      '0aa75210-89c5-5e9e-c448-d8bd28b59a13,ae03ae97-343e-3f57-cd75-0371c774532a,7e559e03-cd33-509c-827d-8694357510f7,7af103b3-4c53-dc1c-f32c-710c583973ec,8438c43c-e1fd-d813-9702-d50e6b37fc1a,ac39ff27-f5ce-9817-2401-7e0e3a1caeec':
-        { name: 'A New Room' },
       '91c6749e-0958-1552-5b9a-77bcfb1ea6f9,46383e10-843b-577d-8702-68457b06efc6,e354fa91-26dd-3d14-0aa3-aeebba07b762,5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1':
         { name: 'A New Room' },
     },

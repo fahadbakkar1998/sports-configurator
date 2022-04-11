@@ -6,16 +6,18 @@ import { InWallFloorItem } from './in_wall_floor_item.js';
 import { OnFloorItem } from './on_floor_item.js';
 import { WallFloorItem } from './wall_floor_item.js';
 import { RoofItem } from './roof_item.js';
+import { OutItem } from './out_item';
 
 export const item_types = {
+  0: Item,
   1: FloorItem,
   2: WallItem,
   3: InWallItem,
+  4: RoofItem,
+  5: OutItem,
   7: InWallFloorItem,
   8: OnFloorItem,
   9: WallFloorItem,
-  0: Item,
-  4: RoofItem,
 };
 
 /* Factory class to create items. */

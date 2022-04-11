@@ -36,7 +36,9 @@ export const addItem = (item) => {
     format: item.format,
     image: item.image,
   };
+  console.log('add item: ', item);
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
+    // Wall Items
     var placeAt = item.selectedWall.item.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,
@@ -48,7 +50,11 @@ export const addItem = (item) => {
       false,
       { position: placeAt, edge: item.selectedWall.item },
     );
-  } else if (item.selectedFloor) {
+  } else if (
+    [0, 1, 8].indexOf(parseInt(item.type)) != -1 &&
+    item.selectedFloor
+  ) {
+    // Floor Items
     var placeAt = item.selectedFloor.item.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,

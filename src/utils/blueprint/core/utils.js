@@ -200,13 +200,7 @@ export class Utils {
         tSecondCorner = firstCorners[tI + 1];
       }
       if (
-        Utils.linePolygonIntersect(
-          tFirstCorner.x,
-          tFirstCorner.y,
-          tSecondCorner.x,
-          tSecondCorner.y,
-          secondCorners,
-        )
+        Utils.linePolygonIntersect(tFirstCorner, tSecondCorner, secondCorners)
       ) {
         return true;
       }
@@ -224,14 +218,7 @@ export class Utils {
       } else {
         tSecondCorner = corners[tI + 1];
       }
-      if (
-        Utils.lineLineIntersect(
-          point,
-          point2,
-          { x: tFirstCorner.x, y: tFirstCorner.y },
-          { x: tSecondCorner.x, y: tSecondCorner.y },
-        )
-      ) {
+      if (Utils.lineLineIntersect(point, point2, tFirstCorner, tSecondCorner)) {
         return true;
       }
     }
@@ -334,38 +321,20 @@ export class Utils {
       } else {
         tSecondCorner = corners[tI + 1];
       }
-
-      if (
-        Utils.lineLineIntersect(
-          start,
-          point,
-          tFirstCorner.x,
-          tFirstCorner.y,
-          tSecondCorner.x,
-          tSecondCorner.y,
-        )
-      ) {
+      if (Utils.lineLineIntersect(start, point, tFirstCorner, tSecondCorner)) {
         tIntersects++;
       }
     }
+
     // odd intersections means the point is in the polygon
     return tIntersects % 2 == 1;
   }
 
   /* Checks if all corners of insideCorners are inside the polygon described by outsideCorners */
   static polygonInsidePolygon(insideCorners, outsideCorners, start) {
-    start.x = start.x || 0;
-    start.y = start.y || 0;
-
+    start = start || new Vector2(0, 0);
     for (let tI = 0; tI < insideCorners.length; tI++) {
-      if (
-        !Utils.pointInPolygon(
-          insideCorners[tI].x,
-          insideCorners[tI].y,
-          outsideCorners,
-          start,
-        )
-      ) {
+      if (!Utils.pointInPolygon(insideCorners[tI], outsideCorners, start)) {
         return false;
       }
     }
@@ -374,18 +343,9 @@ export class Utils {
 
   /* Checks if any corners of firstCorners is inside the polygon described by secondCorners */
   static polygonOutsidePolygon(insideCorners, outsideCorners, start) {
-    start.x = start.x || 0;
-    start.y = start.y || 0;
-
+    start = start || new Vector2(0, 0);
     for (let tI = 0; tI < insideCorners.length; tI++) {
-      if (
-        Utils.pointInPolygon(
-          insideCorners[tI].x,
-          insideCorners[tI].y,
-          outsideCorners,
-          start,
-        )
-      ) {
+      if (Utils.pointInPolygon(insideCorners[tI], outsideCorners, start)) {
         return false;
       }
     }

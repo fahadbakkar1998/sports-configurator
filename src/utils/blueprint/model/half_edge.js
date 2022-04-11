@@ -152,25 +152,21 @@ export class HalfEdge extends EventDispatcher {
     this.offset = wall.thickness / 2.0;
     this.height = wall.height;
 
-    if (this.front) {
-      this.wall.frontEdge = this;
-    } else {
-      this.wall.backEdge = this;
-    }
-
     this.selTexture = {
       url: 'assets/rooms/textures/wallmap_yellow.png',
       stretch: true,
       scale: 1,
     };
 
-    this.curTexture = {
-      url: 'assets/rooms/textures/wallmap.png',
-      stretch: true,
-      scale: 1,
-    };
-
     this.curTextureIndex = 0;
+
+    if (this.front) {
+      this.curTexture = wall.frontTexture;
+      this.wall.frontEdge = this;
+    } else {
+      this.curTexture = wall.backTexture;
+      this.wall.backEdge = this;
+    }
   }
 
   /*

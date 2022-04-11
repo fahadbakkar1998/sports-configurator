@@ -2,10 +2,7 @@ import { Vector2 } from 'three';
 import { Item } from './item.js';
 import { Utils } from '../core/utils.js';
 
-/*
- * A Floor Item is an entity to be placed related to a floor.
- */
-export class FloorItem extends Item {
+export class OutItem extends Item {
   constructor(
     model,
     metadata,
@@ -65,20 +62,17 @@ export class FloorItem extends Item {
     let corners = this.getCorners('x', 'z', vec3);
     // check if we are in a room
     let rooms = this.model.floorplan.getRooms();
-    let isInARoom = false;
+    let isOutARoom = false;
     for (let i = 0; i < rooms.length; i++) {
-      const inPolygon = Utils.polygonInsidePolygon(
+      const outPolygon = Utils.polygonOutsidePolygon(
         corners,
         rooms[i].interiorCorners,
       );
-      if (
-        inPolygon &&
-        !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
-      ) {
-        isInARoom = true;
+      if (outPolygon) {
+        isOutARoom = true;
       }
     }
-    if (!isInARoom) return false;
+    if (!isOutARoom) return false;
 
     // check if we are outside all other objects
     // if (this.obstructFloorMoves) {

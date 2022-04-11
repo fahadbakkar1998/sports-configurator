@@ -323,6 +323,8 @@ $commonHeight: 1.8vmax;
             outline: none;
             border-radius: $fontPadding;
             position: relative;
+            color: $foreColor;
+            background-color: $backColor;
 
             &.pointer {
               cursor: pointer;

@@ -1,8 +1,6 @@
 import { Item } from './item.js';
 import { Matrix4, Triangle, Plane, Vector3 } from 'three';
-/*
- * A Floor Item is an entity to be placed related to a floor.
- */
+import { Utils } from '../blueprint.js';
 export class RoofItem extends Item {
   constructor(
     model,
@@ -91,7 +89,7 @@ export class RoofItem extends Item {
         result.closestPoint = closestPoint.clone();
       }
     }
-    //No good result so return the closest point of the last triangle in this roof mesh
+    // No good result so return the closest point of the last triangle in this roof mesh
     if (result.point == null) {
       result.closestPoint = closestPoint.clone();
     }
@@ -116,7 +114,7 @@ export class RoofItem extends Item {
         globalResult.point = result.point.clone();
       }
     }
-    //No good results so assign the closestPoint of the last roof in the above iteration
+    // No good results so assign the closestPoint of the last roof in the above iteration
     if (globalResult.point == null) {
       return result.closestPoint.clone();
     }
@@ -129,5 +127,35 @@ export class RoofItem extends Item {
       let co = this.closestCeilingPoint();
       this.moveToPosition(co);
     }
+  }
+
+  moveToPosition(vec3, intersection) {
+    if (!vec3) return;
+    if (!intersection) {
+      super.moveToPosition(vec3);
+      return;
+    }
+    if (!this.isValidPosition(vec3, intersection)) {
+      this.showError(vec3);
+    } else {
+      this.hideError();
+      vec3.y = this.position.y;
+      super.moveToPosition(vec3);
+    }
+  }
+
+  getIntersectionCorners(intersection) {
+    const corners = intersection.object.geometry.vertices.map((e) => {
+      return { x: e.x, y: e.z };
+    });
+    return corners;
+  }
+
+  isValidPosition(vec3, intersection) {
+    const corners = this.getCorners('x', 'z', vec3);
+    const intersectionCorners = this.getIntersectionCorners(intersection);
+    const isValid = Utils.polygonInsidePolygon(corners, intersectionCorners);
+    if (!isValid) return false;
+    return true;
   }
 }

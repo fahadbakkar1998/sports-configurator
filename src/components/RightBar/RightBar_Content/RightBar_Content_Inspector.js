@@ -116,10 +116,11 @@ const RightBar_Content_Inspector = () => {
       Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getWidth())) ||
     0;
 
-  console.log(
-    'mat0 selected:',
-    cur3dItemEvent && cur3dItemEvent.item.material[0],
-  );
+  if (cur3dItemEvent && cur3dItemEvent.item && cur3dItemEvent.item.material) {
+    if (!cur3dItemEvent.item.material.length) {
+      cur3dItemEvent.item.material = [cur3dItemEvent.item.material];
+    }
+  }
 
   return (
     <div className="RightBar_Content_Inspector">
@@ -160,12 +161,14 @@ const RightBar_Content_Inspector = () => {
 
             <select
               className="input"
-              value={selectedWall.item.curTextureIndex}
+              value={wallTextures.findIndex((e) => {
+                return e.url === selectedWall.item.curTexture.url;
+              })}
               onChange={(e) => {
                 const index = e.target.value;
-                const cloneSelectedWall = selectedWall;
-                cloneSelectedWall.item.curTexture = wallTextures[index];
+                const cloneSelectedWall = { ...selectedWall };
                 cloneSelectedWall.item.curTextureIndex = index;
+                cloneSelectedWall.item.curTexture = wallTextures[index];
                 cloneSelectedWall.item.showCurTexture();
                 setSelectedWall(cloneSelectedWall);
               }}>
@@ -414,40 +417,41 @@ const RightBar_Content_Inspector = () => {
           <div className="property-header">Color</div>
 
           {React.Children.toArray(
-            cur3dItemEvent.item.material.map((mat, index) => (
-              <>
-                <div className="input-group">
-                  <div>{mat.name}:</div>
-                  <div
-                    className="input pointer"
-                    onClick={() => {
-                      const clone = { ...cur3dItemEvent };
-                      clone.item.material[index].selected = !mat.selected;
-                      setCur3dItemEvent(clone);
-                    }}
-                    style={{
-                      backgroundColor: rgbToHex(mat.color),
-                    }}></div>
-                </div>
-                <div className="input-group">
-                  <div></div>
-                  <HexColorPicker
-                    className={cn('input', {
-                      active: mat.selected,
-                    })}
-                    color={rgbToHex(mat.color)}
-                    onChange={(color) => {
-                      const clone = { ...cur3dItemEvent };
-                      const newColor = new Color(color);
-                      clone.item.material[index].color = clone.item.material[
-                        index
-                      ].emissive = newColor;
-                      clone.item.material[index].needsUpdate = true;
-                      setCur3dItemEvent(clone);
-                    }}></HexColorPicker>
-                </div>
-              </>
-            )),
+            cur3dItemEvent.item.material &&
+              cur3dItemEvent.item.material.map((mat, index) => (
+                <>
+                  <div className="input-group">
+                    <div>{mat.name}:</div>
+                    <div
+                      className="input pointer"
+                      onClick={() => {
+                        const clone = { ...cur3dItemEvent };
+                        clone.item.material[index].selected = !mat.selected;
+                        setCur3dItemEvent(clone);
+                      }}
+                      style={{
+                        backgroundColor: rgbToHex(mat.color),
+                      }}></div>
+                  </div>
+                  <div className="input-group">
+                    <div></div>
+                    <HexColorPicker
+                      className={cn('input', {
+                        active: mat.selected,
+                      })}
+                      color={rgbToHex(mat.color)}
+                      onChange={(color) => {
+                        const clone = { ...cur3dItemEvent };
+                        const hexColor = `0x${color.substring(1)}`;
+                        clone.item.material[index].color.setHex(hexColor);
+                        clone.item.material[index].emissive.setHex(hexColor);
+                        clone.item.material[index].needsUpdate = true;
+                        blueprintJS.three.render(true);
+                        setCur3dItemEvent(clone);
+                      }}></HexColorPicker>
+                  </div>
+                </>
+              )),
           )}
         </>
       )}
