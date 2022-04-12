@@ -95,6 +95,11 @@ export const updateSameElevation = (flag) => {
   Blueprint.Configuration.setValue('sameElevation', flag);
 };
 
+export const updateVisibility = (flag) => {
+  Blueprint.Configuration.setValue('visibility', flag);
+  blueprintJS.three.render(true);
+};
+
 export const updateRoofMode = (flag) => {
   blueprintJS.three.floorplan.showRoof(flag);
 };

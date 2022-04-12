@@ -258,10 +258,6 @@ export class Floorplanner2D extends EventDispatcher {
   /* */
   updateTarget() {
     if (this.mode == floorplannerModes.DRAW && this.lastNode) {
-      console.log(
-        Math.abs(this.mouseX - this.lastNode.x),
-        Math.abs(this.mouseY - this.lastNode.y),
-      );
       if (Configuration.getNumericValue('snapToRect')) {
         if (
           Math.abs(this.mouseX - this.lastNode.x) <

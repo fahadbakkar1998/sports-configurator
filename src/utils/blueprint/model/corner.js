@@ -183,7 +183,6 @@ export class Corner extends EventDispatcher {
       });
     }
     if (Configuration.getNumericValue('sameElevation')) {
-      console.log('sameElevation');
       this.setAllElevation(value);
     }
   }
@@ -192,7 +191,7 @@ export class Corner extends EventDispatcher {
     this.floorplan.getCorners().forEach((corner) => {
       corner._elevation = Number(value);
     });
-    this.floorplan.update();
+    this.floorplan.update(false);
   }
 
   /* @type {Number} elevation The elevation value at this corner*/
@@ -755,7 +754,7 @@ export class Corner extends EventDispatcher {
         //Send this boolean value as false to avoid recursion crashing of the application
         this.move(intersection.x, intersection.y, false, updateFloorPlan); //Causes Recursion if third parameter is true
 
-        this.floorplan.update();
+        this.floorplan.update(false);
         return true;
       }
     }

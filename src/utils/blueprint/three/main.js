@@ -236,6 +236,7 @@ export class Main extends EventDispatcher {
       scope.scene,
       scope.model.floorplan,
       scope.controls,
+      this,
     );
 
     function animate() {

@@ -158,8 +158,6 @@ export class HalfEdge extends EventDispatcher {
       scale: 1,
     };
 
-    this.curTextureIndex = 0;
-
     if (this.front) {
       this.curTexture = wall.frontTexture;
       this.wall.frontEdge = this;

@@ -14,7 +14,7 @@ export class Lights extends EventDispatcher {
     this.tol = 1;
     this.height = 300; // TODO: share with Blueprint.Wall
     this.dirLight = null;
-    this.updatedroomsevent = () => {
+    this.updatedRoomsEvent = () => {
       this.updateShadowCamera();
     };
     this.init();
@@ -47,7 +47,7 @@ export class Lights extends EventDispatcher {
     this.scene.add(this.dirLight.target);
 
     // this.floorplan.fireOnUpdatedRooms(updateShadowCamera);
-    this.floorplan.addEventListener(EVENT_UPDATED, this.updatedroomsevent);
+    this.floorplan.addEventListener(EVENT_UPDATED, this.updatedRoomsEvent);
   }
 
   updateShadowCamera() {

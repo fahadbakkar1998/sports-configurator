@@ -167,7 +167,6 @@ const RightBar_Content_Inspector = () => {
               onChange={(e) => {
                 const index = e.target.value;
                 const cloneSelectedWall = { ...selectedWall };
-                cloneSelectedWall.item.curTextureIndex = index;
                 cloneSelectedWall.item.curTexture = wallTextures[index];
                 cloneSelectedWall.item.showCurTexture();
                 setSelectedWall(cloneSelectedWall);
@@ -182,7 +181,7 @@ const RightBar_Content_Inspector = () => {
         </>
       )}
 
-      {/* {selectedFloor && (
+      {selectedFloor && (
         <>
           <div className="property-header">Floor</div>
 
@@ -191,10 +190,12 @@ const RightBar_Content_Inspector = () => {
 
             <select
               className="input"
-              value={selectedFloor.item.curTextureIndex}
+              value={wallTextures.findIndex((e) => {
+                return e.url === selectedFloor.item.getTexture().url;
+              })}
               onChange={(e) => {
                 const j = e.target.value;
-                const cloneSelectedFloor = selectedFloor;
+                const cloneSelectedFloor = { ...selectedFloor };
                 const texture = wallTextures[j];
                 cloneSelectedFloor.item.curTextureIndex = j;
                 cloneSelectedFloor.item.setTexture(
@@ -212,7 +213,7 @@ const RightBar_Content_Inspector = () => {
             </select>
           </div>
         </>
-      )} */}
+      )}
 
       {cur2dItemEvent && cur2dItemEvent.type === 'CORNER' && (
         <>

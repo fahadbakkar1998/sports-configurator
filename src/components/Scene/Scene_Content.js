@@ -20,7 +20,7 @@ const Scene_Content = () => {
       threeCanvasElement: 'three-canvas',
       widget: false,
     });
-    console.log('blueprintJS: ', blueprintJS);
+    // console.log('blueprintJS: ', blueprintJS);
 
     // load home
     loadDefaultDesign();

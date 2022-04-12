@@ -765,6 +765,7 @@ export class Floorplan extends EventDispatcher {
     // scope.roomNameChanged)});
 
     var roomCorners = this.findRooms(this.corners);
+    console.log('roomCorners: ', roomCorners);
     this.rooms = [];
 
     this.corners.forEach((corner) => {

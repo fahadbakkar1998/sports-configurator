@@ -5,6 +5,7 @@ import {
   updateSnapToRect,
   updateSameElevation,
   updateRoofMode,
+  updateVisibility,
 } from '../../utils/bpSupport';
 import cn from 'classnames';
 
@@ -19,6 +20,8 @@ const Scene_Header = () => {
   const setSameElevation = useZustand((state) => state.setSameElevation);
   const showRoof = useZustand((state) => state.showRoof);
   const setShowRoof = useZustand((state) => state.setShowRoof);
+  const visibility = useZustand((state) => state.visibility);
+  const setVisibility = useZustand((state) => state.setVisibility);
 
   return (
     <div className="Scene_Header">
@@ -67,6 +70,14 @@ const Scene_Header = () => {
           setShowRoof(!showRoof);
         }}>
         Show Roof
+      </div>
+      <div
+        className={cn('item', { active: visibility })}
+        onClick={() => {
+          updateVisibility(!visibility);
+          setVisibility(!visibility);
+        }}>
+        Visibility
       </div>
     </div>
   );

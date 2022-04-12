@@ -18,10 +18,11 @@ import { EVENT_CHANGED } from '../core/events.js';
 import { Configuration, configWallHeight } from '../core/configuration.js';
 
 export class Floor extends EventDispatcher {
-  constructor(scene, room) {
+  constructor(scene, room, three) {
     super();
     this.scene = scene;
     this.room = room;
+    this.three = three;
     this.floorPlane = null;
     this.roofPlane = null;
     this.changedevent = () => {
@@ -47,10 +48,14 @@ export class Floor extends EventDispatcher {
   }
 
   redraw() {
+    console.log('floor redraw');
     this.removeFromScene();
     this.floorPlane = this.buildFloor();
     this.roofPlane = this.buildRoofVaryingHeight();
+    console.log(this.floorPlane);
     this.roofPlane.visible = false;
+    this.floorPlane.material.needsUpdate =
+      this.floorPlane.material.map.needsUpdate = true;
     this.addToScene();
   }
 
@@ -138,6 +143,8 @@ export class Floor extends EventDispatcher {
     // hack so we can do intersect testing
     this.scene.add(this.room.floorPlane);
     this.scene.add(this.room.roofPlane);
+    // console.log(this.three);
+    // this.three.render(true);
   }
 
   removeFromScene() {
@@ -148,7 +155,6 @@ export class Floor extends EventDispatcher {
   }
 
   showRoof(flag) {
-    console.log(flag);
     this.roofPlane.visible = flag;
   }
 }

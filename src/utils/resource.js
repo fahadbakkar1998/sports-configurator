@@ -1229,12 +1229,8 @@ export const rectHome = JSON.stringify({
         corner2: '46383e10-843b-577d-8702-68457b06efc6',
         frontTexture: {
           url: 'assets/rooms/textures/hardwood.png',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
+          stretch: true,
+          scale: 0,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1250,12 +1246,8 @@ export const rectHome = JSON.stringify({
         corner2: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
         frontTexture: {
           url: 'assets/rooms/textures/hardwood.png',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
+          stretch: true,
+          scale: 0,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1271,12 +1263,8 @@ export const rectHome = JSON.stringify({
         corner2: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
         frontTexture: {
           url: 'assets/rooms/textures/hardwood.png',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
+          stretch: true,
+          scale: 0,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',
@@ -1292,12 +1280,8 @@ export const rectHome = JSON.stringify({
         corner2: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
         frontTexture: {
           url: 'assets/rooms/textures/hardwood.png',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
+          stretch: true,
+          scale: 0,
         },
         backTexture: {
           url: 'assets/rooms/textures/wallmap.png',

@@ -56,7 +56,6 @@ export class Room extends EventDispatcher {
     this.roofPlane = null;
     this.customTexture = false;
     this.floorChangeCallbacks = null;
-    this.update();
 
     let cornerIds = [];
     for (let i = 0; i < this.corners.length; i++) {
@@ -66,7 +65,7 @@ export class Room extends EventDispatcher {
     }
     this._roomByCornersId = cornerIds.join(',');
 
-    this.curTextureIndex = 0;
+    this.update();
   }
 
   get roomCornerPoints() {

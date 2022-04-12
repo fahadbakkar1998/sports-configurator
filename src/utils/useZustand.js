@@ -73,6 +73,12 @@ const useZustand = create((set) => ({
     set((state) => ({
       sameElevation,
     })),
+
+  visibility: Blueprint.config.visibility,
+  setVisibility: (visibility) =>
+    set((state) => ({
+      visibility,
+    })),
 }));
 
 export default useZustand;

@@ -27,6 +27,7 @@ export let config = {
   gridSpacing: 25,
   snapToRect: true,
   sameElevation: true,
+  visibility: true,
 };
 
 export let wallInformation = {
@@ -46,47 +47,24 @@ export const cornerTolerance = 20;
 export class Configuration {
   constructor() {
     /* Configuration data loaded from/stored to extern. */
-    // this.data = {dimUnit: dimCentiMeter, wallHeight: 250, wallThickness: 10};
   }
 
   static getData() {
-    // return {dimUnit: dimCentiMeter, wallHeight: 250, wallThickness: 10};
     return config;
   }
 
   /* Set a configuration parameter. */
   static setValue(key, value) {
-    // this.data[key] = value;
     config[key] = value;
   }
 
   /* Get a string configuration parameter. */
   static getStringValue(key) {
-    switch (key) {
-      case configDimUnit:
-        // return String(this.data[key]);
-        return String(Configuration.getData()[key]);
-      default:
-        throw new Error('Invalid string configuration parameter: ' + key);
-    }
+    return String(Configuration.getData()[key]);
   }
 
   /* Get a numeric configuration parameter. */
   static getNumericValue(key) {
-    switch (key) {
-      case configSystemUI:
-      case configWallHeight:
-      case configWallThickness:
-      case scale:
-      case snapToGrid:
-      case snapTolerance:
-      case gridSpacing:
-      case 'snapToRect':
-      case 'sameElevation':
-        // return Number(this.data[key]);
-        return Number(Configuration.getData()[key]);
-      default:
-        throw new Error('Invalid numeric configuration parameter: ' + key);
-    }
+    return Number(Configuration.getData()[key]);
   }
 }
