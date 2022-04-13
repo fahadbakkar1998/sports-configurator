@@ -13,6 +13,7 @@ import {
   Shape,
   ShapeGeometry,
   Mesh,
+  BoxGeometry,
 } from 'three';
 import { EVENT_CHANGED } from '../core/events.js';
 import { Configuration, configWallHeight } from '../core/configuration.js';
@@ -25,7 +26,7 @@ export class Floor extends EventDispatcher {
     this.three = three;
     this.floorPlane = null;
     this.roofPlane = null;
-    this.changedevent = () => {
+    this.changedEvent = () => {
       this.redraw();
     };
     this.init();
@@ -38,7 +39,7 @@ export class Floor extends EventDispatcher {
 
   init() {
     // this.room.fireOnFloorChange(redraw);
-    this.room.addEventListener(EVENT_CHANGED, this.changedevent);
+    this.room.addEventListener(EVENT_CHANGED, this.changedEvent);
 
     this.floorPlane = this.buildFloor();
     // roofs look weird, so commented out
@@ -52,7 +53,6 @@ export class Floor extends EventDispatcher {
     this.removeFromScene();
     this.floorPlane = this.buildFloor();
     this.roofPlane = this.buildRoofVaryingHeight();
-    console.log(this.floorPlane);
     this.roofPlane.visible = false;
     this.floorPlane.material.needsUpdate =
       this.floorPlane.material.map.needsUpdate = true;
@@ -70,9 +70,10 @@ export class Floor extends EventDispatcher {
     let floorMaterialTop = new MeshPhongMaterial({
       map: floorTexture,
       side: DoubleSide,
-      // ambient: 0xffffff, TODO_Ekki
+      // ambient: 0xffffff,
       color: 0xcccccc,
       specular: 0x0a0a0a,
+      // wireframe: true,
     });
 
     let textureScale = textureSettings.scale;
@@ -137,12 +138,13 @@ export class Floor extends EventDispatcher {
   }
 
   addToScene() {
+    console.log('floorPlane: ', this.floorPlane);
     this.scene.add(this.floorPlane);
     this.scene.add(this.roofPlane);
-    //scene.add(roofPlane);
+    // scene.add(roofPlane);
     // hack so we can do intersect testing
-    this.scene.add(this.room.floorPlane);
-    this.scene.add(this.room.roofPlane);
+    // this.scene.add(this.room.floorPlane);
+    // this.scene.add(this.room.roofPlane);
     // console.log(this.three);
     // this.three.render(true);
   }

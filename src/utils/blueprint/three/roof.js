@@ -1,15 +1,19 @@
 import {
   EventDispatcher,
-  Vector2,
   Vector3,
   Face3,
   Geometry,
-  Shape,
-  ShapeGeometry,
   Mesh,
   MeshBasicMaterial,
+  MeshPhongMaterial,
   DoubleSide,
+  TextureLoader,
+  RepeatWrapping,
+  FrontSide,
+  BackSide,
 } from 'three';
+import { Configuration, configWallThickness } from '../core/configuration';
+import { degToRad } from '../../common';
 
 export class Roof extends EventDispatcher {
   constructor({ scene, room, three }) {
@@ -17,15 +21,35 @@ export class Roof extends EventDispatcher {
     this.scene = scene;
     this.room = room;
     this.three = three;
-    this.roofTexture = 'assets/rooms/textures/hardwood.png';
-    this.sideTexture = 'assets/rooms/textures/wallmap.png';
-    this.angle = 30;
+
+    this.textureLoader = new TextureLoader();
+    this.topTexture = this.textureLoader.load(
+      'assets/rooms/textures/hardwood.png',
+    );
+    this.bottomTexture = this.textureLoader.load(
+      'assets/rooms/textures/wallmap.png',
+    );
+    this.thicknessTexture = this.textureLoader.load(
+      'assets/rooms/textures/wallmap.png',
+    );
+    this.sideTexture = this.textureLoader.load(
+      'assets/rooms/textures/hardwood.png',
+    );
+
+    this.middleHeight = 100;
+    this.singleHeight = this.middleHeight * 2;
+    this.wallThickness = Configuration.getNumericValue(configWallThickness);
+    this.thickness = this.wallThickness;
     this.type = 'GABLED'; // GABLED, SINGLE, FLAT
 
-    this.boundary = null;
+    this.minX = this.minY = this.maxX = this.maxY = 0;
     this.roomWidth = this.roomLength = this.roomHeight = 0;
-    this.roofPlane = null;
-    this.sidePlane = null;
+
+    this.topPlane = null;
+    this.bottomPlane = null;
+    this.thicknessPlane = null;
+    this.frontPlane = null;
+    this.backPlane = null;
 
     this.generateBasicData();
     this.generateRoofPlane();
@@ -34,66 +58,276 @@ export class Roof extends EventDispatcher {
   generateBasicData() {
     if (!this.room || !this.room.corners || !this.room.corners.length) return;
     const firstCorner = this.room.corners[0];
-    let minX, minY, maxX, maxY;
-    minX = maxX = firstCorner.x;
-    minY = maxY = firstCorner.y;
+    this.minX = this.maxX = firstCorner.x;
+    this.minY = this.maxY = firstCorner.y;
+
     this.room.corners.forEach((corner) => {
-      if (minX > corner.x) minX = corner.x;
-      if (minY > corner.y) minY = corner.y;
-      if (maxX < corner.x) maxX = corner.x;
-      if (maxY < corner.y) maxY = corner.y;
+      if (this.minX > corner.x) this.minX = corner.x;
+      if (this.minY > corner.y) this.minY = corner.y;
+      if (this.maxX < corner.x) this.maxX = corner.x;
+      if (this.maxY < corner.y) this.maxY = corner.y;
       if (this.roomHeight < corner.elevation)
         this.roomHeight = corner.elevation;
     });
-    this.boundary = { min: { x: minX, y: minY }, max: { x: maxX, y: maxY } };
-    this.roomWidth = maxX - minX;
-    this.roomLength = maxY - minY;
+
+    this.roomWidth = this.maxX - this.minX;
+    this.roomLength = this.maxY - this.minY;
   }
 
   generateRoofPlane() {
-    if (!this.boundary) return;
-    if (this.roofPlane && this.roofPlane.parent) {
-      this.roofPlane.parent.remove(this.roofPlane);
-    }
-    // setup texture
-    const geometry = new Geometry();
+    if (!this.roomWidth || !this.roomLength) return;
+
+    const topGeometry = new Geometry();
+    const bottomGeometry = new Geometry();
+    const thicknessGeometry = new Geometry();
+    const frontSideGeometry = new Geometry();
+    const backSideGeometry = new Geometry();
+
+    const halfRoomWidth = this.roomWidth / 2;
+    const roofBottomWidth = Math.sqrt(
+      halfRoomWidth * halfRoomWidth + this.middleHeight * this.middleHeight,
+    );
+    const thicknessHeight = (this.thickness * roofBottomWidth) / halfRoomWidth;
+    const gabledTopHeight =
+      this.roomHeight + this.middleHeight + thicknessHeight;
+    const gabledBottomHeight = this.roomHeight + this.middleHeight;
+    const middleX = this.minX + halfRoomWidth;
+    const halfWallThickness = this.wallThickness / 2;
+
     switch (this.type) {
       case 'GABLED':
-        geometry.vertices.push(this.boundary.min.x, this.roomHeight, this.boundary.min.y);
-        geometry.vertices.push(this.boundary.min.x, this.roomHeight, this.boundary.max.y);
-        geometry.vertices.push(this.boundary.min.x, this.roomHeight, this.boundary.min.y);
-        geometry.vertices.push(this.boundary.min.x, this.roomHeight, this.boundary.min.y);
-        geometry.vertices.push(this.boundary.min.x, this.roomHeight, this.boundary.min.y);
-        geometry.vertices.push(this.boundary.min.x, this.roomHeight, this.boundary.min.y);
+        // TOP
+        const topVertices = [
+          new Vector3(
+            this.minX - halfWallThickness,
+            this.roomHeight + thicknessHeight,
+            this.minY - halfWallThickness,
+          ), // left-top
+          new Vector3(
+            this.minX - halfWallThickness,
+            this.roomHeight + thicknessHeight,
+            this.maxY + halfWallThickness,
+          ), // left-bottom
+          new Vector3(middleX, gabledTopHeight, this.maxY + halfWallThickness), // middle-bottom
+          new Vector3(middleX, gabledTopHeight, this.minY - halfWallThickness), // middle-top
+          new Vector3(
+            this.maxX + halfWallThickness,
+            this.roomHeight + thicknessHeight,
+            this.minY - halfWallThickness,
+          ), // right-top
+          new Vector3(
+            this.maxX + halfWallThickness,
+            this.roomHeight + thicknessHeight,
+            this.maxY + halfWallThickness,
+          ), // right-bottom
+        ];
+
+        topVertices.forEach((vertex) => topGeometry.vertices.push(vertex));
+
+        // BOTTOM
+        const bottomVertices = [
+          new Vector3(
+            this.minX - halfWallThickness,
+            this.roomHeight,
+            this.minY - halfWallThickness,
+          ), // left-top
+          new Vector3(
+            this.minX - halfWallThickness,
+            this.roomHeight,
+            this.maxY + halfWallThickness,
+          ), // left-bottom
+          new Vector3(
+            middleX,
+            gabledBottomHeight,
+            this.maxY + halfWallThickness,
+          ), // middle-bottom
+          new Vector3(
+            middleX,
+            gabledBottomHeight,
+            this.minY - halfWallThickness,
+          ), // middle-top
+          new Vector3(
+            this.maxX + halfWallThickness,
+            this.roomHeight,
+            this.minY - halfWallThickness,
+          ), // right-top
+          new Vector3(
+            this.maxX + halfWallThickness,
+            this.roomHeight,
+            this.maxY + halfWallThickness,
+          ), // right-bottom
+        ];
+
+        bottomVertices.forEach((vertex) =>
+          bottomGeometry.vertices.push(vertex),
+        );
+
+        // THICKNESS
+        this.generateBetweenVertices(
+          thicknessGeometry,
+          topVertices,
+          bottomVertices,
+        );
+
+        // FRONT SIDE
+        const frontSideVertices = [
+          new Vector3(
+            this.minX - halfWallThickness,
+            this.roomHeight,
+            this.maxY + halfWallThickness,
+          ),
+          new Vector3(
+            middleX,
+            gabledBottomHeight,
+            this.maxY + halfWallThickness,
+          ),
+          new Vector3(
+            this.maxX + halfWallThickness,
+            this.roomHeight,
+            this.maxY + halfWallThickness,
+          ),
+        ];
+
+        frontSideVertices.forEach((vertex) =>
+          frontSideGeometry.vertices.push(vertex),
+        );
+
+        // BACK SIDE
+        const backSideVertices = [
+          new Vector3(
+            this.minX - halfWallThickness,
+            this.roomHeight,
+            this.minY - halfWallThickness,
+          ),
+          new Vector3(
+            middleX,
+            gabledBottomHeight,
+            this.minY - halfWallThickness,
+          ),
+          new Vector3(
+            this.maxX + halfWallThickness,
+            this.roomHeight,
+            this.minY - halfWallThickness,
+          ),
+        ];
+
+        backSideVertices.forEach((vertex) =>
+          backSideGeometry.vertices.push(vertex),
+        );
         break;
+      case 'SINGLE':
+        break;
+      case 'FLAT':
+        break;
+      default:
+        return;
+    }
+
+    this.addFaces(topGeometry);
+    this.topPlane = new Mesh(
+      topGeometry,
+      new MeshBasicMaterial({
+        side: DoubleSide,
+        color: 0x00ff00,
+      }),
+    );
+
+    this.addFaces(bottomGeometry);
+    this.bottomPlane = new Mesh(
+      bottomGeometry,
+      new MeshBasicMaterial({
+        side: DoubleSide,
+        color: 0x0000ff,
+      }),
+    );
+
+    this.addFaces(thicknessGeometry);
+    this.thicknessPlane = new Mesh(
+      thicknessGeometry,
+      new MeshBasicMaterial({
+        side: DoubleSide,
+        color: 0xff0000,
+      }),
+    );
+
+    this.addFaces(frontSideGeometry);
+    this.frontPlane = new Mesh(
+      frontSideGeometry,
+      new MeshBasicMaterial({
+        side: DoubleSide,
+        color: 0xffff00,
+      }),
+    );
+
+    this.addFaces(backSideGeometry);
+    this.backPlane = new Mesh(
+      backSideGeometry,
+      new MeshBasicMaterial({
+        side: DoubleSide,
+        color: 0x00ffff,
+      }),
+    );
+  }
+
+  generateBetweenVertices(targetGeometry, srcVertices1, srcVertices2) {
+    if (
+      srcVertices1.length === srcVertices2.length &&
+      !(srcVertices1.length % 2) &&
+      srcVertices1.length >= 4
+    ) {
+      const length = srcVertices2.length;
+      let isTBDirection = true;
+
+      for (let i = 0; i < length; i++) {
+        if (isTBDirection) {
+          targetGeometry.vertices.push(srcVertices1[i]);
+          targetGeometry.vertices.push(srcVertices2[i]);
+        } else {
+          targetGeometry.vertices.push(srcVertices2[i]);
+          targetGeometry.vertices.push(srcVertices1[i]);
+        }
+        isTBDirection = !isTBDirection;
+      }
+
+      for (let j = length - 4; j >= 0; j -= 2) {
+        if (isTBDirection) {
+          targetGeometry.vertices.push(srcVertices1[j]);
+          targetGeometry.vertices.push(srcVertices2[j]);
+          targetGeometry.vertices.push(srcVertices2[j + 1]);
+          targetGeometry.vertices.push(srcVertices1[j + 1]);
+        } else {
+          targetGeometry.vertices.push(srcVertices2[j]);
+          targetGeometry.vertices.push(srcVertices1[j]);
+          targetGeometry.vertices.push(srcVertices1[j + 1]);
+          targetGeometry.vertices.push(srcVertices2[j + 1]);
+        }
+      }
     }
   }
 
-  removeFromScene() {}
-
-  addToScene() {}
-
-  generateRoofPlanes() {
-    if (this.roofPlane && this.roofPlane != null) {
-      if (this.roofPlane.parent != null) {
-        this.roofPlane.parent.remove(this.roofPlane);
+  addFaces(geometry) {
+    if (geometry.vertices.length >= 3) {
+      for (let i = 0; i < geometry.vertices.length - 2; i += 2) {
+        geometry.faces.push(new Face3(i, i + 1, i + 2));
+        if (geometry.vertices.length > i + 3)
+          geometry.faces.push(new Face3(i, i + 2, i + 3));
       }
     }
-    // setup texture
-    let geometry = new Geometry();
+  }
 
-    this.corners.forEach((corner) => {
-      let vertex = new Vector3(corner.x, corner.elevation, corner.y);
-      geometry.vertices.push(vertex);
-    });
-    for (let i = 2; i < geometry.vertices.length; i++) {
-      let face = new Face3(0, i - 1, i);
-      geometry.faces.push(face);
-    }
-    this.roofPlane = new Mesh(
-      geometry,
-      new MeshBasicMaterial({ side: DoubleSide, visible: false }),
-    );
-    this.roofPlane.room = this;
+  removeFromScene() {
+    this.scene.remove(this.topPlane);
+    this.scene.remove(this.bottomPlane);
+    this.scene.remove(this.thicknessPlane);
+    this.scene.remove(this.frontPlane);
+    this.scene.remove(this.backPlane);
+  }
+
+  addToScene() {
+    this.scene.add(this.topPlane);
+    this.scene.add(this.bottomPlane);
+    this.scene.add(this.thicknessPlane);
+    this.scene.add(this.frontPlane);
+    this.scene.add(this.backPlane);
   }
 }
