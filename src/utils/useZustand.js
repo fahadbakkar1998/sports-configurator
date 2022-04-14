@@ -20,6 +20,12 @@ const useZustand = create((set) => ({
       selectedFloor,
     })),
 
+  selectedRoof: null,
+  setSelectedRoof: (selectedRoof) =>
+    set((state) => ({
+      selectedRoof,
+    })),
+
   floorPlanMode: Blueprint.floorplannerModes.MOVE,
   setFloorPlanMode: (floorPlanMode) =>
     set((state) => ({

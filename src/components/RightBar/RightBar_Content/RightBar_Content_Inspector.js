@@ -18,6 +18,9 @@ const RightBar_Content_Inspector = () => {
   const selectedFloor = useZustand((state) => state.selectedFloor);
   const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
 
+  const selectedRoof = useZustand((state) => state.selectedRoof);
+  const setSelectedRoof = useZustand((state) => state.setSelectedRoof);
+
   const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
   const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
 
@@ -81,6 +84,19 @@ const RightBar_Content_Inspector = () => {
     setCur3dItemEvent(cloneCur3dItemEvent);
   };
 
+  /* Roof */
+  const updateCurRoofNum = (obj) => {
+    const cloneSelectedRoof = { ...selectedRoof };
+    Object.entries(obj).forEach(([key, value]) => {
+      isDot =
+        value &&
+        value.toString().lastIndexOf('.') === value.toString().length - 1;
+      const cm = Blueprint.Dimensioning.cmFromMeasureRaw(value);
+      cloneSelectedRoof.item[key] = cm;
+    });
+    setSelectedRoof(cloneSelectedRoof);
+  };
+
   const cur2dItemX =
     (cur2dItemEvent &&
       cur2dItemEvent.item &&
@@ -114,6 +130,13 @@ const RightBar_Content_Inspector = () => {
       cur3dItemEvent.item &&
       cur3dItemEvent.item.getWidth &&
       Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getWidth())) ||
+    0;
+
+  const curRoofMiddleHeight =
+    (selectedRoof &&
+      selectedRoof.item &&
+      selectedRoof.item.middleHeight &&
+      Blueprint.Dimensioning.cmToMeasureRaw(selectedRoof.item.middleHeight)) ||
     0;
 
   if (cur3dItemEvent && cur3dItemEvent.item && cur3dItemEvent.item.material) {
@@ -151,6 +174,47 @@ const RightBar_Content_Inspector = () => {
           </option>
         </select>
       </div>
+
+      {selectedRoof && (
+        <>
+          <div className="property-header">Roof</div>
+
+          <div className="input-group">
+            <div>Type:</div>
+            <select
+              className="input"
+              value={selectedRoof.type}
+              onChange={(e) => {
+                const type = e.target.value;
+                const cloneSelectedRoof = { ...selectedRoof };
+                cloneSelectedRoof.item.setType = type;
+                setSelectedRoof(cloneSelectedRoof);
+              }}>
+              <option value="GABLED">Gabled</option>
+              <option value="SINGLE">Single Slop</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <DragLabel
+              name={`Height(${dimUnit}):`}
+              value={curRoofMiddleHeight}
+              setValue={(val) => {
+                updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
+              }}
+              offset={0.01}></DragLabel>
+            <input
+              className="input"
+              type="text"
+              value={curRoofMiddleHeight + inputSuffix}
+              onChange={(e) => {
+                updateCurRoofNum({
+                  setMiddleHeight: getUFloat(e.target.value),
+                });
+              }}></input>
+          </div>
+        </>
+      )}
 
       {selectedWall && (
         <>

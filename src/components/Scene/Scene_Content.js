@@ -8,6 +8,7 @@ const Scene_Content = () => {
   const editMode = useZustand((state) => state.editMode);
   const setSelectedWall = useZustand((state) => state.setSelectedWall);
   const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
+  const setSelectedRoof = useZustand((state) => state.setSelectedRoof);
   const setFloorPlanMode = useZustand((state) => state.setFloorPlanMode);
   const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
   const setCur3dItemEvent = useZustand((state) => state.setCur3dItemEvent);
@@ -52,17 +53,20 @@ const Scene_Content = () => {
     blueprintJS.three.addEventListener(Blueprint.EVENT_WALL_CLICKED, (o) => {
       console.log('EVENT_WALL_CLICKED: ', o);
       setSelectedWall(o);
+      setSelectedRoof({ item: o.item.room.roof });
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_FLOOR_CLICKED, (o) => {
       console.log('EVENT_FLOOR_CLICKED: ', o);
       setSelectedFloor(o);
+      setSelectedRoof({ item: o.item.roof });
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_NOTHING_CLICKED, (o) => {
       console.log('EVENT_NOTHING_CLICKED: ', o);
       setSelectedWall(null);
       setSelectedFloor(null);
+      setSelectedRoof(null);
     });
 
     // blueprintJS.three.addEventListener(
