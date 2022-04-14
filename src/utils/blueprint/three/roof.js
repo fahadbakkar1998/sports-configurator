@@ -247,6 +247,7 @@ export class Roof extends EventDispatcher {
         map: this.topTexture,
       }),
     );
+    console.log('topPlane: ', this.topPlane);
 
     this.addFaces(bottomGeometry);
     this.bottomPlane = new Mesh(

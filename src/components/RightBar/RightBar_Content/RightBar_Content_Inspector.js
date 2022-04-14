@@ -183,7 +183,7 @@ const RightBar_Content_Inspector = () => {
             <div>Type:</div>
             <select
               className="input"
-              value={selectedRoof.type}
+              value={selectedRoof.item.type}
               onChange={(e) => {
                 const type = e.target.value;
                 const cloneSelectedRoof = { ...selectedRoof };

@@ -138,7 +138,7 @@ export class Floor extends EventDispatcher {
   }
 
   addToScene() {
-    console.log('floorPlane: ', this.floorPlane);
+    // console.log('floorPlane: ', this.floorPlane);
     this.scene.add(this.floorPlane);
     this.scene.add(this.roofPlane);
     // scene.add(roofPlane);
