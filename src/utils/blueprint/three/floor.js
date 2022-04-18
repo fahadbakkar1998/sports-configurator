@@ -158,5 +158,6 @@ export class Floor extends EventDispatcher {
 
   showRoof(flag) {
     this.roofPlane.visible = flag;
+    this.three.render(true);
   }
 }

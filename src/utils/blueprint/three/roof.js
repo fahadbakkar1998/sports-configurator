@@ -11,9 +11,11 @@ import {
   RepeatWrapping,
   FrontSide,
   BackSide,
+  PlaneGeometry,
 } from 'three';
 import { Configuration, configWallThickness } from '../core/configuration';
 import { degToRad } from '../../common';
+import { Vector2 } from 'three';
 
 export class Roof extends EventDispatcher {
   constructor({ scene, room, three }) {
@@ -23,14 +25,12 @@ export class Roof extends EventDispatcher {
     this.three = three;
 
     this.textureLoader = new TextureLoader();
-    this.topTexture = this.textureLoader.load(
+    this.topTexture = this.textureLoader.load('assets/rooms/textures/roof.jpg');
+    this.bottomTexture = this.textureLoader.load(
       'assets/rooms/textures/hardwood.png',
     );
-    this.bottomTexture = this.textureLoader.load(
-      'assets/rooms/textures/wallmap.png',
-    );
     this.thicknessTexture = this.textureLoader.load(
-      'assets/rooms/textures/wallmap.png',
+      'assets/rooms/textures/hardwood.png',
     );
     this.sideTexture = this.textureLoader.load(
       'assets/rooms/textures/hardwood.png',
@@ -51,6 +51,8 @@ export class Roof extends EventDispatcher {
     this.thicknessPlane = null;
     this.frontPlane = null;
     this.backPlane = null;
+
+    this.visible = false;
 
     this.generateBasicData();
     this.generateRoofPlane();
@@ -74,6 +76,21 @@ export class Roof extends EventDispatcher {
   set setMiddleHeight(val) {
     this.middleHeight = val;
     this.redraw();
+  }
+
+  set setVisible(val) {
+    this.updateVisible(val);
+    this.redraw();
+  }
+
+  updateVisible(flag) {
+    this.visible = flag;
+    this.topPlane.material.visible = flag;
+    this.bottomPlane.material.visible = flag;
+    this.frontPlane.material.visible = flag;
+    this.backPlane.material.visible = flag;
+    this.scene.scene.needsUpdate = true;
+    this.three.render(true);
   }
 
   redraw() {
@@ -243,18 +260,18 @@ export class Roof extends EventDispatcher {
       topGeometry,
       new MeshBasicMaterial({
         side: DoubleSide,
-        color: 0x00ff00,
         map: this.topTexture,
+        visible: this.visible,
       }),
     );
-    console.log('topPlane: ', this.topPlane);
 
     this.addFaces(bottomGeometry);
     this.bottomPlane = new Mesh(
       bottomGeometry,
       new MeshBasicMaterial({
         side: DoubleSide,
-        color: 0x0000ff,
+        map: this.bottomTexture,
+        visible: this.visible,
       }),
     );
 
@@ -263,7 +280,8 @@ export class Roof extends EventDispatcher {
       thicknessGeometry,
       new MeshBasicMaterial({
         side: DoubleSide,
-        color: 0xff0000,
+        map: this.thicknessTexture,
+        visible: this.visible,
       }),
     );
 
@@ -272,7 +290,8 @@ export class Roof extends EventDispatcher {
       frontSideGeometry,
       new MeshBasicMaterial({
         side: DoubleSide,
-        color: 0xffff00,
+        map: this.sideTexture,
+        visible: this.visible,
       }),
     );
 
@@ -281,7 +300,8 @@ export class Roof extends EventDispatcher {
       backSideGeometry,
       new MeshBasicMaterial({
         side: DoubleSide,
-        color: 0x00ffff,
+        map: this.sideTexture,
+        visible: this.visible,
       }),
     );
   }
@@ -326,8 +346,19 @@ export class Roof extends EventDispatcher {
     if (geometry.vertices.length >= 3) {
       for (let i = 0; i < geometry.vertices.length - 2; i += 2) {
         geometry.faces.push(new Face3(i, i + 1, i + 2));
-        if (geometry.vertices.length > i + 3)
+        geometry.faceVertexUvs[0].push([
+          new Vector2(0, 0),
+          new Vector2(0, 1),
+          new Vector2(1, 1),
+        ]);
+        if (geometry.vertices.length > i + 3) {
           geometry.faces.push(new Face3(i, i + 2, i + 3));
+          geometry.faceVertexUvs[0].push([
+            new Vector2(0, 0),
+            new Vector2(1, 1),
+            new Vector2(1, 0),
+          ]);
+        }
       }
     }
   }

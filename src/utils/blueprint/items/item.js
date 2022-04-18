@@ -14,6 +14,7 @@ import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
 import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
+import { configDimUnit, Configuration } from '../blueprint.js';
 
 /*
  * An Item is an abstract entity for all things placed in the scene, e.g. at
@@ -77,7 +78,7 @@ export class Item extends Mesh {
     this.dragOffset = new Vector3();
     /* */
     this.halfSize = new Vector3(0, 0, 0);
-    this.bhelper = null;
+    this.bHelper = null;
 
     this.scene = this.model.scene;
     this._freePosition = true;
@@ -282,7 +283,7 @@ export class Item extends Mesh {
   }
 
   /* */
-  resize({ height, width, depth }) {
+  resize({ height, width, depth, proportionally }) {
     if (!this.resizable) return;
     if (!width) width = this.getWidth();
     if (!height) height = this.getHeight();
@@ -291,7 +292,7 @@ export class Item extends Mesh {
     let y = height / this.getHeight();
     let z = depth / this.getDepth();
 
-    if (this.resizeProportionally) {
+    if (this.resizeProportionally || proportionally) {
       if (Math.abs(width - this.getWidth()) > 0.1) {
         this.setScale(x, x, x);
       } else if (Math.abs(height - this.getHeight()) > 0.1) {
@@ -334,8 +335,8 @@ export class Item extends Mesh {
     scaleVec.multiply(this.scale);
     this.scale.set(scaleVec.x, scaleVec.y, scaleVec.z);
     this.resized();
-    if (this.bhelper) {
-      this.bhelper.update();
+    if (this.bHelper) {
+      this.bHelper.update();
     }
 
     // this.updateCanvasTexture(canvas, context, material, w, h);
@@ -398,17 +399,21 @@ export class Item extends Mesh {
   /* */
   initObject() {
     this.placeInRoom();
-    // An ugly hack to increase the size of gltf models
-    if (this.halfSize.x < 1.0) {
-      this.resize({
-        height: this.getHeight() * 300,
-        width: this.getWidth() * 300,
-        depth: this.getDepth() * 300,
-      });
+
+    // adjust size
+    if (this.getWidth() < 100) {
+      this.resize({ width: 100, proportionally: true });
     }
-    this.bhelper = new BoxHelper(this);
-    this.scene.add(this.bhelper);
-    this.bhelper.visible = false;
+    if (this.getHeight() < 100) {
+      this.resize({ height: 100, proportionally: true });
+    }
+    if (this.getDepth() < 10) {
+      this.resize({ depth: 10, proportionally: true });
+    }
+
+    this.bHelper = new BoxHelper(this);
+    this.scene.add(this.bHelper);
+    this.bHelper.visible = false;
     // select and stuff
     this.scene.needsUpdate = true;
   }
@@ -455,7 +460,7 @@ export class Item extends Mesh {
   setSelected() {
     this.setScale(1, 1, 1);
     this.selected = true;
-    this.bhelper.visible = true;
+    this.bHelper.visible = true;
     this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = true;
     this.updateHighlight();
   }
@@ -463,7 +468,7 @@ export class Item extends Mesh {
   /* */
   setUnselected() {
     this.selected = false;
-    this.bhelper.visible = false;
+    this.bHelper.visible = false;
     this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = false;
     this.updateHighlight();
   }
@@ -508,8 +513,8 @@ export class Item extends Mesh {
   /* */
   moveToPosition(vec3) {
     this.position.copy(vec3);
-    if (this.bhelper) {
-      this.bhelper.update();
+    if (this.bHelper) {
+      this.bHelper.update();
     }
   }
 

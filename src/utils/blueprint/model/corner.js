@@ -345,10 +345,6 @@ export class Corner extends EventDispatcher {
 
     if (Configuration.getNumericValue('snapToRect') && snapToRect) {
       if (prevCorner) {
-        if (this.location === prevCorner.location) {
-          this.location = oldPos;
-          return false;
-        }
         if (
           Math.max(
             Math.abs(this._x - prevCorner._x),
@@ -419,7 +415,6 @@ export class Corner extends EventDispatcher {
           this.updateAttachedRooms(true);
         }
       }
-      ``;
     }
 
     this.dispatchEvent({

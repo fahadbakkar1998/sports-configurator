@@ -97,7 +97,6 @@ export const updateSameElevation = (flag) => {
 
 export const updateVisibility = (flag) => {
   Blueprint.Configuration.setValue('visibility', flag);
-  blueprintJS.three.render(true);
 };
 
 export const updateRoofMode = (flag) => {

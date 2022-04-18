@@ -7,7 +7,6 @@ import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
 import { HexColorPicker } from 'react-colorful';
 import cn from 'classnames';
-import { Color } from 'three';
 
 let isDot = false;
 
@@ -21,14 +20,8 @@ const RightBar_Content_Inspector = () => {
   const selectedRoof = useZustand((state) => state.selectedRoof);
   const setSelectedRoof = useZustand((state) => state.setSelectedRoof);
 
-  const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
-  const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
-
   const cur3dItemEvent = useZustand((state) => state.cur3dItemEvent);
   const setCur3dItemEvent = useZustand((state) => state.setCur3dItemEvent);
-
-  const curUnit = useZustand((state) => state.curUnit);
-  const setCurUnit = useZustand((state) => state.setCurUnit);
 
   const dimUnit = Blueprint.Configuration.getStringValue(
     Blueprint.configDimUnit,
@@ -39,27 +32,6 @@ const RightBar_Content_Inspector = () => {
   useEffect(() => {
     isDot = false;
   }, [isDot]);
-
-  /* 2D */
-  const updateCur2dItemNum = (obj) => {
-    const cloneCur2dItemEvent = { ...cur2dItemEvent };
-    Object.entries(obj).forEach(([key, value]) => {
-      isDot =
-        value &&
-        value.toString().lastIndexOf('.') === value.toString().length - 1;
-      let cm = Blueprint.Dimensioning.cmFromMeasureRaw(value);
-      cloneCur2dItemEvent.item[key] = cm;
-    });
-    setCur2dItemEvent(cloneCur2dItemEvent);
-  };
-
-  const updateCur2dItemValue = (obj) => {
-    const cloneCur2dItemEvent = { ...cur2dItemEvent };
-    Object.entries(obj).forEach(([key, value]) => {
-      cloneCur2dItemEvent.item[key] = value;
-    });
-    setCur2dItemEvent(cloneCur2dItemEvent);
-  };
 
   /* 3D */
   const updateCur3dItemSize = (obj) => {
@@ -97,34 +69,15 @@ const RightBar_Content_Inspector = () => {
     setSelectedRoof(cloneSelectedRoof);
   };
 
-  const cur2dItemX =
-    (cur2dItemEvent &&
-      cur2dItemEvent.item &&
-      cur2dItemEvent.item.x &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.x)) ||
-    0;
+  const updateCurRoofValue = (obj) => {
+    const cloneSelectedRoof = { ...selectedRoof };
+    Object.entries(obj).forEach(([key, value]) => {
+      cloneSelectedRoof.item[key] = value;
+    });
+    setSelectedRoof(cloneSelectedRoof);
+  };
 
-  const cur2dItemY =
-    (cur2dItemEvent &&
-      cur2dItemEvent.item &&
-      cur2dItemEvent.item.y &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.y)) ||
-    0;
-
-  const cur2dItemElevation =
-    (cur2dItemEvent &&
-      cur2dItemEvent.item &&
-      cur2dItemEvent.item.elevation &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.elevation)) ||
-    0;
-
-  const cur2dItemWallSize =
-    (cur2dItemEvent &&
-      cur2dItemEvent.item &&
-      cur2dItemEvent.item.wallSize &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.wallSize)) ||
-    0;
-
+  /* 3D */
   const cur3dItemWidth =
     (cur3dItemEvent &&
       cur3dItemEvent.item &&
@@ -132,11 +85,18 @@ const RightBar_Content_Inspector = () => {
       Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getWidth())) ||
     0;
 
-  const curRoofMiddleHeight =
-    (selectedRoof &&
-      selectedRoof.item &&
-      selectedRoof.item.middleHeight &&
-      Blueprint.Dimensioning.cmToMeasureRaw(selectedRoof.item.middleHeight)) ||
+  const cur3dItemHeight =
+    (cur3dItemEvent &&
+      cur3dItemEvent.item &&
+      cur3dItemEvent.item.getHeight &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getHeight())) ||
+    0;
+
+  const cur3dItemDepth =
+    (cur3dItemEvent &&
+      cur3dItemEvent.item &&
+      cur3dItemEvent.item.getDepth &&
+      Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getDepth())) ||
     0;
 
   if (cur3dItemEvent && cur3dItemEvent.item && cur3dItemEvent.item.material) {
@@ -145,39 +105,30 @@ const RightBar_Content_Inspector = () => {
     }
   }
 
+  /* ROOF */
+  const curRoofMiddleHeight =
+    (selectedRoof &&
+      selectedRoof.item &&
+      selectedRoof.item.middleHeight &&
+      Blueprint.Dimensioning.cmToMeasureRaw(selectedRoof.item.middleHeight)) ||
+    0;
+
   return (
     <div className="RightBar_Content_Inspector">
-      <div className="property-header">Setting</div>
-
-      {/* Select unit */}
-      <div className="input-group">
-        <div>Unit:</div>
-
-        <select
-          className="input"
-          value={curUnit}
-          onChange={(e) => {
-            const unit = e.target.value;
-            updateUnit(unit);
-            setCurUnit(unit);
-          }}>
-          <option value={Blueprint.dimMeter}>{Blueprint.dimMeter}</option>
-          <option value={Blueprint.dimCentiMeter}>
-            {Blueprint.dimCentiMeter}
-          </option>
-          <option value={Blueprint.dimMilliMeter}>
-            {Blueprint.dimMilliMeter}
-          </option>
-          <option value={Blueprint.dimInch}>{Blueprint.dimInch}</option>
-          <option value={Blueprint.dimFeetAndInch}>
-            {Blueprint.dimFeetAndInch}
-          </option>
-        </select>
-      </div>
-
-      {selectedRoof && (
+      {selectedRoof && selectedRoof.item && (
         <>
           <div className="property-header">Roof</div>
+
+          <div className="input-group">
+            <div>Visible:</div>
+            <input
+              className="input"
+              type="checkbox"
+              checked={selectedRoof.item.visible}
+              onChange={(e) => {
+                updateCurRoofValue({ setVisible: e.target.checked });
+              }}></input>
+          </div>
 
           <div className="input-group">
             <div>Type:</div>
@@ -279,104 +230,6 @@ const RightBar_Content_Inspector = () => {
         </>
       )}
 
-      {cur2dItemEvent && cur2dItemEvent.type === 'CORNER' && (
-        <>
-          <div className="property-header">Corner</div>
-
-          {/* Corner position x */}
-          <div className="input-group">
-            <DragLabel
-              name={`X(${dimUnit}):`}
-              value={cur2dItemX}
-              setValue={(x) => updateCur2dItemNum({ x: getFloat(x) })}
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur2dItemX + inputSuffix}
-              onChange={(e) => {
-                updateCur2dItemNum({ x: getFloat(e.target.value) });
-              }}></input>
-          </div>
-
-          {/* Corner position y */}
-          <div className="input-group">
-            <DragLabel
-              name={`Y(${dimUnit}):`}
-              value={cur2dItemY}
-              setValue={(y) => updateCur2dItemNum({ y: getFloat(y) })}
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur2dItemY + inputSuffix}
-              onChange={(e) => {
-                updateCur2dItemNum({ y: getFloat(e.target.value) });
-              }}></input>
-          </div>
-
-          {/* Corner elevation */}
-          <div className="input-group">
-            <DragLabel
-              name={`Elevation(${dimUnit}):`}
-              value={cur2dItemElevation}
-              setValue={(elevation) =>
-                updateCur2dItemNum({ elevation: getUFloat(elevation) })
-              }
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur2dItemElevation + inputSuffix}
-              onChange={(e) => {
-                updateCur2dItemNum({ elevation: getUFloat(e.target.value) });
-              }}></input>
-          </div>
-        </>
-      )}
-
-      {cur2dItemEvent && cur2dItemEvent.type === 'WALL' && (
-        <>
-          <div className="property-header">Wall</div>
-
-          {/* Wall length */}
-          <div className="input-group">
-            <DragLabel
-              name={`Length(${dimUnit}):`}
-              value={cur2dItemWallSize}
-              setValue={(wallSize) =>
-                updateCur2dItemNum({ wallSize: getUFloat(wallSize) })
-              }
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur2dItemWallSize + inputSuffix}
-              onChange={(e) => {
-                updateCur2dItemNum({ wallSize: getUFloat(e.target.value) });
-              }}></input>
-          </div>
-        </>
-      )}
-
-      {cur2dItemEvent && cur2dItemEvent.type === 'ROOM' && (
-        <>
-          <div className="property-header">Room</div>
-
-          {/* Room name */}
-          <div className="input-group">
-            <div>Name:</div>
-            <input
-              className="input"
-              type="text"
-              value={cur2dItemEvent.item.name}
-              onChange={(e) => {
-                updateCur2dItemValue({ name: e.target.value });
-              }}></input>
-          </div>
-        </>
-      )}
-
       {cur3dItemEvent && (
         <>
           <div className="item-info-container">
@@ -387,6 +240,14 @@ const RightBar_Content_Inspector = () => {
               {cur3dItemEvent.item.metadata.itemName}
             </div>
             <div className="item-info">Cost: $123</div>
+            <div
+              className="item-remove"
+              onClick={() => {
+                cur3dItemEvent.item.remove();
+                setCur3dItemEvent(null);
+              }}>
+              Remove
+            </div>
           </div>
 
           <div className="property-header">Dimensions</div>
@@ -413,9 +274,7 @@ const RightBar_Content_Inspector = () => {
           <div className="input-group">
             <DragLabel
               name={`Height(${dimUnit}):`}
-              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
-                cur3dItemEvent.item.getHeight(),
-              )}`}
+              value={cur3dItemHeight}
               setValue={(height) =>
                 updateCur3dItemSize({ height: getUFloat(height) })
               }
@@ -423,9 +282,7 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
-                cur3dItemEvent.item.getHeight(),
-              )}`}
+              value={cur3dItemHeight + inputSuffix}
               onChange={(e) => {
                 updateCur3dItemSize({ height: getUFloat(e.target.value) });
               }}></input>
@@ -434,10 +291,8 @@ const RightBar_Content_Inspector = () => {
           {/* Dimension length */}
           <div className="input-group">
             <DragLabel
-              name={`Height(${dimUnit}):`}
-              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
-                cur3dItemEvent.item.getDepth(),
-              )}`}
+              name={`Length(${dimUnit}):`}
+              value={cur3dItemDepth}
               setValue={(depth) =>
                 updateCur3dItemSize({ depth: getUFloat(depth) })
               }
@@ -445,9 +300,7 @@ const RightBar_Content_Inspector = () => {
             <input
               className="input"
               type="text"
-              value={`${Blueprint.Dimensioning.cmToMeasureRaw(
-                cur3dItemEvent.item.getDepth(),
-              )}`}
+              value={cur3dItemDepth + inputSuffix}
               onChange={(e) => {
                 updateCur3dItemSize({ depth: getUFloat(e.target.value) });
               }}></input>

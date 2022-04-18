@@ -15,6 +15,7 @@ import {
   Geometry,
   Face3,
 } from 'three';
+import * as THREE from 'three';
 import { Utils } from '../core/utils.js';
 import {
   EVENT_REDRAW,
@@ -294,7 +295,7 @@ export class Edge extends EventDispatcher {
 
     // sides
     this.planes.push(
-      this.buildSideFillter(
+      this.buildSideFilter(
         this.edge.interiorStart(),
         this.edge.exteriorStart(),
         extStartCorner.elevation,
@@ -302,15 +303,15 @@ export class Edge extends EventDispatcher {
       ),
     );
     this.planes.push(
-      this.buildSideFillter(
+      this.buildSideFilter(
         this.edge.interiorEnd(),
         this.edge.exteriorEnd(),
         extEndCorner.elevation,
         this.sideColor,
       ),
     );
-    // this.planes.push(this.buildSideFillter(this.edge.interiorStart(), this.edge.exteriorStart(), this.wall.startElevation, this.sideColor));
-    // this.planes.push(this.buildSideFillter(this.edge.interiorEnd(), this.edge.exteriorEnd(), extEndCorner.endElevation, this.sideColor));
+    // this.planes.push(this.buildSideFilter(this.edge.interiorStart(), this.edge.exteriorStart(), this.wall.startElevation, this.sideColor));
+    // this.planes.push(this.buildSideFilter(this.edge.interiorEnd(), this.edge.exteriorEnd(), extEndCorner.endElevation, this.sideColor));
   }
 
   // start, end have x and y attributes (i.e. corners)
@@ -332,13 +333,13 @@ export class Edge extends EventDispatcher {
       p.applyMatrix4(transform);
     });
 
-    let spoints = [
+    let sPoints = [
       new Vector2(points[0].x, points[0].y),
       new Vector2(points[1].x, points[1].y),
       new Vector2(points[2].x, points[2].y),
       new Vector2(points[3].x, points[3].y),
     ];
-    let shape = new Shape(spoints);
+    let shape = new Shape(sPoints);
 
     // add holes for each wall item
     this.wall.items.forEach((item) => {
@@ -365,44 +366,73 @@ export class Edge extends EventDispatcher {
     });
 
     // make UVs
-    let totalDistance = Utils.distance(
-      new Vector2(v1.x, v1.z),
-      new Vector2(v2.x, v2.z),
-    );
-    let height = this.wall.height;
-    geometry.faceVertexUvs[0] = [];
+    this.assignUVs(geometry);
+    // let totalDistance = Utils.distance(
+    //   new Vector2(v1.x, v1.z),
+    //   new Vector2(v2.x, v2.z),
+    // );
+    // let height = this.wall.height;
+    // geometry.faceVertexUvs[0] = [];
 
-    geometry.faces.forEach((face) => {
-      let vertA = geometry.vertices[face.a];
-      let vertB = geometry.vertices[face.b];
-      let vertC = geometry.vertices[face.c];
-      geometry.faceVertexUvs[0].push([
-        vertexToUv(vertA),
-        vertexToUv(vertB),
-        vertexToUv(vertC),
-      ]);
-    });
+    // geometry.faces.forEach((face) => {
+    //   let vertA = geometry.vertices[face.a];
+    //   let vertB = geometry.vertices[face.b];
+    //   let vertC = geometry.vertices[face.c];
+    //   geometry.faceVertexUvs[0].push([
+    //     vertexToUv(vertA),
+    //     vertexToUv(vertB),
+    //     vertexToUv(vertC),
+    //   ]);
+    // });
 
-    geometry.faceVertexUvs[1] = geometry.faceVertexUvs[0];
-    geometry.computeFaceNormals();
-    geometry.computeVertexNormals();
+    // function vertexToUv(vertex) {
+    //   let x =
+    //     Utils.distance(
+    //       new Vector2(v1.x, v1.z),
+    //       new Vector2(vertex.x, vertex.z),
+    //     ) / totalDistance;
+    //   let y = parseInt(vertex.y / height);
+    //   // let y = vertex.y / height;
+    //   return new Vector2(x, y);
+    // }
 
-    function vertexToUv(vertex) {
-      let x =
-        Utils.distance(
-          new Vector2(v1.x, v1.z),
-          new Vector2(vertex.x, vertex.z),
-        ) / totalDistance;
-      let y = vertex.y / height;
-      return new Vector2(x, y);
-    }
+    // geometry.faceVertexUvs[1] = geometry.faceVertexUvs[0];
+    // geometry.computeFaceNormals();
+    // geometry.computeVertexNormals();
 
     let mesh = new Mesh(geometry, material);
     mesh.name = 'wall';
     return mesh;
   }
 
-  buildSideFillter(p1, p2, height, color) {
+  assignUVs(geometry) {
+    geometry.faceVertexUvs[0] = [];
+    let box = new THREE.Box3().setFromPoints(geometry.vertices);
+    let boxSize = new THREE.Vector3();
+    box.getSize(boxSize);
+    geometry.faces.forEach(function (face) {
+      var v1 = geometry.vertices[face.a];
+      var v2 = geometry.vertices[face.b];
+      var v3 = geometry.vertices[face.c];
+      geometry.faceVertexUvs[0].push([
+        new THREE.Vector2(
+          (v1.x - box.min.x) / boxSize.x,
+          (box.max.y - v1.y) / boxSize.y,
+        ),
+        new THREE.Vector2(
+          (v2.x - box.min.x) / boxSize.x,
+          (box.max.y - v2.y) / boxSize.y,
+        ),
+        new THREE.Vector2(
+          (v3.x - box.min.x) / boxSize.x,
+          (box.max.y - v3.y) / boxSize.y,
+        ),
+      ]);
+    });
+    geometry.uvsNeedUpdate = true;
+  }
+
+  buildSideFilter(p1, p2, height, color) {
     let points = [
       this.toVec3(p1),
       this.toVec3(p2),
