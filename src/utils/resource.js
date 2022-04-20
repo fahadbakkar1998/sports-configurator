@@ -1,3 +1,404 @@
+export const items = [
+  {
+    name: 'Batting Cage',
+    children: [
+      {
+        name: 'Air Cage',
+        image: 'assets/models/thumbnails/Air Cage.png',
+        model: 'assets/models/gltf/Air Cage.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'CurtainCage Easy Slide',
+        image: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+        model: 'assets/models/gltf/CurtainCage Easy Slide.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'CurtainCage Line Lift',
+        image: 'assets/models/thumbnails/CurtainCage Line Lift.png',
+        model: 'assets/models/gltf/CurtainCage Line Lift.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Shell Cage',
+        image: 'assets/models/thumbnails/Shell Cage.png',
+        model: 'assets/models/gltf/Shell Cage.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Collegiate 35',
+        image: 'assets/models/thumbnails/Outdoor Collegiate 35.png',
+        model: 'assets/models/gltf/Outdoor Collegiate 35.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Collegiate 55',
+        image: 'assets/models/thumbnails/Outdoor Collegiate 55.png',
+        model: 'assets/models/gltf/Outdoor Collegiate 55.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Collegiate 70',
+        image: 'assets/models/thumbnails/Outdoor Collegiate 70.png',
+        model: 'assets/models/gltf/Outdoor Collegiate 70.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Pro 2x55',
+        image: 'assets/models/thumbnails/Outdoor Pro 2x55.png',
+        model: 'assets/models/gltf/Outdoor Pro 2x55.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Pro 55',
+        image: 'assets/models/thumbnails/Outdoor Pro 55.png',
+        model: 'assets/models/gltf/Outdoor Pro 55.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Pro 70',
+        image: 'assets/models/thumbnails/Outdoor Pro 70.png',
+        model: 'assets/models/gltf/Outdoor Pro 70.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Varsity 35',
+        image: 'assets/models/thumbnails/Outdoor Varsity 35.png',
+        model: 'assets/models/gltf/Outdoor Varsity 35.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Varsity 55',
+        image: 'assets/models/thumbnails/Outdoor Varsity 55.png',
+        model: 'assets/models/gltf/Outdoor Varsity 55.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Outdoor Varsity 70',
+        image: 'assets/models/thumbnails/Outdoor Varsity 70.png',
+        model: 'assets/models/gltf/Outdoor Varsity 70.glb',
+        type: '5',
+        format: 'gltf',
+      },
+    ],
+  },
+  {
+    name: 'Netting',
+    children: [],
+  },
+  {
+    name: 'Surfacing',
+    children: [],
+  },
+  {
+    name: 'Screens',
+    children: [
+      {
+        name: 'L-Screen',
+        image: 'assets/models/thumbnails/L-Screen.png',
+        model: 'assets/models/gltf/L-Screen.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: 'Softball Screen',
+        image: 'assets/models/thumbnails/Softball Screen.png',
+        model: 'assets/models/gltf/Softball Screen.glb',
+        type: '5',
+        format: 'gltf',
+      },
+    ],
+  },
+  {
+    name: 'Gym Equipment',
+    children: [],
+  },
+  {
+    name: 'Training Equipment',
+    children: [],
+  },
+  {
+    name: 'Soccer',
+    children: [
+      {
+        name: 'Goals',
+        image: 'assets/models/thumbnails/Goals.png',
+        model: 'assets/models/gltf/Goals.glb',
+        type: '5',
+        format: 'gltf',
+      },
+    ],
+  },
+  {
+    name: 'Building',
+    children: [],
+  },
+  {
+    name: 'Test',
+    children: [
+      {
+        name: 'Duck',
+        image: 'assets/models/thumbnails/thumbnail_duck.png',
+        model: 'assets/models/js/Duck.gltf',
+        type: '1',
+        format: 'gltf',
+        defaultSize: {
+          unit: 'm',
+          width: 1,
+          height: 2,
+          length: 3,
+          price: 60,
+          pricePerUnit: 10,
+        },
+        staticSizes: [
+          {
+            unit: 'm',
+            width: 1,
+            height: 2,
+            length: 5,
+            extraPrice: 40,
+          },
+          {
+            unit: 'm',
+            width: 1,
+            height: 2,
+            length: 7,
+            extraPrice: 40,
+          },
+        ],
+        accessories: [
+          {
+            name: 'accessory1',
+            types: [
+              {
+                name: 'type1',
+                extraPrice: 10,
+              },
+              {
+                name: 'type2',
+                extraPrice: 20,
+              },
+              {
+                name: 'type3',
+                extraPrice: 30,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Bathroomcabinet',
+        image: 'assets/models/thumbnails_new/bathroomCabinet.png',
+        model: 'assets/models/gltf/bathroomCabinet.glb',
+        type: '2',
+        format: 'gltf',
+      },
+      {
+        name: '3',
+        image: 'assets/models/thumbnails/thumbnail_window.png',
+        model: 'assets/models/js/whitewindow.js',
+        type: '3',
+      },
+      {
+        name: '4',
+        image: 'assets/models/thumbnails_new/ceilingFan.png',
+        model: 'assets/models/gltf/ceilingFan.gltf',
+        type: '4',
+        format: 'gltf',
+      },
+      {
+        name: 'Stairs',
+        image: 'assets/models/thumbnails_new/stairs.png',
+        model: 'assets/models/gltf/stairs.glb',
+        type: '5',
+        format: 'gltf',
+      },
+      {
+        name: '7',
+        image:
+          'assets/models/thumbnails/thumbnail_Screen_Shot_2014-10-27_at_8.04.12_PM.png',
+        model: 'assets/models/js/closed-door28x80_baked.js',
+        type: '7',
+      },
+      {
+        name: '8',
+        image: 'assets/models/thumbnails/thumbnail_cb-blue-block60x96.png',
+        model: 'assets/models/js/cb-blue-block-60x96.js',
+        type: '8',
+      },
+      {
+        name: 'Simplecabinet',
+        image: 'assets/models/thumbnails_new/SimpleCabinet.png',
+        model: 'assets/models/gltf/SimpleCabinet.glb',
+        type: '9',
+        format: 'gltf',
+      },
+    ],
+  },
+];
+
+export const rectHome = JSON.stringify({
+  floorplan: {
+    version: '0.0.2a',
+    corners: {
+      '4bb4443f-7fab-f22d-5497-212403689ff9': { x: 0, y: 0, elevation: 2.5 },
+      'ab04e8c7-2de5-2980-3ac6-358f020f0aac': { x: 5, y: 0, elevation: 2.5 },
+      'c038166d-c9fc-d71a-f009-1a3010ea9749': { x: 5, y: 5, elevation: 2.5 },
+      '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': { x: 0, y: 5, elevation: 2.5 },
+    },
+    walls: [
+      {
+        corner1: '4bb4443f-7fab-f22d-5497-212403689ff9',
+        corner2: 'ab04e8c7-2de5-2980-3ac6-358f020f0aac',
+        frontTexture: {
+          url: 'assets/rooms/textures/marbletiles.jpg',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
+        },
+        backTexture: {
+          url: 'assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 364.1221682976095, y: 302.09874020427594 },
+        b: { x: 551.5972597957242, y: 333.6421682976096 },
+      },
+      {
+        corner1: 'ab04e8c7-2de5-2980-3ac6-358f020f0aac',
+        corner2: 'c038166d-c9fc-d71a-f009-1a3010ea9749',
+        frontTexture: {
+          url: 'assets/rooms/textures/marbletiles.jpg',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
+        },
+        backTexture: {
+          url: 'assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 603.3235350530827, y: 309.21587164830146 },
+        b: { x: 583.0881283516987, y: 465.14753505308255 },
+      },
+      {
+        corner1: 'c038166d-c9fc-d71a-f009-1a3010ea9749',
+        corner2: '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532',
+        frontTexture: {
+          url: 'assets/rooms/textures/marbletiles.jpg',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
+        },
+        backTexture: {
+          url: 'assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 534.2355350530825, y: 465.1475350530825 },
+        b: { x: 358.06846494691763, y: 465.14753505308244 },
+      },
+      {
+        corner1: '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532',
+        corner2: '4bb4443f-7fab-f22d-5497-212403689ff9',
+        frontTexture: {
+          url: 'assets/rooms/textures/marbletiles.jpg',
+          stretch: {
+            url: 'assets/rooms/textures/wallmap.png',
+            stretch: true,
+            scale: 0,
+          },
+          scale: 300,
+        },
+        backTexture: {
+          url: 'assets/rooms/textures/wallmap.png',
+          stretch: true,
+          scale: 0,
+        },
+        wallType: 'STRAIGHT',
+        a: { x: 372.43687474062824, y: 450.7791252593718 },
+        b: { x: 372.43687474062824, y: 262.7088747406283 },
+      },
+    ],
+    rooms: {
+      '4bb4443f-7fab-f22d-5497-212403689ff9,ab04e8c7-2de5-2980-3ac6-358f020f0aac,c038166d-c9fc-d71a-f009-1a3010ea9749,453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532':
+        { name: 'Simple' },
+    },
+    wallTextures: [],
+    floorTextures: {},
+    newFloorTextures: {},
+    carbonSheet: {
+      url: '',
+      transparency: 1,
+      x: 0,
+      y: 0,
+      anchorX: 0,
+      anchorY: 0,
+      width: 0.01,
+      height: 0.01,
+    },
+  },
+  items: [],
+});
+
+export const wallTextures = [
+  {
+    name: 'Grey',
+    url: 'assets/rooms/textures/wallmap.png',
+    stretch: true,
+    scale: 1,
+  },
+  {
+    name: 'Bricks',
+    url: 'assets/rooms/textures/light_brick.jpg',
+    stretch: false,
+    scale: 50,
+  },
+  {
+    name: 'Marble',
+    url: 'assets/rooms/textures/marbletiles.jpg',
+    stretch: false,
+    scale: 300,
+  },
+  {
+    name: 'LightWood',
+    url: 'assets/rooms/textures/light_fine_wood.jpg',
+    stretch: false,
+    scale: 300,
+  },
+  {
+    name: 'HardWood',
+    url: 'assets/rooms/textures/hardwood.png',
+    stretch: false,
+    scale: 300,
+  },
+];
+
 // export const items = [
 //   {
 //     name: 'Building',
@@ -1213,245 +1614,3 @@
 //   { name: 'Accessories', children: [] },
 //   { name: 'Wall Padding', children: [] },
 // ];
-
-export const items = [
-  {
-    name: 'Building',
-    children: [],
-  },
-  {
-    name: 'Sports Court',
-    children: [
-      {
-        name: 'Net1',
-        image: 'assets/models/thumbnails/Net1.png',
-        model: 'assets/models/gltf/Net1.glb',
-        type: '5',
-        format: 'gltf',
-      },
-      {
-        name: 'Net2',
-        image: 'assets/models/thumbnails/Net2.png',
-        model: 'assets/models/gltf/Net2.glb',
-        type: '5',
-        format: 'gltf',
-      },
-      {
-        name: 'Net3',
-        image: 'assets/models/thumbnails/Net3.png',
-        model: 'assets/models/gltf/Net3.glb',
-        type: '5',
-        format: 'gltf',
-      },
-    ],
-  },
-  {
-    name: 'Turf',
-    children: [
-      {
-        name: 'Duck',
-        image: 'assets/models/thumbnails/thumbnail_duck.png',
-        model: 'assets/models/js/Duck.gltf',
-        type: '1',
-        format: 'gltf',
-      },
-      {
-        name: 'Bathroomcabinet',
-        image: 'assets/models/thumbnails_new/bathroomCabinet.png',
-        model: 'assets/models/gltf/bathroomCabinet.glb',
-        type: '2',
-        format: 'gltf',
-      },
-      {
-        name: '3',
-        image: 'assets/models/thumbnails/thumbnail_window.png',
-        model: 'assets/models/js/whitewindow.js',
-        type: '3',
-      },
-      {
-        name: '4',
-        image: 'assets/models/thumbnails_new/ceilingFan.png',
-        model: 'assets/models/gltf/ceilingFan.gltf',
-        type: '4',
-        format: 'gltf',
-      },
-      {
-        name: 'Stairs',
-        image: 'assets/models/thumbnails_new/stairs.png',
-        model: 'assets/models/gltf/stairs.glb',
-        type: '5',
-        format: 'gltf',
-      },
-      {
-        name: '7',
-        image:
-          'assets/models/thumbnails/thumbnail_Screen_Shot_2014-10-27_at_8.04.12_PM.png',
-        model: 'assets/models/js/closed-door28x80_baked.js',
-        type: '7',
-      },
-      {
-        name: '8',
-        image: 'assets/models/thumbnails/thumbnail_cb-blue-block60x96.png',
-        model: 'assets/models/js/cb-blue-block-60x96.js',
-        type: '8',
-      },
-      {
-        name: 'Simplecabinet',
-        image: 'assets/models/thumbnails_new/SimpleCabinet.png',
-        model: 'assets/models/gltf/SimpleCabinet.glb',
-        type: '9',
-        format: 'gltf',
-      },
-    ],
-  },
-  {
-    name: 'Rubber Flooring',
-    children: [],
-  },
-  {
-    name: 'Playground Surfaces',
-    children: [],
-  },
-  {
-    name: 'Outdoor Batting Cage Frame',
-    children: [],
-  },
-  { name: 'Outdoor Lighting', children: [] },
-  { name: 'Hoops', children: [] },
-  { name: 'Backstop/Barrier Nets', children: [] },
-  { name: 'Accessories', children: [] },
-  { name: 'Wall Padding', children: [] },
-];
-
-export const rectHome = JSON.stringify({
-  floorplan: {
-    version: '0.0.2a',
-    corners: {
-      '91c6749e-0958-1552-5b9a-77bcfb1ea6f9': { x: 0, y: 0, elevation: 4 },
-      '46383e10-843b-577d-8702-68457b06efc6': { x: 10, y: 0, elevation: 4 },
-      'e354fa91-26dd-3d14-0aa3-aeebba07b762': { x: 10, y: 10, elevation: 4 },
-      '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1': { x: 0, y: 10, elevation: 4 },
-    },
-    walls: [
-      {
-        corner1: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
-        corner2: '46383e10-843b-577d-8702-68457b06efc6',
-        frontTexture: {
-          url: 'assets/rooms/textures/hardwood.png',
-          stretch: true,
-          scale: 1,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 1,
-        },
-        wallType: 'STRAIGHT',
-        a: { x: 178.58091752452765, y: 175.2118615245278 },
-        b: { x: 321.4190824754721, y: 175.21186152452782 },
-      },
-      {
-        corner1: '46383e10-843b-577d-8702-68457b06efc6',
-        corner2: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
-        frontTexture: {
-          url: 'assets/rooms/textures/hardwood.png',
-          stretch: true,
-          scale: 0,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: { x: 325.1554937819452, y: 174.8445062180548 },
-        b: { x: 325.1554937819452, y: 319.6904377819452 },
-      },
-      {
-        corner1: 'e354fa91-26dd-3d14-0aa3-aeebba07b762',
-        corner2: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
-        frontTexture: {
-          url: 'assets/rooms/textures/hardwood.png',
-          stretch: true,
-          scale: 0,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: { x: 322.5275116306755, y: 317.0624556306756 },
-        b: { x: 175.50448836932438, y: 317.0624556306755 },
-      },
-      {
-        corner1: '5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1',
-        corner2: '91c6749e-0958-1552-5b9a-77bcfb1ea6f9',
-        frontTexture: {
-          url: 'assets/rooms/textures/hardwood.png',
-          stretch: true,
-          scale: 0,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: { x: 173.57229929074228, y: 320.3862308546328 },
-        b: { x: 174.1487131453672, y: 175.54029929074235 },
-      },
-    ],
-    rooms: {
-      '91c6749e-0958-1552-5b9a-77bcfb1ea6f9,46383e10-843b-577d-8702-68457b06efc6,e354fa91-26dd-3d14-0aa3-aeebba07b762,5cdc97d5-90c4-d34f-9fd3-acc5b7d40ce1':
-        { name: 'A New Room' },
-    },
-    wallTextures: [],
-    floorTextures: {},
-    newFloorTextures: {},
-    carbonSheet: {
-      url: '',
-      transparency: 1,
-      x: 0,
-      y: 0,
-      anchorX: 0,
-      anchorY: 0,
-      width: 0.01,
-      height: 0.01,
-    },
-  },
-  items: [],
-});
-
-export const wallTextures = [
-  {
-    name: 'Grey',
-    url: 'assets/rooms/textures/wallmap.png',
-    stretch: true,
-    scale: 1,
-  },
-  {
-    name: 'Bricks',
-    url: 'assets/rooms/textures/light_brick.jpg',
-    stretch: false,
-    scale: 50,
-  },
-  {
-    name: 'Marble',
-    url: 'assets/rooms/textures/marbletiles.jpg',
-    stretch: false,
-    scale: 300,
-  },
-  {
-    name: 'LightWood',
-    url: 'assets/rooms/textures/light_fine_wood.jpg',
-    stretch: false,
-    scale: 300,
-  },
-  {
-    name: 'HardWood',
-    url: 'assets/rooms/textures/hardwood.png',
-    stretch: false,
-    scale: 300,
-  },
-];

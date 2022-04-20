@@ -56,6 +56,7 @@ export class Floorplan3D extends EventDispatcher {
         scene: this.scene,
         room,
         three: this.three,
+        controls: this.controls,
       });
       this.roofs.push(threeRoof);
       threeRoof.addToScene();

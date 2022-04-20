@@ -13,6 +13,7 @@ import {
   configWallHeight,
   cornerTolerance,
 } from '../core/configuration.js';
+import { updateVisibility } from '../../bpSupport.js';
 
 /*
  * Corners are used to define Walls.
@@ -188,8 +189,10 @@ export class Corner extends EventDispatcher {
   }
 
   setAllElevation(value) {
-    this.floorplan.getCorners().forEach((corner) => {
-      corner._elevation = Number(value);
+    this.attachedRooms.forEach((room) => {
+      room.corners.forEach((corner) => {
+        corner._elevation = Number(value);
+      });
     });
     this.floorplan.update(false);
   }
@@ -332,88 +335,22 @@ export class Corner extends EventDispatcher {
    * @param {Number} newX The new x position.
    * @param {Number} newY The new y position.
    */
-  move(
-    newX,
-    newY,
-    mergeWithIntersections = true,
-    visitCornerLocations = [],
-    prevCorner = null,
-    snapToRect = true,
-  ) {
-    const oldPos = new Vector2(this._x, this._y);
+  move(newX, newY, mergeWithIntersections = true, snapToRect = true) {
+    snapToRect = Configuration.getNumericValue('snapToRect') && snapToRect;
+    const newLoc = new Vector2(newX, newY);
+
+    if (snapToRect) {
+      this.makeRect(newLoc);
+    }
+
     this.location = new Vector2(newX, newY);
 
-    if (Configuration.getNumericValue('snapToRect') && snapToRect) {
-      if (prevCorner) {
-        if (
-          Math.max(
-            Math.abs(this._x - prevCorner._x),
-            Math.abs(this._y - prevCorner._y),
-          ) < 200
-        ) {
-          return false;
-        }
-      }
-
-      let canMove = true;
-      visitCornerLocations.push(this._co);
-
-      for (var i in this.wallStarts) {
-        let wall = this.wallStarts[i];
-
-        if (visitCornerLocations.indexOf(wall.end._co) > -1) {
-          if (
-            Math.abs(this._x - wall.end._x) > Math.abs(this._y - wall.end._y)
-          ) {
-            this.location = new Vector2(this._x, wall.end._y);
-          } else {
-            this.location = new Vector2(wall.end._x, this._y);
-          }
-        } else {
-          const deltaX = Math.abs(this._x - wall.end._x);
-          const deltaY = Math.abs(this._y - wall.end._y);
-          if (deltaX > deltaY) {
-            if (deltaX < 200) {
-              this.location = oldPos;
-              return false;
-            }
-            canMove = wall.end.move(
-              wall.end._x,
-              this._y,
-              mergeWithIntersections,
-              visitCornerLocations,
-              this,
-              true,
-            );
-          } else {
-            if (deltaY < 200) {
-              this.location = oldPos;
-              return false;
-            }
-            canMove = wall.end.move(
-              this._x,
-              wall.end._y,
-              mergeWithIntersections,
-              visitCornerLocations,
-              this,
-              true,
-            );
-          }
-        }
-
-        if (!canMove) {
-          this.location = oldPos;
-          return false;
-        }
-      }
-    } else {
-      if (mergeWithIntersections) {
-        // The below line is crashing after making the changes for curved walls
-        // While release v1.0.0 is stable even with this line enabled
-        this.mergeWithIntersected();
-        if (this.floorplan.rooms.length < 10) {
-          this.updateAttachedRooms(true);
-        }
+    if (!snapToRect && mergeWithIntersections) {
+      // The below line is crashing after making the changes for curved walls
+      // While release v1.0.0 is stable even with this line enabled
+      this.mergeWithIntersected();
+      if (this.floorplan.rooms.length < 10) {
+        this.updateAttachedRooms(true);
       }
     }
 
@@ -433,6 +370,77 @@ export class Corner extends EventDispatcher {
     });
 
     return true;
+  }
+
+  makeRect(newLoc) {
+    this.wallStarts.forEach((wall) => {
+      const corner = wall.end;
+      const deltaX = Math.abs(corner.x - this.x);
+      const deltaY = Math.abs(corner.y - this.y);
+      if (deltaX > deltaY) {
+        corner.move(corner.x, newLoc.y, false, false);
+      } else {
+        corner.move(newLoc.x, corner.y, false, false);
+      }
+    });
+
+    this.wallEnds.forEach((wall) => {
+      const corner = wall.start;
+      const deltaX = Math.abs(corner.x - this.x);
+      const deltaY = Math.abs(corner.y - this.y);
+      if (deltaX > deltaY) {
+        corner.move(corner.x, newLoc.y, false, false);
+      } else {
+        corner.move(newLoc.x, corner.y, false, false);
+      }
+    });
+  }
+
+  getArea(room) {
+    let minX, maxX, minY, maxY, intervals, minIndex;
+    minX = maxX = this._x;
+    minY = maxY = this._y;
+    room.corners.forEach((corner) => {
+      if (minX > corner.x) minX = corner.x;
+      if (minY > corner.y) minY = corner.y;
+      if (maxX < corner.x) maxX = corner.x;
+      if (maxY < corner.y) maxY = corner.y;
+    });
+    intervals = [
+      maxX - this._x,
+      maxY - this._y,
+      this._x - minX,
+      this._y - minY,
+    ];
+    minIndex = intervals.indexOf(Math.min(...intervals));
+    switch (minIndex) {
+      case 0:
+        maxX = this._x;
+        if (this._y - minY > maxY - this._y) maxY = this._y;
+        else minY = this._y;
+        break;
+      case 1:
+        maxY = this._y;
+        if (this._x - minX > maxX - this._x) maxX = this._x;
+        else minX = this._x;
+        break;
+      case 2:
+        minX = this._x;
+        if (this._y - minY > maxY - this._y) maxY = this._y;
+        else minY = this._y;
+        break;
+      case 3:
+        minY = this._y;
+        if (this._x - minX > maxX - this._x) maxX = this._x;
+        else minX = this._x;
+        break;
+    }
+    return {
+      minX,
+      minY,
+      maxX,
+      maxY,
+    };
   }
 
   // Angle is in degrees 0 - 360
@@ -747,7 +755,7 @@ export class Corner extends EventDispatcher {
         //It will lead to recursion. So ensure in the move(newX, newY) method mergeWithIntersected is not called
         //Hence added a third parameter to move(newX, newY, mergeWithIntersections) that is a boolean value
         //Send this boolean value as false to avoid recursion crashing of the application
-        this.move(intersection.x, intersection.y, false, updateFloorPlan); //Causes Recursion if third parameter is true
+        this.move(intersection.x, intersection.y, false); //Causes Recursion if third parameter is true
 
         this.floorplan.update(false);
         return true;

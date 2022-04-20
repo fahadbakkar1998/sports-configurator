@@ -189,13 +189,13 @@ export class Edge extends EventDispatcher {
   }
 
   updateObjectVisibility() {
-    // let scope = this;
-    // this.wall.items.forEach((item) => {
-    // item.updateEdgeVisibility(scope.visible, scope.front);
-    // });
-    // this.wall.onItems.forEach((item) => {
-    // item.updateEdgeVisibility(scope.visible, scope.front);
-    // });
+    let scope = this;
+    this.wall.items.forEach((item) => {
+    item.updateEdgeVisibility(scope.visible, scope.front);
+    });
+    this.wall.onItems.forEach((item) => {
+    item.updateEdgeVisibility(scope.visible, scope.front);
+    });
   }
 
   updateTexture(callback) {
@@ -367,38 +367,9 @@ export class Edge extends EventDispatcher {
 
     // make UVs
     this.assignUVs(geometry);
-    // let totalDistance = Utils.distance(
-    //   new Vector2(v1.x, v1.z),
-    //   new Vector2(v2.x, v2.z),
-    // );
-    // let height = this.wall.height;
-    // geometry.faceVertexUvs[0] = [];
-
-    // geometry.faces.forEach((face) => {
-    //   let vertA = geometry.vertices[face.a];
-    //   let vertB = geometry.vertices[face.b];
-    //   let vertC = geometry.vertices[face.c];
-    //   geometry.faceVertexUvs[0].push([
-    //     vertexToUv(vertA),
-    //     vertexToUv(vertB),
-    //     vertexToUv(vertC),
-    //   ]);
-    // });
-
-    // function vertexToUv(vertex) {
-    //   let x =
-    //     Utils.distance(
-    //       new Vector2(v1.x, v1.z),
-    //       new Vector2(vertex.x, vertex.z),
-    //     ) / totalDistance;
-    //   let y = parseInt(vertex.y / height);
-    //   // let y = vertex.y / height;
-    //   return new Vector2(x, y);
-    // }
-
-    // geometry.faceVertexUvs[1] = geometry.faceVertexUvs[0];
-    // geometry.computeFaceNormals();
-    // geometry.computeVertexNormals();
+    geometry.faceVertexUvs[1] = geometry.faceVertexUvs[0];
+    geometry.computeFaceNormals();
+    geometry.computeVertexNormals();
 
     let mesh = new Mesh(geometry, material);
     mesh.name = 'wall';

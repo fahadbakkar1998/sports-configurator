@@ -564,31 +564,39 @@ export class Floorplanner2D extends EventDispatcher {
           );
         }
       } else if (this.activeWall) {
-        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
-          let dx = Dimensioning.pixelToCm(this.rawMouseX - this.lastX);
-          let dy = Dimensioning.pixelToCm(this.rawMouseY - this.lastY);
-          mx =
-            Math.floor(dx / Configuration.getNumericValue(snapTolerance)) *
-            Configuration.getNumericValue(snapTolerance);
-          my =
-            Math.floor(dy / Configuration.getNumericValue(snapTolerance)) *
-            Configuration.getNumericValue(snapTolerance);
-          this.activeWall.relativeMove(mx, my);
-        } else {
-          this.activeWall.relativeMove(
-            Dimensioning.pixelToCm(this.rawMouseX - this.lastX),
-            Dimensioning.pixelToCm(this.rawMouseY - this.lastY),
-          );
-        }
+        if (!Configuration.getNumericValue('snapToRect')) {
+          if (
+            this.gridSnapMode ||
+            Configuration.getNumericValue('snapToGrid')
+          ) {
+            let dx = Dimensioning.pixelToCm(this.rawMouseX - this.lastX);
+            let dy = Dimensioning.pixelToCm(this.rawMouseY - this.lastY);
+            mx =
+              Math.floor(dx / Configuration.getNumericValue(snapTolerance)) *
+              Configuration.getNumericValue(snapTolerance);
+            my =
+              Math.floor(dy / Configuration.getNumericValue(snapTolerance)) *
+              Configuration.getNumericValue(snapTolerance);
+            this.activeWall.relativeMove(mx, my);
+          } else {
+            this.activeWall.relativeMove(
+              Dimensioning.pixelToCm(this.rawMouseX - this.lastX),
+              Dimensioning.pixelToCm(this.rawMouseY - this.lastY),
+            );
+          }
 
-        // 	this.activeWall.relativeMove((this.rawMouseX - this.lastX) * this.cmPerPixel, (this.rawMouseY - this.lastY) * this.cmPerPixel);
-        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
-          this.activeWall.snapToAxis(
-            Configuration.getNumericValue(snapTolerance),
-          );
+          // 	this.activeWall.relativeMove((this.rawMouseX - this.lastX) * this.cmPerPixel, (this.rawMouseY - this.lastY) * this.cmPerPixel);
+          if (
+            this.gridSnapMode ||
+            Configuration.getNumericValue('snapToGrid')
+          ) {
+            this.activeWall.snapToAxis(
+              Configuration.getNumericValue(snapTolerance),
+            );
+          }
+          this.lastX = this.rawMouseX;
+          this.lastY = this.rawMouseY;
         }
-        this.lastX = this.rawMouseX;
-        this.lastY = this.rawMouseY;
       }
       this.updateView();
     }

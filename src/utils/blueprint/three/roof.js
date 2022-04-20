@@ -1,3 +1,4 @@
+import { EVENT_CHANGED } from '../core/events.js';
 import {
   EventDispatcher,
   Vector3,
@@ -18,11 +19,12 @@ import { degToRad } from '../../common';
 import { Vector2 } from 'three';
 
 export class Roof extends EventDispatcher {
-  constructor({ scene, room, three }) {
+  constructor({ scene, room, three, controls }) {
     super();
     this.scene = scene;
     this.room = room;
     this.three = three;
+    this.controls = controls;
 
     this.textureLoader = new TextureLoader();
     this.topTexture = this.textureLoader.load('assets/rooms/textures/roof.jpg');
@@ -32,9 +34,7 @@ export class Roof extends EventDispatcher {
     this.thicknessTexture = this.textureLoader.load(
       'assets/rooms/textures/hardwood.png',
     );
-    this.sideTexture = this.textureLoader.load(
-      'assets/rooms/textures/hardwood.png',
-    );
+    this.sideTexture = this.textureLoader.load(room.getTexture().url);
 
     this.middleHeight = 100;
     this.singleHeight = this.middleHeight * 2;
@@ -58,6 +58,16 @@ export class Roof extends EventDispatcher {
     this.generateRoofPlane();
 
     this.room.roof = this;
+
+    this.room.addEventListener(EVENT_CHANGED, () => {
+      console.log('EVENT_CHANGED: ', this);
+      this.sideTexture = this.textureLoader.load(this.room.getTexture().url);
+      this.frontPlane.material.map = this.sideTexture;
+      this.frontPlane.material.needsUpdate = true;
+      this.backPlane.material.map = this.sideTexture;
+      this.backPlane.material.needsUpdate = true;
+      this.three.render(true);
+    });
   }
 
   set setType(val) {
@@ -262,6 +272,8 @@ export class Roof extends EventDispatcher {
         side: DoubleSide,
         map: this.topTexture,
         visible: this.visible,
+        opacity: 0.3,
+        transparent: true,
       }),
     );
 
@@ -272,6 +284,8 @@ export class Roof extends EventDispatcher {
         side: DoubleSide,
         map: this.bottomTexture,
         visible: this.visible,
+        opacity: 0.3,
+        transparent: true,
       }),
     );
 
@@ -282,6 +296,8 @@ export class Roof extends EventDispatcher {
         side: DoubleSide,
         map: this.thicknessTexture,
         visible: this.visible,
+        opacity: 0.3,
+        transparent: true,
       }),
     );
 
@@ -292,6 +308,8 @@ export class Roof extends EventDispatcher {
         side: DoubleSide,
         map: this.sideTexture,
         visible: this.visible,
+        opacity: 0.3,
+        transparent: true,
       }),
     );
 
@@ -302,6 +320,8 @@ export class Roof extends EventDispatcher {
         side: DoubleSide,
         map: this.sideTexture,
         visible: this.visible,
+        opacity: 0.3,
+        transparent: true,
       }),
     );
   }

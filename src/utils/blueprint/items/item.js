@@ -401,14 +401,8 @@ export class Item extends Mesh {
     this.placeInRoom();
 
     // adjust size
-    if (this.getWidth() < 100) {
+    if (this.getWidth() + this.getHeight() + this.getDepth() < 200) {
       this.resize({ width: 100, proportionally: true });
-    }
-    if (this.getHeight() < 100) {
-      this.resize({ height: 100, proportionally: true });
-    }
-    if (this.getDepth() < 10) {
-      this.resize({ depth: 10, proportionally: true });
     }
 
     this.bHelper = new BoxHelper(this);
