@@ -358,7 +358,7 @@ export class Floorplan extends EventDispatcher {
       type: EVENT_DELETED,
       item: this,
       deleted: wall,
-      item_type: 'wall',
+      type: 'wall',
     });
     Utils.removeValue(this.walls, wall);
     this.update();
@@ -375,7 +375,7 @@ export class Floorplan extends EventDispatcher {
       type: EVENT_DELETED,
       item: this,
       deleted: corner,
-      item_type: 'corner',
+      type: 'corner',
     });
     Utils.removeValue(this.corners, corner);
   }

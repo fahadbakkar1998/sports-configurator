@@ -27,23 +27,15 @@ export const loadDefaultDesign = () => {
 };
 
 export const addItem = (item) => {
-  console.log('new item: ', item);
-  let metadata = {
-    itemName: item.name,
-    resizable: true,
-    modelUrl: item.model,
-    itemType: item.type,
-    format: item.format,
-    image: item.image,
-  };
   console.log('add item: ', item);
+  item.resizable = item.resizeProportionally = true;
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     // Wall Items
     var placeAt = item.selectedWall.item.center.clone();
     blueprintJS.model.scene.addItem(
       item.type,
       item.model,
-      metadata,
+      item,
       null,
       null,
       null,
@@ -59,7 +51,7 @@ export const addItem = (item) => {
     blueprintJS.model.scene.addItem(
       item.type,
       item.model,
-      metadata,
+      item,
       null,
       null,
       null,
@@ -67,7 +59,7 @@ export const addItem = (item) => {
       { position: placeAt },
     );
   } else {
-    blueprintJS.model.scene.addItem(item.type, item.model, metadata);
+    blueprintJS.model.scene.addItem(item.type, item.model, item);
   }
 };
 

@@ -156,27 +156,29 @@ export const items = [
         type: '1',
         format: 'gltf',
         defaultSize: {
-          unit: 'm',
-          width: 1,
-          height: 2,
-          length: 3,
+          unit: 'cm',
+          width: 100,
+          height: 100,
+          length: 50,
           price: 60,
-          pricePerUnit: 10,
+          pricePerUnit: 1,
         },
         staticSizes: [
           {
-            unit: 'm',
-            width: 1,
-            height: 2,
-            length: 5,
+            name: 'staticSize1',
+            unit: 'cm',
+            width: 150,
+            height: 150,
+            length: 100,
             extraPrice: 40,
           },
           {
-            unit: 'm',
-            width: 1,
-            height: 2,
-            length: 7,
-            extraPrice: 40,
+            name: 'staticSize2',
+            unit: 'cm',
+            width: 200,
+            height: 200,
+            length: 150,
+            extraPrice: 80,
           },
         ],
         accessories: [
@@ -184,15 +186,32 @@ export const items = [
             name: 'accessory1',
             types: [
               {
-                name: 'type1',
+                name: 'type11',
                 extraPrice: 10,
               },
               {
-                name: 'type2',
+                name: 'type12',
                 extraPrice: 20,
               },
               {
-                name: 'type3',
+                name: 'type13',
+                extraPrice: 30,
+              },
+            ],
+          },
+          {
+            name: 'accessory2',
+            types: [
+              {
+                name: 'type21',
+                extraPrice: 10,
+              },
+              {
+                name: 'type22',
+                extraPrice: 20,
+              },
+              {
+                name: 'type23',
                 extraPrice: 30,
               },
             ],
@@ -205,6 +224,14 @@ export const items = [
         model: 'assets/models/gltf/bathroomCabinet.glb',
         type: '2',
         format: 'gltf',
+        defaultSize: {
+          unit: 'cm',
+          width: 100,
+          height: 80,
+          length: 20,
+          price: 60,
+          pricePerUnit: 1,
+        },
       },
       {
         name: '3',
@@ -359,7 +386,7 @@ export const rectHome = JSON.stringify({
       y: 0,
       anchorX: 0,
       anchorY: 0,
-      width: 0.01,
+      length: 0.01,
       height: 0.01,
     },
   },

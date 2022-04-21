@@ -53,8 +53,9 @@ export class Dimensioning {
    * @param cm CentiMeter value to be converted.
    * @returns Number representation.
    */
-  static cmFromMeasureRaw(measure) {
-    switch (Configuration.getStringValue(configDimUnit)) {
+  static cmFromMeasureRaw(measure, unit) {
+    if (!unit) unit = Configuration.getStringValue(configDimUnit);
+    switch (unit) {
       case dimFeetAndInch:
         return (
           Math.round(decimals * (measure * 30.480016459203095991)) / decimals
@@ -108,8 +109,9 @@ export class Dimensioning {
    * @param cm CentiMeter value to be converted.
    * @returns String representation.
    */
-  static cmToMeasureRaw(cm, power = 1) {
-    switch (Configuration.getStringValue(configDimUnit)) {
+  static cmToMeasureRaw(cm, power = 1, unit) {
+    if (!unit) unit = Configuration.getStringValue(configDimUnit);
+    switch (unit) {
       case dimFeetAndInch: // dimFeetAndInch returns only the feet
         let allInFeet = cm * Math.pow(0.032808416666669996953, power);
         return allInFeet;

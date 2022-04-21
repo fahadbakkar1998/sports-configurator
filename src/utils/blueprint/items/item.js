@@ -203,6 +203,56 @@ export class Item extends Mesh {
         }
       }
     }
+
+    this.setStaticSizeNo = metadata.staticSizeNo || 0;
+    const length =
+      metadata.accessories && metadata.accessories.length
+        ? metadata.accessories.length
+        : 0;
+    this.accessoryNos = metadata.accessoryNos || Array(length).fill(0);
+  }
+
+  set setStaticSizeNo(no) {
+    no = parseInt(no) || 0;
+    if (no < 0) return;
+    if (this.metadata) {
+      this.staticSizeNo = no;
+      if (no > 0) {
+        if (this.metadata.staticSizes && this.metadata.staticSizes[no - 1]) {
+          const staticSize = this.metadata.staticSizes[no - 1];
+          const width = Dimensioning.cmFromMeasureRaw(
+            staticSize.width,
+            staticSize.unit,
+          );
+          const height = Dimensioning.cmFromMeasureRaw(
+            staticSize.height,
+            staticSize.unit,
+          );
+          const depth = Dimensioning.cmFromMeasureRaw(
+            staticSize.length,
+            staticSize.unit,
+          );
+          this.resize({ width, height, depth });
+        }
+      } else {
+        if (this.metadata.defaultSize) {
+          const defaultSize = this.metadata.defaultSize;
+          const width = Dimensioning.cmFromMeasureRaw(
+            defaultSize.width,
+            defaultSize.unit,
+          );
+          const height = Dimensioning.cmFromMeasureRaw(
+            defaultSize.height,
+            defaultSize.unit,
+          );
+          const depth = Dimensioning.cmFromMeasureRaw(
+            defaultSize.length,
+            defaultSize.unit,
+          );
+          this.resize({ width, height, depth });
+        }
+      }
+    }
   }
 
   get freePosition() {
@@ -401,14 +451,13 @@ export class Item extends Mesh {
     this.placeInRoom();
 
     // adjust size
-    if (this.getWidth() + this.getHeight() + this.getDepth() < 200) {
-      this.resize({ width: 100, proportionally: true });
+    if (this.getWidth() + this.getHeight() + this.getDepth() < 50) {
+      this.resize({ width: 50, proportionally: true });
     }
 
     this.bHelper = new BoxHelper(this);
     this.scene.add(this.bHelper);
     this.bHelper.visible = false;
-    // select and stuff
     this.scene.needsUpdate = true;
   }
 
@@ -543,7 +592,6 @@ export class Item extends Mesh {
     let c4 = new Vector3(-halfSize.x, 0, halfSize.z);
 
     let transform = new Matrix4();
-    // console.log(this.rotation.y);
     transform.makeRotationY(this.rotation.y); // + Math.PI/2)
 
     c1.applyMatrix4(transform);
@@ -631,10 +679,7 @@ export class Item extends Mesh {
       matAttribs.push('#' + this.material.color.getHexString());
     }
     return {
-      item_name: this.metadata.itemName,
-      item_type: this.metadata.itemType,
-      format: this.metadata.format,
-      model_url: this.metadata.modelUrl,
+      ...this.metadata,
       xPos: this.position.x,
       yPos: this.position.y,
       zPos: this.position.z,
@@ -643,7 +688,71 @@ export class Item extends Mesh {
       scale_y: this.scale.y,
       scale_z: this.scale.z,
       fixed: this.fixed,
-      material_colors: matAttribs,
+      materialColors: matAttribs,
+      staticSizeNo: this.staticSizeNo,
+      accessoryNos: this.accessoryNos,
     };
+  }
+
+  getPrice() {
+    let cost3 = 0,
+      metadata3,
+      defaultSize3,
+      staticSize3;
+
+    if (this.metadata) {
+      metadata3 = this.metadata;
+
+      if (metadata3.defaultSize) {
+        defaultSize3 = metadata3.defaultSize;
+
+        if (defaultSize3.price && metadata3.staticSizes) {
+          cost3 = defaultSize3.price;
+        } else if (defaultSize3.pricePerUnit && defaultSize3.unit) {
+          const width = Dimensioning.cmToMeasureRaw(
+            this.getWidth(),
+            1,
+            defaultSize3.unit,
+          );
+          const height = Dimensioning.cmToMeasureRaw(
+            this.getHeight(),
+            1,
+            defaultSize3.unit,
+          );
+          const length = Dimensioning.cmToMeasureRaw(
+            this.getDepth(),
+            1,
+            defaultSize3.unit,
+          );
+          cost3 = defaultSize3.pricePerUnit * width * height * length;
+        }
+      }
+
+      if (
+        this.staticSizeNo &&
+        metadata3.staticSizes &&
+        metadata3.staticSizes[this.staticSizeNo - 1]
+      ) {
+        staticSize3 = metadata3.staticSizes[this.staticSizeNo - 1];
+
+        if (staticSize3.extraPrice) {
+          cost3 += staticSize3.extraPrice;
+        }
+      }
+
+      this.accessoryNos.forEach((accessoryNo, accessoryKey) => {
+        if (
+          accessoryNo > 0 &&
+          metadata3.accessories[accessoryKey].types[accessoryNo - 1].extraPrice
+        ) {
+          cost3 +=
+            metadata3.accessories[accessoryKey].types[accessoryNo - 1]
+              .extraPrice;
+        }
+      });
+    }
+
+    cost3 = parseInt(cost3.toFixed(0));
+    return cost3;
   }
 }

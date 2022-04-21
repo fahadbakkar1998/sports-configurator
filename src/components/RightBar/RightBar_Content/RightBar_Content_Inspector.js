@@ -56,6 +56,18 @@ const RightBar_Content_Inspector = () => {
     setCur3dItemEvent(cloneCur3dItemEvent);
   };
 
+  const updateCur3dStaticSize = (index) => {
+    const cloneCur3dItemEvent = { ...cur3dItemEvent };
+    cloneCur3dItemEvent.item.setStaticSizeNo = index + 1;
+    setCur3dItemEvent(cloneCur3dItemEvent);
+  };
+
+  const updateCur3dAccessory = (accessoryKey, accessoryNo) => {
+    const cloneCur3dItemEvent = { ...cur3dItemEvent };
+    cloneCur3dItemEvent.item.accessoryNos[accessoryKey] = accessoryNo;
+    setCur3dItemEvent(cloneCur3dItemEvent);
+  };
+
   /* Roof */
   const updateCurRoofNum = (obj) => {
     const cloneSelectedRoof = { ...selectedRoof };
@@ -236,10 +248,10 @@ const RightBar_Content_Inspector = () => {
             <img
               className="item-info-logo"
               src={cur3dItemEvent.item.metadata.image}></img>
+            <div className="item-info">{cur3dItemEvent.item.metadata.name}</div>
             <div className="item-info">
-              {cur3dItemEvent.item.metadata.itemName}
+              Cost: ${cur3dItemEvent.item.getPrice()}
             </div>
-            <div className="item-info">Cost: $123</div>
             <div
               className="item-remove"
               onClick={() => {
@@ -250,87 +262,179 @@ const RightBar_Content_Inspector = () => {
             </div>
           </div>
 
-          <div className="property-header">Dimensions</div>
+          {cur3dItemEvent.item.metadata && (
+            <>
+              {cur3dItemEvent.item.metadata.defaultSize && (
+                <>
+                  {cur3dItemEvent.item.metadata.staticSizes ? (
+                    <>
+                      <div className="property-header">Size</div>
 
-          {/* Dimension width */}
-          <div className="input-group">
-            <DragLabel
-              name={`Width(${dimUnit}):`}
-              value={cur3dItemWidth}
-              setValue={(width) =>
-                updateCur3dItemSize({ width: getUFloat(width) })
-              }
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur3dItemWidth + inputSuffix}
-              onChange={(e) => {
-                updateCur3dItemSize({ width: getUFloat(e.target.value) });
-              }}></input>
-          </div>
+                      <div className="input-group">
+                        <div
+                          className={cn('option', {
+                            active: cur3dItemEvent.item.staticSizeNo === 0,
+                          })}
+                          onClick={() => {
+                            updateCur3dStaticSize(-1);
+                          }}>
+                          No
+                        </div>
 
-          {/* Dimension height */}
-          <div className="input-group">
-            <DragLabel
-              name={`Height(${dimUnit}):`}
-              value={cur3dItemHeight}
-              setValue={(height) =>
-                updateCur3dItemSize({ height: getUFloat(height) })
-              }
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur3dItemHeight + inputSuffix}
-              onChange={(e) => {
-                updateCur3dItemSize({ height: getUFloat(e.target.value) });
-              }}></input>
-          </div>
+                        {React.Children.toArray(
+                          cur3dItemEvent.item.metadata.staticSizes.map(
+                            (staticSize, index) => (
+                              <div
+                                className={cn('option', {
+                                  active:
+                                    cur3dItemEvent.item.staticSizeNo ===
+                                    index + 1,
+                                })}
+                                onClick={() =>
+                                  updateCur3dStaticSize(index)
+                                }>{`${staticSize.name}(+${staticSize.extraPrice})`}</div>
+                            ),
+                          ),
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="property-header">Dimensions</div>
 
-          {/* Dimension length */}
-          <div className="input-group">
-            <DragLabel
-              name={`Length(${dimUnit}):`}
-              value={cur3dItemDepth}
-              setValue={(depth) =>
-                updateCur3dItemSize({ depth: getUFloat(depth) })
-              }
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={cur3dItemDepth + inputSuffix}
-              onChange={(e) => {
-                updateCur3dItemSize({ depth: getUFloat(e.target.value) });
-              }}></input>
-          </div>
+                      {/* Dimension width */}
+                      <div className="input-group">
+                        <DragLabel
+                          name={`Width(${dimUnit}):`}
+                          value={cur3dItemWidth}
+                          setValue={(width) =>
+                            updateCur3dItemSize({ width: getUFloat(width) })
+                          }
+                          offset={0.01}></DragLabel>
+                        <input
+                          className="input"
+                          type="text"
+                          value={cur3dItemWidth + inputSuffix}
+                          onChange={(e) => {
+                            updateCur3dItemSize({
+                              width: getUFloat(e.target.value),
+                            });
+                          }}></input>
+                      </div>
 
-          {/* Dimension resizable */}
-          <div className="input-group">
-            <div>Resizable:</div>
-            <input
-              className="input"
-              type="checkbox"
-              checked={cur3dItemEvent.item.resizable || false}
-              onChange={(e) => {
-                updateCur3dItemValue({ resizable: e.target.checked });
-              }}></input>
-          </div>
+                      {/* Dimension height */}
+                      <div className="input-group">
+                        <DragLabel
+                          name={`Height(${dimUnit}):`}
+                          value={cur3dItemHeight}
+                          setValue={(height) =>
+                            updateCur3dItemSize({ height: getUFloat(height) })
+                          }
+                          offset={0.01}></DragLabel>
+                        <input
+                          className="input"
+                          type="text"
+                          value={cur3dItemHeight + inputSuffix}
+                          onChange={(e) => {
+                            updateCur3dItemSize({
+                              height: getUFloat(e.target.value),
+                            });
+                          }}></input>
+                      </div>
 
-          {/* Dimension proportionally */}
-          <div className="input-group">
-            <div>Proportionally:</div>
-            <input
-              className="input"
-              type="checkbox"
-              checked={cur3dItemEvent.item.resizeProportionally || false}
-              onChange={(e) => {
-                updateCur3dItemValue({
-                  resizeProportionally: e.target.checked,
-                });
-              }}></input>
-          </div>
+                      {/* Dimension length */}
+                      <div className="input-group">
+                        <DragLabel
+                          name={`Length(${dimUnit}):`}
+                          value={cur3dItemDepth}
+                          setValue={(depth) =>
+                            updateCur3dItemSize({ depth: getUFloat(depth) })
+                          }
+                          offset={0.01}></DragLabel>
+                        <input
+                          className="input"
+                          type="text"
+                          value={cur3dItemDepth + inputSuffix}
+                          onChange={(e) => {
+                            updateCur3dItemSize({
+                              depth: getUFloat(e.target.value),
+                            });
+                          }}></input>
+                      </div>
+
+                      {/* Dimension resizable */}
+                      <div className="input-group">
+                        <div>Resizable:</div>
+                        <input
+                          className="input"
+                          type="checkbox"
+                          checked={cur3dItemEvent.item.resizable || false}
+                          onChange={(e) => {
+                            updateCur3dItemValue({
+                              resizable: e.target.checked,
+                            });
+                          }}></input>
+                      </div>
+
+                      {/* Dimension proportionally */}
+                      <div className="input-group">
+                        <div>Proportionally:</div>
+                        <input
+                          className="input"
+                          type="checkbox"
+                          checked={
+                            cur3dItemEvent.item.resizeProportionally || false
+                          }
+                          onChange={(e) => {
+                            updateCur3dItemValue({
+                              resizeProportionally: e.target.checked,
+                            });
+                          }}></input>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+
+              {cur3dItemEvent.item.metadata.accessories &&
+                React.Children.toArray(
+                  cur3dItemEvent.item.metadata.accessories.map(
+                    (accessory, i) => (
+                      <>
+                        <div className="property-header">{accessory.name}</div>
+
+                        <div className="input-group">
+                          <div
+                            className={cn('option', {
+                              active: cur3dItemEvent.item.accessoryNos[i] === 0,
+                            })}
+                            onClick={() => {
+                              updateCur3dAccessory(i, 0);
+                            }}>
+                            No
+                          </div>
+
+                          {accessory.types &&
+                            React.Children.toArray(
+                              accessory.types.map((type, j) => (
+                                <div
+                                  className={cn('option', {
+                                    active:
+                                      cur3dItemEvent.item.accessoryNos[i] ===
+                                      j + 1,
+                                  })}
+                                  onClick={() =>
+                                    updateCur3dAccessory(i, j + 1)
+                                  }>{`${type.name}(+${type.extraPrice})`}</div>
+                              )),
+                            )}
+                        </div>
+                      </>
+                    ),
+                  ),
+                )}
+            </>
+          )}
 
           <div className="property-header">Color</div>
 

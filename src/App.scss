@@ -364,6 +364,7 @@ $commonHeight: 1.8vmax;
           width: 99%;
           align-items: center;
           font-size: calc($commonHeight - 5 * $fontPadding);
+          gap: $fontPadding;
 
           .input {
             height: $commonHeight;
@@ -378,6 +379,18 @@ $commonHeight: 1.8vmax;
 
             &.pointer {
               cursor: pointer;
+            }
+          }
+
+          .option {
+            padding: $fontPadding;
+            border: 1px solid $borderColor;
+            color: $foreColor;
+            cursor: pointer;
+            border-radius: $fontPadding;
+
+            &.active {
+              color: $activeColor;
             }
           }
 

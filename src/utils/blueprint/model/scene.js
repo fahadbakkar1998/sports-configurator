@@ -123,7 +123,7 @@ export class Scene extends EventDispatcher {
 
   /*
    * Creates an item and adds it to the scene.
-   * @param itemType The type of the item given by an enumerator.
+   * @param type The type of the item given by an enumerator.
    * @param fileName The name of the file to load.
    * @param metadata TODO
    * @param position The initial position.
@@ -133,7 +133,7 @@ export class Scene extends EventDispatcher {
    * @param newItemDefinitions - Object with position and 'edge' attribute if it is a wall item
    */
   addItem(
-    itemType,
+    type,
     fileName,
     metadata,
     position,
@@ -142,8 +142,8 @@ export class Scene extends EventDispatcher {
     fixed,
     newItemDefinitions,
   ) {
-    if (itemType == undefined) {
-      itemType = 1;
+    if (type == undefined) {
+      type = 1;
     }
 
     let scope = this;
@@ -160,8 +160,8 @@ export class Scene extends EventDispatcher {
     }
 
     let loaderCallback = function (geometry, materials, isGltf = false) {
-      // let item = new (Factory.getClass(itemType))(scope.model, metadata, geometry, new MeshFaceMaterial(materials), position, rotation, scale);
-      let item = new (Factory.getClass(itemType))(
+      // let item = new (Factory.getClass(type))(scope.model, metadata, geometry, new MeshFaceMaterial(materials), position, rotation, scale);
+      let item = new (Factory.getClass(type))(
         scope.model,
         metadata,
         geometry,

@@ -1,9 +1,9 @@
 /* Meta data for items. */
 export class Metadata {
   constructor() {
-    this.itemName = '';
-    this.itemType = -1;
-    this.modelUrl = '';
+    this.name = '';
+    this.type = -1;
+    this.model = '';
     this.resizable = false;
   }
 }

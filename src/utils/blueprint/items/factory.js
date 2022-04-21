@@ -23,7 +23,7 @@ export const item_types = {
 /* Factory class to create items. */
 export class Factory {
   /* Gets the class for the specified item. */
-  static getClass(itemType) {
-    return item_types[itemType];
+  static getClass(type) {
+    return item_types[type];
   }
 }
