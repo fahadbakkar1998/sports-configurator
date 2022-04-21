@@ -15,7 +15,14 @@ const itemTypes = {
   9: 'WallFloorItem',
 };
 
-const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
+const LeftBar_List_Item = ({
+  item,
+  depth,
+  isOpen,
+  openChildren,
+  onClick,
+  hierarchy,
+}) => {
   const selectedWall = useZustand((state) => state.selectedWall);
   const selectedFloor = useZustand((state) => state.selectedFloor);
 
@@ -41,7 +48,7 @@ const LeftBar_List_Item = ({ item, depth, isOpen, openChildren, onClick }) => {
               className="image"
               src={item.image}
               onClick={() => {
-                addItem({ ...item, selectedWall, selectedFloor });
+                addItem({ ...item, selectedWall, selectedFloor, hierarchy });
               }}></img>
             <div className="name" title={item.name}>
               {`(${itemTypes[item.type]})${item.name}`}

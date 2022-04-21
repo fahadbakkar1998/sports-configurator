@@ -16,7 +16,13 @@ import cn from 'classnames';
 
 let isDot = false;
 
-const recursiveItem = ({ item, depth, isOpen, initialOpenDepth }) => {
+const recursiveItem = ({
+  item,
+  depth,
+  isOpen,
+  initialOpenDepth,
+  hierarchy,
+}) => {
   const [openChildren, setOpenChildren] = useState(
     isOpen && depth < initialOpenDepth,
   );
@@ -32,15 +38,17 @@ const recursiveItem = ({ item, depth, isOpen, initialOpenDepth }) => {
         depth={depth}
         isOpen={isOpen}
         openChildren={openChildren}
+        hierarchy={hierarchy}
         onClick={() => setOpenChildren(!openChildren)}></LeftBar_List_Item>
       {item.children &&
         React.Children.toArray(
-          item.children.map((child) =>
+          item.children.map((child, i) =>
             recursiveItem({
               item: child,
               depth: depth + 1,
               isOpen: openChildren,
               initialOpenDepth,
+              hierarchy: [...hierarchy, i],
             }),
           ),
         )}
@@ -332,12 +340,13 @@ const LeftBar_List = () => {
       <div className={cn('content', { active: editMode === '3D' })}>
         <div className="header">Categories</div>
         {React.Children.toArray(
-          items.map((item) =>
+          items.map((item, i) =>
             recursiveItem({
               item,
               isOpen: true,
               depth: 0,
               initialOpenDepth: 0,
+              hierarchy: [i],
             }),
           ),
         )}

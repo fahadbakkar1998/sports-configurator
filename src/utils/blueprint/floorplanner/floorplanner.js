@@ -113,6 +113,7 @@ export class Floorplanner2D extends EventDispatcher {
     // this.wallWidth = 10.0 * this.pixelsPerCm;
     this.gridSnapMode = false;
     this.shiftKey = false;
+    this.ctrlKey = false;
 
     // Initialization:
     this.setMode(floorplannerModes.MOVE);
@@ -241,11 +242,16 @@ export class Floorplanner2D extends EventDispatcher {
     }
     this.gridSnapMode = false;
     this.shiftKey = false;
+    this.ctrlKey = false;
   }
 
   keyDown(e) {
+    // console.log('keyDown: ', e);
     if (e.shiftKey || e.keyCode == 16) {
       this.shiftKey = true;
+    }
+    if (e.ctrlKey || e.keyCode == 17) {
+      this.ctrlKey = true;
     }
     this.gridSnapMode = this.shiftKey;
   }
@@ -562,6 +568,9 @@ export class Floorplanner2D extends EventDispatcher {
           this.activeCorner.snapToAxis(
             Configuration.getNumericValue(snapTolerance),
           );
+        }
+        if (this.ctrlKey) {
+          this.activeCorner.mergeWithIntersected();
         }
       } else if (this.activeWall) {
         if (!Configuration.getNumericValue('snapToRect')) {

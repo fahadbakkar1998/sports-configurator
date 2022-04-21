@@ -190,7 +190,6 @@ $commonHeight: 1.8vmax;
           padding: $fontPadding;
           display: flex;
           justify-content: space-between;
-          width: 99%;
           align-items: center;
           font-size: calc($commonHeight - 5 * $fontPadding);
 
@@ -361,7 +360,6 @@ $commonHeight: 1.8vmax;
           padding: $fontPadding;
           display: flex;
           justify-content: space-between;
-          width: 99%;
           align-items: center;
           font-size: calc($commonHeight - 5 * $fontPadding);
           gap: $fontPadding;
