@@ -8,6 +8,52 @@ export const items = [
         model: 'assets/models/gltf/Air Cage.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          name: '55L',
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 2795,
+        },
+        staticSizes: [
+          {
+            name: '70L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 12,
+            extraPrice: 200,
+          },
+        ],
+        accessories: [
+          {
+            name: 'Golf Compatible',
+            types: [
+              {
+                name: 'Not Golf Compatible',
+                extraPrice: 0,
+              },
+              {
+                name: 'Golf Compatible',
+                extraPrice: 299,
+              },
+            ],
+          },
+          {
+            name: 'Storage Cart',
+            types: [
+              {
+                name: 'No Storage Cart',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Storage Cart',
+                extraPrice: 496,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'CurtainCage Easy Slide',
@@ -15,6 +61,52 @@ export const items = [
         model: 'assets/models/gltf/CurtainCage Easy Slide.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          name: '55L',
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 2795,
+        },
+        staticSizes: [
+          {
+            name: '70L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 12,
+            extraPrice: 200,
+          },
+        ],
+        accessories: [
+          {
+            name: 'Golf Compatible',
+            types: [
+              {
+                name: 'Not Golf Compatible',
+                extraPrice: 0,
+              },
+              {
+                name: 'Golf Compatible',
+                extraPrice: 299,
+              },
+            ],
+          },
+          {
+            name: 'Storage Cart',
+            types: [
+              {
+                name: 'No Storage Cart',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Storage Cart',
+                extraPrice: 496,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'CurtainCage Line Lift',
@@ -22,6 +114,70 @@ export const items = [
         model: 'assets/models/gltf/CurtainCage Line Lift.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 1196,
+        },
+        accessories: [
+          {
+            name: 'Vertical Cable Finish',
+            types: [
+              {
+                name: 'Un-cut',
+                extraPrice: 0,
+              },
+              {
+                name: 'Factory Cut/Crimped to Spec',
+                extraPrice: 856,
+              },
+            ],
+          },
+          {
+            name: 'Anchors',
+            types: [
+              {
+                name: '5x5 Plates',
+                extraPrice: 0,
+              },
+              {
+                name: '8x8 Plates',
+                extraPrice: 180,
+              },
+              {
+                name: 'Ceiling Brackets Est',
+                extraPrice: 450,
+              },
+            ],
+          },
+          {
+            name: 'Structure Type',
+            types: [
+              {
+                name: 'Wood',
+                extraPrice: 0,
+              },
+              {
+                name: 'Concrete',
+                extraPrice: 0,
+              },
+              {
+                name: 'Block',
+                extraPrice: 0,
+              },
+              {
+                name: 'Brick',
+                extraPrice: 0,
+              },
+              {
+                name: 'Other',
+                extraPrice: 0,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Shell Cage',
@@ -29,6 +185,32 @@ export const items = [
         model: 'assets/models/gltf/Shell Cage.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 36,
+          price: 3427,
+        },
+        accessories: [
+          {
+            name: 'Number of Lanes',
+            types: [
+              {
+                name: '2 Lanes',
+                extraPrice: 0,
+              },
+              {
+                name: '3 Lanes',
+                extraPrice: 1538,
+              },
+              {
+                name: '4 Lanes',
+                extraPrice: 2967,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Outdoor Collegiate 35',
@@ -36,6 +218,70 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Collegiate 35.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 3783,
+        },
+        accessories: [
+          {
+            name: 'Pole Size',
+            types: [
+              {
+                name: 'Standard Size',
+                extraPrice: 0,
+              },
+              {
+                name: 'Custom Size',
+                extraPrice: 100,
+              },
+            ],
+          },
+          {
+            name: 'Upgrades',
+            types: [
+              {
+                name: 'No Upgrades',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Base Anchor Kit',
+                extraPrice: 242,
+              },
+              {
+                name: 'With Kicker Stabilizers',
+                extraPrice: 1347,
+              },
+              {
+                name: 'With Base Anchor Kit and Kickers',
+                extraPrice: 1589,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Hot Dipped Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder-Coated-Black',
+                extraPrice: 2200,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2200,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2200,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Outdoor Collegiate 55',
@@ -43,6 +289,70 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Collegiate 55.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 4783,
+        },
+        accessories: [
+          {
+            name: 'Pole Size',
+            types: [
+              {
+                name: 'Standard Size',
+                extraPrice: 0,
+              },
+              {
+                name: 'Custom Size',
+                extraPrice: 100,
+              },
+            ],
+          },
+          {
+            name: 'Upgrades',
+            types: [
+              {
+                name: 'No Upgrades',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Base Anchor Kit',
+                extraPrice: 242,
+              },
+              {
+                name: 'With Kicker Stabilizers',
+                extraPrice: 1347,
+              },
+              {
+                name: 'With Base Anchor Kit and Kickers',
+                extraPrice: 1589,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Hot Dipped Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder-Coated-Black',
+                extraPrice: 2200,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2200,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2200,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Outdoor Collegiate 70',
@@ -50,6 +360,70 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Collegiate 70.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 5783,
+        },
+        accessories: [
+          {
+            name: 'Pole Size',
+            types: [
+              {
+                name: 'Standard Size',
+                extraPrice: 0,
+              },
+              {
+                name: 'Custom Size',
+                extraPrice: 100,
+              },
+            ],
+          },
+          {
+            name: 'Upgrades',
+            types: [
+              {
+                name: 'No Upgrades',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Base Anchor Kit',
+                extraPrice: 242,
+              },
+              {
+                name: 'With Kicker Stabilizers',
+                extraPrice: 1347,
+              },
+              {
+                name: 'With Base Anchor Kit and Kickers',
+                extraPrice: 1589,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Hot Dipped Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder-Coated-Black',
+                extraPrice: 2200,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2200,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2200,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Outdoor Pro 2x55',
@@ -57,6 +431,71 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Pro 2x55.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 24,
+          price: 6449,
+        },
+        staticSizes: [
+          {
+            name: '55W*12H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 12,
+            length: 28,
+            extraPrice: 44,
+          },
+          {
+            name: '70W*12H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 28,
+            extraPrice: 123,
+          },
+          {
+            name: '80W*12H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 12,
+            length: 28,
+            extraPrice: 158,
+          },
+          {
+            name: '70W*12H*12L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 24,
+            extraPrice: 213,
+          },
+          {
+            name: '55W*14H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 14,
+            length: 28,
+            extraPrice: 1169,
+          },
+          {
+            name: '70W*14H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 14,
+            length: 28,
+            extraPrice: 1310,
+          },
+          {
+            name: '80W*14H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 14,
+            length: 28,
+            extraPrice: 1424,
+          },
+        ],
       },
       {
         name: 'Outdoor Pro 55',
@@ -64,6 +503,71 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Pro 55.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 6449,
+        },
+        staticSizes: [
+          {
+            name: '55W*12H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 12,
+            length: 14,
+            extraPrice: 44,
+          },
+          {
+            name: '70W*12H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 14,
+            extraPrice: 123,
+          },
+          {
+            name: '80W*12H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 12,
+            length: 14,
+            extraPrice: 158,
+          },
+          {
+            name: '70W*12H*12L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 12,
+            extraPrice: 213,
+          },
+          {
+            name: '55W*14H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 14,
+            length: 14,
+            extraPrice: 1169,
+          },
+          {
+            name: '70W*14H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 14,
+            length: 14,
+            extraPrice: 1310,
+          },
+          {
+            name: '80W*14H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 14,
+            length: 14,
+            extraPrice: 1424,
+          },
+        ],
       },
       {
         name: 'Outdoor Pro 70',
@@ -71,6 +575,71 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Pro 70.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 12,
+          price: 6449,
+        },
+        staticSizes: [
+          {
+            name: '55W*12H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 12,
+            length: 14,
+            extraPrice: 44,
+          },
+          {
+            name: '70W*12H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 14,
+            extraPrice: 123,
+          },
+          {
+            name: '80W*12H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 12,
+            length: 14,
+            extraPrice: 158,
+          },
+          {
+            name: '70W*12H*12L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 12,
+            extraPrice: 213,
+          },
+          {
+            name: '55W*14H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 14,
+            length: 14,
+            extraPrice: 1169,
+          },
+          {
+            name: '70W*14H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 14,
+            length: 14,
+            extraPrice: 1310,
+          },
+          {
+            name: '80W*14H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 14,
+            length: 14,
+            extraPrice: 1424,
+          },
+        ],
       },
       {
         name: 'Outdoor Varsity 35',
@@ -78,6 +647,87 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Varsity 35.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 70,
+          height: 12,
+          length: 12,
+          price: 4385,
+        },
+        accessories: [
+          {
+            name: 'Netting',
+            types: [
+              {
+                name: 'No Net',
+                extraPrice: 0,
+              },
+              {
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
+              },
+            ],
+          },
+          {
+            name: 'Pipe Gauge',
+            types: [
+              {
+                name: '13 Gauge',
+                extraPrice: 0,
+              },
+              {
+                name: '10 Gauge',
+                extraPrice: 146,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
+                extraPrice: 0,
+              },
+              {
+                name: 'Residential',
+                extraPrice: 150,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Outdoor Varsity 55',
@@ -85,6 +735,87 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Varsity 55.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 70,
+          height: 12,
+          length: 12,
+          price: 4385,
+        },
+        accessories: [
+          {
+            name: 'Netting',
+            types: [
+              {
+                name: 'No Net',
+                extraPrice: 0,
+              },
+              {
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
+              },
+            ],
+          },
+          {
+            name: 'Pipe Gauge',
+            types: [
+              {
+                name: '13 Gauge',
+                extraPrice: 0,
+              },
+              {
+                name: '10 Gauge',
+                extraPrice: 146,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
+                extraPrice: 0,
+              },
+              {
+                name: 'Residential',
+                extraPrice: 150,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Outdoor Varsity 70',
@@ -92,6 +823,87 @@ export const items = [
         model: 'assets/models/gltf/Outdoor Varsity 70.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 70,
+          height: 12,
+          length: 12,
+          price: 4385,
+        },
+        accessories: [
+          {
+            name: 'Netting',
+            types: [
+              {
+                name: 'No Net',
+                extraPrice: 0,
+              },
+              {
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
+              },
+            ],
+          },
+          {
+            name: 'Pipe Gauge',
+            types: [
+              {
+                name: '13 Gauge',
+                extraPrice: 0,
+              },
+              {
+                name: '10 Gauge',
+                extraPrice: 146,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
+                extraPrice: 0,
+              },
+              {
+                name: 'Residential',
+                extraPrice: 150,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -112,6 +924,78 @@ export const items = [
         model: 'assets/models/gltf/L-Screen.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          name: '7W*9H',
+          unit: 'ft',
+          width: 7,
+          height: 9,
+          length: 1,
+          price: 599,
+        },
+        accessories: [
+          {
+            name: 'Style',
+            types: [
+              {
+                name: 'No Wheel Kit or Padding',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Padding',
+                extraPrice: 100,
+              },
+              {
+                name: 'With Wheel Kit',
+                extraPrice: 100,
+              },
+              {
+                name: 'With Padding and Wheel Kit',
+                extraPrice: 150,
+              },
+            ],
+          },
+          {
+            name: 'Padding Color',
+            types: [
+              {
+                name: 'Standard/None',
+                extraPrice: 0,
+              },
+              {
+                name: 'Black',
+                extraPrice: 0,
+              },
+              {
+                name: 'Scarlet',
+                extraPrice: 0,
+              },
+              {
+                name: 'Navy',
+                extraPrice: 0,
+              },
+              {
+                name: 'Red',
+                extraPrice: 0,
+              },
+              {
+                name: 'Royal Blue',
+                extraPrice: 0,
+              },
+              {
+                name: 'Dark Green',
+                extraPrice: 0,
+              },
+              {
+                name: 'Green',
+                extraPrice: 0,
+              },
+              {
+                name: 'Grey',
+                extraPrice: 0,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Softball Screen',
@@ -119,6 +1003,78 @@ export const items = [
         model: 'assets/models/gltf/Softball Screen.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          name: '5W*7H',
+          unit: 'ft',
+          width: 5,
+          height: 7,
+          length: 1,
+          price: 399,
+        },
+        accessories: [
+          {
+            name: 'Style',
+            types: [
+              {
+                name: 'No Wheel Kit or Padding',
+                extraPrice: 0,
+              },
+              {
+                name: 'With Padding',
+                extraPrice: 100,
+              },
+              {
+                name: 'With Wheel Kit',
+                extraPrice: 100,
+              },
+              {
+                name: 'With Padding and Wheel Kit',
+                extraPrice: 150,
+              },
+            ],
+          },
+          {
+            name: 'Padding Color',
+            types: [
+              {
+                name: 'Standard/None',
+                extraPrice: 0,
+              },
+              {
+                name: 'Black',
+                extraPrice: 0,
+              },
+              {
+                name: 'Scarlet',
+                extraPrice: 0,
+              },
+              {
+                name: 'Navy',
+                extraPrice: 0,
+              },
+              {
+                name: 'Red',
+                extraPrice: 0,
+              },
+              {
+                name: 'Royal Blue',
+                extraPrice: 0,
+              },
+              {
+                name: 'Dark Green',
+                extraPrice: 0,
+              },
+              {
+                name: 'Green',
+                extraPrice: 0,
+              },
+              {
+                name: 'Grey',
+                extraPrice: 0,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -139,12 +1095,104 @@ export const items = [
         model: 'assets/models/gltf/Goals.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          name: '24W*8H',
+          unit: 'ft',
+          width: 24,
+          height: 8,
+          length: 5,
+          price: 2445,
+        },
       },
     ],
   },
   {
     name: 'Building',
-    children: [],
+    children: [
+      {
+        name: 'Test',
+        children: [
+          {
+            name: 'Duck',
+            image: 'assets/models/thumbnails/thumbnail_duck.png',
+            model: 'assets/models/js/Duck.gltf',
+            type: '1',
+            format: 'gltf',
+            defaultSize: {
+              // name: 'defaultSize',
+              unit: 'cm',
+              width: 100,
+              height: 100,
+              length: 50,
+              price: 60,
+              pricePerUnit: 1,
+            },
+            staticSizes: [
+              {
+                name: 'staticSize1',
+                unit: 'cm',
+                width: 150,
+                height: 150,
+                length: 100,
+                extraPrice: 40,
+              },
+              {
+                name: 'staticSize2',
+                unit: 'cm',
+                width: 200,
+                height: 200,
+                length: 150,
+                extraPrice: 80,
+              },
+            ],
+            accessories: [
+              {
+                name: 'accessory1',
+                types: [
+                  {
+                    name: 'noType',
+                    extraPrice: 0,
+                  },
+                  {
+                    name: 'type11',
+                    extraPrice: 10,
+                  },
+                  {
+                    name: 'type12',
+                    extraPrice: 20,
+                  },
+                  {
+                    name: 'type13',
+                    extraPrice: 30,
+                  },
+                ],
+              },
+              {
+                name: 'accessory2',
+                types: [
+                  {
+                    name: 'noType',
+                    extraPrice: 0,
+                  },
+                  {
+                    name: 'type21',
+                    extraPrice: 10,
+                  },
+                  {
+                    name: 'type22',
+                    extraPrice: 20,
+                  },
+                  {
+                    name: 'type23',
+                    extraPrice: 30,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     name: 'Test',
@@ -156,6 +1204,7 @@ export const items = [
         type: '1',
         format: 'gltf',
         defaultSize: {
+          // name: 'defaultSize',
           unit: 'cm',
           width: 100,
           height: 100,
@@ -186,6 +1235,10 @@ export const items = [
             name: 'accessory1',
             types: [
               {
+                name: 'noType',
+                extraPrice: 0,
+              },
+              {
                 name: 'type11',
                 extraPrice: 10,
               },
@@ -202,6 +1255,10 @@ export const items = [
           {
             name: 'accessory2',
             types: [
+              {
+                name: 'noType',
+                extraPrice: 0,
+              },
               {
                 name: 'type21',
                 extraPrice: 10,
@@ -238,6 +1295,14 @@ export const items = [
         image: 'assets/models/thumbnails/thumbnail_window.png',
         model: 'assets/models/js/whitewindow.js',
         type: '3',
+        defaultSize: {
+          unit: 'ft',
+          width: 2,
+          height: 2,
+          length: 1,
+          price: 60,
+          pricePerUnit: 1,
+        },
       },
       {
         name: '4',
@@ -252,6 +1317,71 @@ export const items = [
         model: 'assets/models/gltf/stairs.glb',
         type: '5',
         format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 24,
+          price: 6449,
+        },
+        staticSizes: [
+          {
+            name: '55W*12H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 12,
+            length: 28,
+            extraPrice: 44,
+          },
+          {
+            name: '70W*12H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 28,
+            extraPrice: 123,
+          },
+          {
+            name: '80W*12H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 12,
+            length: 28,
+            extraPrice: 158,
+          },
+          {
+            name: '70W*12H*12L',
+            unit: 'ft',
+            width: 70,
+            height: 12,
+            length: 24,
+            extraPrice: 213,
+          },
+          {
+            name: '55W*14H*14L',
+            unit: 'ft',
+            width: 55,
+            height: 14,
+            length: 28,
+            extraPrice: 1169,
+          },
+          {
+            name: '70W*14H*14L',
+            unit: 'ft',
+            width: 70,
+            height: 14,
+            length: 28,
+            extraPrice: 1310,
+          },
+          {
+            name: '80W*14H*14L',
+            unit: 'ft',
+            width: 80,
+            height: 14,
+            length: 28,
+            extraPrice: 1424,
+          },
+        ],
       },
       {
         name: '7',

@@ -33,3 +33,6 @@ export const rgbToHex = ({ r, g, b }) => {
     componentToHex(parseInt(b * 255));
   return hex;
 };
+
+export const equals = (a, b) =>
+  a.length === b.length && a.every((v, i) => v === b[i]);

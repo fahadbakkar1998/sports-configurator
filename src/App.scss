@@ -148,9 +148,10 @@ $commonHeight: 1.8vmax;
               text-align: center;
               width: 90%;
               font-size: calc($commonHeight - 6 * $fontPadding);
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              overflow: hidden;
+              overflow-wrap: break-word;
+              // text-overflow: ellipsis;
+              // white-space: nowrap;
+              // overflow: hidden;
             }
           }
         }
@@ -192,6 +193,7 @@ $commonHeight: 1.8vmax;
           justify-content: space-between;
           align-items: center;
           font-size: calc($commonHeight - 5 * $fontPadding);
+          width: 100%;
 
           .input {
             height: $commonHeight;
@@ -363,6 +365,7 @@ $commonHeight: 1.8vmax;
           align-items: center;
           font-size: calc($commonHeight - 5 * $fontPadding);
           gap: $fontPadding;
+          flex-wrap: wrap;
 
           .input {
             height: $commonHeight;
@@ -432,6 +435,35 @@ $commonHeight: 1.8vmax;
         height: calc(100% - $commonHeight);
         overflow-x: hidden;
         overflow-y: auto;
+
+        .item-group {
+          padding: $commonHeight;
+          display: flex;
+          flex-direction: column;
+          border-bottom: 1px solid $borderColor;
+
+          .header {
+            margin-bottom: $fontPadding;
+            font-size: calc($commonHeight - 3 * $fontPadding);
+          }
+
+          .item {
+            margin-top: $fontPadding;
+            font-size: calc($commonHeight - 4 * $fontPadding);
+            display: flex;
+            justify-content: space-between;
+
+            .item-name {
+              &.active {
+                color: $activeColor;
+              }
+            }
+
+            .item-remove {
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }

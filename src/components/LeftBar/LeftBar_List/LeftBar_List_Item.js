@@ -25,6 +25,8 @@ const LeftBar_List_Item = ({
 }) => {
   const selectedWall = useZustand((state) => state.selectedWall);
   const selectedFloor = useZustand((state) => state.selectedFloor);
+  const [bpJS, setBpJS] = globalStore.useState('blueprintJS');
+  // console.log('hierarchy: ', hierarchy, hierarchy.slice(0, -1));
 
   const style = {
     marginLeft: `${depth * 1}vw`,
@@ -48,7 +50,13 @@ const LeftBar_List_Item = ({
               className="image"
               src={item.image}
               onClick={() => {
-                addItem({ ...item, selectedWall, selectedFloor, hierarchy });
+                addItem({
+                  ...item,
+                  selectedWall,
+                  selectedFloor,
+                  hierarchy: hierarchy.slice(0, -1),
+                });
+                setBpJS({ ...window.blueprintJS });
               }}></img>
             <div className="name" title={item.name}>
               {`(${itemTypes[item.type]})${item.name}`}

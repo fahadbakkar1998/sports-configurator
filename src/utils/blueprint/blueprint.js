@@ -3,6 +3,7 @@ import { Main } from './three/main.js';
 import { Floorplanner2D } from './floorplanner/floorplanner.js';
 import { Configuration, configDimUnit } from './core/configuration.js';
 import { dimMeter } from './core/dimensioning.js';
+import { immerable } from 'immer';
 
 // Classes from core module
 export { Version } from './core/version.js';
@@ -192,6 +193,7 @@ export { OBJExporter } from './exporters/OBJExporter.js';
 //
 // /* VestaDesigner core application. */
 export class BlueprintJS {
+  [immerable] = true;
   /*
    * Creates an instance of BlueprintJS. This is the entry point for the application
    *

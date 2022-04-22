@@ -94,3 +94,9 @@ export const updateVisibility = (flag) => {
 export const updateRoofMode = (flag) => {
   blueprintJS.three.floorplan.showRoof(flag);
 };
+
+export const getTotalPrice = () => {
+  const prices = blueprintJS.model.scene.items.map((item) => item.getPrice());
+  const price = prices.reduce((a, b) => a + b, 0);
+  return price;
+};

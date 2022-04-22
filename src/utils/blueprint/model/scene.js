@@ -184,7 +184,7 @@ export class Scene extends EventDispatcher {
         item.placeInRoom();
       }
     };
-    let gltfCallback = function (gltfModel, a, b, c) {
+    let gltfCallback = function (gltfModel) {
       console.log('gltfModel: ', gltfModel);
       let newMaterials = [];
       let newGeometry = new Geometry();

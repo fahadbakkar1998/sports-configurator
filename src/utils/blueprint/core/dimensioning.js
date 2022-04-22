@@ -4,7 +4,7 @@ import { Configuration, configDimUnit } from './configuration.js';
 export const dimInch = 'inch';
 
 /* Dimensioning in Inch. */
-export const dimFeetAndInch = 'feetAndInch';
+export const dimFeetAndInch = 'ft';
 
 /* Dimensioning in Meter. */
 export const dimMeter = 'm';

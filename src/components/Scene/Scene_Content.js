@@ -5,6 +5,7 @@ import { loadDefaultDesign } from '../../utils/bpSupport';
 import cn from 'classnames';
 
 const Scene_Content = () => {
+  const [bpJS, setBpJS] = globalStore.useState('blueprintJS');
   const editMode = useZustand((state) => state.editMode);
   const setSelectedWall = useZustand((state) => state.setSelectedWall);
   const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
@@ -14,14 +15,16 @@ const Scene_Content = () => {
   const setCur3dItemEvent = useZustand((state) => state.setCur3dItemEvent);
 
   useEffect(() => {
+    console.log('Scene_Content useEffect');
+
     // init
     window.blueprintJS = new Blueprint.BlueprintJS({
       floorplannerElement: 'floor_planner',
       threeElement: 'three',
-      threeCanvasElement: 'three-canvas',
+      threeCanvasElement: 'three_canvas',
       widget: false,
     });
-    // console.log('blueprintJS: ', blueprintJS);
+    setBpJS(window.blueprintJS);
 
     // load home
     loadDefaultDesign();

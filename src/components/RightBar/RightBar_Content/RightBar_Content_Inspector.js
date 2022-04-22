@@ -11,21 +11,19 @@ import cn from 'classnames';
 let isDot = false;
 
 const RightBar_Content_Inspector = () => {
-  const selectedWall = useZustand((state) => state.selectedWall);
-  const setSelectedWall = useZustand((state) => state.setSelectedWall);
+  console.log('RightBar_Content_Inspector: ');
 
-  const selectedFloor = useZustand((state) => state.selectedFloor);
-  const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
-
-  const selectedRoof = useZustand((state) => state.selectedRoof);
-  const setSelectedRoof = useZustand((state) => state.setSelectedRoof);
-
-  const cur3dItemEvent = useZustand((state) => state.cur3dItemEvent);
-  const setCur3dItemEvent = useZustand((state) => state.setCur3dItemEvent);
-
-  const dimUnit = Blueprint.Configuration.getStringValue(
-    Blueprint.configDimUnit,
-  );
+  const {
+    selectedWall,
+    setSelectedWall,
+    selectedFloor,
+    setSelectedFloor,
+    selectedRoof,
+    setSelectedRoof,
+    cur3dItemEvent,
+    setCur3dItemEvent,
+    curUnit,
+  } = useZustand();
 
   const inputSuffix = isDot ? '.' : '';
 
@@ -160,7 +158,7 @@ const RightBar_Content_Inspector = () => {
 
           <div className="input-group">
             <DragLabel
-              name={`Height(${dimUnit}):`}
+              name={`Height(${curUnit}):`}
               value={curRoofMiddleHeight}
               setValue={(val) => {
                 updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
@@ -278,7 +276,8 @@ const RightBar_Content_Inspector = () => {
                           onClick={() => {
                             updateCur3dStaticSize(-1);
                           }}>
-                          No
+                          {cur3dItemEvent.item.metadata.defaultSize.name ||
+                            'No'}
                         </div>
 
                         {React.Children.toArray(
@@ -305,7 +304,7 @@ const RightBar_Content_Inspector = () => {
                       {/* Dimension width */}
                       <div className="input-group">
                         <DragLabel
-                          name={`Width(${dimUnit}):`}
+                          name={`Width(${curUnit}):`}
                           value={cur3dItemWidth}
                           setValue={(width) =>
                             updateCur3dItemSize({ width: getUFloat(width) })
@@ -325,7 +324,7 @@ const RightBar_Content_Inspector = () => {
                       {/* Dimension height */}
                       <div className="input-group">
                         <DragLabel
-                          name={`Height(${dimUnit}):`}
+                          name={`Height(${curUnit}):`}
                           value={cur3dItemHeight}
                           setValue={(height) =>
                             updateCur3dItemSize({ height: getUFloat(height) })
@@ -345,7 +344,7 @@ const RightBar_Content_Inspector = () => {
                       {/* Dimension length */}
                       <div className="input-group">
                         <DragLabel
-                          name={`Length(${dimUnit}):`}
+                          name={`Length(${curUnit}):`}
                           value={cur3dItemDepth}
                           setValue={(depth) =>
                             updateCur3dItemSize({ depth: getUFloat(depth) })
@@ -404,7 +403,7 @@ const RightBar_Content_Inspector = () => {
                         <div className="property-header">{accessory.name}</div>
 
                         <div className="input-group">
-                          <div
+                          {/* <div
                             className={cn('option', {
                               active: cur3dItemEvent.item.accessoryNos[i] === 0,
                             })}
@@ -412,7 +411,7 @@ const RightBar_Content_Inspector = () => {
                               updateCur3dAccessory(i, 0);
                             }}>
                             No
-                          </div>
+                          </div> */}
 
                           {accessory.types &&
                             React.Children.toArray(

@@ -706,7 +706,7 @@ export class Item extends Mesh {
       if (metadata3.defaultSize) {
         defaultSize3 = metadata3.defaultSize;
 
-        if (defaultSize3.price && metadata3.staticSizes) {
+        if (defaultSize3.price) {
           cost3 = defaultSize3.price;
         } else if (defaultSize3.pricePerUnit && defaultSize3.unit) {
           const width = Dimensioning.cmToMeasureRaw(

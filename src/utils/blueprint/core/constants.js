@@ -12,7 +12,7 @@ export const WallTypes = Enum('STRAIGHT', 'CURVED');
 export const dimInch = 'inch';
 
 /* Dimensioning in Inch. */
-export const dimFeetAndInch = 'feetAndInch';
+export const dimFeetAndInch = 'ft';
 
 /* Dimensioning in Meter. */
 export const dimMeter = 'm';
