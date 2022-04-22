@@ -1299,7 +1299,7 @@ export const items = [
           unit: 'ft',
           width: 2,
           height: 2,
-          length: 1,
+          length: 0.2,
           price: 60,
           pricePerUnit: 1,
         },
@@ -1318,7 +1318,7 @@ export const items = [
         type: '5',
         format: 'gltf',
         defaultSize: {
-          unit: 'ft',
+          unit: 'cm',
           width: 55,
           height: 12,
           length: 24,
@@ -1327,7 +1327,7 @@ export const items = [
         staticSizes: [
           {
             name: '55W*12H*14L',
-            unit: 'ft',
+            unit: 'cm',
             width: 55,
             height: 12,
             length: 28,
@@ -1335,7 +1335,7 @@ export const items = [
           },
           {
             name: '70W*12H*14L',
-            unit: 'ft',
+            unit: 'cm',
             width: 70,
             height: 12,
             length: 28,
@@ -1343,7 +1343,7 @@ export const items = [
           },
           {
             name: '80W*12H*14L',
-            unit: 'ft',
+            unit: 'cm',
             width: 80,
             height: 12,
             length: 28,
@@ -1351,7 +1351,7 @@ export const items = [
           },
           {
             name: '70W*12H*12L',
-            unit: 'ft',
+            unit: 'cm',
             width: 70,
             height: 12,
             length: 24,
@@ -1359,7 +1359,7 @@ export const items = [
           },
           {
             name: '55W*14H*14L',
-            unit: 'ft',
+            unit: 'cm',
             width: 55,
             height: 14,
             length: 28,
@@ -1367,7 +1367,7 @@ export const items = [
           },
           {
             name: '70W*14H*14L',
-            unit: 'ft',
+            unit: 'cm',
             width: 70,
             height: 14,
             length: 28,
@@ -1375,7 +1375,7 @@ export const items = [
           },
           {
             name: '80W*14H*14L',
-            unit: 'ft',
+            unit: 'cm',
             width: 80,
             height: 14,
             length: 28,
