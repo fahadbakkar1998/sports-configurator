@@ -6,13 +6,16 @@ import cn from 'classnames';
 
 const Scene_Content = () => {
   const [bpJS, setBpJS] = globalStore.useState('blueprintJS');
-  const editMode = useZustand((state) => state.editMode);
-  const setSelectedWall = useZustand((state) => state.setSelectedWall);
-  const setSelectedFloor = useZustand((state) => state.setSelectedFloor);
-  const setSelectedRoof = useZustand((state) => state.setSelectedRoof);
-  const setFloorPlanMode = useZustand((state) => state.setFloorPlanMode);
-  const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
-  const setCur3dItemEvent = useZustand((state) => state.setCur3dItemEvent);
+  const {
+    editMode,
+    setSelectedWall,
+    setSelectedFloor,
+    setSelectedRoof,
+    setFloorPlanMode,
+    setCur2dItemEvent,
+    setCur3dItemEvent,
+    setLoading,
+  } = useZustand();
 
   useEffect(() => {
     console.log('Scene_Content useEffect');
@@ -25,16 +28,18 @@ const Scene_Content = () => {
       widget: false,
     });
     setBpJS(window.blueprintJS);
-
-    // load home
-    loadDefaultDesign();
+    console.log('blueprintJS: ', window.blueprintJS);
 
     // init events
     initEvents();
+
+    // load home
+    loadDefaultDesign();
   }, []);
 
   const initEvents = () => {
     /* three */
+
     // blueprintJS.three.addEventListener(Blueprint.EVENT_FPS_EXIT, (o) => {
     //   console.log('EVENT_FPS_EXIT: ', o);
     // });
@@ -87,6 +92,7 @@ const Scene_Content = () => {
     // );
 
     /* floor planner */
+
     // When the planner mode changes. (between move, draw and delete)
     blueprintJS.floorplanner.addEventListener(
       Blueprint.EVENT_MODE_RESET,
@@ -141,6 +147,24 @@ const Scene_Content = () => {
         console.log('EVENT_ROOM_2D_CLICKED: ', o);
         o.type = 'ROOM';
         setCur2dItemEvent(o);
+      },
+    );
+
+    /* scene */
+    blueprintJS.three.scene.addEventListener(
+      Blueprint.EVENT_ITEM_LOADING,
+      (o) => {
+        console.log('EVENT_ITEM_LOADING: ', o);
+        setLoading(true);
+      },
+    );
+
+    blueprintJS.three.scene.addEventListener(
+      Blueprint.EVENT_ITEM_LOADED,
+      (o) => {
+        console.log('EVENT_ITEM_LOADED: ', o);
+        setLoading(false);
+        setBpJS({ ...blueprintJS });
       },
     );
   };

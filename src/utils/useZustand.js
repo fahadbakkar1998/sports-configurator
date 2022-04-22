@@ -85,6 +85,12 @@ const useZustand = create((set) => ({
     set((state) => ({
       visibility,
     })),
+
+  loading: false,
+  setLoading: (loading) =>
+    set((state) => ({
+      loading,
+    })),
 }));
 
 export default useZustand;

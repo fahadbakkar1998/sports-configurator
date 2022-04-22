@@ -54,15 +54,15 @@ const RightBar_Content_Total = () => {
                     })}>
                     {item.metadata.name}
                   </div>
-                  <div
+                  <img
                     className="item-remove"
+                    src="assets/images/close.png"
                     onClick={() => {
                       item.remove();
                       bpJS.three.render(true);
                       setBpJS({ ...bpJS });
-                    }}>
-                    X
-                  </div>
+                    }}
+                  />
                 </div>
               )),
             )}

@@ -25,7 +25,6 @@ const LeftBar_List_Item = ({
 }) => {
   const selectedWall = useZustand((state) => state.selectedWall);
   const selectedFloor = useZustand((state) => state.selectedFloor);
-  const [bpJS, setBpJS] = globalStore.useState('blueprintJS');
   // console.log('hierarchy: ', hierarchy, hierarchy.slice(0, -1));
 
   const style = {
@@ -56,7 +55,6 @@ const LeftBar_List_Item = ({
                   selectedFloor,
                   hierarchy: hierarchy.slice(0, -1),
                 });
-                setBpJS({ ...window.blueprintJS });
               }}></img>
             <div className="name" title={item.name}>
               {`(${itemTypes[item.type]})${item.name}`}
