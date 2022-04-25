@@ -57,7 +57,8 @@ const LeftBar_List_Item = ({
                 });
               }}></img>
             <div className="name" title={item.name}>
-              {`(${itemTypes[item.type]})${item.name}`}
+              {/* {`(${itemTypes[item.type]})${item.name}`} */}
+              {item.name}
             </div>
           </div>
         </div>
