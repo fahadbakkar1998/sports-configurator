@@ -60,7 +60,6 @@ export class Roof extends EventDispatcher {
     this.room.roof = this;
 
     this.room.addEventListener(EVENT_CHANGED, () => {
-      console.log('EVENT_CHANGED: ', this);
       this.sideTexture = this.textureLoader.load(this.room.getTexture().url);
       this.frontPlane.material.map = this.sideTexture;
       this.frontPlane.material.needsUpdate = true;

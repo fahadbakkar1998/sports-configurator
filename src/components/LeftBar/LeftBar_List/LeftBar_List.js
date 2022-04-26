@@ -270,7 +270,6 @@ const LeftBar_List = () => {
                 type="text"
                 value={cur2dItemY + inputSuffix}
                 onChange={(e) => {
-                  console.log(getFloat(e.target.value));
                   moveCorner({ y: getFloat(e.target.value) });
                 }}></input>
             </div>

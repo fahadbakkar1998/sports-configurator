@@ -49,7 +49,7 @@ export class Floor extends EventDispatcher {
   }
 
   redraw() {
-    console.log('floor redraw');
+    console.log('floor_redraw');
     this.removeFromScene();
     this.floorPlane = this.buildFloor();
     this.roofPlane = this.buildRoofVaryingHeight();
@@ -138,14 +138,12 @@ export class Floor extends EventDispatcher {
   }
 
   addToScene() {
-    // console.log('floorPlane: ', this.floorPlane);
     this.scene.add(this.floorPlane);
     this.scene.add(this.roofPlane);
     // scene.add(roofPlane);
     // hack so we can do intersect testing
     // this.scene.add(this.room.floorPlane);
     // this.scene.add(this.room.roofPlane);
-    // console.log(this.three);
     // this.three.render(true);
   }
 

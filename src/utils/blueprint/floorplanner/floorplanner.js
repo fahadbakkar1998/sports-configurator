@@ -246,7 +246,6 @@ export class Floorplanner2D extends EventDispatcher {
   }
 
   keyDown(e) {
-    // console.log('keyDown: ', e);
     if (e.shiftKey || e.keyCode == 16) {
       this.shiftKey = true;
     }
@@ -332,8 +331,6 @@ export class Floorplanner2D extends EventDispatcher {
     this.lastX = this.rawMouseX;
     this.lastY = this.rawMouseY;
 
-    // console.log('active corner: ', this.activeCorner);
-
     // delete
     if (this.mode == floorplannerModes.DELETE) {
       if (this.activeCorner) {
@@ -371,7 +368,6 @@ export class Floorplanner2D extends EventDispatcher {
     let mDownCorner = this.floorplan.overlappedCorner(this.mouseX, this.mouseY);
     let mDownWall = this.floorplan.overlappedWall(this.mouseX, this.mouseY);
     let mDownRoom = this.floorplan.overlappedRoom(this.mouseX, this.mouseY);
-    // console.log(mDownCorner, mDownWall, mDownRoom);
     this._clickedWallControl = null;
 
     if (mDownCorner == null && mDownWall == null && mDownRoom == null) {
@@ -510,7 +506,6 @@ export class Floorplanner2D extends EventDispatcher {
     ) {
       // else if (this.mouseDown && (this.activeCorner==null) && (this.activeWall==null) && (this._clickedWallControl == null))
       // else if (this.mouseDown && (!this._clickedCorner) && (!this._clickedWall) && (this._clickedWallControl == null))
-      // console.log('PANNING :: ', this.activeCorner, this.activeWall);
       this.originX += this.lastX - this.rawMouseX;
       this.originY += this.lastY - this.rawMouseY;
       this.unScaledOriginX +=

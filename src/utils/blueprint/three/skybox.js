@@ -156,7 +156,6 @@ export class Skybox extends EventDispatcher {
   }
 
   toggleEnvironment(flag) {
-    // console.log('toggleEnvironment');
     this.useEnvironment = flag;
     if (!flag) {
       this.ground.visible = true;
@@ -176,7 +175,6 @@ export class Skybox extends EventDispatcher {
   }
 
   setEnvironmentMap(url) {
-    // console.log('setEnvironmentMap');
     var scope = this;
     scope.texture.load(
       url,
@@ -193,7 +191,7 @@ export class Skybox extends EventDispatcher {
       },
       undefined,
       function () {
-        console.log('ERROR LOADING FILE');
+        console.log('skybox: ', 'ERROR LOADING FILE');
       },
     );
   }

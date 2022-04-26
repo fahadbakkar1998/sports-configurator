@@ -25,7 +25,6 @@ const LeftBar_List_Item = ({
 }) => {
   const selectedWall = useZustand((state) => state.selectedWall);
   const selectedFloor = useZustand((state) => state.selectedFloor);
-  // console.log('hierarchy: ', hierarchy, hierarchy.slice(0, -1));
 
   const style = {
     marginLeft: `${depth * 1}vw`,

@@ -267,7 +267,6 @@ export class Wall extends EventDispatcher {
 
   set wallSize(value) {
     if (getUFloat(value) <= 100) return;
-    console.log('wallSize: ', value);
     if (this.wallType == WallTypes.STRAIGHT) {
       let vector = this.getEnd().location.clone().sub(this.getStart().location);
       let currentLength = this.wallLength();
@@ -443,7 +442,7 @@ export class Wall extends EventDispatcher {
     } else if (this.end === corner) {
       return this.start;
     } else {
-      console.log('Wall does not connect to corner');
+      console.log('wall: ', 'Wall does not connect to corner');
       return null;
     }
   }

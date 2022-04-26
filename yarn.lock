@@ -4876,6 +4876,11 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
+draco3dgltf@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/draco3dgltf/-/draco3dgltf-1.5.2.tgz#f940463c702d5fcad2fdbeef8508a678ac59ac7e"
+  integrity sha512-lw3oa87pN6iBqwibLvtXp4uHczK/mXqacjVaORJhAze7mgd0lgw1XXf4I1KtaU/W/O+6zdDrPLx8VZz86aXbqA==
+
 duplexer@^0.1.1, duplexer@^0.1.2, duplexer@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
@@ -11169,6 +11174,11 @@ three-copyshader@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/three-copyshader/-/three-copyshader-0.0.1.tgz#ddfa6c3f5dbce596187cfbf4ce1b46c7fbd456c0"
   integrity sha1-3fpsP1285ZYYfPv0zhtGx/vUVsA=
+
+three-dracoloader@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/three-dracoloader/-/three-dracoloader-0.0.1.tgz#523f0d343db7fd5cda4e2f173a9bc10e418091ca"
+  integrity sha512-A0RaTo+0kUapWA+DYglK615KQ5c+qZAuhUkGd4iOZ9f+Pp7eQHHi9UX2uBHco9N1m4fDLTatu/TF+oaLlZEgOg==
 
 three-effectcomposer@^0.0.1:
   version "0.0.1"

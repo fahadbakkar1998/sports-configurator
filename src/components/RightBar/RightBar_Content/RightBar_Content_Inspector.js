@@ -11,8 +11,6 @@ import cn from 'classnames';
 let isDot = false;
 
 const RightBar_Content_Inspector = () => {
-  console.log('RightBar_Content_Inspector: ');
-
   const {
     selectedWall,
     setSelectedWall,

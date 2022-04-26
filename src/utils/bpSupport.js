@@ -16,7 +16,7 @@ export const saveDesign = () => {
 };
 
 export const loadDesign = (data) => {
-  console.log('design data: ', JSON.parse(data));
+  console.log('bpSupport_loadDesign_data: ', JSON.parse(data));
   blueprintJS.model.loadSerialized(data);
   updateFloorPlan();
 };
@@ -27,7 +27,7 @@ export const loadDefaultDesign = () => {
 };
 
 export const addItem = (item) => {
-  console.log('add item: ', item);
+  console.log('bpSupport_addItem_item: ', item);
   item.resizable = item.resizeProportionally = true;
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     // Wall Items

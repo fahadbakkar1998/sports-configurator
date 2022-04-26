@@ -743,7 +743,6 @@ export class Floorplan extends EventDispatcher {
     updateCorners = null, //Should include for , updateWalls=null, updateRooms=null
   ) {
     if (updateCorners != null) {
-      // console.log('UPDATE CORNER ANGLES ::: ', updateCorners.length);
       updateCorners.forEach((corner) => {
         corner.updateAngles();
       });
@@ -754,8 +753,6 @@ export class Floorplan extends EventDispatcher {
       return;
     }
 
-    // console.log('UPDATE ROOM WITH NEW ENTRIES ::: ');
-
     var scope = this;
     this.walls.forEach((wall) => {
       wall.resetFrontBack();
@@ -765,7 +762,6 @@ export class Floorplan extends EventDispatcher {
     // scope.roomNameChanged)});
 
     var roomCorners = this.findRooms(this.corners);
-    // console.log('roomCorners: ', roomCorners);
     this.rooms = [];
 
     this.corners.forEach((corner) => {
@@ -801,7 +797,6 @@ export class Floorplan extends EventDispatcher {
     this.assignOrphanEdges();
     this.updateFloorTextures();
     this.dispatchEvent({ type: EVENT_UPDATED, item: this });
-    // console.log('TOTAL WALLS ::: ', this.walls.length);
   }
 
   /*

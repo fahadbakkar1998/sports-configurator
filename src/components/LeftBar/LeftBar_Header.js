@@ -12,13 +12,13 @@ const LeftBar_Header = () => {
         className={cn('item')}
         src="assets/images/icon-search.png"
         onClick={() => {
-          console.log('search');
+          console.log('LeftBar_Header_onSearch');
         }}></img>
       <img
         className={cn('item')}
         src="assets/images/icon-hand.png"
         onClick={() => {
-          console.log('hand');
+          console.log('LeftBar_Header_onHand');
         }}></img>
     </div>
   );

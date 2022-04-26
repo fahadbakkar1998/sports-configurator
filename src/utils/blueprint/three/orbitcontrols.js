@@ -444,26 +444,18 @@ function OrbitControls(object, domElement) {
   //
 
   function handleMouseDownRotate(event) {
-    // console.log( 'handleMouseDownRotate' );
-
     rotateStart.set(event.clientX, event.clientY);
   }
 
   function handleMouseDownDolly(event) {
-    // console.log( 'handleMouseDownDolly' );
-
     dollyStart.set(event.clientX, event.clientY);
   }
 
   function handleMouseDownPan(event) {
-    // console.log( 'handleMouseDownPan' );
-
     panStart.set(event.clientX, event.clientY);
   }
 
   function handleMouseMoveRotate(event) {
-    // console.log( 'handleMouseMoveRotate' );
-
     rotateEnd.set(event.clientX, event.clientY);
 
     rotateDelta
@@ -484,8 +476,6 @@ function OrbitControls(object, domElement) {
   }
 
   function handleMouseMoveDolly(event) {
-    // console.log( 'handleMouseMoveDolly' );
-
     dollyEnd.set(event.clientX, event.clientY);
 
     dollyDelta.subVectors(dollyEnd, dollyStart);
@@ -513,13 +503,10 @@ function OrbitControls(object, domElement) {
     scope.update();
   }
 
-  function handleMouseUp(/* event */) {
-    // console.log( 'handleMouseUp' );
+  function handleMouseUp(event) {
   }
 
   function handleMouseWheel(event) {
-    // console.log( 'handleMouseWheel' );
-
     if (event.deltaY < 0) {
       dollyOut(getZoomScale());
     } else if (event.deltaY > 0) {
@@ -530,8 +517,6 @@ function OrbitControls(object, domElement) {
   }
 
   function handleKeyDown(event) {
-    // console.log( 'handleKeyDown' );
-
     switch (event.keyCode) {
       case scope.keys.UP:
         pan(0, scope.keyPanSpeed);
@@ -556,14 +541,10 @@ function OrbitControls(object, domElement) {
   }
 
   function handleTouchStartRotate(event) {
-    // console.log( 'handleTouchStartRotate' );
-
     rotateStart.set(event.touches[0].pageX, event.touches[0].pageY);
   }
 
   function handleTouchStartDollyPan(event) {
-    // console.log( 'handleTouchStartDollyPan' );
-
     if (scope.enableZoom) {
       let dx = event.touches[0].pageX - event.touches[1].pageX;
       let dy = event.touches[0].pageY - event.touches[1].pageY;
@@ -582,8 +563,6 @@ function OrbitControls(object, domElement) {
   }
 
   function handleTouchMoveRotate(event) {
-    // console.log( 'handleTouchMoveRotate' );
-
     rotateEnd.set(event.touches[0].pageX, event.touches[0].pageY);
 
     rotateDelta
@@ -604,8 +583,6 @@ function OrbitControls(object, domElement) {
   }
 
   function handleTouchMoveDollyPan(event) {
-    // console.log( 'handleTouchMoveDollyPan' );
-
     if (scope.enableZoom) {
       let dx = event.touches[0].pageX - event.touches[1].pageX;
       let dy = event.touches[0].pageY - event.touches[1].pageY;
@@ -637,8 +614,7 @@ function OrbitControls(object, domElement) {
     scope.update();
   }
 
-  function handleTouchEnd(/* event */) {
-    // console.log( 'handleTouchEnd' );
+  function handleTouchEnd(event) {
   }
 
   //

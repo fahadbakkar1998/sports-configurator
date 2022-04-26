@@ -6,7 +6,8 @@ import {
   Scene as ThreeScene,
   LoadingManager,
 } from 'three';
-import GLTFLoader from 'three-gltf-loader';
+import DRACOLoader from '../loaders/three-dracoloader';
+import GLTFLoader from '../loaders/GLTFLoader';
 import OBJLoader from '@calvinscofield/three-objloader';
 import { Utils } from '../core/utils.js';
 import { Factory } from '../items/factory.js';
@@ -41,10 +42,13 @@ export class Scene extends EventDispatcher {
     this.loader = new JSONLoader();
     this.loader.setCrossOrigin('');
 
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath('assets/models/draco/gltf/');
     this.gltfLoadingManager = new LoadingManager();
     this.gltfLoader = new GLTFLoader(this.gltfLoadingManager);
+    this.gltfLoader.setCrossOrigin('');
+    this.gltfLoader.setDRACOLoader(this.dracoLoader);
     this.objLoader = new OBJLoader();
-    // this.gltfLoader.setCrossOrigin('');
 
     this.itemLoadingCallbacks = null;
     this.itemLoadedCallbacks = null;
@@ -185,11 +189,13 @@ export class Scene extends EventDispatcher {
       }
     };
     let gltfCallback = function (gltfModel) {
-      console.log('gltfModel: ', gltfModel);
+      console.log('scene_gltfCallback');
+      console.log('scene_gltfModel: ', gltfModel);
       let newMaterials = [];
       let newGeometry = new Geometry();
 
       gltfModel.scene.traverse(function (child) {
+        console.log('scene_gltfModel_child: ', child);
         if (child.type == 'Mesh') {
           let materialIndices = [];
           let newItems;
@@ -223,8 +229,10 @@ export class Scene extends EventDispatcher {
           }
         }
       });
+
+      console.log('scene_gltfCallback_end', newGeometry, newMaterials);
       loaderCallback(newGeometry, newMaterials);
-      // loaderCallback(gltfModel.scene, newMaterials, true);
+      // loaderCallback(gltfModel.scene, gltfModel.scene, true);
     };
 
     let objCallback = function (object) {
@@ -258,10 +266,10 @@ export class Scene extends EventDispatcher {
         fileName,
         gltfCallback,
         (e) => {
-          console.log('gltf onLoad Result: ', e);
+          console.log('scene_onLoad: ', e);
         },
         (e) => {
-          console.log('gltf onProgress Result: ', e);
+          console.log('scene_onProgress: ', e);
         },
       );
     } else if (metadata.format == 'obj') {
