@@ -213,6 +213,39 @@ export const items = [
         ],
       },
       {
+        name: 'Shell_Cage_New_Compress',
+        image: 'assets/models/thumbnails/Shell Cage.png',
+        model: 'assets/models/gltf/Shell_Cage_New_Compress.glb',
+        type: '5',
+        format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 55,
+          height: 12,
+          length: 36,
+          price: 3427,
+        },
+        accessories: [
+          {
+            name: 'Number of Lanes',
+            types: [
+              {
+                name: '2 Lanes',
+                extraPrice: 0,
+              },
+              {
+                name: '3 Lanes',
+                extraPrice: 1538,
+              },
+              {
+                name: '4 Lanes',
+                extraPrice: 2967,
+              },
+            ],
+          },
+        ],
+      },
+      {
         name: 'Outdoor Collegiate 35',
         image: 'assets/models/thumbnails/Outdoor Collegiate 35.png',
         model: 'assets/models/gltf/Outdoor Collegiate 35.glb',
@@ -645,6 +678,94 @@ export const items = [
         name: 'Outdoor Varsity 35',
         image: 'assets/models/thumbnails/Outdoor Varsity 35.png',
         model: 'assets/models/gltf/Outdoor Varsity 35.glb',
+        type: '5',
+        format: 'gltf',
+        defaultSize: {
+          unit: 'ft',
+          width: 70,
+          height: 12,
+          length: 12,
+          price: 4385,
+        },
+        accessories: [
+          {
+            name: 'Netting',
+            types: [
+              {
+                name: 'No Net',
+                extraPrice: 0,
+              },
+              {
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
+              },
+            ],
+          },
+          {
+            name: 'Pipe Gauge',
+            types: [
+              {
+                name: '13 Gauge',
+                extraPrice: 0,
+              },
+              {
+                name: '10 Gauge',
+                extraPrice: 146,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
+                extraPrice: 0,
+              },
+              {
+                name: 'Residential',
+                extraPrice: 150,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Outdoor_Varsity_35_New',
+        image: 'assets/models/thumbnails/Outdoor Varsity 35.png',
+        model: 'assets/models/gltf/Outdoor_Varsity_35_New.glb',
         type: '5',
         format: 'gltf',
         defaultSize: {
