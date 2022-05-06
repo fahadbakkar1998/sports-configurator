@@ -1,7 +1,2 @@
-[Todo List]
-
-- roof
-- modeling
-- total page
-- price calculation
-- fog
+[ add following to the package.json to test on wordpress. ]
+"homepage": "/sports-configurator/",
