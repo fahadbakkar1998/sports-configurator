@@ -266,10 +266,10 @@ export class Scene extends EventDispatcher {
         fileName,
         gltfCallback,
         (e) => {
-          console.log('scene_onLoad: ', e);
+          // console.log('scene_onLoad: ', e);
         },
         (e) => {
-          console.log('scene_onProgress: ', e);
+          // console.log('scene_onProgress: ', e);
         },
       );
     } else if (metadata.format == 'obj') {
