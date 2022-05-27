@@ -143,7 +143,7 @@ export const items = [
                   width: 55,
                   height: 12,
                   length: 36,
-                  // price: 3427,
+                  price: 3427,
                 },
                 accessories: [
                   {
@@ -182,7 +182,7 @@ export const items = [
                   width: 55,
                   height: 12,
                   length: 12,
-                  // price: 2795,
+                  price: 2795,
                 },
                 // staticSizes: [
                 //   {
