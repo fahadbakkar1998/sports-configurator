@@ -991,7 +991,7 @@ export const items = [
       {
         name: 'L-Screen',
         image: 'assets/models/thumbnails/L-Screen.png',
-        model: 'assets/models/gltf/L-Screen.glb',
+        model: 'assets/models/gltf/L Screen.glb',
         type: '5',
         format: 'gltf',
         defaultSize: {
@@ -1394,9 +1394,9 @@ export const rectHome = JSON.stringify({
     version: '0.0.2a',
     corners: {
       '4bb4443f-7fab-f22d-5497-212403689ff9': { x: 0, y: 0, elevation: 2.5 },
-      'ab04e8c7-2de5-2980-3ac6-358f020f0aac': { x: 5, y: 0, elevation: 2.5 },
-      'c038166d-c9fc-d71a-f009-1a3010ea9749': { x: 5, y: 5, elevation: 2.5 },
-      '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': { x: 0, y: 5, elevation: 2.5 },
+      'ab04e8c7-2de5-2980-3ac6-358f020f0aac': { x: 10, y: 0, elevation: 2.5 },
+      'c038166d-c9fc-d71a-f009-1a3010ea9749': { x: 10, y: 10, elevation: 2.5 },
+      '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': { x: 0, y: 10, elevation: 2.5 },
     },
     walls: [
       {
@@ -1498,7 +1498,7 @@ export const rectHome = JSON.stringify({
       y: 0,
       anchorX: 0,
       anchorY: 0,
-      length: 0.01,
+      width: 0.01,
       height: 0.01,
     },
   },
