@@ -1,252 +1,522 @@
 export const items = [
   {
-    name: 'Batting Cage',
+    name: 'Indoor Netting',
     children: [
       {
-        name: 'Air Cage',
-        image: 'assets/models/thumbnails/Air Cage.png',
-        model: 'assets/models/gltf/Air Cage.glb',
+        name: 'Indoor Batting Cage',
+        children: [
+          {
+            name: 'Single Tunnel',
+            children: [
+              {
+                name: 'CurtainCage Easy Slide',
+                image: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+                model: 'assets/models/gltf/CurtainCage Easy Slide.glb',
+                type: '5',
+                format: 'gltf',
+                defaultSize: {
+                  name: '55L',
+                  unit: 'ft',
+                  width: 55,
+                  height: 12,
+                  length: 12,
+                  // price: 2795,
+                },
+                accessories: [
+                  {
+                    name: 'Golf Compatible',
+                    types: [
+                      {
+                        name: 'Not Golf Compatible',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Golf Compatible',
+                        extraPrice: 299,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Storage Cart',
+                    types: [
+                      {
+                        name: 'No Storage Cart',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'With Storage Cart',
+                        extraPrice: 496,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Single Tunnel with Vertical Drop Lines',
+            children: [
+              {
+                name: 'CurtainCage Line Lift',
+                image: 'assets/models/thumbnails/CurtainCage Line Lift.png',
+                model: 'assets/models/gltf/CurtainCage Line Lift.glb',
+                type: '5',
+                format: 'gltf',
+                defaultSize: {
+                  unit: 'ft',
+                  width: 55,
+                  height: 12,
+                  length: 12,
+                  // price: 1196,
+                },
+                accessories: [
+                  {
+                    name: 'Vertical Cable Finish',
+                    types: [
+                      {
+                        name: 'Un-cut',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Factory Cut/Crimped to Spec',
+                        extraPrice: 856,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Anchors',
+                    types: [
+                      {
+                        name: '5x5 Plates',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: '8x8 Plates',
+                        extraPrice: 180,
+                      },
+                      {
+                        name: 'Ceiling Brackets Est',
+                        extraPrice: 450,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Structure Type',
+                    types: [
+                      {
+                        name: 'Wood',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Concrete',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Block',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Brick',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Other',
+                        extraPrice: 0,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Multi Lane Tunnel',
+            children: [
+              {
+                name: 'Shell Cage',
+                image: 'assets/models/thumbnails/Shell Cage.png',
+                model: 'assets/models/gltf/Shell Cage.glb',
+                type: '5',
+                format: 'gltf',
+                defaultSize: {
+                  unit: 'ft',
+                  width: 55,
+                  height: 12,
+                  length: 36,
+                  // price: 3427,
+                },
+                accessories: [
+                  {
+                    name: 'Number of Lanes',
+                    types: [
+                      {
+                        name: '2 Lanes',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: '3 Lanes',
+                        extraPrice: 1538,
+                      },
+                      {
+                        name: '4 Lanes',
+                        extraPrice: 2967,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Electric Retractable Tunnel',
+            children: [
+              {
+                name: 'Air Cage',
+                image: 'assets/models/thumbnails/Air Cage.png',
+                model: 'assets/models/gltf/Air Cage.glb',
+                type: '5',
+                format: 'gltf',
+                defaultSize: {
+                  name: '55L',
+                  unit: 'ft',
+                  width: 55,
+                  height: 12,
+                  length: 12,
+                  // price: 2795,
+                },
+                // staticSizes: [
+                //   {
+                //     name: '70L',
+                //     unit: 'ft',
+                //     width: 70,
+                //     height: 12,
+                //     length: 12,
+                //     extraPrice: 200,
+                //   },
+                // ],
+                accessories: [
+                  {
+                    name: 'Golf Compatible',
+                    types: [
+                      {
+                        name: 'Not Golf Compatible',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'Golf Compatible',
+                        extraPrice: 299,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Storage Cart',
+                    types: [
+                      {
+                        name: 'No Storage Cart',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: 'With Storage Cart',
+                        extraPrice: 496,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Cable Free Tunnel',
+            children: [
+              {
+                name: 'Phantom',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Indoor Hitting Cage',
+        children: [
+          {
+            name: 'Single Hitting Cage',
+          },
+        ],
+      },
+      {
+        name: 'Barrier Net',
+      },
+    ],
+  },
+  {
+    name: 'Outdoor Batting Cage',
+    children: [
+      {
+        name: 'Varsity (35ft)',
+        image: 'assets/models/thumbnails/Outdoor Varsity 35.png',
+        model: 'assets/models/gltf/Outdoor_Varsity_35_New.glb',
         type: '5',
         format: 'gltf',
         defaultSize: {
-          name: '55L',
           unit: 'ft',
-          width: 55,
+          width: 70,
           height: 12,
           length: 12,
-          price: 2795,
+          // price: 4385,
         },
-        staticSizes: [
-          {
-            name: '70L',
-            unit: 'ft',
-            width: 70,
-            height: 12,
-            length: 12,
-            extraPrice: 200,
-          },
-        ],
         accessories: [
           {
-            name: 'Golf Compatible',
+            name: 'Netting',
             types: [
               {
-                name: 'Not Golf Compatible',
+                name: 'No Net',
                 extraPrice: 0,
               },
               {
-                name: 'Golf Compatible',
-                extraPrice: 299,
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
               },
             ],
           },
           {
-            name: 'Storage Cart',
+            name: 'Pipe Gauge',
             types: [
               {
-                name: 'No Storage Cart',
+                name: '13 Gauge',
                 extraPrice: 0,
               },
               {
-                name: 'With Storage Cart',
-                extraPrice: 496,
+                name: '10 Gauge',
+                extraPrice: 146,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
+                extraPrice: 0,
+              },
+              {
+                name: 'Residential',
+                extraPrice: 150,
               },
             ],
           },
         ],
       },
       {
-        name: 'CurtainCage Easy Slide',
-        image: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model: 'assets/models/gltf/CurtainCage Easy Slide.glb',
+        name: 'Varsity (55ft)',
+        image: 'assets/models/thumbnails/Outdoor Varsity 55.png',
+        model: 'assets/models/gltf/Outdoor Varsity 55.glb',
         type: '5',
         format: 'gltf',
         defaultSize: {
-          name: '55L',
           unit: 'ft',
-          width: 55,
+          width: 70,
           height: 12,
           length: 12,
-          price: 2795,
+          // price: 4385,
         },
-        staticSizes: [
-          {
-            name: '70L',
-            unit: 'ft',
-            width: 70,
-            height: 12,
-            length: 12,
-            extraPrice: 200,
-          },
-        ],
         accessories: [
           {
-            name: 'Golf Compatible',
+            name: 'Netting',
             types: [
               {
-                name: 'Not Golf Compatible',
+                name: 'No Net',
                 extraPrice: 0,
               },
               {
-                name: 'Golf Compatible',
-                extraPrice: 299,
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
               },
             ],
           },
           {
-            name: 'Storage Cart',
+            name: 'Pipe Gauge',
             types: [
               {
-                name: 'No Storage Cart',
+                name: '13 Gauge',
                 extraPrice: 0,
               },
               {
-                name: 'With Storage Cart',
-                extraPrice: 496,
+                name: '10 Gauge',
+                extraPrice: 146,
+              },
+            ],
+          },
+          {
+            name: 'Coating',
+            types: [
+              {
+                name: 'Galvanized',
+                extraPrice: 0,
+              },
+              {
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
+                extraPrice: 0,
+              },
+              {
+                name: 'Residential',
+                extraPrice: 150,
               },
             ],
           },
         ],
       },
       {
-        name: 'CurtainCage Line Lift',
-        image: 'assets/models/thumbnails/CurtainCage Line Lift.png',
-        model: 'assets/models/gltf/CurtainCage Line Lift.glb',
+        name: 'Varsity (70ft)',
+        image: 'assets/models/thumbnails/Outdoor Varsity 70.png',
+        model: 'assets/models/gltf/Outdoor Varsity 70.glb',
         type: '5',
         format: 'gltf',
         defaultSize: {
           unit: 'ft',
-          width: 55,
+          width: 70,
           height: 12,
           length: 12,
-          price: 1196,
+          // price: 4385,
         },
         accessories: [
           {
-            name: 'Vertical Cable Finish',
+            name: 'Netting',
             types: [
               {
-                name: 'Un-cut',
+                name: 'No Net',
                 extraPrice: 0,
               },
               {
-                name: 'Factory Cut/Crimped to Spec',
-                extraPrice: 856,
+                name: '#36 Poly-12*12- BD3227',
+                extraPrice: 776,
+              },
+              {
+                name: '#36 Poly-12*14- BD3227',
+                extraPrice: 830,
+              },
+              {
+                name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                extraPrice: 1308,
+              },
+              {
+                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                extraPrice: 1385,
               },
             ],
           },
           {
-            name: 'Anchors',
+            name: 'Pipe Gauge',
             types: [
               {
-                name: '5x5 Plates',
+                name: '13 Gauge',
                 extraPrice: 0,
               },
               {
-                name: '8x8 Plates',
-                extraPrice: 180,
-              },
-              {
-                name: 'Ceiling Brackets Est',
-                extraPrice: 450,
+                name: '10 Gauge',
+                extraPrice: 146,
               },
             ],
           },
           {
-            name: 'Structure Type',
+            name: 'Coating',
             types: [
               {
-                name: 'Wood',
+                name: 'Galvanized',
                 extraPrice: 0,
               },
               {
-                name: 'Concrete',
+                name: 'Powder Coated Black',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Brown',
+                extraPrice: 2375,
+              },
+              {
+                name: 'Powder-Coated-Green',
+                extraPrice: 2375,
+              },
+            ],
+          },
+          {
+            name: 'Delivery Address',
+            types: [
+              {
+                name: 'Commercial',
                 extraPrice: 0,
               },
               {
-                name: 'Block',
-                extraPrice: 0,
-              },
-              {
-                name: 'Brick',
-                extraPrice: 0,
-              },
-              {
-                name: 'Other',
-                extraPrice: 0,
+                name: 'Residential',
+                extraPrice: 150,
               },
             ],
           },
         ],
       },
       {
-        name: 'Shell Cage',
-        image: 'assets/models/thumbnails/Shell Cage.png',
-        model: 'assets/models/gltf/Shell Cage.glb',
-        type: '5',
-        format: 'gltf',
-        defaultSize: {
-          unit: 'ft',
-          width: 55,
-          height: 12,
-          length: 36,
-          price: 3427,
-        },
-        accessories: [
-          {
-            name: 'Number of Lanes',
-            types: [
-              {
-                name: '2 Lanes',
-                extraPrice: 0,
-              },
-              {
-                name: '3 Lanes',
-                extraPrice: 1538,
-              },
-              {
-                name: '4 Lanes',
-                extraPrice: 2967,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'Shell_Cage_New_Compress',
-        image: 'assets/models/thumbnails/Shell Cage.png',
-        model: 'assets/models/gltf/Shell_Cage_New_Compress.glb',
-        type: '5',
-        format: 'gltf',
-        defaultSize: {
-          unit: 'ft',
-          width: 55,
-          height: 12,
-          length: 36,
-          price: 3427,
-        },
-        accessories: [
-          {
-            name: 'Number of Lanes',
-            types: [
-              {
-                name: '2 Lanes',
-                extraPrice: 0,
-              },
-              {
-                name: '3 Lanes',
-                extraPrice: 1538,
-              },
-              {
-                name: '4 Lanes',
-                extraPrice: 2967,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'Outdoor Collegiate 35',
+        name: 'Collegiate (35ft)',
         image: 'assets/models/thumbnails/Outdoor Collegiate 35.png',
         model: 'assets/models/gltf/Outdoor Collegiate 35.glb',
         type: '5',
@@ -256,7 +526,7 @@ export const items = [
           width: 55,
           height: 12,
           length: 12,
-          price: 3783,
+          // price: 3783,
         },
         accessories: [
           {
@@ -317,7 +587,7 @@ export const items = [
         ],
       },
       {
-        name: 'Outdoor Collegiate 55',
+        name: 'Collegiate (55ft)',
         image: 'assets/models/thumbnails/Outdoor Collegiate 55.png',
         model: 'assets/models/gltf/Outdoor Collegiate 55.glb',
         type: '5',
@@ -388,7 +658,7 @@ export const items = [
         ],
       },
       {
-        name: 'Outdoor Collegiate 70',
+        name: 'Collegiate (70ft)',
         image: 'assets/models/thumbnails/Outdoor Collegiate 70.png',
         model: 'assets/models/gltf/Outdoor Collegiate 70.glb',
         type: '5',
@@ -398,7 +668,7 @@ export const items = [
           width: 55,
           height: 12,
           length: 12,
-          price: 5783,
+          // price: 5783,
         },
         accessories: [
           {
@@ -459,7 +729,7 @@ export const items = [
         ],
       },
       {
-        name: 'Outdoor Pro 2x55',
+        name: 'Double Lane Pro',
         image: 'assets/models/thumbnails/Outdoor Pro 2x55.png',
         model: 'assets/models/gltf/Outdoor Pro 2x55.glb',
         type: '5',
@@ -531,7 +801,7 @@ export const items = [
         ],
       },
       {
-        name: 'Outdoor Pro 55',
+        name: 'Pro (55ft)',
         image: 'assets/models/thumbnails/Outdoor Pro 55.png',
         model: 'assets/models/gltf/Outdoor Pro 55.glb',
         type: '5',
@@ -603,7 +873,7 @@ export const items = [
         ],
       },
       {
-        name: 'Outdoor Pro 70',
+        name: 'Pro (70ft)',
         image: 'assets/models/thumbnails/Outdoor Pro 70.png',
         model: 'assets/models/gltf/Outdoor Pro 70.glb',
         type: '5',
@@ -674,371 +944,50 @@ export const items = [
           },
         ],
       },
+    ],
+  },
+  {
+    name: 'Surfacing',
+    children: [
       {
-        name: 'Outdoor Varsity 35',
-        image: 'assets/models/thumbnails/Outdoor Varsity 35.png',
-        model: 'assets/models/gltf/Outdoor Varsity 35.glb',
-        type: '5',
-        format: 'gltf',
-        defaultSize: {
-          unit: 'ft',
-          width: 70,
-          height: 12,
-          length: 12,
-          price: 4385,
-        },
-        accessories: [
-          {
-            name: 'Netting',
-            types: [
-              {
-                name: 'No Net',
-                extraPrice: 0,
-              },
-              {
-                name: '#36 Poly-12*12- BD3227',
-                extraPrice: 776,
-              },
-              {
-                name: '#36 Poly-12*14- BD3227',
-                extraPrice: 830,
-              },
-              {
-                name: '#36 Nylon-12*12 with NetSeal - BC2270',
-                extraPrice: 1308,
-              },
-              {
-                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
-                extraPrice: 1385,
-              },
-            ],
-          },
-          {
-            name: 'Pipe Gauge',
-            types: [
-              {
-                name: '13 Gauge',
-                extraPrice: 0,
-              },
-              {
-                name: '10 Gauge',
-                extraPrice: 146,
-              },
-            ],
-          },
-          {
-            name: 'Coating',
-            types: [
-              {
-                name: 'Galvanized',
-                extraPrice: 0,
-              },
-              {
-                name: 'Powder Coated Black',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Brown',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Green',
-                extraPrice: 2375,
-              },
-            ],
-          },
-          {
-            name: 'Delivery Address',
-            types: [
-              {
-                name: 'Commercial',
-                extraPrice: 0,
-              },
-              {
-                name: 'Residential',
-                extraPrice: 150,
-              },
-            ],
-          },
-        ],
+        name: 'Turf Rolls',
       },
       {
-        name: 'Outdoor_Varsity_35_New',
-        image: 'assets/models/thumbnails/Outdoor Varsity 35.png',
-        model: 'assets/models/gltf/Outdoor_Varsity_35_New.glb',
-        type: '5',
-        format: 'gltf',
-        defaultSize: {
-          unit: 'ft',
-          width: 70,
-          height: 12,
-          length: 12,
-          price: 4385,
-        },
-        accessories: [
-          {
-            name: 'Netting',
-            types: [
-              {
-                name: 'No Net',
-                extraPrice: 0,
-              },
-              {
-                name: '#36 Poly-12*12- BD3227',
-                extraPrice: 776,
-              },
-              {
-                name: '#36 Poly-12*14- BD3227',
-                extraPrice: 830,
-              },
-              {
-                name: '#36 Nylon-12*12 with NetSeal - BC2270',
-                extraPrice: 1308,
-              },
-              {
-                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
-                extraPrice: 1385,
-              },
-            ],
-          },
-          {
-            name: 'Pipe Gauge',
-            types: [
-              {
-                name: '13 Gauge',
-                extraPrice: 0,
-              },
-              {
-                name: '10 Gauge',
-                extraPrice: 146,
-              },
-            ],
-          },
-          {
-            name: 'Coating',
-            types: [
-              {
-                name: 'Galvanized',
-                extraPrice: 0,
-              },
-              {
-                name: 'Powder Coated Black',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Brown',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Green',
-                extraPrice: 2375,
-              },
-            ],
-          },
-          {
-            name: 'Delivery Address',
-            types: [
-              {
-                name: 'Commercial',
-                extraPrice: 0,
-              },
-              {
-                name: 'Residential',
-                extraPrice: 150,
-              },
-            ],
-          },
-        ],
+        name: 'Turf Mats',
       },
       {
-        name: 'Outdoor Varsity 55',
-        image: 'assets/models/thumbnails/Outdoor Varsity 55.png',
-        model: 'assets/models/gltf/Outdoor Varsity 55.glb',
-        type: '5',
-        format: 'gltf',
-        defaultSize: {
-          unit: 'ft',
-          width: 70,
-          height: 12,
-          length: 12,
-          price: 4385,
-        },
-        accessories: [
-          {
-            name: 'Netting',
-            types: [
-              {
-                name: 'No Net',
-                extraPrice: 0,
-              },
-              {
-                name: '#36 Poly-12*12- BD3227',
-                extraPrice: 776,
-              },
-              {
-                name: '#36 Poly-12*14- BD3227',
-                extraPrice: 830,
-              },
-              {
-                name: '#36 Nylon-12*12 with NetSeal - BC2270',
-                extraPrice: 1308,
-              },
-              {
-                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
-                extraPrice: 1385,
-              },
-            ],
-          },
-          {
-            name: 'Pipe Gauge',
-            types: [
-              {
-                name: '13 Gauge',
-                extraPrice: 0,
-              },
-              {
-                name: '10 Gauge',
-                extraPrice: 146,
-              },
-            ],
-          },
-          {
-            name: 'Coating',
-            types: [
-              {
-                name: 'Galvanized',
-                extraPrice: 0,
-              },
-              {
-                name: 'Powder Coated Black',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Brown',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Green',
-                extraPrice: 2375,
-              },
-            ],
-          },
-          {
-            name: 'Delivery Address',
-            types: [
-              {
-                name: 'Commercial',
-                extraPrice: 0,
-              },
-              {
-                name: 'Residential',
-                extraPrice: 150,
-              },
-            ],
-          },
-        ],
+        name: 'Rubber',
       },
       {
-        name: 'Outdoor Varsity 70',
-        image: 'assets/models/thumbnails/Outdoor Varsity 70.png',
-        model: 'assets/models/gltf/Outdoor Varsity 70.glb',
-        type: '5',
-        format: 'gltf',
-        defaultSize: {
-          unit: 'ft',
-          width: 70,
-          height: 12,
-          length: 12,
-          price: 4385,
-        },
-        accessories: [
-          {
-            name: 'Netting',
-            types: [
-              {
-                name: 'No Net',
-                extraPrice: 0,
-              },
-              {
-                name: '#36 Poly-12*12- BD3227',
-                extraPrice: 776,
-              },
-              {
-                name: '#36 Poly-12*14- BD3227',
-                extraPrice: 830,
-              },
-              {
-                name: '#36 Nylon-12*12 with NetSeal - BC2270',
-                extraPrice: 1308,
-              },
-              {
-                name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
-                extraPrice: 1385,
-              },
-            ],
-          },
-          {
-            name: 'Pipe Gauge',
-            types: [
-              {
-                name: '13 Gauge',
-                extraPrice: 0,
-              },
-              {
-                name: '10 Gauge',
-                extraPrice: 146,
-              },
-            ],
-          },
-          {
-            name: 'Coating',
-            types: [
-              {
-                name: 'Galvanized',
-                extraPrice: 0,
-              },
-              {
-                name: 'Powder Coated Black',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Brown',
-                extraPrice: 2375,
-              },
-              {
-                name: 'Powder-Coated-Green',
-                extraPrice: 2375,
-              },
-            ],
-          },
-          {
-            name: 'Delivery Address',
-            types: [
-              {
-                name: 'Commercial',
-                extraPrice: 0,
-              },
-              {
-                name: 'Residential',
-                extraPrice: 150,
-              },
-            ],
-          },
-        ],
+        name: 'Court Tiles',
       },
     ],
   },
   {
-    name: 'Netting',
-    children: [],
-  },
-  {
-    name: 'Surfacing',
-    children: [],
-  },
-  {
-    name: 'Screens',
+    name: 'WindScreen',
     children: [
+      {
+        name: 'WindScreens',
+      },
+    ],
+  },
+  {
+    name: 'Gym Equipment',
+    children: [
+      {
+        name: 'Wall padding',
+      },
+      {
+        name: 'Divider Curtain',
+      },
+    ],
+  },
+  {
+    name: 'Training Equipment',
+    children: [
+      {
+        name: 'Pitching Machine',
+      },
       {
         name: 'L-Screen',
         image: 'assets/models/thumbnails/L-Screen.png',
@@ -1200,14 +1149,6 @@ export const items = [
     ],
   },
   {
-    name: 'Gym Equipment',
-    children: [],
-  },
-  {
-    name: 'Training Equipment',
-    children: [],
-  },
-  {
     name: 'Soccer',
     children: [
       {
@@ -1228,90 +1169,10 @@ export const items = [
     ],
   },
   {
-    name: 'Building',
+    name: 'Slab',
     children: [
       {
-        name: 'Test',
-        children: [
-          {
-            name: 'Duck',
-            image: 'assets/models/thumbnails/thumbnail_duck.png',
-            model: 'assets/models/js/Duck.gltf',
-            type: '1',
-            format: 'gltf',
-            defaultSize: {
-              // name: 'defaultSize',
-              unit: 'cm',
-              width: 100,
-              height: 100,
-              length: 50,
-              price: 60,
-              pricePerUnit: 1,
-            },
-            staticSizes: [
-              {
-                name: 'staticSize1',
-                unit: 'cm',
-                width: 150,
-                height: 150,
-                length: 100,
-                extraPrice: 40,
-              },
-              {
-                name: 'staticSize2',
-                unit: 'cm',
-                width: 200,
-                height: 200,
-                length: 150,
-                extraPrice: 80,
-              },
-            ],
-            accessories: [
-              {
-                name: 'accessory1',
-                types: [
-                  {
-                    name: 'noType',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: 'type11',
-                    extraPrice: 10,
-                  },
-                  {
-                    name: 'type12',
-                    extraPrice: 20,
-                  },
-                  {
-                    name: 'type13',
-                    extraPrice: 30,
-                  },
-                ],
-              },
-              {
-                name: 'accessory2',
-                types: [
-                  {
-                    name: 'noType',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: 'type21',
-                    extraPrice: 10,
-                  },
-                  {
-                    name: 'type22',
-                    extraPrice: 20,
-                  },
-                  {
-                    name: 'type23',
-                    extraPrice: 30,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        name: 'Concrete',
       },
     ],
   },
@@ -1319,13 +1180,13 @@ export const items = [
     name: 'Test',
     children: [
       {
-        name: 'Duck',
+        name: '1',
         image: 'assets/models/thumbnails/thumbnail_duck.png',
         model: 'assets/models/js/Duck.gltf',
         type: '1',
         format: 'gltf',
         defaultSize: {
-          // name: 'defaultSize',
+          name: 'defaultSize',
           unit: 'cm',
           width: 100,
           height: 100,
@@ -1397,7 +1258,7 @@ export const items = [
         ],
       },
       {
-        name: 'Bathroomcabinet',
+        name: '2',
         image: 'assets/models/thumbnails_new/bathroomCabinet.png',
         model: 'assets/models/gltf/bathroomCabinet.glb',
         type: '2',
@@ -1433,7 +1294,7 @@ export const items = [
         format: 'gltf',
       },
       {
-        name: 'Stairs',
+        name: '5',
         image: 'assets/models/thumbnails_new/stairs.png',
         model: 'assets/models/gltf/stairs.glb',
         type: '5',
@@ -1696,13 +1557,13 @@ export const wallTextures = [
 //         format: 'gltf',
 //       },
 //       {
-//         name: '3',
+//         name: 'whitewindow',
 //         image: 'assets/models/thumbnails/thumbnail_window.png',
 //         model: 'assets/models/js/whitewindow.js',
 //         type: '3',
 //       },
 //       {
-//         name: '4',
+//         name: 'ceilingFan',
 //         image: 'assets/models/thumbnails_new/ceilingFan.png',
 //         model: 'assets/models/gltf/ceilingFan.gltf',
 //         type: '4',
@@ -1716,14 +1577,14 @@ export const wallTextures = [
 //         format: 'gltf',
 //       },
 //       {
-//         name: '7',
+//         name: 'closed-door',
 //         image:
 //           'assets/models/thumbnails/thumbnail_Screen_Shot_2014-10-27_at_8.04.12_PM.png',
 //         model: 'assets/models/js/closed-door28x80_baked.js',
 //         type: '7',
 //       },
 //       {
-//         name: '8',
+//         name: 'blue-block',
 //         image: 'assets/models/thumbnails/thumbnail_cb-blue-block60x96.png',
 //         model: 'assets/models/js/cb-blue-block-60x96.js',
 //         type: '8',
@@ -1743,7 +1604,7 @@ export const wallTextures = [
 //         format: 'gltf',
 //       },
 //       {
-//         name: '0',
+//         name: 'books',
 //         image: 'assets/models/thumbnails_new/books.png',
 //         model: 'assets/models/gltf/books.glb',
 //         type: '0',

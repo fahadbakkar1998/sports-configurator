@@ -6,9 +6,12 @@ import {
   Scene as ThreeScene,
   LoadingManager,
 } from 'three';
+import * as THREE from 'three';
 import DRACOLoader from '../loaders/three-dracoloader';
 import GLTFLoader from '../loaders/GLTFLoader';
 import OBJLoader from '@calvinscofield/three-objloader';
+import FBXLoader from '../loaders/FBXLoader';
+// import { FBXLoader } from 'three/examples/js/loaders/FBXLoader'
 import { Utils } from '../core/utils.js';
 import { Factory } from '../items/factory.js';
 import {
@@ -49,6 +52,8 @@ export class Scene extends EventDispatcher {
     this.gltfLoader.setCrossOrigin('');
     this.gltfLoader.setDRACOLoader(this.dracoLoader);
     this.objLoader = new OBJLoader();
+    this.fbxLoadingManager = new LoadingManager();
+    this.fbxLoader = new FBXLoader(this.fbxLoadingManager);
 
     this.itemLoadingCallbacks = null;
     this.itemLoadedCallbacks = null;
@@ -188,12 +193,12 @@ export class Scene extends EventDispatcher {
         item.placeInRoom();
       }
     };
+
     let gltfCallback = function (gltfModel) {
       console.log('scene_gltfCallback');
       console.log('scene_gltfModel: ', gltfModel);
       let newMaterials = [];
       let newGeometry = new Geometry();
-
       gltfModel.scene.traverse(function (child) {
         console.log('scene_gltfModel_child: ', child);
         if (child.type == 'Mesh') {
@@ -258,22 +263,61 @@ export class Scene extends EventDispatcher {
       loaderCallback(newGeometry, materials);
     };
 
+    let fbxCallback = function (fbxModel) {
+      console.log('scene_fbxCallback');
+      console.log('scene_fbxModel: ', fbxModel);
+      let newMaterials = [];
+      let newGeometry = new Geometry();
+
+      fbxModel.traverse(function (child) {
+        console.log('scene_fbxModel_child: ', child);
+        if (child.type == 'Mesh') {
+          let materialIndices = [];
+          let newItems;
+          if (child.material.length) {
+            for (let k = 0; k < child.material.length; k++) {
+              newItems = addToMaterials(newMaterials, child.material[k]);
+              newMaterials = newItems[0];
+              materialIndices.push(newItems[1]);
+            }
+          } else {
+            newItems = addToMaterials(newMaterials, child.material); //materials.push(child.material);
+            newMaterials = newItems[0];
+            materialIndices.push(newItems[1]);
+          }
+
+          if (child.geometry.isBufferGeometry) {
+            let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
+            tGeometry.faces.forEach((face) => {
+              // face.materialIndex = face.materialIndex + newMaterials.length;
+              face.materialIndex = materialIndices[face.materialIndex];
+            });
+            child.updateMatrix();
+            newGeometry.merge(tGeometry, child.matrix);
+          } else {
+            child.geometry.faces.forEach((face) => {
+              // face.materialIndex = face.materialIndex + newMaterials.length;
+              face.materialIndex = materialIndices[face.materialIndex];
+            });
+            child.updateMatrix();
+            newGeometry.mergeMesh(child);
+          }
+        }
+      });
+
+      console.log('scene_fbxCallback_end', newGeometry, newMaterials);
+      loaderCallback(newGeometry, newMaterials);
+    };
+
     this.dispatchEvent({ type: EVENT_ITEM_LOADING });
     if (!metadata.format) {
       this.loader.load(fileName, loaderCallback, undefined); // third parameter is undefined - TODO_Ekki
     } else if (metadata.format == 'gltf') {
-      this.gltfLoader.load(
-        fileName,
-        gltfCallback,
-        (e) => {
-          // console.log('scene_onLoad: ', e);
-        },
-        (e) => {
-          // console.log('scene_onProgress: ', e);
-        },
-      );
+      this.gltfLoader.load(fileName, gltfCallback, console.log, console.error);
     } else if (metadata.format == 'obj') {
-      this.objLoader.load(fileName, objCallback, null, null);
+      this.objLoader.load(fileName, objCallback, console.log, console.error);
+    } else if (metadata.format == 'fbx') {
+      this.fbxLoader.load(fileName, fbxCallback, console.log, console.error);
     }
   }
 }
