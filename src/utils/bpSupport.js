@@ -2,7 +2,7 @@ import { rectHome } from './resource';
 import * as Blueprint from './blueprint/blueprint';
 
 export const saveDesign = () => {
-  let data = blueprintJS.model.exportDataObj();
+  let data = window.blueprintJS.model.exportDataObj();
   let a = window.document.createElement('a');
   let blob = new Blob([JSON.stringify(data)], { type: 'text' });
   a.href = window.URL.createObjectURL(blob);
@@ -17,12 +17,12 @@ export const saveDesign = () => {
 
 export const loadDesign = (data) => {
   console.log('bpSupport_loadDesign_data: ', JSON.parse(data));
-  blueprintJS.model.loadSerialized(data);
+  window.blueprintJS.model.loadSerialized(data);
   updateFloorPlan();
 };
 
 export const loadDefaultDesign = () => {
-  blueprintJS.model.loadSerialized(rectHome);
+  window.blueprintJS.model.loadSerialized(rectHome);
   updateFloorPlan();
 };
 
@@ -32,7 +32,7 @@ export const addItem = (item) => {
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     // Wall Items
     var placeAt = item.selectedWall.item.center.clone();
-    blueprintJS.model.scene.addItem(
+    window.blueprintJS.model.scene.addItem(
       item.type,
       item.model,
       item,
@@ -48,7 +48,7 @@ export const addItem = (item) => {
   ) {
     // Floor Items
     var placeAt = item.selectedFloor.item.center.clone();
-    blueprintJS.model.scene.addItem(
+    window.blueprintJS.model.scene.addItem(
       item.type,
       item.model,
       item,
@@ -59,20 +59,20 @@ export const addItem = (item) => {
       { position: placeAt },
     );
   } else {
-    blueprintJS.model.scene.addItem(item.type, item.model, item);
+    window.blueprintJS.model.scene.addItem(item.type, item.model, item);
   }
 };
 
 export const updateFloorPlanMode = (mode) => {
-  blueprintJS.floorplanner.setMode(mode);
+  window.blueprintJS.floorplanner.setMode(mode);
 };
 
 export const updateFloorPlan = () => {
-  blueprintJS.model.floorplan.update();
+  window.blueprintJS.model.floorplan.update();
 };
 
 export const updateWireFrameMode = (flag) => {
-  blueprintJS.three.switchWireFrame(flag);
+  window.blueprintJS.three.switchWireFrame(flag);
 };
 
 export const updateUnit = (unit) => {
@@ -92,11 +92,13 @@ export const updateVisibility = (flag) => {
 };
 
 export const updateRoofMode = (flag) => {
-  blueprintJS.three.floorplan.showRoof(flag);
+  window.blueprintJS.three.floorplan.showRoof(flag);
 };
 
 export const getTotalPrice = () => {
-  const prices = blueprintJS.model.scene.items.map((item) => item.getPrice());
+  const prices = window.blueprintJS.model.scene.items.map((item) =>
+    item.getPrice(),
+  );
   const price = prices.reduce((a, b) => a + b, 0);
   return price;
 };

@@ -21,14 +21,16 @@ const Scene_Content = () => {
     console.log('Scene_Content_useEffect');
 
     // init
-    window.blueprintJS = new Blueprint.BlueprintJS({
-      floorplannerElement: 'floor_planner',
-      threeElement: 'three',
-      threeCanvasElement: 'three_canvas',
-      widget: false,
-    });
-    setBpJS(window.blueprintJS);
-    console.log('Scene_Content_blueprintJS: ', window.blueprintJS);
+    if (!window.blueprintJS) {
+      window.blueprintJS = new Blueprint.BlueprintJS({
+        floorplannerElement: 'floor_planner',
+        threeElement: 'three',
+        threeCanvasElement: 'three_canvas',
+        widget: false,
+      });
+      setBpJS(window.blueprintJS);
+      console.log('Scene_Content_blueprintJS: ', window.blueprintJS);
+    }
 
     // init events
     initEvents();
