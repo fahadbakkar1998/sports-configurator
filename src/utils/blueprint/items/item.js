@@ -14,31 +14,12 @@ import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
 import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
-import { configDimUnit, Configuration } from '../blueprint.js';
 
 /*
  * An Item is an abstract entity for all things placed in the scene, e.g. at
  * walls or on the floor.
  */
 export class Item extends Mesh {
-  /*
-   * Constructs an item.
-   *
-   * @param model
-   *            TODO
-   * @param metadata
-   *            TODO
-   * @param geometry
-   *            TODO
-   * @param material
-   *            TODO
-   * @param position
-   *            TODO
-   * @param rotation
-   *            TODO
-   * @param scale
-   *            TODO
-   */
   constructor({
     model,
     metadata,
@@ -47,13 +28,27 @@ export class Item extends Mesh {
     position,
     rotation,
     scale,
-    isGltf = false,
-    type,
   }) {
-    super();
+    super(geometry, material);
 
     this.model = model;
     this.metadata = metadata;
+    this.geometry = geometry;
+    this.material = material;
+
+    // center in its bounding box
+    this.geometry.computeBoundingBox();
+    this.geometry.applyMatrix(
+      new Matrix4().makeTranslation(
+        -0.5 *
+          (this.geometry.boundingBox.max.x + this.geometry.boundingBox.min.x),
+        -0.5 *
+          (this.geometry.boundingBox.max.y + this.geometry.boundingBox.min.y),
+        -0.5 *
+          (this.geometry.boundingBox.max.z + this.geometry.boundingBox.min.z),
+      ),
+    );
+    this.geometry.computeBoundingBox();
 
     /* */
     this.errorGlow = new Mesh();
@@ -84,44 +79,10 @@ export class Item extends Mesh {
     this.scene = this.model.scene;
     this._freePosition = true;
 
-    if (!isGltf) {
-      this.geometry = geometry;
-      this.material = material;
-      // center in its boundingbox
-      this.geometry.computeBoundingBox();
-      this.geometry.applyMatrix(
-        new Matrix4().makeTranslation(
-          -0.5 *
-            (this.geometry.boundingBox.max.x + this.geometry.boundingBox.min.x),
-          -0.5 *
-            (this.geometry.boundingBox.max.y + this.geometry.boundingBox.min.y),
-          -0.5 *
-            (this.geometry.boundingBox.max.z + this.geometry.boundingBox.min.z),
-        ),
-      );
-      // this.geometry.computeBoundingBox();
-    } else {
-      // let objectBox = new Box3();
-      // objectBox.setFromObject(geometry);
-      // let hsize = objectBox.max.clone().sub(objectBox.min).multiplyScalar(0.5);
-      // this.geometry = new BoxGeometry(
-      //   hsize.x * 0.5,
-      //   hsize.y * 0.5,
-      //   hsize.z * 0.5,
-      // );
-      // this.material = new MeshStandardMaterial({
-      //   color: 0x000000,
-      //   wireframe: true,
-      //   visible: false,
-      // });
-      // this.geometry.computeBoundingBox();
-      // this.add(geometry);
-    }
-
     if (!this.material.color) {
       this.material.color = new Color('#FFFFFF');
     }
-    this.wirematerial = new MeshBasicMaterial({
+    this.wireMaterial = new MeshBasicMaterial({
       color: 0x000000,
       wireframe: true,
     });
@@ -133,10 +94,9 @@ export class Item extends Mesh {
     this.castShadow = true;
     this.receiveShadow = false;
 
-    this.originalmaterial = material;
+    this.originalMaterial = material;
     this.texture = this.material.texture;
 
-    this.position_set = false;
     if (position) {
       this.position.copy(position);
       this.position_set = true;
@@ -147,7 +107,7 @@ export class Item extends Mesh {
     this.canvasWH.width = this.getWidth() + 1.0;
     this.canvasWH.height = this.getHeight() + 1.0;
 
-    this.canvascontextWH = this.canvasWH.getContext('2d');
+    this.canvasContextWH = this.canvasWH.getContext('2d');
     this.canvasTextureWH = new CanvasTexture(this.canvasWH);
     this.canvasMaterialWH = new MeshBasicMaterial({
       map: this.canvasTextureWH,
@@ -165,7 +125,7 @@ export class Item extends Mesh {
     this.canvasWD.width = this.getWidth() + 1.0;
     this.canvasWD.height = this.getDepth() + 1.0;
 
-    this.canvascontextWD = this.canvasWD.getContext('2d');
+    this.canvasContextWD = this.canvasWD.getContext('2d');
     this.canvasTextureWD = new CanvasTexture(this.canvasWD);
     this.canvasMaterialWD = new MeshBasicMaterial({
       map: this.canvasTextureWD,
@@ -189,7 +149,7 @@ export class Item extends Mesh {
       this.rotation.y = rotation;
     }
 
-    if (scale != null) {
+    if (scale) {
       this.setScale(scale.x, scale.y, scale.z);
     }
 
@@ -213,6 +173,9 @@ export class Item extends Mesh {
     this.accessoryNos = metadata.accessoryNos || Array(length).fill(0);
   }
 
+  /**
+   * @param {string | number} no
+   */
   set setStaticSizeNo(no) {
     no = parseInt(no) || 0;
     if (no < 0) return;
@@ -325,7 +288,7 @@ export class Item extends Mesh {
   }
 
   switchWireFrame(flag) {
-    this.material = flag ? this.wirematerial : this.originalmaterial;
+    this.material = flag ? this.wireMaterial : this.originalMaterial;
   }
 
   /* */
@@ -386,14 +349,12 @@ export class Item extends Mesh {
     scaleVec.multiply(this.scale);
     this.scale.set(scaleVec.x, scaleVec.y, scaleVec.z);
     this.resized();
-    if (this.bHelper) {
-      this.bHelper.update();
-    }
+    this.bHelper && this.bHelper.update();
 
     // this.updateCanvasTexture(canvas, context, material, w, h);
     this.updateCanvasTexture(
       this.canvasWH,
-      this.canvascontextWH,
+      this.canvasContextWH,
       this.canvasMaterialWH,
       this.getWidth(),
       this.getHeight(),
@@ -402,7 +363,7 @@ export class Item extends Mesh {
     );
     this.updateCanvasTexture(
       this.canvasWD,
-      this.canvascontextWD,
+      this.canvasContextWD,
       this.canvasMaterialWD,
       this.getWidth(),
       this.getDepth(),
@@ -504,7 +465,7 @@ export class Item extends Mesh {
   setSelected() {
     this.setScale(1, 1, 1);
     this.selected = true;
-    this.bHelper.visible = true;
+    this.bHelper && (this.bHelper.visible = true);
     this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = true;
     this.updateHighlight();
   }
@@ -512,7 +473,7 @@ export class Item extends Mesh {
   /* */
   setUnselected() {
     this.selected = false;
-    this.bHelper.visible = false;
+    this.bHelper && (this.bHelper.visible = false);
     this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = false;
     this.updateHighlight();
   }
@@ -557,9 +518,7 @@ export class Item extends Mesh {
   /* */
   moveToPosition(vec3) {
     this.position.copy(vec3);
-    if (this.bHelper) {
-      this.bHelper.update();
-    }
+    this.bHelper && this.bHelper.update();
   }
 
   /* */

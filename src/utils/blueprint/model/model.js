@@ -96,15 +96,11 @@ export class Model extends EventDispatcher {
       let position = new Vector3(item.xPos, item.yPos, item.zPos);
       if (!item.materialColors) item.materialColors = [];
       let scale = new Vector3(item.scale_x, item.scale_y, item.scale_z);
-      this.scene.addItem(
-        item.type,
-        item.model,
-        item,
-        position,
-        item.rotation,
-        scale,
-        item.fixed,
-      );
+      if (item.format === 'configurator') {
+        this.scene.addConfigurator({ ...item, position, scale });
+      } else {
+        this.scene.addItem({ ...item, position, scale });
+      }
     });
   }
 }

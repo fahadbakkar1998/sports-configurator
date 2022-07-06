@@ -150,7 +150,7 @@ export class HUD extends EventDispatcher {
     let coneMat = new MeshBasicMaterial({ color: this.getColor() });
     let cone = new Mesh(coneGeo, coneMat);
     cone.position.copy(this.rotateVector(item));
-    // cone.rotation.x = -Math.PI / 2.0;
+    cone.rotation.x = -Math.PI / 2.0;
     return cone;
   }
 

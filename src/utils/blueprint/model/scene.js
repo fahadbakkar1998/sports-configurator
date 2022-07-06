@@ -5,6 +5,9 @@ import {
   Geometry,
   Scene as ThreeScene,
   LoadingManager,
+  BoxGeometry,
+  MeshStandardMaterial,
+  DoubleSide,
 } from 'three';
 import DRACOLoader from '../loaders/three-dracoloader';
 import GLTFLoader from '../loaders/GLTFLoader';
@@ -17,6 +20,7 @@ import {
   EVENT_ITEM_LOADED,
   EVENT_ITEM_REMOVED,
 } from '../core/events.js';
+import { Dimensioning } from '../core/dimensioning';
 
 /*
  * The Scene is a manager of Items and also links to a ThreeJS scene.
@@ -135,7 +139,7 @@ export class Scene extends EventDispatcher {
    * @param newItemDefinitions - Object with position and 'edge' attribute if it is a wall item
    */
   addItem(itemInfo) {
-    const { type, modelPath, newItemDefinitions } = itemInfo;
+    let { type, modelPath, newItemDefinitions } = itemInfo;
     if (!type) type = 1;
 
     let scope = this;
@@ -278,13 +282,34 @@ export class Scene extends EventDispatcher {
     }
   }
 
-  async addConfigurator(item) {
-    if (!item.type || !item.components) return;
-    if (!item.unit) item.unit = 'm';
-    const configurator = new (Factory.getClass(item.type))({
-      ...item,
+  async addConfigurator(itemInfo) {
+    if (!itemInfo.type || !itemInfo.components || !itemInfo.defaultSize) return;
+    if (!itemInfo.unit) itemInfo.unit = 'm';
+    const width = Dimensioning.cmFromMeasureRaw(
+      itemInfo.defaultSize.width,
+      itemInfo.unit,
+    );
+    const height = Dimensioning.cmFromMeasureRaw(
+      itemInfo.defaultSize.height,
+      itemInfo.unit,
+    );
+    const length = Dimensioning.cmFromMeasureRaw(
+      itemInfo.defaultSize.length,
+      itemInfo.unit,
+    );
+    const configurator = new (Factory.getClass(itemInfo.type))({
+      ...itemInfo,
+      metadata: itemInfo,
       model: this.model,
+      geometry: new BoxGeometry(width, height, length),
+      material: new MeshStandardMaterial({
+        color: 0xff0000,
+        side: DoubleSide,
+        // visible: false,
+        // wireframe: true,
+      }),
     });
+    configurator.initObject();
     await configurator.initConfigurator();
     this.items.push(configurator);
     this.add(configurator);

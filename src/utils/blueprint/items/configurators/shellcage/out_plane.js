@@ -1,6 +1,6 @@
 import { Group, Vector3 } from 'three';
 
-export class Divider extends Group {
+export class OutPlane extends Group {
   constructor(info) {
     super();
   }
