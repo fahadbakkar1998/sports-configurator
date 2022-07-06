@@ -7,7 +7,8 @@ import { EVENT_UPDATED } from '../core/events.js';
 import { Dimensioning } from '../core/dimensioning.js';
 import {
   Configuration,
-  gridSpacing,
+  configScale,
+  configGridSpacing,
   configWallThickness,
   wallInformation,
 } from '../core/configuration.js';
@@ -17,7 +18,7 @@ import { CarbonSheet } from './carbonsheet.js';
 export const floorplannerModes = { MOVE: 0, DRAW: 1, DELETE: 2 };
 
 // grid parameters
-// export const gridSpacing = Dimensioning.cmToPixel(25); //20; // pixels
+// export const configGridSpacing = Dimensioning.cmToPixel(25); //20; // pixels
 export const gridWidth = 1;
 export const gridColor = '#f1f1f1';
 
@@ -135,7 +136,7 @@ export class FloorplannerView2D {
     });
     this.floorplan.getCorners().forEach((corner) => {
       this.drawCorner(corner);
-      // this.drawCornerAngles(corner);
+      this.drawCornerAngles(corner);
     });
 
     // this.context.globalAlpha = 0.3;
@@ -230,12 +231,12 @@ export class FloorplannerView2D {
     let originX = this.viewModel.canvasElement.innerWidth() / 2.0;
     let originY = this.viewModel.canvasElement.innerHeight() / 2.0;
 
-    if (Configuration.getNumericValue('scale') != 1) {
+    if (Configuration.getNumericValue(configScale) != 1) {
       this.context.setTransform(1, 0, 0, 1, 0, 0);
       this.context.translate(originX, originY);
       this.context.scale(
-        Configuration.getNumericValue('scale'),
-        Configuration.getNumericValue('scale'),
+        Configuration.getNumericValue(configScale),
+        Configuration.getNumericValue(configScale),
       );
       this.context.translate(-originX, -originY);
     } else {
@@ -857,7 +858,7 @@ export class FloorplannerView2D {
   /* returns n where -gridSize/2 < n <= gridSize/2  */
   calculateGridOffset(n) {
     let gSpacing = Dimensioning.cmToPixel(
-      Configuration.getNumericValue(gridSpacing),
+      Configuration.getNumericValue(configGridSpacing),
     );
     if (n >= 0) {
       return ((n + gSpacing / 2.0) % gSpacing) - gSpacing / 2.0;
@@ -869,13 +870,13 @@ export class FloorplannerView2D {
   /* */
   drawGrid() {
     let gSpacing = Dimensioning.cmToPixel(
-      Configuration.getNumericValue(gridSpacing),
+      Configuration.getNumericValue(configGridSpacing),
     );
     let offsetX = this.calculateGridOffset(-this.viewModel.originX);
     let offsetY = this.calculateGridOffset(-this.viewModel.originY);
     let width = this.canvasElement.width;
     let height = this.canvasElement.height;
-    let scale = Configuration.getNumericValue('scale');
+    let scale = Configuration.getNumericValue(configScale);
     if (scale < 1.0) {
       width = width / scale;
       height = height / scale;

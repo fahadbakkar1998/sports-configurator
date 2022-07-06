@@ -28,7 +28,14 @@ export const loadDefaultDesign = () => {
 
 export const addItem = (item) => {
   console.log('bpSupport_addItem_item: ', item);
+
+  if (item.format === 'configurator') {
+    window.blueprintJS.model.scene.addConfigurator(item);
+    return;
+  }
+
   item.resizable = item.resizeProportionally = true;
+
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     // Wall Items
     var placeAt = item.selectedWall.item.center.clone();
@@ -42,10 +49,10 @@ export const addItem = (item) => {
       false,
       { position: placeAt, edge: item.selectedWall.item },
     );
-  } else if (
-    [0, 1, 8].indexOf(parseInt(item.type)) != -1 &&
-    item.selectedFloor
-  ) {
+    return;
+  }
+
+  if ([0, 1, 8].indexOf(parseInt(item.type)) != -1 && item.selectedFloor) {
     // Floor Items
     var placeAt = item.selectedFloor.item.center.clone();
     window.blueprintJS.model.scene.addItem(
@@ -58,9 +65,10 @@ export const addItem = (item) => {
       false,
       { position: placeAt },
     );
-  } else {
-    window.blueprintJS.model.scene.addItem(item.type, item.model, item);
+    return;
   }
+
+  window.blueprintJS.model.scene.addItem(item.type, item.model, item);
 };
 
 export const updateFloorPlanMode = (mode) => {

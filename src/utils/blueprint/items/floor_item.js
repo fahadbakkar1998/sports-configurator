@@ -6,26 +6,8 @@ import { Utils } from '../core/utils.js';
  * A Floor Item is an entity to be placed related to a floor.
  */
 export class FloorItem extends Item {
-  constructor(
-    model,
-    metadata,
-    geometry,
-    material,
-    position,
-    rotation,
-    scale,
-    isGltf = false,
-  ) {
-    super(
-      model,
-      metadata,
-      geometry,
-      material,
-      position,
-      rotation,
-      scale,
-      isGltf,
-    );
+  constructor(info) {
+    super(info);
     this._freePosition = false;
   }
 

@@ -47,7 +47,7 @@ const Scene_Header = () => {
         }}>
         WireFrame
       </div>
-      {/* <div
+      <div
         className={cn('item', { active: snapToRect })}
         onClick={() => {
           updateSnapToRect(!snapToRect);
@@ -78,7 +78,7 @@ const Scene_Header = () => {
           setVisibility(!visibility);
         }}>
         Visibility
-      </div> */}
+      </div>
     </div>
   );
 };

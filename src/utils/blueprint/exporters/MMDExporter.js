@@ -6,205 +6,179 @@
  */
 
 THREE.MMDExporter = function () {
+  // Unicode to Shift_JIS table
+  let u2sTable;
 
-	// Unicode to Shift_JIS table
-	let u2sTable;
+  function unicodeToShiftjis(str) {
+    if (u2sTable === undefined) {
+      let encoder = new MMDParser.CharsetEncoder();
+      let table = encoder.s2uTable;
+      u2sTable = {};
 
-	function unicodeToShiftjis( str ) {
+      let keys = Object.keys(table);
 
-		if ( u2sTable === undefined ) {
+      for (let i = 0, il = keys.length; i < il; i++) {
+        let key = keys[i];
 
-			let encoder = new MMDParser.CharsetEncoder();
-			let table = encoder.s2uTable;
-			u2sTable = {};
+        let value = table[key];
+        key = parseInt(key);
 
-			let keys = Object.keys( table );
+        u2sTable[value] = key;
+      }
+    }
 
-			for ( let i = 0, il = keys.length; i < il; i ++ ) {
+    let array = [];
 
-				let key = keys[ i ];
+    for (let i = 0, il = str.length; i < il; i++) {
+      let code = str.charCodeAt(i);
 
-				let value = table[ key ];
-				key = parseInt( key );
+      let value = u2sTable[code];
 
-				u2sTable[ value ] = key;
+      if (value === undefined) {
+        throw 'cannot convert charcode 0x' + code.toString(16);
+      } else if (value > 0xff) {
+        array.push((value >> 8) & 0xff);
+        array.push(value & 0xff);
+      } else {
+        array.push(value & 0xff);
+      }
+    }
 
-			}
+    return new Uint8Array(array);
+  }
 
-		}
+  function getBindBones(skin) {
+    // any more efficient ways?
+    let poseSkin = skin.clone();
+    poseSkin.pose();
+    return poseSkin.skeleton.bones;
+  }
 
-		let array = [];
-
-		for ( let i = 0, il = str.length; i < il; i ++ ) {
-
-			let code = str.charCodeAt( i );
-
-			let value = u2sTable[ code ];
-
-			if ( value === undefined ) {
-
-				throw 'cannot convert charcode 0x' + code.toString( 16 );
-
-			} else if ( value > 0xff ) {
-
-				array.push( ( value >> 8 ) & 0xff );
-				array.push( value & 0xff );
-
-			} else {
-
-				array.push( value & 0xff );
-
-			}
-
-		}
-
-		return new Uint8Array( array );
-
-	}
-
-	function getBindBones( skin ) {
-
-		// any more efficient ways?
-		let poseSkin = skin.clone();
-		poseSkin.pose();
-		return poseSkin.skeleton.bones;
-
-	}
-
-	/* TODO: implement
+  /* TODO: implement
 	// mesh -> pmd
 	this.parsePmd = function ( object ) {
 
 	};
 	*/
 
-	/* TODO: implement
+  /* TODO: implement
 	// mesh -> pmx
 	this.parsePmx = function ( object ) {
 
 	};
 	*/
 
-	/*
-	 * skeleton -> vpd
-	 * Returns Shift_JIS encoded Uint8Array. Otherwise return strings.
-	 */
-	this.parseVpd = function ( skin, outputShiftJis, useOriginalBones ) {
+  /*
+   * skeleton -> vpd
+   * Returns Shift_JIS encoded Uint8Array. Otherwise return strings.
+   */
+  this.parseVpd = function (skin, outputShiftJis, useOriginalBones) {
+    if (skin.isSkinnedMesh !== true) {
+      console.warn(
+        'THREE.MMDExporter: parseVpd() requires SkinnedMesh instance.',
+      );
+      return null;
+    }
 
-		if ( skin.isSkinnedMesh !== true ) {
+    function toStringsFromNumber(num) {
+      if (Math.abs(num) < 1e-6) num = 0;
 
-			console.warn( 'THREE.MMDExporter: parseVpd() requires SkinnedMesh instance.' );
-			return null;
+      let a = num.toString();
 
-		}
+      if (a.indexOf('.') === -1) {
+        a += '.';
+      }
 
-		function toStringsFromNumber( num ) {
+      a += '000000';
 
-			if ( Math.abs( num ) < 1e-6 ) num = 0;
+      let index = a.indexOf('.');
 
-			let a = num.toString();
+      let d = a.slice(0, index);
+      let p = a.slice(index + 1, index + 7);
 
-			if ( a.indexOf( '.' ) === - 1 ) {
+      return d + '.' + p;
+    }
 
-				a += '.';
+    function toStringsFromArray(array) {
+      let a = [];
 
-			}
+      for (let i = 0, il = array.length; i < il; i++) {
+        a.push(toStringsFromNumber(array[i]));
+      }
 
-			a += '000000';
+      return a.join(',');
+    }
 
-			let index = a.indexOf( '.' );
+    skin.updateMatrixWorld(true);
 
-			let d = a.slice( 0, index );
-			let p = a.slice( index + 1, index + 7 );
+    let bones = skin.skeleton.bones;
+    let bones2 = getBindBones(skin);
 
-			return d + '.' + p;
+    let position = new THREE.Vector3();
+    let quaternion = new THREE.Quaternion();
+    let quaternion2 = new THREE.Quaternion();
+    let matrix = new THREE.Matrix4();
 
-		}
+    let array = [];
+    array.push('Vocaloid Pose Data file');
+    array.push('');
+    array.push(
+      (skin.name !== '' ? skin.name.replace(/\s/g, '_') : 'skin') + '.osm;',
+    );
+    array.push(bones.length + ';');
+    array.push('');
 
-		function toStringsFromArray( array ) {
+    for (let i = 0, il = bones.length; i < il; i++) {
+      let bone = bones[i];
+      let bone2 = bones2[i];
 
-			let a = [];
+      /*
+       * use the bone matrix saved before solving IK.
+       * see CCDIKSolver for the detail.
+       */
+      if (
+        useOriginalBones === true &&
+        bone.userData.ik !== undefined &&
+        bone.userData.ik.originalMatrix !== undefined
+      ) {
+        matrix.fromArray(bone.userData.ik.originalMatrix);
+      } else {
+        matrix.copy(bone.matrix);
+      }
 
-			for ( let i = 0, il = array.length; i < il; i ++ ) {
+      position.setFromMatrixPosition(matrix);
+      quaternion.setFromRotationMatrix(matrix);
 
-				a.push( toStringsFromNumber( array[ i ] ) );
+      let pArray = position.sub(bone2.position).toArray();
+      let qArray = quaternion2
+        .copy(bone2.quaternion)
+        .conjugate()
+        .multiply(quaternion)
+        .toArray();
 
-			}
+      // right to left
+      pArray[2] = -pArray[2];
+      qArray[0] = -qArray[0];
+      qArray[1] = -qArray[1];
 
-			return a.join( ',' );
+      array.push('Bone' + i + '{' + bone.name);
+      array.push('  ' + toStringsFromArray(pArray) + ';');
+      array.push('  ' + toStringsFromArray(qArray) + ';');
+      array.push('}');
+      array.push('');
+    }
 
-		}
+    array.push('');
 
-		skin.updateMatrixWorld( true );
+    let lines = array.join('\n');
 
-		let bones = skin.skeleton.bones;
-		let bones2 = getBindBones( skin );
+    return outputShiftJis === true ? unicodeToShiftjis(lines) : lines;
+  };
 
-		let position = new THREE.Vector3();
-		let quaternion = new THREE.Quaternion();
-		let quaternion2 = new THREE.Quaternion();
-		let matrix = new THREE.Matrix4();
-
-		let array = [];
-		array.push( 'Vocaloid Pose Data file' );
-		array.push( '' );
-		array.push( ( skin.name !== '' ? skin.name.replace( /\s/g, '_' ) : 'skin' ) + '.osm;' );
-		array.push( bones.length + ';' );
-		array.push( '' );
-
-		for ( let i = 0, il = bones.length; i < il; i ++ ) {
-
-			let bone = bones[ i ];
-			let bone2 = bones2[ i ];
-
-			/*
-			 * use the bone matrix saved before solving IK.
-			 * see CCDIKSolver for the detail.
-			 */
-			if ( useOriginalBones === true &&
-				bone.userData.ik !== undefined &&
-				bone.userData.ik.originalMatrix !== undefined ) {
-
-				matrix.fromArray( bone.userData.ik.originalMatrix );
-
-			} else {
-
-				matrix.copy( bone.matrix );
-
-			}
-
-			position.setFromMatrixPosition( matrix );
-			quaternion.setFromRotationMatrix( matrix );
-
-			let pArray = position.sub( bone2.position ).toArray();
-			let qArray = quaternion2.copy( bone2.quaternion ).conjugate().multiply( quaternion ).toArray();
-
-			// right to left
-			pArray[ 2 ] = - pArray[ 2 ];
-			qArray[ 0 ] = - qArray[ 0 ];
-			qArray[ 1 ] = - qArray[ 1 ];
-
-			array.push( 'Bone' + i + '{' + bone.name );
-			array.push( '  ' + toStringsFromArray( pArray ) + ';' );
-			array.push( '  ' + toStringsFromArray( qArray ) + ';' );
-			array.push( '}' );
-			array.push( '' );
-
-		}
-
-		array.push( '' );
-
-		let lines = array.join( '\n' );
-
-		return ( outputShiftJis === true ) ? unicodeToShiftjis( lines ) : lines;
-
-	};
-
-	/* TODO: implement
+  /* TODO: implement
 	// animation + skeleton -> vmd
 	this.parseVmd = function ( object ) {
 
 	};
 	*/
-
 };

@@ -5,51 +5,41 @@
 THREE.TypedGeometryExporter = function () {};
 
 THREE.TypedGeometryExporter.prototype = {
+  constructor: THREE.TypedGeometryExporter,
 
-	constructor: THREE.TypedGeometryExporter,
+  parse: function (geometry) {
+    let output = {
+      metadata: {
+        version: 4.0,
+        type: 'TypedGeometry',
+        generator: 'TypedGeometryExporter',
+      },
+    };
 
-	parse: function ( geometry ) {
+    let attributes = ['vertices', 'normals', 'uvs'];
 
-		let output = {
-			metadata: {
-				version: 4.0,
-				type: 'TypedGeometry',
-				generator: 'TypedGeometryExporter'
-			}
-		};
+    for (let key in attributes) {
+      let attribute = attributes[key];
 
-		let attributes = [ 'vertices', 'normals', 'uvs' ];
+      let typedArray = geometry[attribute];
+      let array = [];
 
-		for ( let key in attributes ) {
+      for (let i = 0, l = typedArray.length; i < l; i++) {
+        array[i] = typedArray[i];
+      }
 
-			let attribute = attributes[ key ];
+      output[attribute] = array;
+    }
 
-			let typedArray = geometry[ attribute ];
-			let array = [];
+    let boundingSphere = geometry.boundingSphere;
 
-			for ( let i = 0, l = typedArray.length; i < l; i ++ ) {
+    if (boundingSphere !== null) {
+      output.boundingSphere = {
+        center: boundingSphere.center.toArray(),
+        radius: boundingSphere.radius,
+      };
+    }
 
-				array[ i ] = typedArray[ i ];
-
-			}
-
-			output[ attribute ] = array;
-
-		}
-
-		let boundingSphere = geometry.boundingSphere;
-
-		if ( boundingSphere !== null ) {
-
-			output.boundingSphere = {
-				center: boundingSphere.center.toArray(),
-				radius: boundingSphere.radius
-			};
-
-		}
-
-		return output;
-
-	}
-
+    return output;
+  },
 };

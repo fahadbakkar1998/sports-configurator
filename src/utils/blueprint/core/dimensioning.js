@@ -1,4 +1,4 @@
-import { Configuration, configDimUnit } from './configuration.js';
+import { Configuration, configDimUnit, configScale } from './configuration.js';
 
 /* Dimensioning in Inch. */
 export const dimInch = 'inch';
@@ -32,7 +32,7 @@ export const dimensioningOptions = [
 export class Dimensioning {
   static cmToPixel(cm, apply_scale = true) {
     if (apply_scale) {
-      return cm * pixelsPerCm * Configuration.getNumericValue('scale');
+      return cm * pixelsPerCm * Configuration.getNumericValue(configScale);
     }
     return cm * pixelsPerCm;
   }
@@ -40,7 +40,7 @@ export class Dimensioning {
   static pixelToCm(pixel, apply_scale = true) {
     if (apply_scale) {
       return (
-        pixel * cmPerPixel * (1.0 / Configuration.getNumericValue('scale'))
+        pixel * cmPerPixel * (1.0 / Configuration.getNumericValue(configScale))
       );
     }
     return pixel * cmPerPixel;
@@ -49,12 +49,14 @@ export class Dimensioning {
   static roundOff(value, decimals) {
     return Math.round(decimals * value) / decimals;
   }
-  /* Converts cm to dimensioning number.
-   * @param cm CentiMeter value to be converted.
-   * @returns Number representation.
+
+  /* Converts dimensioning number to cm number.
+   * @param measure Dimensioning number to be converted.
+   * @returns Float.
    */
   static cmFromMeasureRaw(measure, unit) {
     if (!unit) unit = Configuration.getStringValue(configDimUnit);
+
     switch (unit) {
       case dimFeetAndInch:
         return (
@@ -70,47 +72,26 @@ export class Dimensioning {
         );
       case dimCentiMeter:
         return measure;
-      case dimMeter:
       default:
         return Math.round(decimals * 100 * measure) / decimals;
     }
   }
 
-  /* Converts cm to dimensioning string.
-   * @param cm CentiMeter value to be converted.
-   * @returns String representation.
+  /* Converts dimensioning number to cm string.
+   * @param measure Dimensioning number to be converted.
+   * @returns String.
    */
-  static cmFromMeasure(measure) {
-    switch (Configuration.getStringValue(configDimUnit)) {
-      case dimFeetAndInch:
-        return (
-          Math.round(decimals * (measure * 30.480016459203095991)) / decimals +
-          'cm'
-        );
-      case dimInch:
-        return (
-          Math.round(decimals * (measure * 2.5400013716002578512)) / decimals +
-          'cm'
-        );
-      case dimMilliMeter:
-        return (
-          Math.round(decimals * (measure * 0.10000005400001014955)) / decimals +
-          'cm'
-        );
-      case dimCentiMeter:
-        return measure;
-      case dimMeter:
-      default:
-        return Math.round(decimals * 100 * measure) / decimals + 'cm';
-    }
+  static cmFromMeasure(measure, unit) {
+    return Dimensioning.cmFromMeasureRaw(measure, unit) + 'cm';
   }
 
-  /* Converts cm to dimensioning string.
+  /* Converts cm to dimensioning number.
    * @param cm CentiMeter value to be converted.
-   * @returns String representation.
+   * @returns Float.
    */
   static cmToMeasureRaw(cm, power = 1, unit) {
     if (!unit) unit = Configuration.getStringValue(configDimUnit);
+
     switch (unit) {
       case dimFeetAndInch: // dimFeetAndInch returns only the feet
         let allInFeet = cm * Math.pow(0.032808416666669996953, power);
@@ -124,7 +105,6 @@ export class Dimensioning {
         return mm;
       case dimCentiMeter:
         return Math.round(decimals * cm) / decimals;
-      case dimMeter:
       default:
         let m = Math.round(decimals * (cm * Math.pow(0.01, power))) / decimals;
         return m;
@@ -133,10 +113,12 @@ export class Dimensioning {
 
   /* Converts cm to dimensioning string.
    * @param cm CentiMeter value to be converted.
-   * @returns String representation.
+   * @returns String.
    */
-  static cmToMeasure(cm, power = 1) {
-    switch (Configuration.getStringValue(configDimUnit)) {
+  static cmToMeasure(cm, power = 1, unit) {
+    if (!unit) unit = Configuration.getStringValue(configDimUnit);
+
+    switch (unit) {
       case dimFeetAndInch:
         let allInFeet = cm * Math.pow(0.032808416666669996953, power);
         let floorFeet = Math.floor(allInFeet);

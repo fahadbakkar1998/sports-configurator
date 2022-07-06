@@ -1,7 +1,7 @@
 import { EventDispatcher } from 'three';
 import { EVENT_UPDATED } from '../core/events.js';
 import { cmPerPixel, pixelsPerCm, Dimensioning } from '../core/dimensioning.js';
-import { Configuration } from '../core/configuration.js';
+import { Configuration, configScale } from '../core/configuration.js';
 
 /*
  * The View to be used by a Floorplanner to render in/interact with.
@@ -10,7 +10,6 @@ export class CarbonSheet extends EventDispatcher {
   constructor(floorplan, viewModel, canvas) {
     super();
     this.canvasElement = document.getElementById(canvas);
-    this.canvas = canvas;
     this.context = this.canvasElement.getContext('2d');
     this.floorplan = floorplan;
     this.viewModel = viewModel;
@@ -132,7 +131,6 @@ export class CarbonSheet extends EventDispatcher {
 
   set x(val) {
     this._x = val;
-    // this._anchorX = val;
     this._updated();
   }
 
@@ -142,7 +140,6 @@ export class CarbonSheet extends EventDispatcher {
 
   set y(val) {
     this._y = val;
-    // this._anchorY = val;
     this._updated();
   }
 
@@ -225,10 +222,14 @@ export class CarbonSheet extends EventDispatcher {
       this.context.globalAlpha = this._transparency;
       this.context.drawImage(
         this._image,
-        -this._anchorX * this._scaleX * Configuration.getNumericValue('scale'),
-        -this._anchorY * this._scaleY * Configuration.getNumericValue('scale'),
-        this._drawWidthPixels * Configuration.getNumericValue('scale'),
-        this._drawHeightPixels * Configuration.getNumericValue('scale'),
+        -this._anchorX *
+          this._scaleX *
+          Configuration.getNumericValue(configScale),
+        -this._anchorY *
+          this._scaleY *
+          Configuration.getNumericValue(configScale),
+        this._drawWidthPixels * Configuration.getNumericValue(configScale),
+        this._drawHeightPixels * Configuration.getNumericValue(configScale),
       );
       this.context.globalAlpha = 1.0;
 

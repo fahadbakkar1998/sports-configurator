@@ -1,20 +1,23 @@
 import { dimCentiMeter } from './constants';
 
-// GENERAL:
 /* The dimensioning unit for 2D floorplan measurements. */
-export let configDimUnit = 'dimUnit';
+export const configDimUnit = 'dimUnit';
 
-// WALL:
 /* The initial wall height in cm. */
 export const configWallHeight = 'wallHeight';
 
 /* The initial wall thickness in cm. */
 export const configWallThickness = 'wallThickness';
+
 export const configSystemUI = 'systemUI';
-export const scale = 'scale';
-export const gridSpacing = 'gridSpacing';
-export const snapToGrid = 'snapToGrid';
-export const snapTolerance = 'snapTolerance'; // In CMS
+
+export const configScale = 'scale';
+
+export const configGridSpacing = 'gridSpacing';
+
+export const configSnapToGrid = 'snapToGrid';
+
+export const configSnapTolerance = 'snapTolerance'; // In CMS
 
 export let config = {
   dimUnit: dimCentiMeter,
@@ -40,14 +43,9 @@ export let wallInformation = {
   midlineLabel: 'm:',
 };
 
-/* The tolerance in cms between corners, otherwise below this tolerance they will snap together as one corner */
-export const cornerTolerance = 20;
-
-/* Global configuration to customize the whole system.  */
+/* Global configuration to customize the whole system. */
 export class Configuration {
-  constructor() {
-    /* Configuration data loaded from/stored to extern. */
-  }
+  constructor() {}
 
   static getData() {
     return config;

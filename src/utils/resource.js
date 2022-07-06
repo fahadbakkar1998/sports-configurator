@@ -3,6 +3,42 @@ export const items = [
     name: 'Indoor Netting',
     children: [
       {
+        name: 'Shell Cage',
+        image: 'assets/models/thumbnails/Shell Cage.png',
+        format: 'configurator',
+        type: 'shellcage',
+        unit: 'ft',
+        defaultSize: {
+          width: 40,
+          height: 10,
+          length: 60,
+        },
+        components: {
+          out_container: {
+            width: 40,
+            height: 10,
+            length: 60,
+          },
+          in_container: {
+            length: 50,
+          },
+          dividers: [
+            {
+              startPoint: { x: 10, y: 0, z: 0 },
+              endPoint: { x: 10, y: 0, z: 50 },
+            },
+            {
+              startPoint: { x: 20, y: 0, z: 0 },
+              endPoint: { x: 20, y: 0, z: 40 },
+            },
+            {
+              startPoint: { x: 10, y: 0, z: 0 },
+              endPoint: { x: 30, y: 0, z: 30 },
+            },
+          ],
+        },
+      },
+      {
         name: 'Indoor Batting Cage',
         children: [
           {

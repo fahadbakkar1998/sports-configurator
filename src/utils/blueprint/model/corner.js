@@ -6,13 +6,9 @@ import {
 } from '../core/events.js';
 import { EventDispatcher, Vector2 } from 'three';
 import { Utils } from '../core/utils.js';
-import { WallTypes } from '../core/constants.js';
+import { WallTypes, cornerTolerance } from '../core/constants.js';
 //import {Dimensioning} from '../core/dimensioning.js';
-import {
-  Configuration,
-  configWallHeight,
-  cornerTolerance,
-} from '../core/configuration.js';
+import { Configuration, configWallHeight } from '../core/configuration.js';
 import { updateVisibility } from '../../bpSupport.js';
 
 /*

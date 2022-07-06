@@ -24,3 +24,6 @@ export const dimCentiMeter = 'cm';
 export const dimMilliMeter = 'mm';
 
 export const sphereRadius = 40000;
+
+/* The tolerance in cms between corners, otherwise below this tolerance they will snap together as one corner */
+export const cornerTolerance = 20;

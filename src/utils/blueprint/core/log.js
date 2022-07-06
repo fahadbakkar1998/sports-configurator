@@ -8,6 +8,7 @@ export let ELogContext = Enum(
   'Wall',
   'Room',
 );
+
 export let ELogLevel = Enum(
   'Information',
   'Warning',

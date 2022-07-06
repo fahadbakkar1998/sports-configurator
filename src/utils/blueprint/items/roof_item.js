@@ -2,26 +2,8 @@ import { Item } from './item.js';
 import { Matrix4, Triangle, Plane, Vector3 } from 'three';
 import { Utils } from '../blueprint.js';
 export class RoofItem extends Item {
-  constructor(
-    model,
-    metadata,
-    geometry,
-    material,
-    position,
-    rotation,
-    scale,
-    isGltf = false,
-  ) {
-    super(
-      model,
-      metadata,
-      geometry,
-      material,
-      position,
-      rotation,
-      scale,
-      isGltf,
-    );
+  constructor(info) {
+    super(info);
     this.allowRotate = false;
     this.boundToFloor = false;
     this._freePosition = false;

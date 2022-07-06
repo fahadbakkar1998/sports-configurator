@@ -6,12 +6,10 @@ import {
   Scene as ThreeScene,
   LoadingManager,
 } from 'three';
-import * as THREE from 'three';
 import DRACOLoader from '../loaders/three-dracoloader';
 import GLTFLoader from '../loaders/GLTFLoader';
 import OBJLoader from '@calvinscofield/three-objloader';
 import FBXLoader from '../loaders/FBXLoader';
-// import { FBXLoader } from 'three/examples/js/loaders/FBXLoader'
 import { Utils } from '../core/utils.js';
 import { Factory } from '../items/factory.js';
 import {
@@ -33,8 +31,6 @@ export class Scene extends EventDispatcher {
     super();
     this.model = model;
     this.textureDir = textureDir;
-
-    // let grid = new GridHelper(4000, 200);
 
     this.scene = new ThreeScene();
     this.scene.background = new Color(0xffffff);
@@ -58,12 +54,11 @@ export class Scene extends EventDispatcher {
     this.itemLoadingCallbacks = null;
     this.itemLoadedCallbacks = null;
     this.itemRemovedCallbacks = null;
+
+    // let grid = new GridHelper(4000, 200);
     // this.add(grid);
   }
 
-  /* Adds a non-item, basically a mesh, to the scene.
-   * @param mesh The mesh to be added.
-   */
   add(mesh) {
     this.scene.add(mesh);
   }
@@ -158,28 +153,25 @@ export class Scene extends EventDispatcher {
     let scope = this;
 
     function addToMaterials(materials, newMaterial) {
-      for (let i = 0; i < materials.length; i++) {
-        let mat = materials[i];
-        if (mat.name == newMaterial.name) {
-          return [materials, i];
-        }
+      const index = materials.findIndex((el) => el.name === newMaterial.name);
+      if (index > -1) return index;
+      else {
+        materials.push(newMaterial);
+        return materials.length - 1;
       }
-      materials.push(newMaterial);
-      return [materials, materials.length - 1];
     }
 
-    let loaderCallback = function (geometry, materials, isGltf = false) {
-      // let item = new (Factory.getClass(type))(scope.model, metadata, geometry, new MeshFaceMaterial(materials), position, rotation, scale);
-      let item = new (Factory.getClass(type))(
-        scope.model,
+    let loaderCallback = function (geometry, material, isGltf = false) {
+      let item = new (Factory.getClass(type))({
+        model: scope.model,
         metadata,
         geometry,
-        materials,
+        material,
         position,
         rotation,
         scale,
         isGltf,
-      );
+      });
       item.fixed = fixed || false;
       scope.items.push(item);
       scope.add(item);
@@ -195,25 +187,20 @@ export class Scene extends EventDispatcher {
     };
 
     let gltfCallback = function (gltfModel) {
-      console.log('scene_gltfCallback');
-      console.log('scene_gltfModel: ', gltfModel);
       let newMaterials = [];
       let newGeometry = new Geometry();
       gltfModel.scene.traverse(function (child) {
-        console.log('scene_gltfModel_child: ', child);
         if (child.type == 'Mesh') {
           let materialIndices = [];
           let newItems;
           if (child.material.length) {
             for (let k = 0; k < child.material.length; k++) {
-              newItems = addToMaterials(newMaterials, child.material[k]);
-              newMaterials = newItems[0];
-              materialIndices.push(newItems[1]);
+              materialIndices.push(
+                addToMaterials(newMaterials, child.material[k]),
+              );
             }
           } else {
-            newItems = addToMaterials(newMaterials, child.material); //materials.push(child.material);
-            newMaterials = newItems[0];
-            materialIndices.push(newItems[1]);
+            materialIndices.push(addToMaterials(newMaterials, child.material));
           }
 
           if (child.geometry.isBufferGeometry) {
@@ -319,5 +306,18 @@ export class Scene extends EventDispatcher {
     } else if (metadata.format == 'fbx') {
       this.fbxLoader.load(fileName, fbxCallback, console.log, console.error);
     }
+  }
+
+  async addConfigurator(item) {
+    if (!item.type || !item.components) return;
+    if (!item.unit) item.unit = 'm';
+    const configurator = new (Factory.getClass(item.type))({
+      ...item,
+      model: this.model,
+    });
+    await configurator.initConfigurator();
+    this.items.push(configurator);
+    this.add(configurator);
+    this.dispatchEvent({ type: EVENT_ITEM_LOADED, item: configurator });
   }
 }

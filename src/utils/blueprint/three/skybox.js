@@ -21,7 +21,7 @@ export class Skybox extends EventDispatcher {
 
     this.defaultEnvironment = 'assets/rooms/textures/envs/Sky.jpg';
     this.useEnvironment = false;
-    this.topColor = 0x92b2ce; //0xe9e9e9; //0xf9f9f9;//0x565e63
+    this.topColor = 0x92b2ce; //0xe9e9e9; //0xf9f9f9; //0x565e63
     this.bottomColor = 0xffffff; //0xD8ECF9
     this.verticalOffset = 400;
     this.exponent = 0.5;
@@ -145,14 +145,14 @@ export class Skybox extends EventDispatcher {
   }
 
   setEnabled(flag) {
-    if (!flag) {
-      this.scene.remove(this.sky);
-      this.scene.remove(this.ground);
-    } else {
-      this.scene.add(this.sky);
-      this.scene.add(this.ground);
-    }
-    // this.sky.visible = this.ground.visible = flag;
+    // if (!flag) {
+    //   this.scene.remove(this.sky);
+    //   this.scene.remove(this.ground);
+    // } else {
+    //   this.scene.add(this.sky);
+    //   this.scene.add(this.ground);
+    // }
+    this.sky.visible = this.ground.visible = flag;
   }
 
   toggleEnvironment(flag) {
@@ -163,15 +163,15 @@ export class Skybox extends EventDispatcher {
       this.sky.material.needsUpdate = true;
     } else {
       this.ground.visible = false;
-      if (!this.skyMat) {
+      if (!this.plainSkyMat) {
         this.setEnvironmentMap(this.defaultEnvironment);
       } else {
-        this.sky.material = this.skyMat;
+        this.sky.material = this.plainSkyMat;
         this.sky.material.needsUpdate = true;
       }
       this.sky.visible = true;
     }
-    this.scene.needsUpdate = true;
+    this.scene.scene.needsUpdate = true;
   }
 
   setEnvironmentMap(url) {
@@ -197,6 +197,6 @@ export class Skybox extends EventDispatcher {
   }
 
   init() {
-    this.toggleEnvironment(false);
+    this.toggleEnvironment(true);
   }
 }

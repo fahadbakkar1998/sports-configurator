@@ -93,16 +93,15 @@ export {
 } from './core/dimensioning.js';
 
 export {
-  cornerTolerance,
   configDimUnit,
   configWallHeight,
   configWallThickness,
   configSystemUI,
   wallInformation,
-  scale,
-  snapToGrid,
-  snapTolerance,
-  gridSpacing,
+  configScale,
+  configSnapToGrid,
+  configSnapTolerance,
+  configGridSpacing,
   config,
   Configuration,
 } from './core/configuration.js';
@@ -112,6 +111,7 @@ export {
   VIEW_RIGHT,
   VIEW_LEFT,
   VIEW_ISOMETRY,
+  cornerTolerance,
 } from './core/constants.js';
 export { WallTypes, sphereRadius } from './core/constants.js';
 
@@ -164,7 +164,6 @@ export { CarbonSheet } from './floorplanner/carbonsheet.js';
 
 // Classes from items module
 export { item_types, Factory } from './items/factory.js';
-export { Metadata } from './items/metadata.js';
 export { Item } from './items/item.js';
 export { FloorItem } from './items/floor_item.js';
 export { WallItem } from './items/wall_item.js';

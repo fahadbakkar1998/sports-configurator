@@ -39,7 +39,7 @@ export class Item extends Mesh {
    * @param scale
    *            TODO
    */
-  constructor(
+  constructor({
     model,
     metadata,
     geometry,
@@ -48,7 +48,8 @@ export class Item extends Mesh {
     rotation,
     scale,
     isGltf = false,
-  ) {
+    type,
+  }) {
     super();
 
     this.model = model;
@@ -98,23 +99,23 @@ export class Item extends Mesh {
             (this.geometry.boundingBox.max.z + this.geometry.boundingBox.min.z),
         ),
       );
-      this.geometry.computeBoundingBox();
+      // this.geometry.computeBoundingBox();
     } else {
-      let objectBox = new Box3();
-      objectBox.setFromObject(geometry);
-      let hsize = objectBox.max.clone().sub(objectBox.min).multiplyScalar(0.5);
-      this.geometry = new BoxGeometry(
-        hsize.x * 0.5,
-        hsize.y * 0.5,
-        hsize.z * 0.5,
-      );
-      this.material = new MeshStandardMaterial({
-        color: 0x000000,
-        wireframe: true,
-        visible: false,
-      });
-      this.geometry.computeBoundingBox();
-      this.add(geometry);
+      // let objectBox = new Box3();
+      // objectBox.setFromObject(geometry);
+      // let hsize = objectBox.max.clone().sub(objectBox.min).multiplyScalar(0.5);
+      // this.geometry = new BoxGeometry(
+      //   hsize.x * 0.5,
+      //   hsize.y * 0.5,
+      //   hsize.z * 0.5,
+      // );
+      // this.material = new MeshStandardMaterial({
+      //   color: 0x000000,
+      //   wireframe: true,
+      //   visible: false,
+      // });
+      // this.geometry.computeBoundingBox();
+      // this.add(geometry);
     }
 
     if (!this.material.color) {

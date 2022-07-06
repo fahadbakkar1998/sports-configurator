@@ -7,26 +7,8 @@ import { Item } from './item.js';
  * A Wall Item is an entity to be placed related to a wall.
  */
 export class WallItem extends Item {
-  constructor(
-    model,
-    metadata,
-    geometry,
-    material,
-    position,
-    rotation,
-    scale,
-    isGltf = false,
-  ) {
-    super(
-      model,
-      metadata,
-      geometry,
-      material,
-      position,
-      rotation,
-      scale,
-      isGltf,
-    );
+  constructor(info) {
+    super(info);
     /* The currently applied wall edge. */
     this.currentWallEdge = null;
     /* TODO:

@@ -3,26 +3,8 @@ import { Item } from './item.js';
 import { Utils } from '../core/utils.js';
 
 export class OutItem extends Item {
-  constructor(
-    model,
-    metadata,
-    geometry,
-    material,
-    position,
-    rotation,
-    scale,
-    isGltf = false,
-  ) {
-    super(
-      model,
-      metadata,
-      geometry,
-      material,
-      position,
-      rotation,
-      scale,
-      isGltf,
-    );
+  constructor(info) {
+    super(info);
     this._freePosition = false;
   }
 

@@ -3,10 +3,13 @@ import { EventDispatcher, Vector2 } from 'three';
 import { cmPerPixel, pixelsPerCm, Dimensioning } from '../core/dimensioning.js';
 import {
   configDimUnit,
-  snapTolerance,
+  configScale,
+  configSnapToGrid,
+  configSnapTolerance,
+  configWallThickness,
   Configuration,
 } from '../core/configuration.js';
-//import {gridSpacing} from '../core/configuration.js';
+//import {configGridSpacing} from '../core/configuration.js';
 import { EVENT_MODE_RESET, EVENT_LOADED, EVENT_MOVED } from '../core/events.js';
 import {
   EVENT_CORNER_ATTRIBUTES_CHANGED,
@@ -33,7 +36,7 @@ import { EVENT_NOTHING_CLICKED } from '../core/events.js';
 import { FloorplannerView2D, floorplannerModes } from './floorplanner_view.js';
 
 /* how much will we move a corner to make a wall axis aligned (cm) */
-//export const snapTolerance = 25;//In CMS
+//export const configSnapTolerance = 25;//In CMS
 /*
  * The Floorplanner implements an interactive tool for creation of floorplans in
  * 2D.
@@ -107,7 +110,7 @@ export class Floorplanner2D extends EventDispatcher {
     this.pixelsPerCm = pixelsPerCm;
 
     this.wallWidth = Dimensioning.cmToPixel(
-      Configuration.getNumericValue('wallThickness'),
+      Configuration.getNumericValue(configWallThickness),
     );
 
     // this.wallWidth = 10.0 * this.pixelsPerCm;
@@ -277,7 +280,7 @@ export class Floorplanner2D extends EventDispatcher {
       } else {
         if (
           Math.abs(this.mouseX - this.lastNode.x) <
-          Configuration.getNumericValue(snapTolerance)
+          Configuration.getNumericValue(configSnapTolerance)
         ) {
           this.targetX = this.lastNode.x;
         } else {
@@ -285,7 +288,7 @@ export class Floorplanner2D extends EventDispatcher {
         }
         if (
           Math.abs(this.mouseY - this.lastNode.y) <
-          Configuration.getNumericValue(snapTolerance)
+          Configuration.getNumericValue(configSnapTolerance)
         ) {
           this.targetY = this.lastNode.y;
         } else {
@@ -297,19 +300,19 @@ export class Floorplanner2D extends EventDispatcher {
       this.targetY = this.mouseY;
     }
 
-    if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
+    if (this.gridSnapMode || Configuration.getNumericValue(configSnapToGrid)) {
       this.targetX =
         Math.floor(
-          this.targetX / Configuration.getNumericValue(snapTolerance),
-        ) * Configuration.getNumericValue(snapTolerance);
+          this.targetX / Configuration.getNumericValue(configSnapTolerance),
+        ) * Configuration.getNumericValue(configSnapTolerance);
       this.targetY =
         Math.floor(
-          this.targetY / Configuration.getNumericValue(snapTolerance),
-        ) * Configuration.getNumericValue(snapTolerance);
+          this.targetY / Configuration.getNumericValue(configSnapTolerance),
+        ) * Configuration.getNumericValue(configSnapTolerance);
 
-      // The below will not work, the snapTolerance is necessary for X, Y axis snapping, where as grid snapping is for snapping to grid lines
-      // this.targetX = Math.floor(this.targetX / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
-      // this.targetY = Math.floor(this.targetY / Configuration.getNumericValue(gridSpacing)) * Configuration.getNumericValue(gridSpacing);
+      // The below will not work, the configSnapTolerance is necessary for X, Y axis snapping, where as grid snapping is for snapping to grid lines
+      // this.targetX = Math.floor(this.targetX / Configuration.getNumericValue(configGridSpacing)) * Configuration.getNumericValue(configGridSpacing);
+      // this.targetY = Math.floor(this.targetY / Configuration.getNumericValue(configGridSpacing)) * Configuration.getNumericValue(configGridSpacing);
     }
 
     this.updateView();
@@ -510,10 +513,10 @@ export class Floorplanner2D extends EventDispatcher {
       this.originY += this.lastY - this.rawMouseY;
       this.unScaledOriginX +=
         (this.lastX - this.rawMouseX) *
-        (1 / Configuration.getNumericValue('scale'));
+        (1 / Configuration.getNumericValue(configScale));
       this.unScaledOriginY +=
         (this.lastY - this.rawMouseY) *
-        (1 / Configuration.getNumericValue('scale'));
+        (1 / Configuration.getNumericValue(configScale));
       this.lastX = this.rawMouseX;
       this.lastY = this.rawMouseY;
       this.updateView();
@@ -524,15 +527,18 @@ export class Floorplanner2D extends EventDispatcher {
       if (this._clickedWallControl != null) {
         mx = this.mouseX;
         my = this.mouseY;
-        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
+        if (
+          this.gridSnapMode ||
+          Configuration.getNumericValue(configSnapToGrid)
+        ) {
           mx =
             Math.floor(
-              this.mouseX / Configuration.getNumericValue(snapTolerance),
-            ) * Configuration.getNumericValue(snapTolerance);
+              this.mouseX / Configuration.getNumericValue(configSnapTolerance),
+            ) * Configuration.getNumericValue(configSnapTolerance);
           my =
             Math.floor(
-              this.mouseY / Configuration.getNumericValue(snapTolerance),
-            ) * Configuration.getNumericValue(snapTolerance);
+              this.mouseY / Configuration.getNumericValue(configSnapTolerance),
+            ) * Configuration.getNumericValue(configSnapTolerance);
         }
 
         this._clickedWallControl.x = mx;
@@ -542,18 +548,21 @@ export class Floorplanner2D extends EventDispatcher {
         return;
       }
       if (this.activeCorner) {
-        if (this.gridSnapMode || Configuration.getNumericValue('snapToGrid')) {
-          // 		let mx = (Math.abs(this.mouseX - this.activeCorner.x) < Configuration.getNumericValue(snapTolerance)) ? this.activeCorner.x : this.mouseX;
-          // 		let my = (Math.abs(this.mouseY - this.activeCorner.y) < Configuration.getNumericValue(snapTolerance)) ? this.activeCorner.y : this.mouseY;
+        if (
+          this.gridSnapMode ||
+          Configuration.getNumericValue(configSnapToGrid)
+        ) {
+          // 		let mx = (Math.abs(this.mouseX - this.activeCorner.x) < Configuration.getNumericValue(configSnapTolerance)) ? this.activeCorner.x : this.mouseX;
+          // 		let my = (Math.abs(this.mouseY - this.activeCorner.y) < Configuration.getNumericValue(configSnapTolerance)) ? this.activeCorner.y : this.mouseY;
 
           mx =
             Math.floor(
-              this.mouseX / Configuration.getNumericValue(snapTolerance),
-            ) * Configuration.getNumericValue(snapTolerance);
+              this.mouseX / Configuration.getNumericValue(configSnapTolerance),
+            ) * Configuration.getNumericValue(configSnapTolerance);
           my =
             Math.floor(
-              this.mouseY / Configuration.getNumericValue(snapTolerance),
-            ) * Configuration.getNumericValue(snapTolerance);
+              this.mouseY / Configuration.getNumericValue(configSnapTolerance),
+            ) * Configuration.getNumericValue(configSnapTolerance);
 
           this.activeCorner.move(Math.round(mx), Math.round(my));
         } else {
@@ -561,7 +570,7 @@ export class Floorplanner2D extends EventDispatcher {
         }
         if (this.shiftKey) {
           this.activeCorner.snapToAxis(
-            Configuration.getNumericValue(snapTolerance),
+            Configuration.getNumericValue(configSnapTolerance),
           );
         }
         if (this.ctrlKey) {
@@ -571,16 +580,18 @@ export class Floorplanner2D extends EventDispatcher {
         if (!Configuration.getNumericValue('snapToRect')) {
           if (
             this.gridSnapMode ||
-            Configuration.getNumericValue('snapToGrid')
+            Configuration.getNumericValue(configSnapToGrid)
           ) {
             let dx = Dimensioning.pixelToCm(this.rawMouseX - this.lastX);
             let dy = Dimensioning.pixelToCm(this.rawMouseY - this.lastY);
             mx =
-              Math.floor(dx / Configuration.getNumericValue(snapTolerance)) *
-              Configuration.getNumericValue(snapTolerance);
+              Math.floor(
+                dx / Configuration.getNumericValue(configSnapTolerance),
+              ) * Configuration.getNumericValue(configSnapTolerance);
             my =
-              Math.floor(dy / Configuration.getNumericValue(snapTolerance)) *
-              Configuration.getNumericValue(snapTolerance);
+              Math.floor(
+                dy / Configuration.getNumericValue(configSnapTolerance),
+              ) * Configuration.getNumericValue(configSnapTolerance);
             this.activeWall.relativeMove(mx, my);
           } else {
             this.activeWall.relativeMove(
@@ -592,10 +603,10 @@ export class Floorplanner2D extends EventDispatcher {
           // 	this.activeWall.relativeMove((this.rawMouseX - this.lastX) * this.cmPerPixel, (this.rawMouseY - this.lastY) * this.cmPerPixel);
           if (
             this.gridSnapMode ||
-            Configuration.getNumericValue('snapToGrid')
+            Configuration.getNumericValue(configSnapToGrid)
           ) {
             this.activeWall.snapToAxis(
-              Configuration.getNumericValue(snapTolerance),
+              Configuration.getNumericValue(configSnapTolerance),
             );
           }
           this.lastX = this.rawMouseX;
@@ -707,7 +718,7 @@ export class Floorplanner2D extends EventDispatcher {
       this.unScaledOriginY + centerY,
     );
     currentPan = currentPan
-      .multiplyScalar(Configuration.getNumericValue('scale'))
+      .multiplyScalar(Configuration.getNumericValue(configScale))
       .sub(originScreen);
 
     this.originX = currentPan.x;

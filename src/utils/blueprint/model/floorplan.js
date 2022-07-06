@@ -14,9 +14,8 @@ import {
 import { EventDispatcher, Vector2, Vector3 } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
-import { WallTypes } from '../core/constants.js';
+import { WallTypes, cornerTolerance } from '../core/constants.js';
 import { Version } from '../core/version.js';
-import { cornerTolerance } from '../core/configuration.js';
 
 import { HalfEdge } from './half_edge.js';
 import { Corner } from './corner.js';
