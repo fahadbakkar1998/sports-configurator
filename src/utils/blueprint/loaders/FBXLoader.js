@@ -100,8 +100,6 @@ var _FBXLoader = (function () {
         fbxTree = new TextParser().parse(FBXText);
       }
 
-      // console.log( fbxTree );
-
       var textureLoader = new THREE.TextureLoader(this.manager)
         .setPath(this.resourcePath || path)
         .setCrossOrigin(this.crossOrigin);

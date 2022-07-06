@@ -49,7 +49,6 @@ export class Floor extends EventDispatcher {
   }
 
   redraw() {
-    console.log('floor_redraw');
     this.removeFromScene();
     this.floorPlane = this.buildFloor();
     this.roofPlane = this.buildRoofVaryingHeight();

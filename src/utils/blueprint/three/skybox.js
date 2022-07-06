@@ -178,7 +178,7 @@ export class Skybox extends EventDispatcher {
     var scope = this;
     scope.texture.load(
       url,
-      function (t) {
+      (t) => {
         var textureUniform = { type: 't', value: t };
         var uniforms = { texture: textureUniform };
         scope.skyMat = new ShaderMaterial({
@@ -189,8 +189,8 @@ export class Skybox extends EventDispatcher {
         });
         scope.toggleEnvironment(scope.useEnvironment);
       },
-      undefined,
-      function () {
+      () => {},
+      () => {
         console.log('skybox: ', 'ERROR LOADING FILE');
       },
     );

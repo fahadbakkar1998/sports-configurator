@@ -222,7 +222,6 @@ export class Scene extends EventDispatcher {
         }
       });
 
-      console.log('scene_gltfCallback_end', newGeometry, newMaterials);
       loaderCallback(newGeometry, newMaterials);
       // loaderCallback(gltfModel.scene, gltfModel.scene, true);
     };
@@ -251,13 +250,10 @@ export class Scene extends EventDispatcher {
     };
 
     let fbxCallback = function (fbxModel) {
-      console.log('scene_fbxCallback');
-      console.log('scene_fbxModel: ', fbxModel);
       let newMaterials = [];
       let newGeometry = new Geometry();
 
       fbxModel.traverse(function (child) {
-        console.log('scene_fbxModel_child: ', child);
         if (child.type == 'Mesh') {
           let materialIndices = [];
           let newItems;
@@ -292,7 +288,6 @@ export class Scene extends EventDispatcher {
         }
       });
 
-      console.log('scene_fbxCallback_end', newGeometry, newMaterials);
       loaderCallback(newGeometry, newMaterials);
     };
 
@@ -300,11 +295,11 @@ export class Scene extends EventDispatcher {
     if (!metadata.format) {
       this.loader.load(fileName, loaderCallback, undefined); // third parameter is undefined - TODO_Ekki
     } else if (metadata.format == 'gltf') {
-      this.gltfLoader.load(fileName, gltfCallback, console.log, console.error);
+      this.gltfLoader.load(fileName, gltfCallback, () => {}, console.error);
     } else if (metadata.format == 'obj') {
-      this.objLoader.load(fileName, objCallback, console.log, console.error);
+      this.objLoader.load(fileName, objCallback, () => {}, console.error);
     } else if (metadata.format == 'fbx') {
-      this.fbxLoader.load(fileName, fbxCallback, console.log, console.error);
+      this.fbxLoader.load(fileName, fbxCallback, () => {}, console.error);
     }
   }
 

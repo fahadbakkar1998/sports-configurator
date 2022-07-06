@@ -18,8 +18,6 @@ const Scene_Content = () => {
   } = useZustand();
 
   useEffect(() => {
-    console.log('Scene_Content_useEffect');
-
     // init
     if (!window.blueprintJS) {
       window.blueprintJS = new Blueprint.BlueprintJS({
@@ -29,7 +27,6 @@ const Scene_Content = () => {
         widget: false,
       });
       setBpJS(window.blueprintJS);
-      console.log('Scene_Content_blueprintJS: ', window.blueprintJS);
     }
 
     // init events
