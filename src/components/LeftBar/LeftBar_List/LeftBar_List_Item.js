@@ -46,7 +46,7 @@ const LeftBar_List_Item = ({
           <div className="container">
             <img
               className="image"
-              src={item.image}
+              src={item.imagePath}
               onClick={() => {
                 addItem({
                   ...item,

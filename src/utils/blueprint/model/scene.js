@@ -94,7 +94,6 @@ export class Scene extends EventDispatcher {
 
   /* Removes all items. */
   clearItems() {
-    // let items_copy = this.items ;
     let scope = this;
     this.items.forEach((item) => {
       scope.removeItem(item, true);
@@ -105,7 +104,7 @@ export class Scene extends EventDispatcher {
   /*
    * Removes an item.
    * @param item The item to be removed.
-   * @param dontRemove If not set, also remove the item from the items list.
+   * @param don'tRemove If not set, also remove the item from the items list.
    */
   removeItem(item, keepInList) {
     keepInList = keepInList || false;
@@ -128,27 +127,16 @@ export class Scene extends EventDispatcher {
   /*
    * Creates an item and adds it to the scene.
    * @param type The type of the item given by an enumerator.
-   * @param fileName The name of the file to load.
-   * @param metadata TODO
+   * @param modelPath The name of the file to load.
    * @param position The initial position.
    * @param rotation The initial rotation around the y axis.
    * @param scale The initial scaling.
    * @param fixed True if fixed.
    * @param newItemDefinitions - Object with position and 'edge' attribute if it is a wall item
    */
-  addItem(
-    type,
-    fileName,
-    metadata,
-    position,
-    rotation,
-    scale,
-    fixed,
-    newItemDefinitions,
-  ) {
-    if (type == undefined) {
-      type = 1;
-    }
+  addItem(itemInfo) {
+    const { type, modelPath, newItemDefinitions } = itemInfo;
+    if (!type) type = 1;
 
     let scope = this;
 
@@ -161,18 +149,14 @@ export class Scene extends EventDispatcher {
       }
     }
 
-    let loaderCallback = function (geometry, material, isGltf = false) {
+    let loaderCallback = function (geometry, material) {
       let item = new (Factory.getClass(type))({
+        ...itemInfo,
+        metadata: itemInfo,
         model: scope.model,
-        metadata,
         geometry,
         material,
-        position,
-        rotation,
-        scale,
-        isGltf,
       });
-      item.fixed = fixed || false;
       scope.items.push(item);
       scope.add(item);
       item.initObject();
@@ -192,7 +176,6 @@ export class Scene extends EventDispatcher {
       gltfModel.scene.traverse(function (child) {
         if (child.type == 'Mesh') {
           let materialIndices = [];
-          let newItems;
           if (child.material.length) {
             for (let k = 0; k < child.material.length; k++) {
               materialIndices.push(
@@ -202,7 +185,6 @@ export class Scene extends EventDispatcher {
           } else {
             materialIndices.push(addToMaterials(newMaterials, child.material));
           }
-
           if (child.geometry.isBufferGeometry) {
             let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
             tGeometry.faces.forEach((face) => {
@@ -221,9 +203,7 @@ export class Scene extends EventDispatcher {
           }
         }
       });
-
       loaderCallback(newGeometry, newMaterials);
-      // loaderCallback(gltfModel.scene, gltfModel.scene, true);
     };
 
     let objCallback = function (object) {
@@ -252,23 +232,18 @@ export class Scene extends EventDispatcher {
     let fbxCallback = function (fbxModel) {
       let newMaterials = [];
       let newGeometry = new Geometry();
-
       fbxModel.traverse(function (child) {
         if (child.type == 'Mesh') {
           let materialIndices = [];
-          let newItems;
           if (child.material.length) {
             for (let k = 0; k < child.material.length; k++) {
-              newItems = addToMaterials(newMaterials, child.material[k]);
-              newMaterials = newItems[0];
-              materialIndices.push(newItems[1]);
+              materialIndices.push(
+                addToMaterials(newMaterials, child.material[k]),
+              );
             }
           } else {
-            newItems = addToMaterials(newMaterials, child.material); //materials.push(child.material);
-            newMaterials = newItems[0];
-            materialIndices.push(newItems[1]);
+            materialIndices.push(addToMaterials(newMaterials, child.material));
           }
-
           if (child.geometry.isBufferGeometry) {
             let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
             tGeometry.faces.forEach((face) => {
@@ -287,19 +262,19 @@ export class Scene extends EventDispatcher {
           }
         }
       });
-
       loaderCallback(newGeometry, newMaterials);
     };
 
     this.dispatchEvent({ type: EVENT_ITEM_LOADING });
-    if (!metadata.format) {
-      this.loader.load(fileName, loaderCallback, undefined); // third parameter is undefined - TODO_Ekki
-    } else if (metadata.format == 'gltf') {
-      this.gltfLoader.load(fileName, gltfCallback, () => {}, console.error);
-    } else if (metadata.format == 'obj') {
-      this.objLoader.load(fileName, objCallback, () => {}, console.error);
-    } else if (metadata.format == 'fbx') {
-      this.fbxLoader.load(fileName, fbxCallback, () => {}, console.error);
+
+    if (!itemInfo.format) {
+      this.loader.load(modelPath, loaderCallback, () => {}, console.error);
+    } else if (itemInfo.format == 'gltf') {
+      this.gltfLoader.load(modelPath, gltfCallback, () => {}, console.error);
+    } else if (itemInfo.format == 'obj') {
+      this.objLoader.load(modelPath, objCallback, () => {}, console.error);
+    } else if (itemInfo.format == 'fbx') {
+      this.fbxLoader.load(modelPath, fbxCallback, () => {}, console.error);
     }
   }
 

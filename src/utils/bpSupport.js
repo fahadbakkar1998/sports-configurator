@@ -39,36 +39,24 @@ export const addItem = (item) => {
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     // Wall Items
     var placeAt = item.selectedWall.item.center.clone();
-    window.blueprintJS.model.scene.addItem(
-      item.type,
-      item.model,
-      item,
-      null,
-      null,
-      null,
-      false,
-      { position: placeAt, edge: item.selectedWall.item },
-    );
+    window.blueprintJS.model.scene.addItem({
+      ...item,
+      newItemDefinitions: { position: placeAt, edge: item.selectedWall.item },
+    });
     return;
   }
 
   if ([0, 1, 8].indexOf(parseInt(item.type)) != -1 && item.selectedFloor) {
     // Floor Items
     var placeAt = item.selectedFloor.item.center.clone();
-    window.blueprintJS.model.scene.addItem(
-      item.type,
-      item.model,
-      item,
-      null,
-      null,
-      null,
-      false,
-      { position: placeAt },
-    );
+    window.blueprintJS.model.scene.addItem({
+      ...item,
+      newItemDefinitions: { position: placeAt },
+    });
     return;
   }
 
-  window.blueprintJS.model.scene.addItem(item.type, item.model, item);
+  window.blueprintJS.model.scene.addItem(item);
 };
 
 export const updateFloorPlanMode = (mode) => {
