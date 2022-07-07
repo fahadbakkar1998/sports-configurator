@@ -1,5 +1,6 @@
 import { Group, Vector3, AxesHelper, BoxHelper } from 'three';
 import { InPlane } from './in_plane';
+import { Divider } from './divider';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class InContainer extends Group {
@@ -45,7 +46,39 @@ export class InContainer extends Group {
     this.add(this.topPlane);
 
     // generate dividers
+    this.dividerPlanes = [];
     if (dividers && dividers.length) {
+      let dividerCurX = 0;
+      dividers.forEach((divider) => {
+        const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
+          divider.deltaX,
+          info.unit,
+        );
+        const dividerStartZ = Dimensioning.cmFromMeasureRaw(
+          divider.deltaZ[0],
+          info.unit,
+        );
+        const dividerEndZ = Dimensioning.cmFromMeasureRaw(
+          divider.deltaZ[1],
+          info.unit,
+        );
+        dividerCurX += dividerDeltaX;
+        const dividerWidth = dividerEndZ - dividerStartZ;
+        const dividerPlane = new Divider({
+          info,
+          dividerInfo: { width: dividerWidth, height },
+        });
+        dividerPlane.position.copy(
+          new Vector3(
+            dividerCurX - width / 2,
+            0,
+            dividerStartZ + dividerWidth / 2 - length / 2,
+          ),
+        );
+        dividerPlane.rotateY(Math.PI / 2);
+        this.dividerPlanes.push(dividerPlane);
+        this.add(dividerPlane);
+      });
     }
   }
 }

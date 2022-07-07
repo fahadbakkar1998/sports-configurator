@@ -8,7 +8,9 @@ export class OutContainer extends Group {
     this.info = info;
     this.scene = info.model.scene.scene;
     const { width, height, length } = containerInfo;
+    const dividers = info.components.dividers;
 
+    // generate planes
     this.frontPlane = new OutPlane({ info, planeInfo: { width, height } });
     this.frontPlane.position.copy(new Vector3(0, 0, length / 2));
     this.add(this.frontPlane);
@@ -49,5 +51,19 @@ export class OutContainer extends Group {
     this.bottomPlane.position.copy(new Vector3(0, -height / 2, 0));
     this.bottomPlane.rotateX(Math.PI / 2);
     this.add(this.bottomPlane);
+
+    // generate rib lines
+    this.ribLines = [];
+    if (dividers && dividers.length) {
+      let dividerCurX = 0;
+      dividers.forEach((divider) => {
+        const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
+          divider.deltaX,
+          info.unit,
+        );
+        // todo
+        dividerCurX += dividerDeltaX;
+      });
+    }
   }
 }
