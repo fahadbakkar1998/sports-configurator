@@ -20,10 +20,11 @@ export const items = [
             length: 60,
           },
           out_edge: {
-            thickness: 1,
+            thickness: 0.4,
           },
           in_container: {
-            length: 50,
+            gap: 0.4,
+            deltaZ: [0, 50],
           },
           dividers: [
             // All points start at the back left.
@@ -32,11 +33,11 @@ export const items = [
               deltaZ: [0, 50],
             },
             {
-              deltaX: 20,
+              deltaX: 10,
               deltaZ: [0, 40],
             },
             {
-              deltaX: 30,
+              deltaX: 10,
               deltaZ: [30, 0],
             },
           ],

@@ -37,7 +37,7 @@ export class OutEdge extends Group {
     addFaces(geometry);
     this.edgeMesh = new Mesh(
       geometry,
-      new MeshBasicMaterial({ side: DoubleSide, color: 0xffff00 }),
+      new MeshBasicMaterial({ side: DoubleSide, color: 0x333333 }),
     );
     this.add(this.edgeMesh);
   }

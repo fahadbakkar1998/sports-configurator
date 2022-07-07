@@ -8,6 +8,7 @@ import {
   BoxGeometry,
   MeshStandardMaterial,
   DoubleSide,
+  Vector3,
 } from 'three';
 import DRACOLoader from '../loaders/three-dracoloader';
 import GLTFLoader from '../loaders/GLTFLoader';
@@ -312,6 +313,9 @@ export class Scene extends EventDispatcher {
     configurator.initObject();
     this.items.push(configurator);
     this.add(configurator);
+    configurator.position.copy(
+      new Vector3(2000, configurator.position.y, configurator.position.z),
+    ); // temp
     this.dispatchEvent({ type: EVENT_ITEM_LOADED, item: configurator });
   }
 }

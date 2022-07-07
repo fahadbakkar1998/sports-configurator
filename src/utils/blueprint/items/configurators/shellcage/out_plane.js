@@ -30,5 +30,21 @@ export class OutPlane extends Group {
     });
     this.bottomEdge.position.copy(new Vector3(0, -planeInfo.height / 2, 0));
     this.add(this.bottomEdge);
+
+    this.leftEdge = new OutEdge({
+      info,
+      edgeInfo: { width: planeInfo.height },
+    });
+    this.leftEdge.position.copy(new Vector3(-planeInfo.width / 2, 0, 0));
+    this.leftEdge.rotateZ(-Math.PI / 2);
+    this.add(this.leftEdge);
+
+    this.rightEdge = new OutEdge({
+      info,
+      edgeInfo: { width: planeInfo.height },
+    });
+    this.rightEdge.position.copy(new Vector3(planeInfo.width / 2, 0, 0));
+    this.rightEdge.rotateZ(Math.PI / 2);
+    this.add(this.rightEdge);
   }
 }
