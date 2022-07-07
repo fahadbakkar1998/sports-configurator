@@ -305,12 +305,11 @@ export class Scene extends EventDispatcher {
       material: new MeshStandardMaterial({
         color: 0xff0000,
         side: DoubleSide,
-        // visible: false,
+        visible: false,
         // wireframe: true,
       }),
     });
     configurator.initObject();
-    await configurator.initConfigurator();
     this.items.push(configurator);
     this.add(configurator);
     this.dispatchEvent({ type: EVENT_ITEM_LOADED, item: configurator });

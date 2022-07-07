@@ -19,21 +19,25 @@ export const items = [
             height: 10,
             length: 60,
           },
+          out_edge: {
+            thickness: 1,
+          },
           in_container: {
             length: 50,
           },
           dividers: [
+            // All points start at the back left.
             {
-              startPoint: { x: 10, y: 0, z: 0 },
-              endPoint: { x: 10, y: 0, z: 50 },
+              deltaX: 10,
+              deltaZ: [0, 50],
             },
             {
-              startPoint: { x: 20, y: 0, z: 0 },
-              endPoint: { x: 20, y: 0, z: 40 },
+              deltaX: 20,
+              deltaZ: [0, 40],
             },
             {
-              startPoint: { x: 10, y: 0, z: 0 },
-              endPoint: { x: 30, y: 0, z: 30 },
+              deltaX: 30,
+              deltaZ: [30, 0],
             },
           ],
         },
@@ -46,7 +50,8 @@ export const items = [
             children: [
               {
                 name: 'CurtainCage Easy Slide',
-                imagePath: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+                imagePath:
+                  'assets/models/thumbnails/CurtainCage Easy Slide.png',
                 modelPath: 'assets/models/gltf/CurtainCage Easy Slide.glb',
                 type: '5',
                 format: 'gltf',
