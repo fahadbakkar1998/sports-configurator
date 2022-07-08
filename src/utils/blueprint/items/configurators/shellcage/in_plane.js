@@ -1,14 +1,9 @@
 import {
   Group,
   Mesh,
-  Vector2,
-  Vector3,
   PlaneGeometry,
-  MeshStandardMaterial,
   MeshBasicMaterial,
   DoubleSide,
-  Plane,
-  Object3D,
 } from 'three';
 
 export class InPlane extends Group {

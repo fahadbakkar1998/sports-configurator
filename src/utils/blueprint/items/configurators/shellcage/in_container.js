@@ -1,4 +1,4 @@
-import { Group, Vector3, AxesHelper, BoxHelper } from 'three';
+import { Group, Vector3 } from 'three';
 import { InPlane } from './in_plane';
 import { Divider } from './divider';
 import { Dimensioning } from '../../../core/dimensioning';
@@ -47,19 +47,19 @@ export class InContainer extends Group {
 
     // generate dividers
     this.dividerPlanes = [];
-    if (dividers && dividers.length) {
+    if (dividers && dividers.value && dividers.value.length) {
       let dividerCurX = 0;
-      dividers.forEach((divider) => {
+      dividers.value.forEach((divider) => {
         const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
-          divider.deltaX,
+          divider.value.deltaX.value,
           info.unit,
         );
         const dividerStartZ = Dimensioning.cmFromMeasureRaw(
-          divider.deltaZ[0],
+          divider.value.deltaZ.value[0],
           info.unit,
         );
         const dividerEndZ = Dimensioning.cmFromMeasureRaw(
-          divider.deltaZ[1],
+          divider.value.deltaZ.value[1],
           info.unit,
         );
         dividerCurX += dividerDeltaX;

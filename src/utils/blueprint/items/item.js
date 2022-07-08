@@ -76,7 +76,7 @@ export class Item extends Mesh {
     this.halfSize = new Vector3(0, 0, 0);
     this.bHelper = null;
 
-    this.scene = this.model.scene;
+    this.scene = this.model.scene.scene;
     this._freePosition = true;
 
     if (!this.material.color) {
@@ -293,7 +293,7 @@ export class Item extends Mesh {
 
   /* */
   remove() {
-    this.scene.removeItem(this);
+    this.model.scene.removeItem(this);
   }
 
   /* */

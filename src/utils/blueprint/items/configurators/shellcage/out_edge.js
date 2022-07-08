@@ -1,14 +1,10 @@
 import {
   Group,
   Mesh,
-  Vector2,
   Vector3,
-  PlaneGeometry,
-  MeshStandardMaterial,
   MeshBasicMaterial,
   DoubleSide,
   Geometry,
-  Side,
 } from 'three';
 import { Dimensioning } from '../../../core/dimensioning';
 import { addFaces } from '../../../core/common';
@@ -21,7 +17,7 @@ export class OutEdge extends Group {
 
     // calculate out_edge thickness
     const thickness = Dimensioning.cmFromMeasureRaw(
-      info.components.out_edge.thickness,
+      info.components.out_edge.value.thickness.value,
       info.unit,
     );
 

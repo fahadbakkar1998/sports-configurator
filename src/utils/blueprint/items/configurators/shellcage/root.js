@@ -12,32 +12,32 @@ export class Root extends Group {
 
     // calculate out_container size
     const outContainerWidth = Dimensioning.cmFromMeasureRaw(
-      info.components.out_container.width,
+      info.components.out_container.value.width.value,
       info.unit,
     );
     const outContainerHeight = Dimensioning.cmFromMeasureRaw(
-      info.components.out_container.height,
+      info.components.out_container.value.height.value,
       info.unit,
     );
     const outContainerLength = Dimensioning.cmFromMeasureRaw(
-      info.components.out_container.length,
+      info.components.out_container.value.length.value,
       info.unit,
     );
 
     // calculate in_container size
     const gap = Dimensioning.cmFromMeasureRaw(
-      info.components.in_container.gap,
+      info.components.in_container.value.gap.value,
       info.unit,
     );
     let inContainerStartZ = Dimensioning.cmFromMeasureRaw(
-      info.components.in_container.deltaZ[0],
+      info.components.in_container.value.deltaZ.value[0],
       info.unit,
     );
     if (inContainerStartZ < gap) inContainerStartZ = gap;
     if (inContainerStartZ > outContainerLength - gap)
       inContainerStartZ = outContainerLength - gap;
     let inContainerEndZ = Dimensioning.cmFromMeasureRaw(
-      info.components.in_container.deltaZ[1],
+      info.components.in_container.value.deltaZ.value[1],
       info.unit,
     );
     if (inContainerEndZ > outContainerLength - gap)

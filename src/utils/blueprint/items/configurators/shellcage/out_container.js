@@ -5,11 +5,6 @@ import {
   TubeGeometry,
   MeshLambertMaterial,
   Mesh,
-  BoxGeometry,
-  BoxHelper,
-  AxesHelper,
-  PlaneGeometry,
-  MeshBasicMaterial,
   DoubleSide,
 } from 'three';
 import { OutPlane } from './out_plane';
@@ -68,18 +63,18 @@ export class OutContainer extends Group {
     // generate rib lines
     this.ribLines = [];
     const ribLineDiameter = Dimensioning.cmFromMeasureRaw(
-      info.components.rib_line.diameter,
+      info.components.rib_line.value.diameter.value,
       info.unit,
     );
     const ribLineAllowableLaneWidth = Dimensioning.cmFromMeasureRaw(
-      info.components.rib_line.allowableLaneWidth,
+      info.components.rib_line.value.allowableLaneWidth.value,
       info.unit,
     );
-    if (dividers && dividers.length) {
+    if (dividers && dividers.value && dividers.value.length) {
       let dividerCurX = 0;
-      dividers.forEach((divider) => {
+      dividers.value.forEach((divider) => {
         const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
-          divider.deltaX,
+          divider.value.deltaX.value,
           info.unit,
         );
         this.generateRibLine({

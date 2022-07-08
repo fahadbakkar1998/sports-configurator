@@ -1,14 +1,5 @@
-import {
-  Group,
-  Mesh,
-  Vector2,
-  Vector3,
-  PlaneGeometry,
-  MeshStandardMaterial,
-  DoubleSide,
-} from 'three';
+import { Group, Vector3 } from 'three';
 import { OutEdge } from './out_edge';
-import { Dimensioning } from '../../../core/dimensioning';
 
 export class OutPlane extends Group {
   constructor({ info, planeInfo }) {
