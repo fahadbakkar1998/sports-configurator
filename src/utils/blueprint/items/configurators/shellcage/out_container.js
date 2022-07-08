@@ -1,4 +1,17 @@
-import { Group, Vector3 } from 'three';
+import {
+  Group,
+  Vector3,
+  CatmullRomCurve3,
+  TubeGeometry,
+  MeshLambertMaterial,
+  Mesh,
+  BoxGeometry,
+  BoxHelper,
+  AxesHelper,
+  PlaneGeometry,
+  MeshBasicMaterial,
+  DoubleSide,
+} from 'three';
 import { OutPlane } from './out_plane';
 import { Dimensioning } from '../../../core/dimensioning';
 
@@ -54,6 +67,14 @@ export class OutContainer extends Group {
 
     // generate rib lines
     this.ribLines = [];
+    const ribLineDiameter = Dimensioning.cmFromMeasureRaw(
+      info.components.rib_line.diameter,
+      info.unit,
+    );
+    const ribLineAllowableLaneWidth = Dimensioning.cmFromMeasureRaw(
+      info.components.rib_line.allowableLaneWidth,
+      info.unit,
+    );
     if (dividers && dividers.length) {
       let dividerCurX = 0;
       dividers.forEach((divider) => {
@@ -61,9 +82,38 @@ export class OutContainer extends Group {
           divider.deltaX,
           info.unit,
         );
-        // todo
+        this.generateRibLine({
+          x: dividerCurX + dividerDeltaX / 2 - width / 2,
+          y: height / 2 + ribLineDiameter / 2,
+          length,
+          diameter: ribLineDiameter,
+        });
         dividerCurX += dividerDeltaX;
       });
+      if (dividerCurX + ribLineAllowableLaneWidth <= width) {
+        this.generateRibLine({
+          x: dividerCurX / 2,
+          y: height / 2 + ribLineDiameter / 2,
+          length,
+          diameter: ribLineDiameter,
+        });
+      }
     }
+  }
+
+  generateRibLine({ x, y, length, diameter }) {
+    const pipeSpline = new CatmullRomCurve3([
+      new Vector3(x, 0, -length / 2),
+      new Vector3(x, 0, length / 2),
+    ]);
+    const geometry = new TubeGeometry(pipeSpline, 10, diameter / 2, 10, false);
+    const material = new MeshLambertMaterial({
+      color: 0x333333,
+      side: DoubleSide,
+    });
+    const ribLine = new Mesh(geometry, material);
+    ribLine.position.copy(new Vector3(0, y, 0));
+    this.ribLines.push(ribLine);
+    this.add(ribLine);
   }
 }

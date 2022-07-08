@@ -14,6 +14,7 @@ export const items = [
           length: 60,
         },
         components: {
+          // All points start at the back left.
           out_container: {
             width: 40,
             height: 10,
@@ -27,7 +28,6 @@ export const items = [
             deltaZ: [0, 50],
           },
           dividers: [
-            // All points start at the back left.
             {
               deltaX: 10,
               deltaZ: [0, 50],
@@ -41,6 +41,10 @@ export const items = [
               deltaZ: [30, 0],
             },
           ],
+          rib_line: {
+            diameter: 0.2,
+            allowableLaneWidth: 8,
+          },
         },
       },
       {
