@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useZustand from '../../../utils/useZustand';
 import { updateUnit } from '../../../utils/bpSupport';
 import { getFloat, getUFloat, rgbToHex } from '../../../utils/common';
@@ -7,8 +7,47 @@ import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
 import { HexColorPicker } from 'react-colorful';
 import cn from 'classnames';
+import RightBar_Content_CompInfo from './RightBar_Content_CompInfo';
+import { isLeafComponent } from './common';
 
 let isDot = false;
+
+const recursiveComponent = ({ comp, depth, isOpen, initialOpenDepth }) => {
+  // const [openChildren, setOpenChildren] = useState(
+  //   isOpen && depth < initialOpenDepth,
+  // );
+
+  // useEffect(() => {
+  //   !isOpen && setOpenChildren(isOpen);
+  // }, [isOpen]);
+
+  const openChildren = true;
+
+  return (
+    <>
+      <RightBar_Content_CompInfo
+        comp={comp}
+        depth={depth}
+        isOpen={isOpen}
+        openChildren={openChildren}
+        // onClick={() =>
+        //   setOpenChildren(!openChildren)
+        // }
+      ></RightBar_Content_CompInfo>
+      {!isLeafComponent(comp) &&
+        React.Children.toArray(
+          Object.keys(comp.value).map((childKey) =>
+            recursiveComponent({
+              comp: comp.value[childKey],
+              depth: depth + 1,
+              isOpen: openChildren,
+              initialOpenDepth,
+            }),
+          ),
+        )}
+    </>
+  );
+};
 
 const RightBar_Content_Inspector = () => {
   const {
@@ -243,7 +282,7 @@ const RightBar_Content_Inspector = () => {
           <div className="item-info-container">
             <img
               className="item-info-logo"
-              src={cur3dItemEvent.item.metadata.image}></img>
+              src={cur3dItemEvent.item.metadata.imagePath}></img>
             <div className="item-info">{cur3dItemEvent.item.metadata.name}</div>
             <div className="item-info">
               Cost: ${cur3dItemEvent.item.getPrice()}
@@ -264,7 +303,13 @@ const RightBar_Content_Inspector = () => {
                 cur3dItemEvent.item.metadata.components &&
                 React.Children.toArray(
                   Object.keys(cur3dItemEvent.item.metadata.components).map(
-                    (key) => key, // Todo
+                    (compKey) =>
+                      recursiveComponent({
+                        comp: cur3dItemEvent.item.metadata.components[compKey],
+                        isOpen: true,
+                        depth: 0,
+                        initialOpenDepth: 0,
+                      }),
                   ),
                 )
               ) : (

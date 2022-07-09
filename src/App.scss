@@ -359,6 +359,38 @@ $commonHeight: 1.8vmax;
           padding-left: calc(5 * $fontPadding);
         }
 
+        .RightBar_Content_Comp {
+          width: 100%;
+          height: $commonHeight;
+          gap: $fontPadding;
+          align-items: center;
+          padding: $fontPadding;
+          cursor: pointer;
+          border-top: 1px solid $borderColor;
+          border-bottom: 1px solid $borderColor;
+          height: $commonHeight;
+          transition: 0.2s;
+          display: none;
+
+          &.show {
+            display: flex;
+          }
+
+          div {
+            padding: $fontPadding;
+            font-size: calc($commonHeight - 5 * $fontPadding);
+          }
+
+          .arrow {
+            width: fit-content;
+            transition: 0.2s;
+
+            &.open {
+              transform: rotate(90deg);
+            }
+          }
+        }
+
         .input-group {
           margin-top: $fontPadding;
           margin-left: $fontPadding;
@@ -370,6 +402,10 @@ $commonHeight: 1.8vmax;
           font-size: calc($commonHeight - 5 * $fontPadding);
           gap: $fontPadding;
           flex-wrap: wrap;
+
+          &.show {
+            display: none;
+          }
 
           .input {
             height: $commonHeight;

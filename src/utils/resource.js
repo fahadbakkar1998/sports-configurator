@@ -99,7 +99,7 @@ export const items = [
             name: 'RibLine',
             value: {
               diameter: { name: 'Diameter', value: 0.2 },
-              allowableLaneWidth: { name: 'AllowableLaneWidth', value: 8 },
+              allowableLaneWidth: { name: 'ALW', value: 8 },
             },
           },
         },
