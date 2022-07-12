@@ -13,39 +13,6 @@ export const items = [
           height: 10,
           length: 60,
         },
-        // components: {
-        //   // All points start at the back left.
-        //   out_container: {
-        //     width: 40,
-        //     height: 10,
-        //     length: 60,
-        //   },
-        //   out_edge: {
-        //     thickness: 0.4,
-        //   },
-        //   in_container: {
-        //     gap: 0.4,
-        //     deltaZ: [0, 50],
-        //   },
-        //   dividers: [
-        //     {
-        //       deltaX: 10,
-        //       deltaZ: [0, 50],
-        //     },
-        //     {
-        //       deltaX: 10,
-        //       deltaZ: [0, 40],
-        //     },
-        //     {
-        //       deltaX: 10,
-        //       deltaZ: [10, 20],
-        //     },
-        //   ],
-        //   rib_line: {
-        //     diameter: 0.2,
-        //     allowableLaneWidth: 8,
-        //   },
-        // },
         components: {
           // All points start at the back left.
           out_container: {
@@ -66,7 +33,7 @@ export const items = [
             name: 'InContainer',
             value: {
               gap: { name: 'Gap', value: 0.4 },
-              deltaZ: { name: 'DeltaZ', value: [0, 50] },
+              deltaZ: { name: 'DeltaZ', value: [0, 50], range: [0, 60] },
             },
           },
           dividers: {
@@ -76,21 +43,21 @@ export const items = [
                 name: 'Divider1',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 50] },
+                  deltaZ: { name: 'DeltaZ', value: [0, 50], range: [0, 50] },
                 },
               },
               {
                 name: 'Divider2',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 40] },
+                  deltaZ: { name: 'DeltaZ', value: [0, 40], range: [0, 50] },
                 },
               },
               {
                 name: 'Divider3',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [10, 30] },
+                  deltaZ: { name: 'DeltaZ', value: [10, 30], range: [0, 50] },
                 },
               },
             ],

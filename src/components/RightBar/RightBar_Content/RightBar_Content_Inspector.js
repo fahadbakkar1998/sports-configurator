@@ -12,16 +12,22 @@ import { isLeafComponent } from './common';
 
 let isDot = false;
 
-const recursiveComponent = ({ comp, depth, isOpen, initialOpenDepth }) => {
+const recursiveComponent = ({
+  comp,
+  depth,
+  isOpen,
+  initialOpenDepth,
+  updateComponents,
+}) => {
   // const [openChildren, setOpenChildren] = useState(
   //   isOpen && depth < initialOpenDepth,
   // );
 
+  const openChildren = true;
+
   // useEffect(() => {
   //   !isOpen && setOpenChildren(isOpen);
   // }, [isOpen]);
-
-  const openChildren = true;
 
   return (
     <>
@@ -30,20 +36,23 @@ const recursiveComponent = ({ comp, depth, isOpen, initialOpenDepth }) => {
         depth={depth}
         isOpen={isOpen}
         openChildren={openChildren}
+        updateComponents={updateComponents}
         // onClick={() =>
         //   setOpenChildren(!openChildren)
         // }
       ></RightBar_Content_CompInfo>
-      {!isLeafComponent(comp) &&
+      {!isLeafComponent({ ...comp }) &&
         React.Children.toArray(
-          Object.keys(comp.value).map((childKey) =>
-            recursiveComponent({
+          Object.keys(comp.value).map((childKey) => {
+            comp.value[childKey].id = `${comp.id}_${childKey}`;
+            return recursiveComponent({
               comp: comp.value[childKey],
               depth: depth + 1,
               isOpen: openChildren,
               initialOpenDepth,
-            }),
-          ),
+              updateComponents,
+            });
+          }),
         )}
     </>
   );
@@ -100,6 +109,11 @@ const RightBar_Content_Inspector = () => {
   const updateCur3dAccessory = (accessoryKey, accessoryNo) => {
     const cloneCur3dItemEvent = { ...cur3dItemEvent };
     cloneCur3dItemEvent.item.accessoryNos[accessoryKey] = accessoryNo;
+    setCur3dItemEvent(cloneCur3dItemEvent);
+  };
+
+  const updateCur3dItemComponents = () => {
+    const cloneCur3dItemEvent = { ...cur3dItemEvent };
     setCur3dItemEvent(cloneCur3dItemEvent);
   };
 
@@ -303,13 +317,17 @@ const RightBar_Content_Inspector = () => {
                 cur3dItemEvent.item.metadata.components &&
                 React.Children.toArray(
                   Object.keys(cur3dItemEvent.item.metadata.components).map(
-                    (compKey) =>
-                      recursiveComponent({
+                    (compKey) => {
+                      cur3dItemEvent.item.metadata.components[compKey].id =
+                        compKey;
+                      return recursiveComponent({
                         comp: cur3dItemEvent.item.metadata.components[compKey],
                         isOpen: true,
                         depth: 0,
                         initialOpenDepth: 0,
-                      }),
+                        updateComponents: updateCur3dItemComponents,
+                      });
+                    },
                   ),
                 )
               ) : (
