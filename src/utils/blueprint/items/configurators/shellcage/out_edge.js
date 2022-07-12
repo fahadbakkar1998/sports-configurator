@@ -10,9 +10,9 @@ import { Dimensioning } from '../../../core/dimensioning';
 import { addFaces } from '../../../core/common';
 
 export class OutEdge extends Group {
-  constructor({ info, edgeInfo }) {
+  constructor({ info, parentInfo }) {
     super();
-    this.info = info;
+    this.unit = info.unit;
     this.scene = info.model.scene.scene;
 
     // calculate out_edge thickness
@@ -24,10 +24,10 @@ export class OutEdge extends Group {
     // generate edge mesh
     const geometry = new Geometry();
     const vertices = [
-      new Vector3(thickness - edgeInfo.width / 2, thickness, 0), // left top
-      new Vector3(-edgeInfo.width / 2, 0, 0), // left bottom
-      new Vector3(edgeInfo.width / 2, 0, 0), // right bottom
-      new Vector3(edgeInfo.width / 2 - thickness, thickness, 0), // right top
+      new Vector3(thickness - parentInfo.width / 2, thickness, 0), // left top
+      new Vector3(-parentInfo.width / 2, 0, 0), // left bottom
+      new Vector3(parentInfo.width / 2, 0, 0), // right bottom
+      new Vector3(parentInfo.width / 2 - thickness, thickness, 0), // right top
     ];
     vertices.forEach((vertex) => geometry.vertices.push(vertex));
     addFaces(geometry);

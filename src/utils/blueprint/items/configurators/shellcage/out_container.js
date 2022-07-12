@@ -11,11 +11,11 @@ import { OutPlane } from './out_plane';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class OutContainer extends Group {
-  constructor({ info, containerInfo }) {
+  constructor({ info, parentInfo }) {
     super();
-    this.info = info;
+    this.unit = info.unit;
     this.scene = info.model.scene.scene;
-    const { width, height, length } = containerInfo;
+    const { width, height, length } = parentInfo;
     const dividers = info.components.dividers;
 
     // generate planes
@@ -64,18 +64,18 @@ export class OutContainer extends Group {
     this.ribLines = [];
     const ribLineDiameter = Dimensioning.cmFromMeasureRaw(
       info.components.rib_line.value.diameter.value,
-      info.unit,
+      this.unit,
     );
     const ribLineAllowableLaneWidth = Dimensioning.cmFromMeasureRaw(
       info.components.rib_line.value.allowableLaneWidth.value,
-      info.unit,
+      this.unit,
     );
     if (dividers && dividers.value && dividers.value.length) {
       let dividerCurX = 0;
       dividers.value.forEach((divider) => {
         const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
           divider.value.deltaX.value,
-          info.unit,
+          this.unit,
         );
         this.generateRibLine({
           x: dividerCurX + dividerDeltaX / 2 - width / 2,
@@ -111,4 +111,6 @@ export class OutContainer extends Group {
     this.ribLines.push(ribLine);
     this.add(ribLine);
   }
+
+  redrawComponents({ components, parentInfo }) {}
 }

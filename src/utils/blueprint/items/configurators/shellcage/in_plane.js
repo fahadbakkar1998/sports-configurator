@@ -7,11 +7,11 @@ import {
 } from 'three';
 
 export class InPlane extends Group {
-  constructor({ info, planeInfo }) {
+  constructor({ info, parentInfo }) {
     super();
     this.info = info;
     this.scene = info.model.scene.scene;
-    const { width, height } = planeInfo;
+    const { width, height } = parentInfo;
 
     this.planeMesh = new Mesh(
       new PlaneGeometry(width, height),

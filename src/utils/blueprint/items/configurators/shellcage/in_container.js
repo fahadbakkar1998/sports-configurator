@@ -4,26 +4,26 @@ import { Divider } from './divider';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class InContainer extends Group {
-  constructor({ info, containerInfo }) {
+  constructor({ info, parentInfo }) {
     super();
-    this.info = info;
+    this.unit = info.unit;
     this.scene = info.model.scene.scene;
-    const { width, height, length } = containerInfo;
+    const { width, height, length } = parentInfo;
     const dividers = info.components.dividers;
 
     // generate planes
-    this.frontPlane = new InPlane({ info, planeInfo: { width, height } });
+    this.frontPlane = new InPlane({ info, parentInfo: { width, height } });
     this.frontPlane.position.copy(new Vector3(0, 0, length / 2));
     this.add(this.frontPlane);
 
-    this.backPlane = new InPlane({ info, planeInfo: { width, height } });
+    this.backPlane = new InPlane({ info, parentInfo: { width, height } });
     this.backPlane.position.copy(new Vector3(0, 0, -length / 2));
     this.backPlane.rotateY(Math.PI);
     this.add(this.backPlane);
 
     this.leftPlane = new InPlane({
       info,
-      planeInfo: { width: length, height },
+      parentInfo: { width: length, height },
     });
     this.leftPlane.position.copy(new Vector3(-width / 2, 0, 0));
     this.leftPlane.rotateY(Math.PI / 2);
@@ -31,7 +31,7 @@ export class InContainer extends Group {
 
     this.rightPlane = new InPlane({
       info,
-      planeInfo: { width: length, height },
+      parentInfo: { width: length, height },
     });
     this.rightPlane.position.copy(new Vector3(width / 2, 0, 0));
     this.rightPlane.rotateY(-Math.PI / 2);
@@ -39,7 +39,7 @@ export class InContainer extends Group {
 
     this.topPlane = new InPlane({
       info,
-      planeInfo: { width, height: length },
+      parentInfo: { width, height: length },
     });
     this.topPlane.position.copy(new Vector3(0, height / 2, 0));
     this.topPlane.rotateX(-Math.PI / 2);
@@ -52,21 +52,21 @@ export class InContainer extends Group {
       dividers.value.forEach((divider) => {
         const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
           divider.value.deltaX.value,
-          info.unit,
+          this.unit,
         );
         const dividerStartZ = Dimensioning.cmFromMeasureRaw(
           divider.value.deltaZ.value[0],
-          info.unit,
+          this.unit,
         );
         const dividerEndZ = Dimensioning.cmFromMeasureRaw(
           divider.value.deltaZ.value[1],
-          info.unit,
+          this.unit,
         );
         dividerCurX += dividerDeltaX;
         const dividerWidth = dividerEndZ - dividerStartZ;
         const dividerPlane = new Divider({
           info,
-          dividerInfo: { width: dividerWidth, height },
+          parentInfo: { width: dividerWidth, height },
         });
         dividerPlane.position.copy(
           new Vector3(
@@ -80,5 +80,9 @@ export class InContainer extends Group {
         this.add(dividerPlane);
       });
     }
+  }
+
+  redrawComponents(components) {
+    console.log('in_container', this.parent);
   }
 }
