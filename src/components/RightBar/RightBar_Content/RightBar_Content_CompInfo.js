@@ -16,7 +16,7 @@ const RightBar_Content_CompInfo = ({
   onClick,
   updateComponents,
 }) => {
-  const { cur3dItemEvent, setCur3dItemEvent, curUnit } = useZustand();
+  const { curUnit } = useZustand();
 
   const style = {
     marginLeft: `${depth * 1}vw`,

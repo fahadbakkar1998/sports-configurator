@@ -114,6 +114,7 @@ const RightBar_Content_Inspector = () => {
 
   const updateCur3dItemComponents = () => {
     const cloneCur3dItemEvent = { ...cur3dItemEvent };
+    cur3dItemEvent.item.redrawComponents();
     setCur3dItemEvent(cloneCur3dItemEvent);
   };
 

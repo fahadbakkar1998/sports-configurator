@@ -10,4 +10,8 @@ export class ShellCage extends OutItem {
     this.root = new Root(info);
     this.add(this.root);
   }
+
+  redrawComponents() {
+    this.root.redrawComponents(this.metadata.components);
+  }
 }

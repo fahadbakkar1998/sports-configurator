@@ -75,4 +75,8 @@ export class Root extends Group {
     );
     this.add(this.inContainer);
   }
+
+  redrawComponents(components) {
+    
+  }
 }
