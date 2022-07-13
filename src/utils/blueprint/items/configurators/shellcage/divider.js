@@ -24,4 +24,11 @@ export class Divider extends Group {
     );
     this.add(this.planeMesh);
   }
+
+  redrawComponents({ components, parentInfo }) {
+    this.planeMesh.geometry = new PlaneGeometry(
+      parentInfo.width,
+      parentInfo.height,
+    );
+  }
 }

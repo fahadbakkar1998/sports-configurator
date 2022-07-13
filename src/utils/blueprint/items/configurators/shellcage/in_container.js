@@ -49,21 +49,13 @@ export class InContainer extends Group {
     this.dividerPlanes = [];
     if (dividers && dividers.value && dividers.value.length) {
       let dividerCurX = 0;
-      dividers.value.forEach((divider) => {
-        const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
-          divider.value.deltaX.value,
-          this.unit,
-        );
-        const dividerStartZ = Dimensioning.cmFromMeasureRaw(
-          divider.value.deltaZ.value[0],
-          this.unit,
-        );
-        const dividerEndZ = Dimensioning.cmFromMeasureRaw(
-          divider.value.deltaZ.value[1],
-          this.unit,
-        );
-        dividerCurX += dividerDeltaX;
-        const dividerWidth = dividerEndZ - dividerStartZ;
+      dividers.value.forEach((comp) => {
+        const dividerInfo = this.getDividerInfo({
+          comp,
+          maxLen: parentInfo.length,
+        });
+        dividerCurX += dividerInfo.deltaX;
+        const dividerWidth = dividerInfo.endZ - dividerInfo.startZ;
         const dividerPlane = new Divider({
           item,
           parentInfo: { width: dividerWidth, height },
@@ -72,7 +64,7 @@ export class InContainer extends Group {
           new Vector3(
             dividerCurX - width / 2,
             0,
-            dividerStartZ + dividerWidth / 2 - length / 2,
+            dividerInfo.startZ + dividerWidth / 2 - length / 2,
           ),
         );
         dividerPlane.rotateY(Math.PI / 2);
@@ -80,6 +72,30 @@ export class InContainer extends Group {
         this.add(dividerPlane);
       });
     }
+  }
+
+  getDividerInfo({ comp, maxLen }) {
+    // condition
+    if (comp.value.deltaX.value < 0) comp.value.deltaX.value = 0;
+    if (comp.value.deltaZ.value[0] < 0) comp.value.deltaZ.value[0] = 0;
+    if (comp.value.deltaZ.value[1] < comp.value.deltaZ.value[0])
+      comp.value.deltaZ.value[1] = comp.value.deltaZ.value[0];
+    if (comp.value.deltaZ.value[1] > maxLen)
+      comp.value.deltaZ.value[1] = maxLen;
+
+    const deltaX = Dimensioning.cmFromMeasureRaw(
+      comp.value.deltaX.value,
+      this.unit,
+    );
+    const startZ = Dimensioning.cmFromMeasureRaw(
+      comp.value.deltaZ.value[0],
+      this.unit,
+    );
+    const endZ = Dimensioning.cmFromMeasureRaw(
+      comp.value.deltaZ.value[1],
+      this.unit,
+    );
+    return { deltaX, startZ, endZ };
   }
 
   redrawComponents({ components, parentInfo }) {
@@ -117,5 +133,29 @@ export class InContainer extends Group {
     });
     this.topPlane.position.copy(new Vector3(0, parentInfo.height / 2, 0));
     this.add(this.topPlane);
+
+    const dividers = components.dividers;
+    let dividerCurX = 0;
+    if (dividers && dividers.value && dividers.value.length) {
+      dividers.value.map((comp, i) => {
+        const dividerInfo = this.getDividerInfo({
+          comp,
+          maxLen: parentInfo.length,
+        });
+        dividerCurX += dividerInfo.deltaX;
+        const dividerWidth = dividerInfo.endZ - dividerInfo.startZ;
+        this.dividerPlanes[i].redrawComponents({
+          components,
+          parentInfo: { width: dividerWidth, height: parentInfo.height },
+        });
+        this.dividerPlanes[i].position.copy(
+          new Vector3(
+            dividerCurX - parentInfo.width / 2,
+            0,
+            dividerInfo.startZ + dividerWidth / 2 - parentInfo.length / 2,
+          ),
+        );
+      });
+    }
   }
 }
