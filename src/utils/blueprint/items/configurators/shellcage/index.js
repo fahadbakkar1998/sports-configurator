@@ -5,9 +5,8 @@ import { Root } from './root';
 export class ShellCage extends OutItem {
   constructor(info) {
     super(info);
-    this.info = info;
     this.scene = info.model.scene.scene;
-    this.root = new Root(info);
+    this.root = new Root(this);
     this.add(this.root);
   }
 

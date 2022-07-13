@@ -223,6 +223,10 @@ export class Item extends Mesh {
     return this._freePosition;
   }
 
+  refreshItem() {
+    this.halfSize = this.objectHalfSize();
+  }
+
   updateCanvasTexture(canvas, context, material, w, h, wPrefix, hPrefix) {
     if (w < 1 || h < 1) {
       return;

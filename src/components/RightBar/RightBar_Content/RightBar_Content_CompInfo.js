@@ -16,11 +16,13 @@ const RightBar_Content_CompInfo = ({
   onClick,
   updateComponents,
 }) => {
-  const { curUnit } = useZustand();
+  const { cur3dItemEvent } = useZustand();
 
   const style = {
     marginLeft: `${depth * 1}vw`,
   };
+
+  const { unit, maxSize } = cur3dItemEvent.item.metadata;
 
   return (
     <>
@@ -28,12 +30,12 @@ const RightBar_Content_CompInfo = ({
         <div className={classnames('input-group', { hide: !isOpen })}>
           {Array.isArray(comp.value) ? (
             <>
-              <span>{comp.name}</span>
+              <span>{`${comp.name}(${unit}):`}</span>
               {/* <Slider /> */}
               <MultiRangeSlider
-                min={comp.range[0]}
-                max={comp.range[1]}
-                step={parseInt((comp.range[1] - comp.range[0]) / 50)}
+                min={0}
+                max={maxSize}
+                step={parseInt(maxSize / 50)}
                 ruler={true}
                 label={true}
                 preventWheel={false}
@@ -49,7 +51,7 @@ const RightBar_Content_CompInfo = ({
           ) : (
             <>
               <DragLabel
-                name={`${comp.name}(${curUnit}):`}
+                name={`${comp.name}(${unit}):`}
                 value={comp.value}
                 setValue={(val) => {
                   comp.value = getUFloat(val);

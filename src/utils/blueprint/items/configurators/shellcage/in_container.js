@@ -4,25 +4,25 @@ import { Divider } from './divider';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class InContainer extends Group {
-  constructor({ info, parentInfo }) {
+  constructor({ item, parentInfo }) {
     super();
-    this.unit = info.unit;
-    this.scene = info.model.scene.scene;
+    this.unit = item.metadata.unit;
+    this.scene = item.model.scene.scene;
     const { width, height, length } = parentInfo;
-    const dividers = info.components.dividers;
+    const dividers = item.metadata.components.dividers;
 
     // generate planes
-    this.frontPlane = new InPlane({ info, parentInfo: { width, height } });
+    this.frontPlane = new InPlane({ item, parentInfo: { width, height } });
     this.frontPlane.position.copy(new Vector3(0, 0, length / 2));
     this.add(this.frontPlane);
 
-    this.backPlane = new InPlane({ info, parentInfo: { width, height } });
+    this.backPlane = new InPlane({ item, parentInfo: { width, height } });
     this.backPlane.position.copy(new Vector3(0, 0, -length / 2));
     this.backPlane.rotateY(Math.PI);
     this.add(this.backPlane);
 
     this.leftPlane = new InPlane({
-      info,
+      item,
       parentInfo: { width: length, height },
     });
     this.leftPlane.position.copy(new Vector3(-width / 2, 0, 0));
@@ -30,7 +30,7 @@ export class InContainer extends Group {
     this.add(this.leftPlane);
 
     this.rightPlane = new InPlane({
-      info,
+      item,
       parentInfo: { width: length, height },
     });
     this.rightPlane.position.copy(new Vector3(width / 2, 0, 0));
@@ -38,7 +38,7 @@ export class InContainer extends Group {
     this.add(this.rightPlane);
 
     this.topPlane = new InPlane({
-      info,
+      item,
       parentInfo: { width, height: length },
     });
     this.topPlane.position.copy(new Vector3(0, height / 2, 0));
@@ -65,7 +65,7 @@ export class InContainer extends Group {
         dividerCurX += dividerDeltaX;
         const dividerWidth = dividerEndZ - dividerStartZ;
         const dividerPlane = new Divider({
-          info,
+          item,
           parentInfo: { width: dividerWidth, height },
         });
         dividerPlane.position.copy(
@@ -82,7 +82,40 @@ export class InContainer extends Group {
     }
   }
 
-  redrawComponents(components) {
-    console.log('in_container', this.parent);
+  redrawComponents({ components, parentInfo }) {
+    this.frontPlane.redrawComponents({
+      components,
+      parentInfo: { width: parentInfo.width, height: parentInfo.height },
+    });
+    this.frontPlane.position.copy(new Vector3(0, 0, parentInfo.length / 2));
+    this.add(this.frontPlane);
+
+    this.backPlane.redrawComponents({
+      components,
+      parentInfo: { width: parentInfo.width, height: parentInfo.height },
+    });
+    this.backPlane.position.copy(new Vector3(0, 0, -parentInfo.length / 2));
+    this.add(this.backPlane);
+
+    this.leftPlane.redrawComponents({
+      components,
+      parentInfo: { width: parentInfo.length, height: parentInfo.height },
+    });
+    this.leftPlane.position.copy(new Vector3(-parentInfo.width / 2, 0, 0));
+    this.add(this.leftPlane);
+
+    this.rightPlane.redrawComponents({
+      components,
+      parentInfo: { width: parentInfo.length, height: parentInfo.height },
+    });
+    this.rightPlane.position.copy(new Vector3(parentInfo.width / 2, 0, 0));
+    this.add(this.rightPlane);
+
+    this.topPlane.redrawComponents({
+      components,
+      parentInfo: { width: parentInfo.width, height: parentInfo.length },
+    });
+    this.topPlane.position.copy(new Vector3(0, parentInfo.height / 2, 0));
+    this.add(this.topPlane);
   }
 }

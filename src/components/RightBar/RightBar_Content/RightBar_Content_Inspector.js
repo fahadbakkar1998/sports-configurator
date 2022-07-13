@@ -43,16 +43,15 @@ const recursiveComponent = ({
       ></RightBar_Content_CompInfo>
       {!isLeafComponent({ ...comp }) &&
         React.Children.toArray(
-          Object.keys(comp.value).map((childKey) => {
-            comp.value[childKey].id = `${comp.id}_${childKey}`;
-            return recursiveComponent({
+          Object.keys(comp.value).map((childKey) =>
+            recursiveComponent({
               comp: comp.value[childKey],
               depth: depth + 1,
               isOpen: openChildren,
               initialOpenDepth,
               updateComponents,
-            });
-          }),
+            }),
+          ),
         )}
     </>
   );
@@ -318,17 +317,14 @@ const RightBar_Content_Inspector = () => {
                 cur3dItemEvent.item.metadata.components &&
                 React.Children.toArray(
                   Object.keys(cur3dItemEvent.item.metadata.components).map(
-                    (compKey) => {
-                      cur3dItemEvent.item.metadata.components[compKey].id =
-                        compKey;
-                      return recursiveComponent({
+                    (compKey) =>
+                      recursiveComponent({
                         comp: cur3dItemEvent.item.metadata.components[compKey],
                         isOpen: true,
                         depth: 0,
                         initialOpenDepth: 0,
                         updateComponents: updateCur3dItemComponents,
-                      });
-                    },
+                      }),
                   ),
                 )
               ) : (

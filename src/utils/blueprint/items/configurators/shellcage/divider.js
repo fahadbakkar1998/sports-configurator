@@ -7,10 +7,10 @@ import {
 } from 'three';
 
 export class Divider extends Group {
-  constructor({ info, parentInfo }) {
+  constructor({ item, parentInfo }) {
     super();
-    this.info = info;
-    this.scene = info.model.scene.scene;
+    this.unit = item.metadata.unit;
+    this.scene = item.model.scene.scene;
     const { width, height } = parentInfo;
 
     this.planeMesh = new Mesh(

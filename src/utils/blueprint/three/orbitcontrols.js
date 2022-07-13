@@ -194,9 +194,9 @@ function OrbitControls(object, domElement) {
       scope.target.add(panOffset);
 
       // If in down padding, move the target to the previous position.
-      if (this.disableDownPanning && scope.target.y < 10) {
-        scope.target.add(new Vector3(0, -panOffset.y, 0));
-      }
+      // if (this.disableDownPanning && scope.target.y < 10) {
+      //   scope.target.add(new Vector3(0, -panOffset.y, 0));
+      // }
 
       offset.setFromSpherical(spherical);
 
@@ -503,8 +503,7 @@ function OrbitControls(object, domElement) {
     scope.update();
   }
 
-  function handleMouseUp(event) {
-  }
+  function handleMouseUp(event) {}
 
   function handleMouseWheel(event) {
     if (event.deltaY < 0) {
@@ -614,8 +613,7 @@ function OrbitControls(object, domElement) {
     scope.update();
   }
 
-  function handleTouchEnd(event) {
-  }
+  function handleTouchEnd(event) {}
 
   //
   // event handlers - FSM: listen for events and reset state

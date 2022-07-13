@@ -12,7 +12,9 @@ export const items = [
           width: 40,
           height: 10,
           length: 60,
+          unit: 'ft',
         },
+        maxSize: 100,
         components: {
           // All points start at the back left.
           out_container: {
@@ -33,7 +35,7 @@ export const items = [
             name: 'InContainer',
             value: {
               gap: { name: 'Gap', value: 0.4 },
-              deltaZ: { name: 'DeltaZ', value: [0, 50], range: [0, 60] },
+              deltaZ: { name: 'DeltaZ', value: [0, 60] },
             },
           },
           dividers: {
@@ -43,21 +45,21 @@ export const items = [
                 name: 'Divider1',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 50], range: [0, 50] },
+                  deltaZ: { name: 'DeltaZ', value: [0, 50] },
                 },
               },
               {
                 name: 'Divider2',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 40], range: [0, 50] },
+                  deltaZ: { name: 'DeltaZ', value: [0, 40] },
                 },
               },
               {
                 name: 'Divider3',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [10, 30], range: [0, 50] },
+                  deltaZ: { name: 'DeltaZ', value: [10, 30] },
                 },
               },
             ],

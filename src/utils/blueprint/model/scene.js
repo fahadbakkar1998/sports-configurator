@@ -299,7 +299,6 @@ export class Scene extends EventDispatcher {
       itemInfo.unit,
     );
     const configurator = new (Factory.getClass(itemInfo.type))({
-      ...itemInfo,
       metadata: itemInfo,
       model: this.model,
       geometry: new BoxGeometry(width, height, length),

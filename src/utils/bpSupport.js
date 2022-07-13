@@ -29,12 +29,14 @@ export const loadDefaultDesign = () => {
 export const addItem = (item) => {
   console.log('bpSupport_addItem_item: ', item);
 
+  item.resizable = true;
+
   if (item.format === 'configurator') {
-    window.blueprintJS.model.scene.addConfigurator(item);
+    window.blueprintJS.model.scene.addConfigurator({ ...item });
     return;
   }
 
-  item.resizable = item.resizeProportionally = true;
+  item.resizeProportionally = true;
 
   if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
     // Wall Items
