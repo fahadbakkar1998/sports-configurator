@@ -16,7 +16,7 @@ export class Divider extends Group {
     this.planeMesh = new Mesh(
       new PlaneGeometry(width, height),
       new MeshBasicMaterial({
-        color: 0x2ecc40,
+        color: 0x696969,
         side: DoubleSide,
         transparent: true,
         opacity: 0.3,

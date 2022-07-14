@@ -16,8 +16,7 @@ export class InPlane extends Group {
     this.planeMesh = new Mesh(
       new PlaneGeometry(width, height),
       new MeshBasicMaterial({
-        // color: 0x696969,
-        color: 0xff0000,
+        color: 0x696969,
         side: DoubleSide,
         transparent: true,
         opacity: 0.3,
