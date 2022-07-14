@@ -6,6 +6,7 @@ import { Dimensioning } from '../../../core/dimensioning';
 export class OutContainer extends Group {
   constructor({ item, compInfo }) {
     super();
+    this.item = item;
     this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
     const { width, height, length } = compInfo;
@@ -58,36 +59,50 @@ export class OutContainer extends Group {
     const ribLineInfo = this.getRibLineInfo(item.metadata.components);
     if (dividers && dividers.value && dividers.value.length) {
       let dividerCurX = 0;
-      dividers.value.forEach((divider) => {
+      for (let i in dividers.value) {
+        const divider = dividers.value[i];
         const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
           divider.value.deltaX.value,
           this.unit,
         );
-        const ribLine = new RibLine({
-          item,
-          compInfo: { length },
-        });
-        ribLine.position.copy(
-          new Vector3(
-            dividerCurX + dividerDeltaX / 2 - width / 2,
-            height / 2,
-            0,
-          ),
-        );
-        this.ribLines.push(ribLine);
-        this.add(ribLine);
+        if (dividerDeltaX < ribLineInfo.allowableLaneWidth) {
+          dividerCurX += dividerDeltaX;
+          continue;
+        }
+        const ribLine = this.generateRibLine({ item, compInfo: { length } });
+        if (
+          dividerCurX + dividerDeltaX >
+          width - ribLineInfo.allowableLaneWidth
+        ) {
+          ribLine.position.copy(new Vector3(dividerCurX / 2, height / 2, 0));
+        } else {
+          ribLine.position.copy(
+            new Vector3(
+              dividerCurX + dividerDeltaX / 2 - width / 2,
+              height / 2,
+              0,
+            ),
+          );
+        }
         dividerCurX += dividerDeltaX;
-      });
+        this.add(ribLine);
+        if (dividerCurX > width - ribLineInfo.allowableLaneWidth) break;
+      }
       if (dividerCurX + ribLineInfo.allowableLaneWidth <= width) {
-        const ribLine = new RibLine({
-          item,
-          compInfo: { length },
-        });
+        const ribLine = this.generateRibLine({ item, compInfo: { length } });
         ribLine.position.copy(new Vector3(dividerCurX / 2, height / 2, 0));
-        this.ribLines.push(ribLine);
         this.add(ribLine);
       }
     }
+  }
+
+  generateRibLine({ item, compInfo }) {
+    const ribLine = new RibLine({
+      item,
+      compInfo,
+    });
+    this.ribLines.push(ribLine);
+    return ribLine;
   }
 
   getRibLineInfo(components) {
@@ -104,7 +119,7 @@ export class OutContainer extends Group {
 
   redrawComponents({ components, compInfo }) {
     const ribLineInfo = this.getRibLineInfo(components);
-    
+
     // redraw planes
     this.frontPlane.redrawComponents({
       components,
@@ -142,36 +157,72 @@ export class OutContainer extends Group {
     });
     this.bottomPlane.position.copy(new Vector3(0, -compInfo.height / 2, 0));
 
-    // redraw rib lines
+    // layout rib lines again
     const dividers = components.dividers;
+    if (dividers && dividers.value && dividers.value.length) {
+      let dividerCurX = 0;
+      let index = 0;
+      for (let i in dividers.value) {
+        const divider = dividers.value[i];
+        const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
+          divider.value.deltaX.value,
+          this.unit,
+        );
+        if (dividerDeltaX < ribLineInfo.allowableLaneWidth) {
+          dividerCurX += dividerDeltaX;
+          continue;
+        }
+        if (!this.ribLines[index]) {
+          this.generateRibLine({
+            item: this.item,
+            compInfo: { length: compInfo.length },
+          });
+        }
+        if (
+          dividerCurX + dividerDeltaX >
+          compInfo.width - ribLineInfo.allowableLaneWidth
+        ) {
+          this.ribLines[index].position.copy(
+            new Vector3(dividerCurX / 2, compInfo.height / 2, 0),
+          );
+        } else {
+          this.ribLines[index].position.copy(
+            new Vector3(
+              dividerCurX + dividerDeltaX / 2 - compInfo.width / 2,
+              compInfo.height / 2,
+              0,
+            ),
+          );
+        }
+        dividerCurX += dividerDeltaX;
+        if (dividerCurX > compInfo.width - ribLineInfo.allowableLaneWidth)
+          break;
+        index++;
+      }
+      if (dividerCurX + ribLineInfo.allowableLaneWidth <= compInfo.width) {
+        if (!this.ribLines[index]) {
+          this.generateRibLine({
+            item: this.item,
+            compInfo: { length: compInfo.length },
+          });
+        }
+        this.ribLines[index].position.copy(
+          new Vector3(dividerCurX / 2, compInfo.height / 2, 0),
+        );
+      }
+      const ribLinesNum = this.ribLines.length;
+      for (let i = index + 1; i < ribLinesNum; i++) {
+        const ribLine = this.ribLines.pop();
+        this.remove(ribLine);
+      }
+    }
+
+    // redraw rib lines
     this.ribLines.forEach((ribLine) =>
       ribLine.redrawComponents({
         components,
         compInfo: { length: compInfo.length },
       }),
     );
-    if (dividers && dividers.value && dividers.value.length) {
-      let dividerCurX = 0;
-      dividers.value.forEach((divider, index) => {
-        const dividerDeltaX = Dimensioning.cmFromMeasureRaw(
-          divider.value.deltaX.value,
-          this.unit,
-        );
-        this.ribLines[index].position.copy(
-          new Vector3(
-            dividerCurX + dividerDeltaX / 2 - compInfo.width / 2,
-            compInfo.height / 2,
-            0,
-          ),
-        );
-        dividerCurX += dividerDeltaX;
-      });
-      if (dividerCurX + ribLineInfo.allowableLaneWidth <= compInfo.width) {
-        this.ribLines[dividers.value.length].position.copy(
-          new Vector3(dividerCurX / 2, compInfo.height / 2, 0),
-        );
-      }
-    } else {
-    }
   }
 }

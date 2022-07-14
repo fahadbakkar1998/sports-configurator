@@ -5,6 +5,7 @@ import {
   Vector3,
   MeshBasicMaterial,
   AdditiveBlending,
+  BoxHelper,
 } from 'three';
 import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
 import { Color } from 'three';
@@ -480,7 +481,8 @@ export class Item extends Mesh {
     this.setScale(1, 1, 1);
     this.selected = true;
     this.bHelper && (this.bHelper.visible = true);
-    this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = true;
+    this.metadata.format !== 'configurator' &&
+      (this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = true);
     this.updateHighlight();
   }
 

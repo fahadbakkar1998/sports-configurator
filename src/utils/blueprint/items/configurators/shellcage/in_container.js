@@ -6,6 +6,7 @@ import { Dimensioning } from '../../../core/dimensioning';
 export class InContainer extends Group {
   constructor({ item, compInfo }) {
     super();
+    this.item = item;
     this.unit = item.metadata.unit;
     this.scene = item.model.scene.scene;
     const { width, height, length } = compInfo;
@@ -47,9 +48,11 @@ export class InContainer extends Group {
 
     // generate dividers
     this.dividerPlanes = [];
+    const ribLineInfo = this.getRibLineInfo(item.metadata.components);
     if (dividers && dividers.value && dividers.value.length) {
       let dividerCurX = 0;
-      dividers.value.forEach((comp) => {
+      for (let i in dividers.value) {
+        const comp = dividers.value[i];
         const dividerInfo = this.getDividerInfo({
           comp,
           maxLen:
@@ -57,8 +60,9 @@ export class InContainer extends Group {
             item.metadata.components.in_container.value.deltaZ.value[0],
         });
         dividerCurX += dividerInfo.deltaX;
+        if (dividerCurX > width - ribLineInfo.allowableLaneWidth) break;
         const dividerWidth = dividerInfo.endZ - dividerInfo.startZ;
-        const dividerPlane = new Divider({
+        const dividerPlane = this.generateDivider({
           item,
           compInfo: { width: dividerWidth, height },
         });
@@ -70,10 +74,18 @@ export class InContainer extends Group {
           ),
         );
         dividerPlane.rotateY(Math.PI / 2);
-        this.dividerPlanes.push(dividerPlane);
         this.add(dividerPlane);
-      });
+      }
     }
+  }
+
+  generateDivider({ item, compInfo }) {
+    const dividerPlane = new Divider({
+      item,
+      compInfo,
+    });
+    this.dividerPlanes.push(dividerPlane);
+    return dividerPlane;
   }
 
   getDividerInfo({ comp, maxLen }) {
@@ -98,6 +110,18 @@ export class InContainer extends Group {
       this.unit,
     );
     return { deltaX, startZ, endZ };
+  }
+
+  getRibLineInfo(components) {
+    const diameter = Dimensioning.cmFromMeasureRaw(
+      components.rib_line.value.diameter.value,
+      this.unit,
+    );
+    const allowableLaneWidth = Dimensioning.cmFromMeasureRaw(
+      components.rib_line.value.allowableLaneWidth.value,
+      this.unit,
+    );
+    return { diameter, allowableLaneWidth };
   }
 
   redrawComponents({ components, compInfo }) {
@@ -137,9 +161,12 @@ export class InContainer extends Group {
     this.add(this.topPlane);
 
     const dividers = components.dividers;
-    let dividerCurX = 0;
+    const ribLineInfo = this.getRibLineInfo(components);
+    let index = 0;
     if (dividers && dividers.value && dividers.value.length) {
-      dividers.value.map((comp, i) => {
+      let dividerCurX = 0;
+      for (let i in dividers.value) {
+        const comp = dividers.value[i];
         const dividerInfo = this.getDividerInfo({
           comp,
           maxLen:
@@ -147,19 +174,33 @@ export class InContainer extends Group {
             components.in_container.value.deltaZ.value[0],
         });
         dividerCurX += dividerInfo.deltaX;
+        if (dividerCurX > compInfo.width - ribLineInfo.allowableLaneWidth)
+          break;
         const dividerWidth = dividerInfo.endZ - dividerInfo.startZ;
-        this.dividerPlanes[i].redrawComponents({
-          components,
-          compInfo: { width: dividerWidth, height: compInfo.height },
-        });
-        this.dividerPlanes[i].position.copy(
+        if (!this.dividerPlanes[index]) {
+          this.generateDivider({
+            item: this.item,
+            compInfo: { width: dividerWidth, height: compInfo.height },
+          });
+        }
+        this.dividerPlanes[index].position.copy(
           new Vector3(
             dividerCurX - compInfo.width / 2,
             0,
             dividerInfo.startZ + dividerWidth / 2 - compInfo.length / 2,
           ),
         );
-      });
+        this.dividerPlanes[index].redrawComponents({
+          components,
+          compInfo: { width: dividerWidth, height: compInfo.height },
+        });
+        index++;
+      }
+    }
+    const dividersNum = this.dividerPlanes.length;
+    for (let i = index; i < dividersNum; i++) {
+      const dividerPlane = this.dividerPlanes.pop();
+      this.remove(dividerPlane);
     }
   }
 }

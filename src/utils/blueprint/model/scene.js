@@ -193,14 +193,12 @@ export class Scene extends EventDispatcher {
           if (child.geometry.isBufferGeometry) {
             let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
             tGeometry.faces.forEach((face) => {
-              // face.materialIndex = face.materialIndex + newMaterials.length;
               face.materialIndex = materialIndices[face.materialIndex];
             });
             child.updateMatrix();
             newGeometry.merge(tGeometry, child.matrix);
           } else {
             child.geometry.faces.forEach((face) => {
-              // face.materialIndex = face.materialIndex + newMaterials.length;
               face.materialIndex = materialIndices[face.materialIndex];
             });
             child.updateMatrix();
@@ -252,14 +250,12 @@ export class Scene extends EventDispatcher {
           if (child.geometry.isBufferGeometry) {
             let tGeometry = new Geometry().fromBufferGeometry(child.geometry);
             tGeometry.faces.forEach((face) => {
-              // face.materialIndex = face.materialIndex + newMaterials.length;
               face.materialIndex = materialIndices[face.materialIndex];
             });
             child.updateMatrix();
             newGeometry.merge(tGeometry, child.matrix);
           } else {
             child.geometry.faces.forEach((face) => {
-              // face.materialIndex = face.materialIndex + newMaterials.length;
               face.materialIndex = materialIndices[face.materialIndex];
             });
             child.updateMatrix();

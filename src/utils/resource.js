@@ -34,7 +34,7 @@ export const items = [
           in_container: {
             name: 'InContainer',
             value: {
-              gap: { name: 'Gap', value: 2 },
+              gap: { name: 'Gap', value: 0.2 },
               deltaZ: { name: 'DeltaZ', value: [0, 60] },
             },
           },
