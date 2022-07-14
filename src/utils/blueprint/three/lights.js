@@ -57,8 +57,8 @@ export class Lights extends EventDispatcher {
     let pos = new Vector3(center.x, this.height, center.z);
     this.dirLight.position.copy(pos);
     this.dirLight.target.position.copy(center);
-    //dirLight.updateMatrix();
-    //dirLight.updateWorldMatrix()
+    // dirLight.updateMatrix();
+    // dirLight.updateWorldMatrix()
     this.dirLight.shadow.camera.left = -d;
     this.dirLight.shadow.camera.right = d;
     this.dirLight.shadow.camera.top = d;
