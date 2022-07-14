@@ -5,6 +5,7 @@ import {
   MeshBasicMaterial,
   DoubleSide,
 } from 'three';
+import { Net } from './net';
 
 export class InPlane extends Group {
   constructor({ item, compInfo }) {
@@ -23,6 +24,9 @@ export class InPlane extends Group {
       }),
     );
     this.add(this.planeMesh);
+
+    this.net = new Net({ item, compInfo });
+    this.add(this.net);
   }
 
   redrawComponents({ components, compInfo }) {
@@ -30,5 +34,7 @@ export class InPlane extends Group {
       compInfo.width,
       compInfo.height,
     );
+
+    this.net.redrawComponents({ components, compInfo });
   }
 }

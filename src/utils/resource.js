@@ -71,6 +71,13 @@ export const items = [
               allowableLaneWidth: { name: 'ALW', value: 8 },
             },
           },
+          net: {
+            name: 'Net',
+            value: {
+              holeSize: { name: 'HoleSize', value: 0.6 },
+              diameter: { name: 'Diameter', value: 0.1 },
+            },
+          },
         },
       },
       {
