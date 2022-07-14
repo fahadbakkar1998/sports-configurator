@@ -301,7 +301,9 @@ export class Scene extends EventDispatcher {
       material: new MeshStandardMaterial({
         color: 0xff0000,
         side: DoubleSide,
-        visible: false,
+        transparent: true,
+        opacity: 0.1,
+        // visible: false,
         // wireframe: true,
       }),
     });
