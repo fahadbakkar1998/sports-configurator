@@ -42,6 +42,7 @@ const RightBar_Content_CompInfo = ({
                 minValue={comp.value[0]}
                 maxValue={comp.value[1]}
                 onInput={(e) => {
+                  if (comp.immutability) return;
                   comp.value[0] = e.minValue;
                   comp.value[1] = e.maxValue;
                   updateComponents();
@@ -54,15 +55,19 @@ const RightBar_Content_CompInfo = ({
                 name={`${comp.name}(${unit}):`}
                 value={comp.value}
                 setValue={(val) => {
+                  if (comp.immutability) return;
                   comp.value = getUFloat(val);
                   updateComponents();
                 }}
                 offset={0.1}></DragLabel>
               <input
-                className="input"
+                className={classnames('input', {
+                  immutability: comp.immutability,
+                })}
                 type="text"
                 value={comp.value}
                 onChange={(e) => {
+                  if (comp.immutability) return;
                   comp.value = getUFloat(e.target.value);
                   updateComponents();
                 }}></input>

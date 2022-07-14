@@ -28,13 +28,13 @@ export const items = [
           out_edge: {
             name: 'OutEdge',
             value: {
-              thickness: { name: 'Thickness', value: 0.4 },
+              thickness: { name: 'Thickness', value: 0.4, immutability: true },
             },
           },
           in_container: {
             name: 'InContainer',
             value: {
-              gap: { name: 'Gap', value: 0.2 },
+              gap: { name: 'Gap', value: 0.2, immutability: true },
               deltaZ: { name: 'DeltaZ', value: [0, 60] },
             },
           },
@@ -67,15 +67,15 @@ export const items = [
           rib_line: {
             name: 'RibLine',
             value: {
-              diameter: { name: 'Diameter', value: 0.2 },
-              allowableLaneWidth: { name: 'ALW', value: 8 },
+              diameter: { name: 'Diameter', value: 0.2, immutability: true },
+              allowableLaneWidth: { name: 'ALW', value: 8, immutability: true },
             },
           },
           net: {
             name: 'Net',
             value: {
-              holeSize: { name: 'HoleSize', value: 0.6 },
-              diameter: { name: 'Diameter', value: 0.1 },
+              holeSize: { name: 'HoleSize', value: 0.6, immutability: true },
+              diameter: { name: 'Diameter', value: 0.1, immutability: true },
             },
           },
         },

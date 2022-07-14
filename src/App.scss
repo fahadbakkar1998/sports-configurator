@@ -421,6 +421,10 @@ $commonHeight: 1.8vmax;
             &.pointer {
               cursor: pointer;
             }
+
+            &.immutability {
+              background-color: $backDarkColor;
+            }
           }
 
           .multi-range-slider {
