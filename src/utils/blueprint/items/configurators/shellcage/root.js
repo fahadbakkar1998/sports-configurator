@@ -147,5 +147,10 @@ export class Root extends Group {
           outContainerInfo.length / 2,
       ),
     );
+
+    this.outContainer.redrawRibLines({
+      components,
+      compInfo: outContainerInfo,
+    });
   }
 }

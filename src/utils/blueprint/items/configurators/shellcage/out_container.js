@@ -118,8 +118,6 @@ export class OutContainer extends Group {
   }
 
   redrawComponents({ components, compInfo }) {
-    const ribLineInfo = this.getRibLineInfo(components);
-
     // redraw planes
     this.frontPlane.redrawComponents({
       components,
@@ -156,6 +154,10 @@ export class OutContainer extends Group {
       compInfo: { width: compInfo.width, height: compInfo.length },
     });
     this.bottomPlane.position.copy(new Vector3(0, -compInfo.height / 2, 0));
+  }
+
+  redrawRibLines({ components, compInfo }) {
+    const ribLineInfo = this.getRibLineInfo(components);
 
     // layout rib lines again
     const dividers = components.dividers;

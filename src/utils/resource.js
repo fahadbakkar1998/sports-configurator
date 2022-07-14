@@ -18,7 +18,7 @@ export const items = [
         components: {
           // All points start at the back left.
           out_container: {
-            name: 'OutContainer',
+            name: 'Exterior',
             value: {
               width: { name: 'Width', value: 40 },
               height: { name: 'Height', value: 10 },
@@ -26,40 +26,40 @@ export const items = [
             },
           },
           out_edge: {
-            name: 'OutEdge',
+            name: 'Rungs',
             value: {
               thickness: { name: 'Thickness', value: 0.4, immutability: true },
             },
           },
           in_container: {
-            name: 'InContainer',
+            name: 'Interior',
             value: {
               gap: { name: 'Gap', value: 0.2, immutability: true },
-              deltaZ: { name: 'DeltaZ', value: [0, 60] },
+              deltaZ: { name: 'Length', value: [0, 60] },
             },
           },
           dividers: {
             name: 'Dividers',
             value: [
               {
-                name: 'Divider1',
+                name: 'Divider 1',
                 value: {
-                  deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 60] },
+                  deltaX: { name: 'Lane Width', value: 10 },
+                  deltaZ: { name: 'Length', value: [0, 60] },
                 },
               },
               {
-                name: 'Divider2',
+                name: 'Divider 2',
                 value: {
-                  deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 40] },
+                  deltaX: { name: 'Lane Width', value: 10 },
+                  deltaZ: { name: 'Length', value: [0, 40] },
                 },
               },
               {
-                name: 'Divider3',
+                name: 'Divider 3',
                 value: {
-                  deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [10, 30] },
+                  deltaX: { name: 'Lane Width', value: 10 },
+                  deltaZ: { name: 'Length', value: [10, 30] },
                 },
               },
             ],
@@ -68,7 +68,11 @@ export const items = [
             name: 'RibLine',
             value: {
               diameter: { name: 'Diameter', value: 0.2, immutability: true },
-              allowableLaneWidth: { name: 'ALW', value: 8, immutability: true },
+              allowableLaneWidth: {
+                name: 'Limit Lane Width',
+                value: 8,
+                immutability: true,
+              },
             },
           },
           net: {

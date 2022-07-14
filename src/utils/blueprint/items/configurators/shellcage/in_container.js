@@ -164,6 +164,7 @@ export class InContainer extends Group {
     const ribLineInfo = this.getRibLineInfo(components);
     let index = 0;
     if (dividers && dividers.value && dividers.value.length) {
+      const dividersNum = dividers.value.length;
       let dividerCurX = 0;
       for (let i in dividers.value) {
         const comp = dividers.value[i];
@@ -174,8 +175,10 @@ export class InContainer extends Group {
             components.in_container.value.deltaZ.value[0],
         });
         dividerCurX += dividerInfo.deltaX;
-        if (dividerCurX > compInfo.width - ribLineInfo.allowableLaneWidth)
+        if (dividerCurX > compInfo.width - ribLineInfo.allowableLaneWidth) {
+          for (let j = i; j < dividersNum; j++) dividers.value.pop();
           break;
+        }
         const dividerWidth = dividerInfo.endZ - dividerInfo.startZ;
         if (!this.dividerPlanes[index]) {
           this.generateDivider({
@@ -197,8 +200,8 @@ export class InContainer extends Group {
         index++;
       }
     }
-    const dividersNum = this.dividerPlanes.length;
-    for (let i = index; i < dividersNum; i++) {
+    const dividerPlanesNum = this.dividerPlanes.length;
+    for (let i = index; i < dividerPlanesNum; i++) {
       const dividerPlane = this.dividerPlanes.pop();
       this.remove(dividerPlane);
     }
