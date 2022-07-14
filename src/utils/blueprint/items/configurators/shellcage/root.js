@@ -1,4 +1,4 @@
-import { BoxHelper, Group, Vector3, BoxGeometry } from 'three';
+import { Group, Vector3, BoxGeometry } from 'three';
 import { OutContainer } from './out_container';
 import { InContainer } from './in_container';
 import { Dimensioning } from '../../../core/dimensioning';
@@ -17,19 +17,20 @@ export class Root extends Group {
 
     this.outContainer = new OutContainer({
       item,
-      parentInfo: outContainerInfo,
+      compInfo: outContainerInfo,
     });
     this.add(this.outContainer);
 
     this.inContainer = new InContainer({
       item,
-      parentInfo: inContainerInfo,
+      compInfo: inContainerInfo,
     });
     this.inContainer.position.copy(
       new Vector3(
         0,
         0,
         inContainerInfo.startZ +
+          inContainerInfo.gap +
           inContainerInfo.length / 2 -
           outContainerInfo.length / 2,
       ),
@@ -93,16 +94,16 @@ export class Root extends Group {
       components.in_container.value.deltaZ.value[0],
       this.unit,
     );
-    if (startZ < gap) startZ = gap;
-    if (startZ > outContainerInfo.length - gap)
-      startZ = outContainerInfo.length - gap;
+    if (startZ < 0) startZ = 0;
+    if (startZ > outContainerInfo.length - gap * 2)
+      startZ = outContainerInfo.length - gap * 2;
     let endZ = Dimensioning.cmFromMeasureRaw(
       components.in_container.value.deltaZ.value[1],
       this.unit,
     );
-    if (endZ > outContainerInfo.length - gap)
-      endZ = outContainerInfo.length - gap;
     if (endZ < startZ) endZ = startZ;
+    if (endZ > outContainerInfo.length - gap * 2)
+      endZ = outContainerInfo.length - gap * 2;
     const width = outContainerInfo.width - gap * 2;
     const height = outContainerInfo.height - gap * 2;
     const length = endZ - startZ;
@@ -112,11 +113,14 @@ export class Root extends Group {
       length,
       startZ,
       endZ,
+      gap,
     };
   }
 
   redrawComponents(components) {
     const outContainerInfo = this.getOutContainerInfo(components);
+    const inContainerInfo = this.getInContainerInfo(components);
+
     this.item.geometry = new BoxGeometry(
       outContainerInfo.width,
       outContainerInfo.height,
@@ -126,19 +130,19 @@ export class Root extends Group {
     this.item.refreshItem();
     this.outContainer.redrawComponents({
       components,
-      parentInfo: outContainerInfo,
+      compInfo: outContainerInfo,
     });
 
-    const inContainerInfo = this.getInContainerInfo(components);
     this.inContainer.redrawComponents({
       components,
-      parentInfo: inContainerInfo,
+      compInfo: inContainerInfo,
     });
     this.inContainer.position.copy(
       new Vector3(
         0,
         0,
         inContainerInfo.startZ +
+          inContainerInfo.gap +
           inContainerInfo.length / 2 -
           outContainerInfo.length / 2,
       ),

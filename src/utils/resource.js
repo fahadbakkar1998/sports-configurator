@@ -34,7 +34,7 @@ export const items = [
           in_container: {
             name: 'InContainer',
             value: {
-              gap: { name: 'Gap', value: 0.4 },
+              gap: { name: 'Gap', value: 2 },
               deltaZ: { name: 'DeltaZ', value: [0, 60] },
             },
           },
@@ -45,7 +45,7 @@ export const items = [
                 name: 'Divider1',
                 value: {
                   deltaX: { name: 'DeltaX', value: 10 },
-                  deltaZ: { name: 'DeltaZ', value: [0, 50] },
+                  deltaZ: { name: 'DeltaZ', value: [0, 60] },
                 },
               },
               {

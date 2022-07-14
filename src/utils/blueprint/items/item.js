@@ -3,11 +3,7 @@ import {
   Matrix4,
   Vector2,
   Vector3,
-  BoxGeometry,
-  BoxHelper,
-  Box3,
   MeshBasicMaterial,
-  MeshStandardMaterial,
   AdditiveBlending,
 } from 'three';
 import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
@@ -225,6 +221,20 @@ export class Item extends Mesh {
 
   refreshItem() {
     this.halfSize = this.objectHalfSize();
+    this.canvasPlaneWH.geometry = new PlaneGeometry(
+      this.getWidth(),
+      this.getHeight(),
+      1,
+      1,
+    );
+    this.canvasPlaneWH.position.set(0, 0, this.getDepth() * 0.5 + 0.3);
+    this.canvasPlaneWD.geometry = new PlaneGeometry(
+      this.getWidth(),
+      this.getDepth(),
+      1,
+      1,
+    );
+    this.canvasPlaneWD.position.set(0, this.getHeight() * 0.5 + 0.3, 0);
   }
 
   updateCanvasTexture(canvas, context, material, w, h, wPrefix, hPrefix) {
@@ -421,9 +431,9 @@ export class Item extends Mesh {
       this.resize({ width: 50, proportionally: true });
     }
 
-    this.bHelper = new BoxHelper(this);
-    this.scene.add(this.bHelper);
-    this.bHelper.visible = false;
+    // this.bHelper = new BoxHelper(this);
+    // this.scene.add(this.bHelper);
+    // this.bHelper.visible = false;
     this.scene.needsUpdate = true;
   }
 
