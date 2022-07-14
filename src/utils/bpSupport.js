@@ -32,7 +32,9 @@ export const addItem = (item) => {
   item.resizable = true;
 
   if (item.format === 'configurator') {
-    window.blueprintJS.model.scene.addConfigurator({ ...item });
+    window.blueprintJS.model.scene.addConfigurator(
+      JSON.parse(JSON.stringify(item)),
+    );
     return;
   }
 
