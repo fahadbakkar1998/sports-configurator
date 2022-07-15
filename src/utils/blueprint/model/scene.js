@@ -310,9 +310,9 @@ export class Scene extends EventDispatcher {
     configurator.initObject();
     this.items.push(configurator);
     this.add(configurator);
-    configurator.position.copy(
-      new Vector3(2000, configurator.position.y, configurator.position.z),
-    ); // temp
+    // configurator.position.copy(
+    //   new Vector3(2000, configurator.position.y, configurator.position.z),
+    // ); // temp
     this.dispatchEvent({ type: EVENT_ITEM_LOADED, item: configurator });
   }
 }

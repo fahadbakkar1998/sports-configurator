@@ -28,7 +28,11 @@ export const items = [
           out_edge: {
             name: 'Rungs',
             value: {
-              thickness: { name: 'Thickness', value: 0.4, immutability: true },
+              thickness: {
+                name: 'Thickness',
+                value: 0.4,
+                immutability: true,
+              },
             },
           },
           in_container: {
@@ -67,7 +71,11 @@ export const items = [
           rib_line: {
             name: 'RibLine',
             value: {
-              diameter: { name: 'Diameter', value: 0.2, immutability: true },
+              diameter: {
+                name: 'Diameter',
+                value: 0.2,
+                immutability: true,
+              },
               allowableLaneWidth: {
                 name: 'Limit Lane Width',
                 value: 8,
@@ -78,8 +86,16 @@ export const items = [
           net: {
             name: 'Net',
             value: {
-              holeSize: { name: 'HoleSize', value: 0.6, immutability: true },
-              diameter: { name: 'Diameter', value: 0.1, immutability: true },
+              holeSize: {
+                name: 'HoleSize',
+                value: 0.6,
+                immutability: true,
+              },
+              diameter: {
+                name: 'Diameter',
+                value: 0.1,
+                immutability: true,
+              },
             },
           },
         },
@@ -217,6 +233,104 @@ export const items = [
             children: [
               {
                 name: 'Shell Cage',
+                imagePath: 'assets/models/thumbnails/Shell Cage.png',
+                format: 'configurator',
+                type: 'shellcage',
+                unit: 'ft',
+                defaultSize: {
+                  width: 40,
+                  height: 10,
+                  length: 60,
+                  unit: 'ft',
+                },
+                maxSize: 100,
+                components: {
+                  // All points start at the back left.
+                  out_container: {
+                    name: 'Exterior',
+                    value: {
+                      width: { name: 'Width', value: 40 },
+                      height: { name: 'Height', value: 10 },
+                      length: { name: 'Length', value: 60 },
+                    },
+                  },
+                  out_edge: {
+                    name: 'Rungs',
+                    value: {
+                      thickness: {
+                        name: 'Thickness',
+                        value: 0.4,
+                        immutability: true,
+                      },
+                    },
+                  },
+                  in_container: {
+                    name: 'Interior',
+                    value: {
+                      gap: { name: 'Gap', value: 0.2, immutability: true },
+                      deltaZ: { name: 'Length', value: [0, 60] },
+                    },
+                  },
+                  dividers: {
+                    name: 'Dividers',
+                    value: [
+                      {
+                        name: 'Divider 1',
+                        value: {
+                          deltaX: { name: 'Lane Width', value: 10 },
+                          deltaZ: { name: 'Length', value: [0, 60] },
+                        },
+                      },
+                      {
+                        name: 'Divider 2',
+                        value: {
+                          deltaX: { name: 'Lane Width', value: 10 },
+                          deltaZ: { name: 'Length', value: [0, 40] },
+                        },
+                      },
+                      {
+                        name: 'Divider 3',
+                        value: {
+                          deltaX: { name: 'Lane Width', value: 10 },
+                          deltaZ: { name: 'Length', value: [10, 30] },
+                        },
+                      },
+                    ],
+                  },
+                  rib_line: {
+                    name: 'RibLine',
+                    value: {
+                      diameter: {
+                        name: 'Diameter',
+                        value: 0.2,
+                        immutability: true,
+                      },
+                      allowableLaneWidth: {
+                        name: 'Limit Lane Width',
+                        value: 8,
+                        immutability: true,
+                      },
+                    },
+                  },
+                  net: {
+                    name: 'Net',
+                    value: {
+                      holeSize: {
+                        name: 'HoleSize',
+                        value: 0.6,
+                        immutability: true,
+                      },
+                      diameter: {
+                        name: 'Diameter',
+                        value: 0.1,
+                        immutability: true,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'Shell Cage (Old)',
                 imagePath: 'assets/models/thumbnails/Shell Cage.png',
                 modelPath: 'assets/models/gltf/Shell Cage.glb',
                 type: '5',
