@@ -73,8 +73,6 @@ export class InContainer extends Group {
             dividerInfo.startZ + dividerWidth / 2 - length / 2,
           ),
         );
-        dividerPlane.rotateY(Math.PI / 2);
-        this.add(dividerPlane);
       }
     }
   }
@@ -84,7 +82,9 @@ export class InContainer extends Group {
       item,
       compInfo,
     });
+    dividerPlane.rotateY(Math.PI / 2);
     this.dividerPlanes.push(dividerPlane);
+    this.add(dividerPlane);
     return dividerPlane;
   }
 

@@ -85,13 +85,11 @@ export class OutContainer extends Group {
           );
         }
         dividerCurX += dividerDeltaX;
-        this.add(ribLine);
         if (dividerCurX > width - ribLineInfo.allowableLaneWidth) break;
       }
       if (dividerCurX + ribLineInfo.allowableLaneWidth <= width) {
         const ribLine = this.generateRibLine({ item, compInfo: { length } });
         ribLine.position.copy(new Vector3(dividerCurX / 2, height / 2, 0));
-        this.add(ribLine);
       }
     }
   }
@@ -102,6 +100,7 @@ export class OutContainer extends Group {
       compInfo,
     });
     this.ribLines.push(ribLine);
+    this.add(ribLine);
     return ribLine;
   }
 

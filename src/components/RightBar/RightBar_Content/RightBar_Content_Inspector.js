@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useZustand from '../../../utils/useZustand';
-import { updateUnit } from '../../../utils/bpSupport';
-import { getFloat, getUFloat, rgbToHex } from '../../../utils/common';
+import { getUFloat, rgbToHex } from '../../../utils/common';
 import { wallTextures } from '../../../utils/resource';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
@@ -9,6 +8,7 @@ import { HexColorPicker } from 'react-colorful';
 import cn from 'classnames';
 import RightBar_Content_CompInfo from './RightBar_Content_CompInfo';
 import { isLeafComponent } from './common';
+import RightBar_Content_AddChildComp from './RightBar_Content_AddChildComp';
 
 let isDot = false;
 
@@ -41,18 +41,28 @@ const recursiveComponent = ({
         //   setOpenChildren(!openChildren)
         // }
       ></RightBar_Content_CompInfo>
-      {!isLeafComponent({ ...comp }) &&
-        React.Children.toArray(
-          Object.keys(comp.value).map((childKey) =>
-            recursiveComponent({
-              comp: comp.value[childKey],
-              depth: depth + 1,
-              isOpen: openChildren,
-              initialOpenDepth,
-              updateComponents,
-            }),
-          ),
-        )}
+      {!isLeafComponent(comp) && (
+        <>
+          {React.Children.toArray(
+            Object.keys(comp.value).map((childKey) =>
+              recursiveComponent({
+                comp: comp.value[childKey],
+                depth: depth + 1,
+                isOpen: openChildren,
+                initialOpenDepth,
+                updateComponents,
+              }),
+            ),
+          )}
+          {Array.isArray(comp.value) && comp.addition && (
+            <RightBar_Content_AddChildComp
+              comp={comp}
+              updateComponents={updateComponents}
+              depth={depth + 1}
+            />
+          )}
+        </>
+      )}
     </>
   );
 };

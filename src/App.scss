@@ -391,6 +391,17 @@ $commonHeight: 1.8vmax;
           }
         }
 
+        .icon-add {
+          margin-top: $fontPadding;
+          margin-bottom: $fontPadding;
+          padding: $fontPadding;
+          font-size: calc($commonHeight - 4 * $fontPadding);
+          width: fit-content;
+          border: 1px solid $borderColor;
+          border-radius: $fontPadding;
+          cursor: pointer;
+        }
+
         .input-group {
           margin-top: $fontPadding;
           margin-left: $fontPadding;
@@ -477,6 +488,30 @@ $commonHeight: 1.8vmax;
           & .react-colorful__hue-pointer {
             width: calc($commonHeight - 3 * $fontPadding);
             height: calc($commonHeight - 3 * $fontPadding);
+          }
+        }
+
+        .button-group {
+          margin-top: $fontPadding;
+          margin-left: $fontPadding;
+          margin-right: $fontPadding;
+          padding: $fontPadding;
+          display: flex;
+          justify-content: flex-end;
+          gap: $fontPadding;
+          align-items: center;
+          font-size: calc($commonHeight - 5 * $fontPadding);
+          flex-wrap: wrap;
+
+          .button {
+            padding: $fontPadding;
+            border: 1px solid $borderColor;
+            border-radius: $fontPadding;
+            cursor: pointer;
+
+            &:active {
+              color: $activeColor;
+            }
           }
         }
       }

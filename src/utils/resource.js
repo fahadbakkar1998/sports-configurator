@@ -44,6 +44,10 @@ export const items = [
           },
           dividers: {
             name: 'Dividers',
+            addition: {
+              deltaX: { type: 'single', name: 'Lane Width', value: 10 },
+              deltaZ: { type: 'interval', name: 'Length', value: [0, 50] },
+            },
             value: [
               {
                 name: 'Divider 1',
@@ -329,39 +333,6 @@ export const items = [
                   },
                 },
               },
-              {
-                name: 'Shell Cage (Old)',
-                imagePath: 'assets/models/thumbnails/Shell Cage.png',
-                modelPath: 'assets/models/gltf/Shell Cage.glb',
-                type: '5',
-                format: 'gltf',
-                defaultSize: {
-                  unit: 'ft',
-                  width: 55,
-                  height: 12,
-                  length: 36,
-                  price: 3427,
-                },
-                accessories: [
-                  {
-                    name: 'Number of Lanes',
-                    types: [
-                      {
-                        name: '2 Lanes',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: '3 Lanes',
-                        extraPrice: 1538,
-                      },
-                      {
-                        name: '4 Lanes',
-                        extraPrice: 2967,
-                      },
-                    ],
-                  },
-                ],
-              },
             ],
           },
           {
@@ -427,6 +398,36 @@ export const items = [
             children: [
               {
                 name: 'Phantom',
+                imagePath: 'assets/models/thumbnails/Shell Cage.png',
+                modelPath: 'assets/models/gltf/Shell Cage.glb',
+                type: '5',
+                format: 'gltf',
+                defaultSize: {
+                  unit: 'ft',
+                  width: 55,
+                  height: 12,
+                  length: 36,
+                  price: 3427,
+                },
+                accessories: [
+                  {
+                    name: 'Number of Lanes',
+                    types: [
+                      {
+                        name: '2 Lanes',
+                        extraPrice: 0,
+                      },
+                      {
+                        name: '3 Lanes',
+                        extraPrice: 1538,
+                      },
+                      {
+                        name: '4 Lanes',
+                        extraPrice: 2967,
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -451,7 +452,7 @@ export const items = [
       {
         name: 'Varsity (35ft)',
         imagePath: 'assets/models/thumbnails/Outdoor Varsity 35.png',
-        modelPath: 'assets/models/gltf/Outdoor_Varsity_35_New.glb',
+        modelPath: 'assets/models/gltf/Outdoor Varsity 35.glb',
         type: '5',
         format: 'gltf',
         defaultSize: {
