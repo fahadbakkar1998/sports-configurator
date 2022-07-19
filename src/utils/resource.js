@@ -29,10 +29,10 @@ export const items = [
                   { name: 'Golf', value: 'golf' },
                 ],
               },
-              net_types: {
+              net_type: {
                 type: 'select',
                 name: 'Net Type',
-                value: 'baseball',
+                value: 'nylon21',
                 options: [
                   { name: '#21 Nylon 1-7/8" STANDARD', value: 'nylon21' },
                   { name: '#21 Nylon 1-7/8" LATEX DIP', value: 'nylon21latex' },
@@ -197,6 +197,7 @@ export const items = [
                 immutability: true,
               },
             },
+            price_per_unit: 0.9,
           },
         },
       },

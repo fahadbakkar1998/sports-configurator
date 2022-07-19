@@ -128,6 +128,7 @@ export class Root extends Group {
     );
     this.item.position.y = outContainerInfo.height / 2;
     this.item.refreshItem();
+
     this.outContainer.redrawComponents({
       components,
       compInfo: outContainerInfo,
