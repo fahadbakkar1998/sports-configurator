@@ -248,6 +248,10 @@ export const items = [
                   unit: 'ft',
                 },
                 maxSize: 100,
+                calcInfo: {
+                  uses: ['baseball', 'golf'],
+                  ribLinePrice: 0.9,
+                },
                 components: {
                   // All points start at the back left.
                   out_container: {
