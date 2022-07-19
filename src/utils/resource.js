@@ -15,25 +15,21 @@ export const items = [
           unit: 'ft',
         },
         maxSize: 100,
-        calc_info: {
-          uses: ['baseball', 'golf'],
-          rib_line_price: 0.9,
-          net_type: 'nylon21',
-        },
         components: {
           // All points start at the back left.
           out_container: {
             name: 'Exterior',
             value: {
-              width: { name: 'Width', value: 40 },
-              height: { name: 'Height', value: 10 },
-              length: { name: 'Length', value: 60 },
+              width: { type: 'single', name: 'Width', value: 40 },
+              height: { type: 'single', name: 'Height', value: 10 },
+              length: { type: 'single', name: 'Length', value: 60 },
             },
           },
           out_edge: {
             name: 'Rungs',
             value: {
               thickness: {
+                type: 'single',
                 name: 'Thickness',
                 value: 0.4,
                 immutability: true,
@@ -43,36 +39,51 @@ export const items = [
           in_container: {
             name: 'Interior',
             value: {
-              gap: { name: 'Gap', value: 0.2, immutability: true },
-              deltaZ: { name: 'Length', value: [0, 60] },
+              gap: {
+                type: 'single',
+                name: 'Gap',
+                value: 0.2,
+                immutability: true,
+              },
+              deltaZ: { type: 'interval', name: 'Length', value: [0, 60] },
             },
           },
           dividers: {
             name: 'Dividers',
             addition: {
-              deltaX: { type: 'single', name: 'Lane Width', value: 10 },
-              deltaZ: { type: 'interval', name: 'Length', value: [0, 50] },
+              deltaX: {
+                type: 'single',
+                type: 'single',
+                name: 'Lane Width',
+                value: 10,
+              },
+              deltaZ: {
+                type: 'single',
+                type: 'interval',
+                name: 'Length',
+                value: [0, 50],
+              },
             },
             value: [
               {
                 name: 'Divider 1',
                 value: {
-                  deltaX: { name: 'Lane Width', value: 10 },
-                  deltaZ: { name: 'Length', value: [0, 60] },
+                  deltaX: { type: 'single', name: 'Lane Width', value: 10 },
+                  deltaZ: { type: 'interval', name: 'Length', value: [0, 60] },
                 },
               },
               {
                 name: 'Divider 2',
                 value: {
-                  deltaX: { name: 'Lane Width', value: 10 },
-                  deltaZ: { name: 'Length', value: [0, 40] },
+                  deltaX: { type: 'single', name: 'Lane Width', value: 10 },
+                  deltaZ: { type: 'interval', name: 'Length', value: [0, 40] },
                 },
               },
               {
                 name: 'Divider 3',
                 value: {
-                  deltaX: { name: 'Lane Width', value: 10 },
-                  deltaZ: { name: 'Length', value: [10, 30] },
+                  deltaX: { type: 'single', name: 'Lane Width', value: 10 },
+                  deltaZ: { type: 'interval', name: 'Length', value: [10, 30] },
                 },
               },
             ],
@@ -81,11 +92,13 @@ export const items = [
             name: 'RibLine',
             value: {
               diameter: {
+                type: 'single',
                 name: 'Diameter',
                 value: 0.2,
                 immutability: true,
               },
               allowableLaneWidth: {
+                type: 'single',
                 name: 'Limit Lane Width',
                 value: 8,
                 immutability: true,
@@ -96,11 +109,13 @@ export const items = [
             name: 'Net',
             value: {
               holeSize: {
+                type: 'single',
                 name: 'HoleSize',
                 value: 0.6,
                 immutability: true,
               },
               diameter: {
+                type: 'single',
                 name: 'Diameter',
                 value: 0.1,
                 immutability: true,
@@ -239,106 +254,7 @@ export const items = [
           },
           {
             name: 'Multi Lane Tunnel',
-            children: [
-              {
-                name: 'Shell Cage',
-                imagePath: 'assets/models/thumbnails/Shell Cage.png',
-                format: 'configurator',
-                type: 'shellcage',
-                unit: 'ft',
-                defaultSize: {
-                  width: 40,
-                  height: 10,
-                  length: 60,
-                  unit: 'ft',
-                },
-                maxSize: 100,
-                components: {
-                  // All points start at the back left.
-                  out_container: {
-                    name: 'Exterior',
-                    value: {
-                      width: { name: 'Width', value: 40 },
-                      height: { name: 'Height', value: 10 },
-                      length: { name: 'Length', value: 60 },
-                    },
-                  },
-                  out_edge: {
-                    name: 'Rungs',
-                    value: {
-                      thickness: {
-                        name: 'Thickness',
-                        value: 0.4,
-                        immutability: true,
-                      },
-                    },
-                  },
-                  in_container: {
-                    name: 'Interior',
-                    value: {
-                      gap: { name: 'Gap', value: 0.2, immutability: true },
-                      deltaZ: { name: 'Length', value: [0, 60] },
-                    },
-                  },
-                  dividers: {
-                    name: 'Dividers',
-                    value: [
-                      {
-                        name: 'Divider 1',
-                        value: {
-                          deltaX: { name: 'Lane Width', value: 10 },
-                          deltaZ: { name: 'Length', value: [0, 60] },
-                        },
-                      },
-                      {
-                        name: 'Divider 2',
-                        value: {
-                          deltaX: { name: 'Lane Width', value: 10 },
-                          deltaZ: { name: 'Length', value: [0, 40] },
-                        },
-                      },
-                      {
-                        name: 'Divider 3',
-                        value: {
-                          deltaX: { name: 'Lane Width', value: 10 },
-                          deltaZ: { name: 'Length', value: [10, 30] },
-                        },
-                      },
-                    ],
-                  },
-                  rib_line: {
-                    name: 'RibLine',
-                    value: {
-                      diameter: {
-                        name: 'Diameter',
-                        value: 0.2,
-                        immutability: true,
-                      },
-                      allowableLaneWidth: {
-                        name: 'Limit Lane Width',
-                        value: 8,
-                        immutability: true,
-                      },
-                    },
-                  },
-                  net: {
-                    name: 'Net',
-                    value: {
-                      holeSize: {
-                        name: 'HoleSize',
-                        value: 0.6,
-                        immutability: true,
-                      },
-                      diameter: {
-                        name: 'Diameter',
-                        value: 0.1,
-                        immutability: true,
-                      },
-                    },
-                  },
-                },
-              },
-            ],
+            children: [],
           },
           {
             name: 'Electric Retractable Tunnel',

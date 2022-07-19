@@ -13,4 +13,8 @@ export class ShellCage extends OutItem {
   redrawComponents() {
     this.root.redrawComponents(this.metadata.components);
   }
+
+  getPrice() {
+    return 100;
+  }
 }
