@@ -132,7 +132,7 @@ export class Scene extends EventDispatcher {
   /*
    * Creates an item and adds it to the scene.
    * @param type The type of the item given by an enumerator.
-   * @param modelPath The name of the file to load.
+   * @param model_path The name of the file to load.
    * @param position The initial position.
    * @param rotation The initial rotation around the y axis.
    * @param scale The initial scaling.
@@ -140,7 +140,7 @@ export class Scene extends EventDispatcher {
    * @param newItemDefinitions - Object with position and 'edge' attribute if it is a wall item
    */
   addItem(itemInfo) {
-    let { type, modelPath, newItemDefinitions } = itemInfo;
+    let { type, model_path, newItemDefinitions } = itemInfo;
     if (!type) type = 1;
 
     let scope = this;
@@ -269,29 +269,31 @@ export class Scene extends EventDispatcher {
     this.dispatchEvent({ type: EVENT_ITEM_LOADING });
 
     if (!itemInfo.format) {
-      this.loader.load(modelPath, loaderCallback, () => {}, console.error);
+      this.loader.load(model_path, loaderCallback, () => {}, console.error);
     } else if (itemInfo.format == 'gltf') {
-      this.gltfLoader.load(modelPath, gltfCallback, () => {}, console.error);
+      this.gltfLoader.load(model_path, gltfCallback, () => {}, console.error);
     } else if (itemInfo.format == 'obj') {
-      this.objLoader.load(modelPath, objCallback, () => {}, console.error);
+      this.objLoader.load(model_path, objCallback, () => {}, console.error);
     } else if (itemInfo.format == 'fbx') {
-      this.fbxLoader.load(modelPath, fbxCallback, () => {}, console.error);
+      this.fbxLoader.load(model_path, fbxCallback, () => {}, console.error);
     }
   }
 
   async addConfigurator(itemInfo) {
-    if (!itemInfo.type || !itemInfo.components || !itemInfo.defaultSize) return;
+    if (!itemInfo.type || !itemInfo.components || !itemInfo.default_size)
+      return;
     if (!itemInfo.unit) itemInfo.unit = 'm';
+    // this.dispatchEvent({ type: EVENT_ITEM_LOADING });
     const width = Dimensioning.cmFromMeasureRaw(
-      itemInfo.defaultSize.width,
+      itemInfo.default_size.width,
       itemInfo.unit,
     );
     const height = Dimensioning.cmFromMeasureRaw(
-      itemInfo.defaultSize.height,
+      itemInfo.default_size.height,
       itemInfo.unit,
     );
     const length = Dimensioning.cmFromMeasureRaw(
-      itemInfo.defaultSize.length,
+      itemInfo.default_size.length,
       itemInfo.unit,
     );
     const configurator = new (Factory.getClass(itemInfo.type))({

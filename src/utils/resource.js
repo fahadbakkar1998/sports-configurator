@@ -4,19 +4,112 @@ export const items = [
     children: [
       {
         name: 'Shell Cage',
-        imagePath: 'assets/models/thumbnails/Shell Cage.png',
+        image_path: 'assets/models/thumbnails/Shell Cage.png',
         format: 'configurator',
         type: 'shellcage',
         unit: 'ft',
-        defaultSize: {
+        default_size: {
           width: 40,
           height: 10,
           length: 60,
           unit: 'ft',
         },
-        maxSize: 100,
+        max_size: 100,
         components: {
           // All points start at the back left.
+          net: {
+            name: 'Net',
+            value: {
+              use: {
+                type: 'select',
+                name: 'Use',
+                value: 'baseball',
+                options: [
+                  { name: 'Baseball', value: 'baseball' },
+                  { name: 'Golf', value: 'golf' },
+                ],
+              },
+              net_types: {
+                type: 'select',
+                name: 'Net Type',
+                value: 'baseball',
+                options: [
+                  { name: '#21 Nylon 1-7/8" STANDARD', value: 'nylon21' },
+                  { name: '#21 Nylon 1-7/8" LATEX DIP', value: 'nylon21latex' },
+                  {
+                    name: '#21 Nylon 1-7/8" DuPont 66-728',
+                    value: 'nylon21dupont',
+                  },
+                  {
+                    name: '#21 Nylon 1-7/8" Varnish Dip',
+                    value: 'nylon21varnish',
+                  },
+
+                  { name: '#36 Nylon 1-7/8" STANDARD', value: 'nylon36' },
+                  { name: '#36 Nylon 1-7/8" LATEX DIP', value: 'nylon36latex' },
+                  {
+                    name: '#36 Nylon 1-7/8" DuPont 66-728',
+                    value: 'nylon36dupont',
+                  },
+                  {
+                    name: '#36 Nylon 1-7/8" Varnish Dip',
+                    value: 'nylon36varnish',
+                  },
+
+                  { name: '#42 Nylon 1-7/8" STANDARD', value: 'nylon42' },
+                  { name: '#42 Nylon 1-7/8" LATEX DIP', value: 'nylon42latex' },
+                  {
+                    name: '#42 Nylon 1-7/8" DuPont 66-728',
+                    value: 'nylon42dupont',
+                  },
+                  {
+                    name: '#42 Nylon 1-7/8" Varnish Dip',
+                    value: 'nylon42varnish',
+                  },
+
+                  { name: '#48 Nylon 1-7/8" STANDARD', value: 'nylon48' },
+                  { name: '#48 Nylon 1-7/8" LATEX DIP', value: 'nylon48latex' },
+
+                  { name: '#60 Nylon 1-7/8" STANDARD', value: 'nylon60' },
+                  { name: '#60 Nylon 1-7/8" LATEX DIP', value: 'nylon60latex' },
+                  {
+                    name: '#60 Nylon 1-7/8" DuPont 66-728',
+                    value: 'nylon60dupont',
+                  },
+                  {
+                    name: '#60 Nylon 1-7/8" Varnish Dip',
+                    value: 'nylon60varnish',
+                  },
+
+                  {
+                    name: '#96 Nylon 1-7/8" DuPont 66-728',
+                    value: 'nylon96dupont',
+                  },
+                  {
+                    name: '#96 Nylon 1-7/8" Varnish Dip',
+                    value: 'nylon96varnish',
+                  },
+
+                  { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
+
+                  { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
+                ],
+              },
+              hole_size: {
+                type: 'single',
+                name: 'HoleSize',
+                // value: 0.15625,
+                value: 0.3,
+                immutability: true,
+              },
+              diameter: {
+                type: 'single',
+                name: 'Diameter',
+                value: 0.03,
+                immutability: true,
+              },
+            },
+          },
           out_container: {
             name: 'Exterior',
             value: {
@@ -105,23 +198,6 @@ export const items = [
               },
             },
           },
-          net: {
-            name: 'Net',
-            value: {
-              holeSize: {
-                type: 'single',
-                name: 'HoleSize',
-                value: 0.6,
-                immutability: true,
-              },
-              diameter: {
-                type: 'single',
-                name: 'Diameter',
-                value: 0.1,
-                immutability: true,
-              },
-            },
-          },
         },
       },
       {
@@ -132,12 +208,12 @@ export const items = [
             children: [
               {
                 name: 'CurtainCage Easy Slide',
-                imagePath:
+                image_path:
                   'assets/models/thumbnails/CurtainCage Easy Slide.png',
-                modelPath: 'assets/models/gltf/CurtainCage Easy Slide.glb',
+                model_path: 'assets/models/gltf/CurtainCage Easy Slide.glb',
                 type: '5',
                 format: 'gltf',
-                defaultSize: {
+                default_size: {
                   name: '55L',
                   unit: 'ft',
                   width: 55,
@@ -181,11 +257,12 @@ export const items = [
             children: [
               {
                 name: 'CurtainCage Line Lift',
-                imagePath: 'assets/models/thumbnails/CurtainCage Line Lift.png',
-                modelPath: 'assets/models/gltf/CurtainCage Line Lift.glb',
+                image_path:
+                  'assets/models/thumbnails/CurtainCage Line Lift.png',
+                model_path: 'assets/models/gltf/CurtainCage Line Lift.glb',
                 type: '5',
                 format: 'gltf',
-                defaultSize: {
+                default_size: {
                   unit: 'ft',
                   width: 55,
                   height: 12,
@@ -261,11 +338,11 @@ export const items = [
             children: [
               {
                 name: 'Air Cage',
-                imagePath: 'assets/models/thumbnails/Air Cage.png',
-                modelPath: 'assets/models/gltf/Air Cage.glb',
+                image_path: 'assets/models/thumbnails/Air Cage.png',
+                model_path: 'assets/models/gltf/Air Cage.glb',
                 type: '5',
                 format: 'gltf',
-                defaultSize: {
+                default_size: {
                   name: '55L',
                   unit: 'ft',
                   width: 55,
@@ -319,11 +396,11 @@ export const items = [
             children: [
               {
                 name: 'Phantom',
-                imagePath: 'assets/models/thumbnails/Shell Cage.png',
-                modelPath: 'assets/models/gltf/Shell Cage.glb',
+                image_path: 'assets/models/thumbnails/Shell Cage.png',
+                model_path: 'assets/models/gltf/Shell Cage.glb',
                 type: '5',
                 format: 'gltf',
-                defaultSize: {
+                default_size: {
                   unit: 'ft',
                   width: 55,
                   height: 12,
@@ -372,11 +449,11 @@ export const items = [
     children: [
       {
         name: 'Varsity (35ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Varsity 35.png',
-        modelPath: 'assets/models/gltf/Outdoor Varsity 35.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Varsity 35.png',
+        model_path: 'assets/models/gltf/Outdoor Varsity 35.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 70,
           height: 12,
@@ -460,11 +537,11 @@ export const items = [
       },
       {
         name: 'Varsity (55ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Varsity 55.png',
-        modelPath: 'assets/models/gltf/Outdoor Varsity 55.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Varsity 55.png',
+        model_path: 'assets/models/gltf/Outdoor Varsity 55.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 70,
           height: 12,
@@ -548,11 +625,11 @@ export const items = [
       },
       {
         name: 'Varsity (70ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Varsity 70.png',
-        modelPath: 'assets/models/gltf/Outdoor Varsity 70.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Varsity 70.png',
+        model_path: 'assets/models/gltf/Outdoor Varsity 70.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 70,
           height: 12,
@@ -636,11 +713,11 @@ export const items = [
       },
       {
         name: 'Collegiate (35ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Collegiate 35.png',
-        modelPath: 'assets/models/gltf/Outdoor Collegiate 35.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Collegiate 35.png',
+        model_path: 'assets/models/gltf/Outdoor Collegiate 35.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 55,
           height: 12,
@@ -707,11 +784,11 @@ export const items = [
       },
       {
         name: 'Collegiate (55ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Collegiate 55.png',
-        modelPath: 'assets/models/gltf/Outdoor Collegiate 55.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Collegiate 55.png',
+        model_path: 'assets/models/gltf/Outdoor Collegiate 55.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 55,
           height: 12,
@@ -778,11 +855,11 @@ export const items = [
       },
       {
         name: 'Collegiate (70ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Collegiate 70.png',
-        modelPath: 'assets/models/gltf/Outdoor Collegiate 70.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Collegiate 70.png',
+        model_path: 'assets/models/gltf/Outdoor Collegiate 70.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 55,
           height: 12,
@@ -849,11 +926,11 @@ export const items = [
       },
       {
         name: 'Double Lane Pro',
-        imagePath: 'assets/models/thumbnails/Outdoor Pro 2x55.png',
-        modelPath: 'assets/models/gltf/Outdoor Pro 2x55.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Pro 2x55.png',
+        model_path: 'assets/models/gltf/Outdoor Pro 2x55.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 55,
           height: 12,
@@ -921,11 +998,11 @@ export const items = [
       },
       {
         name: 'Pro (55ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Pro 55.png',
-        modelPath: 'assets/models/gltf/Outdoor Pro 55.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Pro 55.png',
+        model_path: 'assets/models/gltf/Outdoor Pro 55.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 55,
           height: 12,
@@ -993,11 +1070,11 @@ export const items = [
       },
       {
         name: 'Pro (70ft)',
-        imagePath: 'assets/models/thumbnails/Outdoor Pro 70.png',
-        modelPath: 'assets/models/gltf/Outdoor Pro 70.glb',
+        image_path: 'assets/models/thumbnails/Outdoor Pro 70.png',
+        model_path: 'assets/models/gltf/Outdoor Pro 70.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           unit: 'ft',
           width: 55,
           height: 12,
@@ -1109,11 +1186,11 @@ export const items = [
       },
       {
         name: 'L-Screen',
-        imagePath: 'assets/models/thumbnails/L-Screen.png',
-        modelPath: 'assets/models/gltf/L Screen.glb',
+        image_path: 'assets/models/thumbnails/L-Screen.png',
+        model_path: 'assets/models/gltf/L Screen.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           name: '7W*9H',
           unit: 'ft',
           width: 7,
@@ -1188,11 +1265,11 @@ export const items = [
       },
       {
         name: 'Softball Screen',
-        imagePath: 'assets/models/thumbnails/Softball Screen.png',
-        modelPath: 'assets/models/gltf/Softball Screen.glb',
+        image_path: 'assets/models/thumbnails/Softball Screen.png',
+        model_path: 'assets/models/gltf/Softball Screen.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           name: '5W*7H',
           unit: 'ft',
           width: 5,
@@ -1272,11 +1349,11 @@ export const items = [
     children: [
       {
         name: 'Goals',
-        imagePath: 'assets/models/thumbnails/Goals.png',
-        modelPath: 'assets/models/gltf/Goals.glb',
+        image_path: 'assets/models/thumbnails/Goals.png',
+        model_path: 'assets/models/gltf/Goals.glb',
         type: '5',
         format: 'gltf',
-        defaultSize: {
+        default_size: {
           name: '24W*8H',
           unit: 'ft',
           width: 24,

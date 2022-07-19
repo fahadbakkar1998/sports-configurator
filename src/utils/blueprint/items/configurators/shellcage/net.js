@@ -20,7 +20,7 @@ export class Net extends Group {
 
   getNetInfo(components) {
     const holeSize = Dimensioning.cmFromMeasureRaw(
-      components.net.value.holeSize.value,
+      components.net.value.hole_size.value,
       this.unit,
     );
     const diameter = Dimensioning.cmFromMeasureRaw(

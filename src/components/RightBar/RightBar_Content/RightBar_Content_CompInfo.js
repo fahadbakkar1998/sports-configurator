@@ -22,34 +22,13 @@ const RightBar_Content_CompInfo = ({
     marginLeft: `${depth * 1}vw`,
   };
 
-  const { unit, maxSize } = cur3dItemEvent.item.metadata;
+  const { unit, max_size } = cur3dItemEvent.item.metadata;
 
   return (
     <>
       {isLeafComponent(comp) ? (
         <div className={classnames('input-group', { hide: !isOpen })}>
-          {Array.isArray(comp.value) ? (
-            <>
-              <span>{`${comp.name}(${unit}):`}</span>
-              {/* <Slider /> */}
-              <MultiRangeSlider
-                min={0}
-                max={maxSize}
-                step={parseInt(maxSize / 50)}
-                ruler={true}
-                label={true}
-                preventWheel={false}
-                minValue={comp.value[0]}
-                maxValue={comp.value[1]}
-                onInput={(e) => {
-                  if (comp.immutability) return;
-                  comp.value[0] = e.minValue;
-                  comp.value[1] = e.maxValue;
-                  updateComponents();
-                }}
-              />
-            </>
-          ) : (
+          {comp.type === 'single' && (
             <>
               <DragLabel
                 name={`${comp.name}(${unit}):`}
@@ -73,6 +52,49 @@ const RightBar_Content_CompInfo = ({
                 }}></input>
             </>
           )}
+          {comp.type === 'interval' && (
+            <>
+              <span>{`${comp.name}(${unit}):`}</span>
+              {/* <Slider /> */}
+              <MultiRangeSlider
+                min={0}
+                max={max_size}
+                step={parseInt(max_size / 50)}
+                ruler={true}
+                label={true}
+                preventWheel={false}
+                minValue={comp.value[0]}
+                maxValue={comp.value[1]}
+                onInput={(e) => {
+                  if (comp.immutability) return;
+                  comp.value[0] = e.minValue;
+                  comp.value[1] = e.maxValue;
+                  updateComponents();
+                }}
+              />
+            </>
+          )}
+          {comp.type === 'select' &&
+            comp.options &&
+            Array.isArray(comp.options) &&
+            comp.options.length && (
+              <>
+                <span>{`${comp.name}:`}</span>
+                <select
+                  className="input pointer"
+                  value={comp.value}
+                  onChange={(e) => {
+                    comp.value = e.target.value;
+                    updateComponents();
+                  }}>
+                  {React.Children.toArray(
+                    comp.options.map((option) => (
+                      <option value={option.value}>{option.name}</option>
+                    )),
+                  )}
+                </select>
+              </>
+            )}
         </div>
       ) : (
         <div

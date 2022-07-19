@@ -9,7 +9,7 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
   const { cur3dItemEvent } = useZustand();
   const nameRef = useRef();
 
-  const { unit, maxSize } = cur3dItemEvent.item.metadata;
+  const { unit, max_size } = cur3dItemEvent.item.metadata;
   const style = {
     marginLeft: `${depth * 1}vw`,
   };
@@ -61,8 +61,8 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
                   <span>{`${comp.addition[fieldKey].name}(${unit}):`}</span>
                   <MultiRangeSlider
                     min={0}
-                    max={maxSize}
-                    step={parseInt(maxSize / 50)}
+                    max={max_size}
+                    step={parseInt(max_size / 50)}
                     ruler={true}
                     label={true}
                     preventWheel={false}

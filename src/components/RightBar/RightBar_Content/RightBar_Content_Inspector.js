@@ -9,7 +9,6 @@ import cn from 'classnames';
 import RightBar_Content_CompInfo from './RightBar_Content_CompInfo';
 import { isLeafComponent } from './common';
 import RightBar_Content_AddChildComp from './RightBar_Content_AddChildComp';
-import { netTypes } from '../../../utils/net_quoter';
 
 let isDot = false;
 
@@ -307,7 +306,7 @@ const RightBar_Content_Inspector = () => {
           <div className="item-info-container">
             <img
               className="item-info-logo"
-              src={cur3dItemEvent.item.metadata.imagePath}></img>
+              src={cur3dItemEvent.item.metadata.image_path}></img>
             <div className="item-info">{cur3dItemEvent.item.metadata.name}</div>
             <div className="item-info">
               Cost: ${cur3dItemEvent.item.getPrice()}
@@ -340,7 +339,7 @@ const RightBar_Content_Inspector = () => {
                 )
               ) : (
                 <>
-                  {cur3dItemEvent.item.metadata.defaultSize && (
+                  {cur3dItemEvent.item.metadata.default_size && (
                     <>
                       {cur3dItemEvent.item.metadata.staticSizes ? (
                         <>
@@ -354,7 +353,7 @@ const RightBar_Content_Inspector = () => {
                               onClick={() => {
                                 updateCur3dStaticSize(-1);
                               }}>
-                              {cur3dItemEvent.item.metadata.defaultSize.name ||
+                              {cur3dItemEvent.item.metadata.default_size.name ||
                                 'No'}
                             </div>
 

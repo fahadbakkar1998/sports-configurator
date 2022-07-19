@@ -10,7 +10,7 @@ export class Root extends Group {
     this.item = item;
     this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
-    this.maxSize = item.metadata.maxSize;
+    this.maxSize = item.metadata.max_size;
 
     const outContainerInfo = this.getOutContainerInfo(item.metadata.components);
     const inContainerInfo = this.getInContainerInfo(item.metadata.components);

@@ -196,8 +196,8 @@ export class Item extends Mesh {
           this.resize({ width, height, depth });
         }
       } else {
-        if (this.metadata.defaultSize) {
-          const defaultSize = this.metadata.defaultSize;
+        if (this.metadata.default_size) {
+          const defaultSize = this.metadata.default_size;
           const width = Dimensioning.cmFromMeasureRaw(
             defaultSize.width,
             defaultSize.unit,
@@ -679,8 +679,8 @@ export class Item extends Mesh {
     if (this.metadata) {
       metadata3 = this.metadata;
 
-      if (metadata3.defaultSize) {
-        defaultSize3 = metadata3.defaultSize;
+      if (metadata3.default_size) {
+        defaultSize3 = metadata3.default_size;
 
         if (defaultSize3.price) {
           cost3 = defaultSize3.price;

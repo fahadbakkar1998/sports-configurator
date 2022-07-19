@@ -1,38 +1,5 @@
 /* unit - ft */
 
-// Net Types
-export const netTypes = [
-  { name: '#21 Nylon 1-7/8" STANDARD', value: 'nylon21' },
-  { name: '#21 Nylon 1-7/8" LATEX DIP', value: 'nylon21latex' },
-  { name: '#21 Nylon 1-7/8" DuPont 66-728', value: 'nylon21dupont' },
-  { name: '#21 Nylon 1-7/8" Varnish Dip', value: 'nylon21varnish' },
-
-  { name: '#36 Nylon 1-7/8" STANDARD', value: 'nylon36' },
-  { name: '#36 Nylon 1-7/8" LATEX DIP', value: 'nylon36latex' },
-  { name: '#36 Nylon 1-7/8" DuPont 66-728', value: 'nylon36dupont' },
-  { name: '#36 Nylon 1-7/8" Varnish Dip', value: 'nylon36varnish' },
-
-  { name: '#42 Nylon 1-7/8" STANDARD', value: 'nylon42' },
-  { name: '#42 Nylon 1-7/8" LATEX DIP', value: 'nylon42latex' },
-  { name: '#42 Nylon 1-7/8" DuPont 66-728', value: 'nylon42dupont' },
-  { name: '#42 Nylon 1-7/8" Varnish Dip', value: 'nylon42varnish' },
-
-  { name: '#48 Nylon 1-7/8" STANDARD', value: 'nylon48' },
-  { name: '#48 Nylon 1-7/8" LATEX DIP', value: 'nylon48latex' },
-
-  { name: '#60 Nylon 1-7/8" STANDARD', value: 'nylon60' },
-  { name: '#60 Nylon 1-7/8" LATEX DIP', value: 'nylon60latex' },
-  { name: '#60 Nylon 1-7/8" DuPont 66-728', value: 'nylon60dupont' },
-  { name: '#60 Nylon 1-7/8" Varnish Dip', value: 'nylon60varnish' },
-
-  { name: '#96 Nylon 1-7/8" DuPont 66-728', value: 'nylon96dupont' },
-  { name: '#96 Nylon 1-7/8" Varnish Dip', value: 'nylon96varnish' },
-
-  { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
-
-  { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
-];
-
 // CALCULATE TUNNEL
 export const calculateTunnel = ({ use, length, width, height }) => {
   let nylon18 = 0,
