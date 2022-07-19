@@ -9,6 +9,7 @@ import cn from 'classnames';
 import RightBar_Content_CompInfo from './RightBar_Content_CompInfo';
 import { isLeafComponent } from './common';
 import RightBar_Content_AddChildComp from './RightBar_Content_AddChildComp';
+import { netTypes } from '../../../utils/net_quoter';
 
 let isDot = false;
 
@@ -324,18 +325,44 @@ const RightBar_Content_Inspector = () => {
           {cur3dItemEvent.item.metadata && (
             <>
               {cur3dItemEvent.item.metadata.format === 'configurator' ? (
-                cur3dItemEvent.item.metadata.components &&
-                React.Children.toArray(
-                  Object.keys(cur3dItemEvent.item.metadata.components).map(
-                    (compKey) =>
-                      recursiveComponent({
-                        comp: cur3dItemEvent.item.metadata.components[compKey],
-                        isOpen: true,
-                        depth: 0,
-                        initialOpenDepth: 0,
-                        updateComponents: updateCur3dItemComponents,
-                      }),
-                  ),
+                cur3dItemEvent.item.metadata.components && (
+                  <>
+                    {cur3dItemEvent.item.metadata.calc_info && (
+                      <div className="input-group">
+                        <div>Net Type:</div>
+                        <select
+                          className="input pointer"
+                          value={
+                            cur3dItemEvent.item.metadata.calc_info.net_type
+                          }
+                          onChange={(e) => {
+                            cur3dItemEvent.item.metadata.calc_info.net_type =
+                              e.target.value;
+                            updateCur3dItemComponents();
+                          }}>
+                          {React.Children.toArray(
+                            netTypes.map((type) => (
+                              <option value={type.value}>{type.name}</option>
+                            )),
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {React.Children.toArray(
+                      Object.keys(cur3dItemEvent.item.metadata.components).map(
+                        (compKey) =>
+                          recursiveComponent({
+                            comp: cur3dItemEvent.item.metadata.components[
+                              compKey
+                            ],
+                            isOpen: true,
+                            depth: 0,
+                            initialOpenDepth: 0,
+                            updateComponents: updateCur3dItemComponents,
+                          }),
+                      ),
+                    )}
+                  </>
                 )
               ) : (
                 <>

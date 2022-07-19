@@ -15,9 +15,10 @@ export const items = [
           unit: 'ft',
         },
         maxSize: 100,
-        calcInfo: {
+        calc_info: {
           uses: ['baseball', 'golf'],
-          ribLinePrice: 0.9,
+          rib_line_price: 0.9,
+          net_type: 'nylon21',
         },
         components: {
           // All points start at the back left.
