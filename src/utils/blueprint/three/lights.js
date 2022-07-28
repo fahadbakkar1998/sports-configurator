@@ -2,6 +2,7 @@ import {
   EventDispatcher,
   HemisphereLight,
   DirectionalLight,
+  AmbientLight,
   Vector3,
 } from 'three';
 import { EVENT_UPDATED } from '../core/events.js';
@@ -25,9 +26,13 @@ export class Lights extends EventDispatcher {
   }
 
   init() {
-    let light = new HemisphereLight(0xffffff, 0x888888, 1.1);
-    light.position.set(0, this.height, 0);
-    this.scene.add(light);
+    let hemLight = new HemisphereLight(0xffffff, 0x888888, 1.1);
+    hemLight.position.set(0, this.height, 0);
+    this.scene.add(hemLight);
+
+    let ambLight = new AmbientLight(0xffffff, 0x888888, 1.1);
+    ambLight.position.set(0, this.height, 0);
+    this.scene.add(ambLight);
 
     this.dirLight = new DirectionalLight(0xffffff, 0.5);
     this.dirLight.color.setHSL(1, 1, 0.1);

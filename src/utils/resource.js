@@ -3,202 +3,41 @@ export const items = [
     name: 'Indoor Netting',
     children: [
       {
-        name: 'Shell Cage',
-        image_path: 'assets/models/thumbnails/Shell Cage.png',
-        format: 'configurator',
-        type: 'shellcage',
-        unit: 'ft',
+        name: 'OmniJam Portable Basketball Goal',
+        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+        model_path: 'assets/models/gltf/OmniJam Portable Basketball Goal.glb',
+        type: '5',
+        format: 'gltf',
         default_size: {
-          width: 40,
-          height: 10,
-          length: 60,
+          name: 'Dimension',
           unit: 'ft',
+          height: 20,
         },
-        max_size: 100,
-        components: {
-          // All points start at the back left.
-          net: {
-            name: 'Net',
-            value: {
-              use: {
-                type: 'select',
-                name: 'Use',
-                value: 'baseball',
-                options: [
-                  { name: 'Baseball', value: 'baseball' },
-                  { name: 'Golf', value: 'golf' },
-                ],
-              },
-              net_type: {
-                type: 'select',
-                name: 'Net Type',
-                value: 'nylon21',
-                options: [
-                  { name: '#21 Nylon 1-7/8" STANDARD', value: 'nylon21' },
-                  { name: '#21 Nylon 1-7/8" LATEX DIP', value: 'nylon21latex' },
-                  {
-                    name: '#21 Nylon 1-7/8" DuPont 66-728',
-                    value: 'nylon21dupont',
-                  },
-                  {
-                    name: '#21 Nylon 1-7/8" Varnish Dip',
-                    value: 'nylon21varnish',
-                  },
-
-                  { name: '#36 Nylon 1-7/8" STANDARD', value: 'nylon36' },
-                  { name: '#36 Nylon 1-7/8" LATEX DIP', value: 'nylon36latex' },
-                  {
-                    name: '#36 Nylon 1-7/8" DuPont 66-728',
-                    value: 'nylon36dupont',
-                  },
-                  {
-                    name: '#36 Nylon 1-7/8" Varnish Dip',
-                    value: 'nylon36varnish',
-                  },
-
-                  { name: '#42 Nylon 1-7/8" STANDARD', value: 'nylon42' },
-                  { name: '#42 Nylon 1-7/8" LATEX DIP', value: 'nylon42latex' },
-                  {
-                    name: '#42 Nylon 1-7/8" DuPont 66-728',
-                    value: 'nylon42dupont',
-                  },
-                  {
-                    name: '#42 Nylon 1-7/8" Varnish Dip',
-                    value: 'nylon42varnish',
-                  },
-
-                  { name: '#48 Nylon 1-7/8" STANDARD', value: 'nylon48' },
-                  { name: '#48 Nylon 1-7/8" LATEX DIP', value: 'nylon48latex' },
-
-                  { name: '#60 Nylon 1-7/8" STANDARD', value: 'nylon60' },
-                  { name: '#60 Nylon 1-7/8" LATEX DIP', value: 'nylon60latex' },
-                  {
-                    name: '#60 Nylon 1-7/8" DuPont 66-728',
-                    value: 'nylon60dupont',
-                  },
-                  {
-                    name: '#60 Nylon 1-7/8" Varnish Dip',
-                    value: 'nylon60varnish',
-                  },
-
-                  {
-                    name: '#96 Nylon 1-7/8" DuPont 66-728',
-                    value: 'nylon96dupont',
-                  },
-                  {
-                    name: '#96 Nylon 1-7/8" Varnish Dip',
-                    value: 'nylon96varnish',
-                  },
-
-                  { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
-
-                  { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
-                ],
-              },
-              hole_size: {
-                type: 'single',
-                name: 'HoleSize',
-                // value: 0.15625,
-                value: 0.3,
-                immutability: true,
-              },
-              diameter: {
-                type: 'single',
-                name: 'Diameter',
-                value: 0.03,
-                immutability: true,
-              },
-            },
-          },
-          out_container: {
-            name: 'Exterior',
-            value: {
-              width: { type: 'single', name: 'Width', value: 40 },
-              height: { type: 'single', name: 'Height', value: 10 },
-              length: { type: 'single', name: 'Length', value: 60 },
-            },
-          },
-          out_edge: {
-            name: 'Rungs',
-            value: {
-              thickness: {
-                type: 'single',
-                name: 'Thickness',
-                value: 0.4,
-                immutability: true,
-              },
-            },
-          },
-          in_container: {
-            name: 'Interior',
-            value: {
-              gap: {
-                type: 'single',
-                name: 'Gap',
-                value: 0.2,
-                immutability: true,
-              },
-              deltaZ: { type: 'interval', name: 'Length', value: [0, 60] },
-            },
-          },
-          dividers: {
-            name: 'Dividers',
-            addition: {
-              deltaX: {
-                type: 'single',
-                type: 'single',
-                name: 'Lane Width',
-                value: 10,
-              },
-              deltaZ: {
-                type: 'single',
-                type: 'interval',
-                name: 'Length',
-                value: [0, 50],
-              },
-            },
-            value: [
-              {
-                name: 'Divider 1',
-                value: {
-                  deltaX: { type: 'single', name: 'Lane Width', value: 10 },
-                  deltaZ: { type: 'interval', name: 'Length', value: [0, 60] },
-                },
-              },
-              {
-                name: 'Divider 2',
-                value: {
-                  deltaX: { type: 'single', name: 'Lane Width', value: 10 },
-                  deltaZ: { type: 'interval', name: 'Length', value: [0, 40] },
-                },
-              },
-              {
-                name: 'Divider 3',
-                value: {
-                  deltaX: { type: 'single', name: 'Lane Width', value: 10 },
-                  deltaZ: { type: 'interval', name: 'Length', value: [10, 30] },
-                },
-              },
-            ],
-          },
-          rib_line: {
-            name: 'RibLine',
-            value: {
-              diameter: {
-                type: 'single',
-                name: 'Diameter',
-                value: 0.2,
-                immutability: true,
-              },
-              allowableLaneWidth: {
-                type: 'single',
-                name: 'Limit Lane Width',
-                value: 8,
-                immutability: true,
-              },
-            },
-            price_per_unit: 0.9,
-          },
+      },
+      {
+        name: 'Jam In Ground Adjustable Basketball Goal',
+        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+        model_path:
+          'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb',
+        type: '5',
+        format: 'gltf',
+        default_size: {
+          name: 'Dimension',
+          unit: 'ft',
+          height: 20,
+        },
+      },
+      {
+        name: 'RollaSport Portable Basketball Goal',
+        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+        model_path:
+          'assets/models/gltf/RollaSport Portable Basketball Goal.glb',
+        type: '5',
+        format: 'gltf',
+        default_size: {
+          name: 'Dimension',
+          unit: 'ft',
+          height: 20,
         },
       },
       {
@@ -332,7 +171,265 @@ export const items = [
           },
           {
             name: 'Multi Lane Tunnel',
-            children: [],
+            children: [
+              {
+                name: 'Shell Cage',
+                image_path: 'assets/models/thumbnails/Shell Cage.png',
+                format: 'configurator',
+                type: 'shellcage',
+                unit: 'ft',
+                default_size: {
+                  width: 40,
+                  height: 10,
+                  length: 60,
+                  unit: 'ft',
+                },
+                max_size: 100,
+                components: {
+                  // All points start at the back left.
+                  net: {
+                    name: 'Net',
+                    value: {
+                      use: {
+                        type: 'select',
+                        name: 'Use',
+                        value: 'baseball',
+                        options: [
+                          { name: 'Baseball', value: 'baseball' },
+                          { name: 'Golf', value: 'golf' },
+                        ],
+                      },
+                      net_type: {
+                        type: 'select',
+                        name: 'Net Type',
+                        value: 'nylon21',
+                        options: [
+                          {
+                            name: '#21 Nylon 1-7/8" STANDARD',
+                            value: 'nylon21',
+                          },
+                          {
+                            name: '#21 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon21latex',
+                          },
+                          {
+                            name: '#21 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon21dupont',
+                          },
+                          {
+                            name: '#21 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon21varnish',
+                          },
+
+                          {
+                            name: '#36 Nylon 1-7/8" STANDARD',
+                            value: 'nylon36',
+                          },
+                          {
+                            name: '#36 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon36latex',
+                          },
+                          {
+                            name: '#36 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon36dupont',
+                          },
+                          {
+                            name: '#36 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon36varnish',
+                          },
+
+                          {
+                            name: '#42 Nylon 1-7/8" STANDARD',
+                            value: 'nylon42',
+                          },
+                          {
+                            name: '#42 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon42latex',
+                          },
+                          {
+                            name: '#42 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon42dupont',
+                          },
+                          {
+                            name: '#42 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon42varnish',
+                          },
+
+                          {
+                            name: '#48 Nylon 1-7/8" STANDARD',
+                            value: 'nylon48',
+                          },
+                          {
+                            name: '#48 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon48latex',
+                          },
+
+                          {
+                            name: '#60 Nylon 1-7/8" STANDARD',
+                            value: 'nylon60',
+                          },
+                          {
+                            name: '#60 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon60latex',
+                          },
+                          {
+                            name: '#60 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon60dupont',
+                          },
+                          {
+                            name: '#60 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon60varnish',
+                          },
+
+                          {
+                            name: '#96 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon96dupont',
+                          },
+                          {
+                            name: '#96 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon96varnish',
+                          },
+
+                          { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
+
+                          { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
+                        ],
+                      },
+                      hole_size: {
+                        type: 'single',
+                        name: 'HoleSize',
+                        // value: 0.15625,
+                        value: 0.3,
+                        immutability: true,
+                      },
+                      diameter: {
+                        type: 'single',
+                        name: 'Diameter',
+                        value: 0.03,
+                        immutability: true,
+                      },
+                    },
+                  },
+                  out_container: {
+                    name: 'Exterior',
+                    value: {
+                      width: { type: 'single', name: 'Width', value: 40 },
+                      height: { type: 'single', name: 'Height', value: 10 },
+                      length: { type: 'single', name: 'Length', value: 60 },
+                    },
+                  },
+                  out_edge: {
+                    name: 'Rungs',
+                    value: {
+                      thickness: {
+                        type: 'single',
+                        name: 'Thickness',
+                        value: 0.4,
+                        immutability: true,
+                      },
+                    },
+                  },
+                  in_container: {
+                    name: 'Interior',
+                    value: {
+                      gap: {
+                        type: 'single',
+                        name: 'Gap',
+                        value: 0.2,
+                        immutability: true,
+                      },
+                      deltaZ: {
+                        type: 'interval',
+                        name: 'Length',
+                        value: [0, 60],
+                      },
+                    },
+                  },
+                  dividers: {
+                    name: 'Dividers',
+                    addition: {
+                      deltaX: {
+                        type: 'single',
+                        type: 'single',
+                        name: 'Lane Width',
+                        value: 10,
+                      },
+                      deltaZ: {
+                        type: 'single',
+                        type: 'interval',
+                        name: 'Length',
+                        value: [0, 50],
+                      },
+                    },
+                    value: [
+                      {
+                        name: 'Divider 1',
+                        value: {
+                          deltaX: {
+                            type: 'single',
+                            name: 'Lane Width',
+                            value: 10,
+                          },
+                          deltaZ: {
+                            type: 'interval',
+                            name: 'Length',
+                            value: [0, 60],
+                          },
+                        },
+                      },
+                      {
+                        name: 'Divider 2',
+                        value: {
+                          deltaX: {
+                            type: 'single',
+                            name: 'Lane Width',
+                            value: 10,
+                          },
+                          deltaZ: {
+                            type: 'interval',
+                            name: 'Length',
+                            value: [0, 40],
+                          },
+                        },
+                      },
+                      {
+                        name: 'Divider 3',
+                        value: {
+                          deltaX: {
+                            type: 'single',
+                            name: 'Lane Width',
+                            value: 10,
+                          },
+                          deltaZ: {
+                            type: 'interval',
+                            name: 'Length',
+                            value: [10, 30],
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  rib_line: {
+                    name: 'RibLine',
+                    value: {
+                      diameter: {
+                        type: 'single',
+                        name: 'Diameter',
+                        value: 0.2,
+                        immutability: true,
+                      },
+                      allowableLaneWidth: {
+                        type: 'single',
+                        name: 'Limit Lane Width',
+                        value: 8,
+                        immutability: true,
+                      },
+                    },
+                    price_per_unit: 0.9,
+                  },
+                },
+              },
+            ],
           },
           {
             name: 'Electric Retractable Tunnel',
@@ -397,8 +494,8 @@ export const items = [
             children: [
               {
                 name: 'Phantom',
-                image_path: 'assets/models/thumbnails/Shell Cage.png',
-                model_path: 'assets/models/gltf/Shell Cage.glb',
+                image_path: 'assets/models/thumbnails/Phantom.png',
+                model_path: 'assets/models/gltf/Phantom.glb',
                 type: '5',
                 format: 'gltf',
                 default_size: {
@@ -437,11 +534,230 @@ export const items = [
         children: [
           {
             name: 'Single Hitting Cage',
+            image_path: 'assets/models/thumbnails/Outdoor Varsity 55.png',
+            model_path: 'assets/models/gltf/Outdoor Varsity 55.glb',
+            type: '5',
+            format: 'gltf',
+            default_size: {
+              unit: 'ft',
+              width: 70,
+              height: 12,
+              length: 12,
+              // price: 4385,
+            },
+            accessories: [
+              {
+                name: 'Netting',
+                types: [
+                  {
+                    name: 'No Net',
+                    extraPrice: 0,
+                  },
+                  {
+                    name: '#36 Poly-12*12- BD3227',
+                    extraPrice: 776,
+                  },
+                  {
+                    name: '#36 Poly-12*14- BD3227',
+                    extraPrice: 830,
+                  },
+                  {
+                    name: '#36 Nylon-12*12 with NetSeal - BC2270',
+                    extraPrice: 1308,
+                  },
+                  {
+                    name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
+                    extraPrice: 1385,
+                  },
+                ],
+              },
+              {
+                name: 'Pipe Gauge',
+                types: [
+                  {
+                    name: '13 Gauge',
+                    extraPrice: 0,
+                  },
+                  {
+                    name: '10 Gauge',
+                    extraPrice: 146,
+                  },
+                ],
+              },
+              {
+                name: 'Coating',
+                types: [
+                  {
+                    name: 'Galvanized',
+                    extraPrice: 0,
+                  },
+                  {
+                    name: 'Powder Coated Black',
+                    extraPrice: 2375,
+                  },
+                  {
+                    name: 'Powder-Coated-Brown',
+                    extraPrice: 2375,
+                  },
+                  {
+                    name: 'Powder-Coated-Green',
+                    extraPrice: 2375,
+                  },
+                ],
+              },
+              {
+                name: 'Delivery Address',
+                types: [
+                  {
+                    name: 'Commercial',
+                    extraPrice: 0,
+                  },
+                  {
+                    name: 'Residential',
+                    extraPrice: 150,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
       {
-        name: 'Barrier Net',
+        name: 'Netting',
+        children: [
+          // {
+          //   name: 'Barrier Net',
+          //   image_path: 'assets/models/thumbnails/Shell Cage.png',
+          //   format: 'configurator',
+          //   type: 'net',
+          //   unit: 'ft',
+          //   default_size: {
+          //     width: 40,
+          //     height: 10,
+          //     unit: 'ft',
+          //   },
+          //   max_size: 100,
+          //   components: {
+          //     use: {
+          //       type: 'select',
+          //       name: 'Use',
+          //       value: 'baseball',
+          //       options: [
+          //         { name: 'Baseball', value: 'baseball' },
+          //         { name: 'Golf', value: 'golf' },
+          //       ],
+          //     },
+          //     net_type: {
+          //       type: 'select',
+          //       name: 'Net Type',
+          //       value: 'nylon21',
+          //       options: [
+          //         {
+          //           name: '#21 Nylon 1-7/8" STANDARD',
+          //           value: 'nylon21',
+          //         },
+          //         {
+          //           name: '#21 Nylon 1-7/8" LATEX DIP',
+          //           value: 'nylon21latex',
+          //         },
+          //         {
+          //           name: '#21 Nylon 1-7/8" DuPont 66-728',
+          //           value: 'nylon21dupont',
+          //         },
+          //         {
+          //           name: '#21 Nylon 1-7/8" Varnish Dip',
+          //           value: 'nylon21varnish',
+          //         },
+          //         {
+          //           name: '#36 Nylon 1-7/8" STANDARD',
+          //           value: 'nylon36',
+          //         },
+          //         {
+          //           name: '#36 Nylon 1-7/8" LATEX DIP',
+          //           value: 'nylon36latex',
+          //         },
+          //         {
+          //           name: '#36 Nylon 1-7/8" DuPont 66-728',
+          //           value: 'nylon36dupont',
+          //         },
+          //         {
+          //           name: '#36 Nylon 1-7/8" Varnish Dip',
+          //           value: 'nylon36varnish',
+          //         },
+          //         {
+          //           name: '#42 Nylon 1-7/8" STANDARD',
+          //           value: 'nylon42',
+          //         },
+          //         {
+          //           name: '#42 Nylon 1-7/8" LATEX DIP',
+          //           value: 'nylon42latex',
+          //         },
+          //         {
+          //           name: '#42 Nylon 1-7/8" DuPont 66-728',
+          //           value: 'nylon42dupont',
+          //         },
+          //         {
+          //           name: '#42 Nylon 1-7/8" Varnish Dip',
+          //           value: 'nylon42varnish',
+          //         },
+          //         {
+          //           name: '#48 Nylon 1-7/8" STANDARD',
+          //           value: 'nylon48',
+          //         },
+          //         {
+          //           name: '#48 Nylon 1-7/8" LATEX DIP',
+          //           value: 'nylon48latex',
+          //         },
+          //         {
+          //           name: '#60 Nylon 1-7/8" STANDARD',
+          //           value: 'nylon60',
+          //         },
+          //         {
+          //           name: '#60 Nylon 1-7/8" LATEX DIP',
+          //           value: 'nylon60latex',
+          //         },
+          //         {
+          //           name: '#60 Nylon 1-7/8" DuPont 66-728',
+          //           value: 'nylon60dupont',
+          //         },
+          //         {
+          //           name: '#60 Nylon 1-7/8" Varnish Dip',
+          //           value: 'nylon60varnish',
+          //         },
+          //         {
+          //           name: '#96 Nylon 1-7/8" DuPont 66-728',
+          //           value: 'nylon96dupont',
+          //         },
+          //         {
+          //           name: '#96 Nylon 1-7/8" Varnish Dip',
+          //           value: 'nylon96varnish',
+          //         },
+          //         { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
+          //         { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
+          //       ],
+          //     },
+          //     dimension: {
+          //       name: 'Dimension',
+          //       value: {
+          //         width: { type: 'single', name: 'Width', value: 40 },
+          //         height: { type: 'single', name: 'Height', value: 10 },
+          //       },
+          //     },
+          //     hole_size: {
+          //       type: 'single',
+          //       name: 'HoleSize',
+          //       value: 0.3,
+          //       immutability: true,
+          //     },
+          //     diameter: {
+          //       type: 'single',
+          //       name: 'Diameter',
+          //       value: 0.03,
+          //       immutability: true,
+          //     },
+          //   },
+          // },
+        ],
       },
     ],
   },

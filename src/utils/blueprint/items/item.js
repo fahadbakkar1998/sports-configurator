@@ -193,7 +193,12 @@ export class Item extends Mesh {
             staticSize.length,
             staticSize.unit,
           );
-          this.resize({ width, height, depth });
+          this.resize({
+            width,
+            height,
+            depth,
+            proportionally: !width || !height || !depth,
+          });
         }
       } else {
         if (this.metadata.default_size) {
@@ -210,7 +215,12 @@ export class Item extends Mesh {
             defaultSize.length,
             defaultSize.unit,
           );
-          this.resize({ width, height, depth });
+          this.resize({
+            width,
+            height,
+            depth,
+            proportionally: !width || !height || !depth,
+          });
         }
       }
     }
