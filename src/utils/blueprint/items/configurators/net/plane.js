@@ -10,8 +10,8 @@ import { Net } from './net';
 export class Plane extends Group {
   constructor({ item, compInfo }) {
     super();
-    this.unit = item.metadata.unit;
     this.scene = item.model.scene.scene;
+    this.unit = item.metadata.unit;
     const { width, height } = compInfo;
 
     this.planeMesh = new Mesh(

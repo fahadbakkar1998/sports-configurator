@@ -1,4 +1,4 @@
-import { Group, Vector3, BoxGeometry } from 'three';
+import { Group, Vector3, PlaneGeometry } from 'three';
 import { Plane } from './plane';
 import { Dimensioning } from '../../../core/dimensioning';
 
@@ -20,57 +20,31 @@ export class Root extends Group {
   }
 
   getDimensionInfo(components) {
-    // calculate dimension size
+    // calculate dimension size.
     const width = Dimensioning.cmFromMeasureRaw(
-      components.dimension.value.width.value,
+      components.width.value,
       this.unit,
     );
     const height = Dimensioning.cmFromMeasureRaw(
-      components.dimension.value.height.value,
+      components.height.value,
       this.unit,
     );
-    const length = Dimensioning.cmFromMeasureRaw(
-      components.dimension.value.length.value,
-      this.unit,
-    );
-    return { width, height, length };
+    return { width, height };
   }
 
   redrawComponents(components) {
-    const outContainerInfo = this.getOutContainerInfo(components);
-    const inContainerInfo = this.getInContainerInfo(components);
+    const dimensionInfo = this.getDimensionInfo(components);
 
-    this.item.geometry = new BoxGeometry(
-      outContainerInfo.width,
-      outContainerInfo.height,
-      outContainerInfo.length,
+    this.item.geometry = new PlaneGeometry(
+      dimensionInfo.width,
+      dimensionInfo.height,
     );
-    this.item.position.y = outContainerInfo.height / 2;
+    this.item.position.y = dimensionInfo.height / 2;
     this.item.refreshItem();
 
-    this.outContainer.redrawComponents({
+    this.plane.redrawComponents({
       components,
-      compInfo: outContainerInfo,
-    });
-
-    this.inContainer.redrawComponents({
-      components,
-      compInfo: inContainerInfo,
-    });
-    this.inContainer.position.copy(
-      new Vector3(
-        0,
-        0,
-        inContainerInfo.startZ +
-          inContainerInfo.gap +
-          inContainerInfo.length / 2 -
-          outContainerInfo.length / 2,
-      ),
-    );
-
-    this.outContainer.redrawRibLines({
-      components,
-      compInfo: outContainerInfo,
+      compInfo: dimensionInfo,
     });
   }
 }

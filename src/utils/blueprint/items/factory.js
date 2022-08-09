@@ -8,6 +8,7 @@ import { WallFloorItem } from './wall_floor_item.js';
 import { RoofItem } from './roof_item.js';
 import { OutItem } from './out_item';
 import { ShellCage } from './configurators/shellcage';
+import { Net } from './configurators/net';
 
 export const item_types = {
   0: Item,
@@ -20,6 +21,7 @@ export const item_types = {
   8: OnFloorItem,
   9: WallFloorItem,
   shellcage: ShellCage,
+  net: Net,
 };
 
 /* Factory class to create items. */

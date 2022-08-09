@@ -12,19 +12,19 @@ import { Dimensioning } from '../../../core/dimensioning';
 export class Net extends Group {
   constructor({ item, compInfo }) {
     super();
-    this.unit = item.metadata.unit;
     this.scene = item.model.scene.scene;
+    this.unit = item.metadata.unit;
     this.netLines = [];
     this.redrawComponents({ components: item.metadata.components, compInfo });
   }
 
   getNetInfo(components) {
     const holeSize = Dimensioning.cmFromMeasureRaw(
-      components.net.value.hole_size.value,
+      components.hole_size.value,
       this.unit,
     );
     const diameter = Dimensioning.cmFromMeasureRaw(
-      components.net.value.diameter.value,
+      components.diameter.value,
       this.unit,
     );
     return { holeSize, diameter };
