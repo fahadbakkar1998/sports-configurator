@@ -179,19 +179,19 @@ export class Floorplan extends EventDispatcher {
   }
 
   fireOnNewWall(callback) {
-    this.new_wall_callbacks.add(callback);
+    this.new_wall_callbacks.push(callback);
   }
 
   fireOnNewCorner(callback) {
-    this.new_corner_callbacks.add(callback);
+    this.new_corner_callbacks.push(callback);
   }
 
   fireOnRedraw(callback) {
-    this.redraw_callbacks.add(callback);
+    this.redraw_callbacks.push(callback);
   }
 
   fireOnUpdatedRooms(callback) {
-    this.updated_rooms.add(callback);
+    this.updated_rooms.push(callback);
   }
 
   // This method needs to be called from the 2d floorplan whenever

@@ -30,9 +30,9 @@ export class Lights extends EventDispatcher {
     hemLight.position.set(0, this.height, 0);
     this.scene.add(hemLight);
 
-    let ambLight = new AmbientLight(0xffffff, 0x888888, 1.1);
-    ambLight.position.set(0, this.height, 0);
-    this.scene.add(ambLight);
+    // let ambLight = new AmbientLight(0xffffff, 0x888888, 1.1);
+    // ambLight.position.set(0, this.height, 0);
+    // this.scene.add(ambLight);
 
     this.dirLight = new DirectionalLight(0xffffff, 0.5);
     this.dirLight.color.setHSL(1, 1, 0.1);
@@ -51,7 +51,7 @@ export class Lights extends EventDispatcher {
     this.scene.add(this.dirLight);
     this.scene.add(this.dirLight.target);
 
-    // this.floorplan.fireOnUpdatedRooms(updateShadowCamera);
+    this.floorplan.fireOnUpdatedRooms(this.updateShadowCamera);
     this.floorplan.addEventListener(EVENT_UPDATED, this.updatedRoomsEvent);
   }
 
@@ -62,8 +62,8 @@ export class Lights extends EventDispatcher {
     let pos = new Vector3(center.x, this.height, center.z);
     this.dirLight.position.copy(pos);
     this.dirLight.target.position.copy(center);
-    // dirLight.updateMatrix();
-    // dirLight.updateWorldMatrix()
+    this.dirLight.updateMatrix();
+    this.dirLight.updateWorldMatrix();
     this.dirLight.shadow.camera.left = -d;
     this.dirLight.shadow.camera.right = d;
     this.dirLight.shadow.camera.top = d;
