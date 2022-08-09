@@ -1465,7 +1465,7 @@ export const items = [
         unit: 'ft',
         default_size: {
           width: 10,
-          height: 10,
+          length: 10,
           unit: 'ft',
         },
         max_size: 1000,
@@ -1491,9 +1491,67 @@ export const items = [
       },
       {
         name: 'Turf Mats',
+        image_path: 'assets/models/thumbnails/Turf Mats/Mat1.png',
+        format: 'configurator',
+        type: 'horizontality',
+        unit: 'ft',
+        default_size: {
+          width: 10,
+          length: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 10 },
+          length: { type: 'single', name: 'Length', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/Turf Mats/Mat1.png',
+            options: [
+              {
+                name: 'Mat1',
+                value: 'assets/models/thumbnails/Turf Mats/Mat1.png',
+              },
+              {
+                name: 'Mat2',
+                value: 'assets/models/thumbnails/Turf Mats/Mat2.png',
+              },
+            ],
+          },
+        },
       },
       {
         name: 'Rubber',
+        image_path: 'assets/models/thumbnails/Rubber/Mat1.png',
+        format: 'configurator',
+        type: 'horizontality',
+        unit: 'ft',
+        default_size: {
+          width: 10,
+          length: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 10 },
+          length: { type: 'single', name: 'Length', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/Rubber/Mat1.png',
+            options: [
+              {
+                name: 'Mat1',
+                value: 'assets/models/thumbnails/Rubber/Mat1.png',
+              },
+              {
+                name: 'Mat2',
+                value: 'assets/models/thumbnails/Rubber/Mat2.png',
+              },
+            ],
+          },
+        },
       },
       {
         name: 'Court Tiles',
@@ -1505,6 +1563,35 @@ export const items = [
     children: [
       {
         name: 'WindScreens',
+        image_path: 'assets/models/thumbnails/WindScreens/Mat1.png',
+        format: 'configurator',
+        type: 'aplomb',
+        unit: 'ft',
+        default_size: {
+          width: 16,
+          height: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 16 },
+          height: { type: 'single', name: 'Height', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/WindScreens/Mat1.png',
+            options: [
+              {
+                name: 'Mat1',
+                value: 'assets/models/thumbnails/WindScreens/Mat1.png',
+              },
+              {
+                name: 'Mat2',
+                value: 'assets/models/thumbnails/WindScreens/Mat2.png',
+              },
+            ],
+          },
+        },
       },
     ],
   },
@@ -1522,9 +1609,9 @@ export const items = [
   {
     name: 'Training Equipment',
     children: [
-      {
-        name: 'Pitching Machine',
-      },
+      // {
+      //   name: 'Pitching Machine',
+      // },
       {
         name: 'L-Screen',
         image_path: 'assets/models/thumbnails/L-Screen.png',
@@ -1710,6 +1797,35 @@ export const items = [
     children: [
       {
         name: 'Concrete',
+        image_path: 'assets/models/thumbnails/Concrete/Mat1.png',
+        format: 'configurator',
+        type: 'horizontality',
+        unit: 'ft',
+        default_size: {
+          width: 10,
+          length: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 10 },
+          length: { type: 'single', name: 'Length', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/Concrete/Mat1.png',
+            options: [
+              {
+                name: 'Mat1',
+                value: 'assets/models/thumbnails/Concrete/Mat1.png',
+              },
+              {
+                name: 'Mat2',
+                value: 'assets/models/thumbnails/Concrete/Mat2.png',
+              },
+            ],
+          },
+        },
       },
     ],
   },
