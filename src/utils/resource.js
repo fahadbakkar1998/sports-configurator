@@ -2,44 +2,44 @@ export const items = [
   {
     name: 'Indoor Netting',
     children: [
-      {
-        name: 'OmniJam Portable Basketball Goal',
-        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model_path: 'assets/models/gltf/OmniJam Portable Basketball Goal.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: 'Dimension',
-          unit: 'ft',
-          height: 20,
-        },
-      },
-      {
-        name: 'Jam In Ground Adjustable Basketball Goal',
-        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model_path:
-          'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: 'Dimension',
-          unit: 'ft',
-          height: 20,
-        },
-      },
-      {
-        name: 'RollaSport Portable Basketball Goal',
-        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model_path:
-          'assets/models/gltf/RollaSport Portable Basketball Goal.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: 'Dimension',
-          unit: 'ft',
-          height: 20,
-        },
-      },
+      // {
+      //   name: 'OmniJam Portable Basketball Goal',
+      //   image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+      //   model_path: 'assets/models/gltf/OmniJam Portable Basketball Goal.glb',
+      //   type: '5',
+      //   format: 'gltf',
+      //   default_size: {
+      //     name: 'Dimension',
+      //     unit: 'ft',
+      //     height: 20,
+      //   },
+      // },
+      // {
+      //   name: 'Jam In Ground Adjustable Basketball Goal',
+      //   image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+      //   model_path:
+      //     'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb',
+      //   type: '5',
+      //   format: 'gltf',
+      //   default_size: {
+      //     name: 'Dimension',
+      //     unit: 'ft',
+      //     height: 20,
+      //   },
+      // },
+      // {
+      //   name: 'RollaSport Portable Basketball Goal',
+      //   image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+      //   model_path:
+      //     'assets/models/gltf/RollaSport Portable Basketball Goal.glb',
+      //   type: '5',
+      //   format: 'gltf',
+      //   default_size: {
+      //     name: 'Dimension',
+      //     unit: 'ft',
+      //     height: 20,
+      //   },
+      // },
       {
         name: 'Indoor Batting Cage',
         children: [
@@ -627,7 +627,7 @@ export const items = [
         children: [
           {
             name: 'Barrier Net',
-            image_path: 'assets/models/thumbnails/Shell Cage.png',
+            image_path: 'assets/models/thumbnails/Barrier Net.png',
             format: 'configurator',
             type: 'net',
             unit: 'ft',
