@@ -1459,6 +1459,35 @@ export const items = [
     children: [
       {
         name: 'Turf Rolls',
+        image_path: 'assets/models/thumbnails/Turf Rolls/Mat1.png',
+        format: 'configurator',
+        type: 'horizontality',
+        unit: 'ft',
+        default_size: {
+          width: 10,
+          height: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 10 },
+          length: { type: 'single', name: 'Length', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/Turf Rolls/Mat1.png',
+            options: [
+              {
+                name: 'Mat1',
+                value: 'assets/models/thumbnails/Turf Rolls/Mat1.png',
+              },
+              {
+                name: 'Mat2',
+                value: 'assets/models/thumbnails/Turf Rolls/Mat2.png',
+              },
+            ],
+          },
+        },
       },
       {
         name: 'Turf Mats',

@@ -14,6 +14,7 @@ export class Root extends Group {
 
     const outContainerInfo = this.getOutContainerInfo(item.metadata.components);
     const inContainerInfo = this.getInContainerInfo(item.metadata.components);
+    this.redrawItem(outContainerInfo);
 
     this.outContainer = new OutContainer({
       item,
@@ -117,17 +118,16 @@ export class Root extends Group {
     };
   }
 
+  redrawItem({ width, height, length }) {
+    this.item.geometry = new BoxGeometry(width, height, length);
+    this.item.position.y = height / 2;
+    this.item.refreshItem();
+  }
+
   redrawComponents(components) {
     const outContainerInfo = this.getOutContainerInfo(components);
     const inContainerInfo = this.getInContainerInfo(components);
-
-    this.item.geometry = new BoxGeometry(
-      outContainerInfo.width,
-      outContainerInfo.height,
-      outContainerInfo.length,
-    );
-    this.item.position.y = outContainerInfo.height / 2;
-    this.item.refreshItem();
+    this.redrawItem(outContainerInfo);
 
     this.outContainer.redrawComponents({
       components,

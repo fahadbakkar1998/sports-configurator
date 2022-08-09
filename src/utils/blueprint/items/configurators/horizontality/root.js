@@ -1,6 +1,5 @@
-import { Group, PlaneGeometry } from 'three';
+import { Group, BoxGeometry } from 'three';
 import { Plane } from './plane';
-import { Net } from './net';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class Root extends Group {
@@ -20,9 +19,6 @@ export class Root extends Group {
       compInfo: dimensionInfo,
     });
     this.add(this.plane);
-
-    this.net = new Net({ item, compInfo: dimensionInfo });
-    this.add(this.net);
   }
 
   getDimensionInfo(components) {
@@ -31,15 +27,16 @@ export class Root extends Group {
       components.width.value,
       this.unit,
     );
-    const height = Dimensioning.cmFromMeasureRaw(
-      components.height.value,
+    const length = Dimensioning.cmFromMeasureRaw(
+      components.length.value,
       this.unit,
     );
-    return { width, height };
+    return { width, length };
   }
 
-  redrawItem({ width, height }) {
-    this.item.geometry = new PlaneGeometry(width, height);
+  redrawItem({ width, length }) {
+    const height = 0.1;
+    this.item.geometry = new BoxGeometry(width, height, length);
     this.item.position.y = height / 2;
     this.item.refreshItem();
   }
@@ -52,7 +49,5 @@ export class Root extends Group {
       components,
       compInfo: dimensionInfo,
     });
-
-    this.net.redrawComponents({ components, compInfo: dimensionInfo });
   }
 }
