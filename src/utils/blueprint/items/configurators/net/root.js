@@ -1,5 +1,6 @@
 import { Group, Vector3, PlaneGeometry } from 'three';
 import { Plane } from './plane';
+import { Net } from './net';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class Root extends Group {
@@ -12,11 +13,15 @@ export class Root extends Group {
     this.maxSize = item.metadata.max_size;
 
     const dimensionInfo = this.getDimensionInfo(item.metadata.components);
+
     this.plane = new Plane({
       item,
       compInfo: dimensionInfo,
     });
     this.add(this.plane);
+
+    this.net = new Net({ item, compInfo: dimensionInfo });
+    this.add(this.net);
   }
 
   getDimensionInfo(components) {
@@ -46,5 +51,7 @@ export class Root extends Group {
       components,
       compInfo: dimensionInfo,
     });
+
+    this.net.redrawComponents({ components, compInfo: dimensionInfo });
   }
 }
