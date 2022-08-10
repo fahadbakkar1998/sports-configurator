@@ -95,6 +95,44 @@ const RightBar_Content_CompInfo = ({
                 </select>
               </>
             )}
+          {comp.type === 'material' &&
+            comp.options &&
+            Array.isArray(comp.options) &&
+            comp.options.length && (
+              <>
+                <div
+                  className={classnames('RightBar_Content_Comp', {
+                    show: isOpen,
+                  })}
+                  onClick={onClick}>
+                  <div
+                    className={classnames('arrow', { open: openChildren })}
+                    style={style}>
+                    &gt;
+                  </div>
+                  <div className="name">{comp.name}</div>
+                </div>
+                {React.Children.toArray(
+                  comp.options.map((option) => (
+                    <div
+                      className={classnames('gallery', {
+                        active: comp.value === option.value,
+                      })}>
+                      <img
+                        className="image"
+                        src={option.value}
+                        onClick={() => {
+                          comp.value = option.value;
+                          updateComponents();
+                        }}></img>
+                      <div className="name" title={option.name}>
+                        {option.name}
+                      </div>
+                    </div>
+                  )),
+                )}
+              </>
+            )}
         </div>
       ) : (
         <div

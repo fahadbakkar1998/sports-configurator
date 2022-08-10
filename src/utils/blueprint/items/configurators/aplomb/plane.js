@@ -12,24 +12,23 @@ export class Plane extends Group {
     super();
     this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
-    this.textureLoader = new TextureLoader();
+    this.textures = {};
     const { width, height } = compInfo;
+
+    // Get all textures.
+    const textureLoader = new TextureLoader();
+    item.metadata.components.material.options.forEach((option) => {
+      this.textures[option.value] = textureLoader.load(option.value);
+    });
 
     this.planeMesh = new Mesh(
       new PlaneGeometry(width, height),
       new MeshBasicMaterial({
         side: DoubleSide,
-        map: this.getTexture(item.metadata.components),
+        map: this.textures[item.metadata.components.material.value],
       }),
     );
     this.add(this.planeMesh);
-  }
-
-  getTexture(components) {
-    let textureUrl = components.material.value;
-    if (!textureUrl) textureUrl = 'assets/models/thumbnails/Nothing.png';
-    const texture = this.textureLoader.load(textureUrl);
-    return texture;
   }
 
   redrawComponents({ components, compInfo }) {
@@ -37,5 +36,6 @@ export class Plane extends Group {
       compInfo.width,
       compInfo.height,
     );
+    this.planeMesh.material.map = this.textures[components.material.value];
   }
 }

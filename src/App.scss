@@ -457,6 +457,41 @@ $commonHeight: 1.8vmax;
             }
           }
 
+          .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: $fontPadding;
+            width: 30%;
+            border: 1px solid $borderColor;
+            border-radius: 0.5vmax;
+            padding: $fontPadding;
+
+            .image {
+              width: 100%;
+              cursor: pointer;
+              border-radius: 0.5vmax;
+
+              &:active {
+                opacity: 0.5;
+              }
+            }
+
+            .name {
+              width: 100%;
+              text-align: center;
+              font-size: calc($commonHeight - 6 * $fontPadding);
+              overflow-wrap: break-word;
+              // text-overflow: ellipsis;
+              // white-space: nowrap;
+              // overflow: hidden;
+            }
+
+            &.active {
+              border-color: $activeColor;
+            }
+          }
+
           & .react-colorful {
             border: 0;
             display: none;
