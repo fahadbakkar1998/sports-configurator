@@ -1580,6 +1580,7 @@ export const items = [
             type: 'material',
             name: 'Material',
             value: 'assets/models/thumbnails/WindScreens/Mat1.png',
+            piece_size: { width: 100, height: 100 },
             options: [
               {
                 name: 'Mat1',
@@ -1814,6 +1815,7 @@ export const items = [
             type: 'material',
             name: 'Material',
             value: 'assets/models/thumbnails/Concrete/Mat1.png',
+            piece_size: { width: 100, height: 100 },
             options: [
               {
                 name: 'Mat1',
