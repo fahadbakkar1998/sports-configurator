@@ -49,7 +49,7 @@ const Scene_Content = () => {
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_ITEM_SELECTED, (o) => {
       console.log('Scene_Content_EVENT_ITEM_SELECTED: ', o);
-      // setCur3dItemEvent(o);
+      setCur3dItemEvent(o);
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_ITEM_UNSELECTED, (o) => {

@@ -170,9 +170,11 @@ const RightBar_Content_Inspector = () => {
       Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getDepth())) ||
     0;
 
+  let cur3dItemMaterial;
   if (cur3dItemEvent && cur3dItemEvent.item && cur3dItemEvent.item.material) {
-    if (!cur3dItemEvent.item.material.length) {
-      cur3dItemEvent.item.material = [cur3dItemEvent.item.material];
+    cur3dItemMaterial = cur3dItemEvent.item.material;
+    if (!cur3dItemMaterial.length) {
+      cur3dItemMaterial = [cur3dItemMaterial];
     }
   }
 
@@ -515,11 +517,11 @@ const RightBar_Content_Inspector = () => {
                         ),
                       ),
                     )}
-                  {cur3dItemEvent.item.material && (
+                  {cur3dItemMaterial && (
                     <>
                       <div className="property-header">Color</div>{' '}
                       {React.Children.toArray(
-                        cur3dItemEvent.item.material.map((mat, index) => (
+                        cur3dItemMaterial.map((mat, index) => (
                           <>
                             <div className="input-group">
                               <div>{mat.name}:</div>
