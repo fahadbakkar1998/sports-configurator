@@ -22,6 +22,7 @@ import {
   EVENT_ITEM_REMOVED,
 } from '../core/events.js';
 import { Dimensioning } from '../core/dimensioning';
+import { minSize } from '../core/constants';
 
 /*
  * The Scene is a manager of Items and also links to a ThreeJS scene.
@@ -284,29 +285,29 @@ export class Scene extends EventDispatcher {
       return;
     if (!itemInfo.unit) itemInfo.unit = 'm';
     // this.dispatchEvent({ type: EVENT_ITEM_LOADING });
-    const width = Dimensioning.cmFromMeasureRaw(
-      itemInfo.default_size.width,
-      itemInfo.unit,
-    );
-    const height = Dimensioning.cmFromMeasureRaw(
-      itemInfo.default_size.height,
-      itemInfo.unit,
-    );
-    const length = Dimensioning.cmFromMeasureRaw(
-      itemInfo.default_size.length,
-      itemInfo.unit,
-    );
+    const width =
+      Dimensioning.cmFromMeasureRaw(
+        itemInfo.default_size.width,
+        itemInfo.unit,
+      ) || minSize;
+    const height =
+      Dimensioning.cmFromMeasureRaw(
+        itemInfo.default_size.height,
+        itemInfo.unit,
+      ) || minSize;
+    const length =
+      Dimensioning.cmFromMeasureRaw(
+        itemInfo.default_size.length,
+        itemInfo.unit,
+      ) || minSize;
     const configurator = new (Factory.getClass(itemInfo.type))({
       metadata: itemInfo,
       model: this.model,
       geometry: new BoxGeometry(width, height, length),
       material: new MeshStandardMaterial({
-        color: 0xff0000,
-        side: DoubleSide,
-        transparent: true,
-        opacity: 0.1,
-        // visible: false,
-        // wireframe: true,
+        // color: 0xff0000,
+        // side: DoubleSide,
+        visible: false,
       }),
     });
     configurator.initObject();

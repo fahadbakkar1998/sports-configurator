@@ -5,12 +5,12 @@ import {
   Vector3,
   MeshBasicMaterial,
   AdditiveBlending,
-  BoxHelper,
 } from 'three';
 import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
 import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
+import { minGap } from '../core/constants';
 
 /*
  * An Item is an abstract entity for all things placed in the scene, e.g. at
@@ -100,10 +100,10 @@ export class Item extends Mesh {
     }
 
     this.halfSize = this.objectHalfSize();
+
     this.canvasWH = document.createElement('canvas');
     this.canvasWH.width = this.getWidth() + 1.0;
     this.canvasWH.height = this.getHeight() + 1.0;
-
     this.canvasContextWH = this.canvasWH.getContext('2d');
     this.canvasTextureWH = new CanvasTexture(this.canvasWH);
     this.canvasMaterialWH = new MeshBasicMaterial({
@@ -116,12 +116,11 @@ export class Item extends Mesh {
       this.canvasMaterialWH,
     );
     this.canvasPlaneWH.scale.set(1, 1, 1);
-    this.canvasPlaneWH.position.set(0, 0, this.getDepth() * 0.5 + 0.3);
+    this.canvasPlaneWH.position.set(0, 0, this.getDepth() * 0.5 + minGap);
 
     this.canvasWD = document.createElement('canvas');
     this.canvasWD.width = this.getWidth() + 1.0;
     this.canvasWD.height = this.getDepth() + 1.0;
-
     this.canvasContextWD = this.canvasWD.getContext('2d');
     this.canvasTextureWD = new CanvasTexture(this.canvasWD);
     this.canvasMaterialWD = new MeshBasicMaterial({
@@ -135,9 +134,9 @@ export class Item extends Mesh {
     );
     this.canvasPlaneWD.rotateX(-Math.PI * 0.5);
     this.canvasPlaneWD.scale.set(1, 1, 1);
-    this.canvasPlaneWD.position.set(0, this.getHeight() * 0.5 + 0.3, 0);
-    this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = false;
+    this.canvasPlaneWD.position.set(0, this.getHeight() * 0.5 + minGap, 0);
 
+    this.canvasPlaneWH.visible = this.canvasPlaneWD.visible = false;
     this.add(this.canvasPlaneWH);
     this.add(this.canvasPlaneWD);
     this.resizeProportionally = false;
@@ -375,8 +374,6 @@ export class Item extends Mesh {
     this.scale.set(scaleVec.x, scaleVec.y, scaleVec.z);
     this.resized();
     this.bHelper && this.bHelper.update();
-
-    // this.updateCanvasTexture(canvas, context, material, w, h);
     this.updateCanvasTexture(
       this.canvasWH,
       this.canvasContextWH,
@@ -395,7 +392,6 @@ export class Item extends Mesh {
       'w:',
       'd:',
     );
-
     this.scene.needsUpdate = true;
   }
 

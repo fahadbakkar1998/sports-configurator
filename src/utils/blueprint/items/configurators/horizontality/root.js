@@ -1,6 +1,7 @@
 import { Group, BoxGeometry } from 'three';
 import { Plane } from './plane';
 import { Dimensioning } from '../../../core/dimensioning';
+import { minSize } from '../../../core/constants';
 
 export class Root extends Group {
   constructor(item) {
@@ -35,9 +36,8 @@ export class Root extends Group {
   }
 
   redrawItem({ width, length }) {
-    const height = 0.1;
-    this.item.geometry = new BoxGeometry(width, height, length);
-    this.item.position.y = height / 2;
+    this.item.geometry = new BoxGeometry(width, minSize, length);
+    this.item.position.y = minSize / 2;
     this.item.refreshItem();
   }
 
