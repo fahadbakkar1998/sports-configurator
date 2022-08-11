@@ -1831,6 +1831,217 @@ export const items = [
       },
     ],
   },
+  {
+    name: 'Test',
+    children: [
+      {
+        name: '1',
+        imagePath: 'assets/models/thumbnails/thumbnail_duck.png',
+        modelPath: 'assets/models/js/Duck.gltf',
+        type: '1',
+        format: 'gltf',
+        defaultSize: {
+          name: 'defaultSize',
+          unit: 'cm',
+          width: 100,
+          height: 100,
+          length: 50,
+          price: 60,
+          pricePerUnit: 1,
+        },
+        staticSizes: [
+          {
+            name: 'staticSize1',
+            unit: 'cm',
+            width: 150,
+            height: 150,
+            length: 100,
+            extraPrice: 40,
+          },
+          {
+            name: 'staticSize2',
+            unit: 'cm',
+            width: 200,
+            height: 200,
+            length: 150,
+            extraPrice: 80,
+          },
+        ],
+        accessories: [
+          {
+            name: 'accessory1',
+            types: [
+              {
+                name: 'noType',
+                extraPrice: 0,
+              },
+              {
+                name: 'type11',
+                extraPrice: 10,
+              },
+              {
+                name: 'type12',
+                extraPrice: 20,
+              },
+              {
+                name: 'type13',
+                extraPrice: 30,
+              },
+            ],
+          },
+          {
+            name: 'accessory2',
+            types: [
+              {
+                name: 'noType',
+                extraPrice: 0,
+              },
+              {
+                name: 'type21',
+                extraPrice: 10,
+              },
+              {
+                name: 'type22',
+                extraPrice: 20,
+              },
+              {
+                name: 'type23',
+                extraPrice: 30,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: '2',
+        imagePath: 'assets/models/thumbnails_new/bathroomCabinet.png',
+        modelPath: 'assets/models/gltf/bathroomCabinet.glb',
+        type: '2',
+        format: 'gltf',
+        defaultSize: {
+          unit: 'cm',
+          width: 100,
+          height: 80,
+          length: 20,
+          price: 60,
+          pricePerUnit: 1,
+        },
+      },
+      {
+        name: '3',
+        imagePath: 'assets/models/thumbnails/thumbnail_window.png',
+        modelPath: 'assets/models/js/whitewindow.js',
+        type: '3',
+        defaultSize: {
+          unit: 'ft',
+          width: 2,
+          height: 2,
+          length: 0.2,
+          price: 60,
+          pricePerUnit: 1,
+        },
+      },
+      {
+        name: '4',
+        imagePath: 'assets/models/thumbnails_new/ceilingFan.png',
+        modelPath: 'assets/models/gltf/ceilingFan.gltf',
+        type: '4',
+        format: 'gltf',
+      },
+      {
+        name: '5',
+        imagePath: 'assets/models/thumbnails_new/stairs.png',
+        modelPath: 'assets/models/gltf/stairs.glb',
+        type: '5',
+        format: 'gltf',
+        defaultSize: {
+          unit: 'cm',
+          width: 55,
+          height: 12,
+          length: 24,
+          price: 6449,
+        },
+        staticSizes: [
+          {
+            name: '55W*12H*14L',
+            unit: 'cm',
+            width: 55,
+            height: 12,
+            length: 28,
+            extraPrice: 44,
+          },
+          {
+            name: '70W*12H*14L',
+            unit: 'cm',
+            width: 70,
+            height: 12,
+            length: 28,
+            extraPrice: 123,
+          },
+          {
+            name: '80W*12H*14L',
+            unit: 'cm',
+            width: 80,
+            height: 12,
+            length: 28,
+            extraPrice: 158,
+          },
+          {
+            name: '70W*12H*12L',
+            unit: 'cm',
+            width: 70,
+            height: 12,
+            length: 24,
+            extraPrice: 213,
+          },
+          {
+            name: '55W*14H*14L',
+            unit: 'cm',
+            width: 55,
+            height: 14,
+            length: 28,
+            extraPrice: 1169,
+          },
+          {
+            name: '70W*14H*14L',
+            unit: 'cm',
+            width: 70,
+            height: 14,
+            length: 28,
+            extraPrice: 1310,
+          },
+          {
+            name: '80W*14H*14L',
+            unit: 'cm',
+            width: 80,
+            height: 14,
+            length: 28,
+            extraPrice: 1424,
+          },
+        ],
+      },
+      {
+        name: '7',
+        imagePath:
+          'assets/models/thumbnails/thumbnail_Screen_Shot_2014-10-27_at_8.04.12_PM.png',
+        modelPath: 'assets/models/js/closed-door28x80_baked.js',
+        type: '7',
+      },
+      {
+        name: '8',
+        imagePath: 'assets/models/thumbnails/thumbnail_cb-blue-block60x96.png',
+        modelPath: 'assets/models/js/cb-blue-block-60x96.js',
+        type: '8',
+      },
+      {
+        name: '9',
+        imagePath: 'assets/models/thumbnails_new/SimpleCabinet.png',
+        modelPath: 'assets/models/gltf/SimpleCabinet.glb',
+        type: '9',
+        format: 'gltf',
+      },
+    ],
+  },
 ];
 
 export const rectHome = JSON.stringify({
