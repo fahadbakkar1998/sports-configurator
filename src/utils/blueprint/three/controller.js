@@ -98,7 +98,7 @@ export class Controller extends EventDispatcher {
     let scope = this;
     if (!item.position_set) {
       scope.setSelectedObject(item);
-      scope.switchState(states.SELECTED);
+      scope.switchState(states.DRAGGING);
       let pos = item.position.clone();
       pos.y = 0;
       let vec = scope.three.projectVector(pos);

@@ -398,7 +398,7 @@ export class Main extends EventDispatcher {
     let heightHalf = scope.elementHeight / 2;
     let vector = new Vector3();
     vector.copy(vec3);
-    vector.project(scope.camera);
+    // vector.project(scope.camera);
 
     let vec2 = new Vector2();
     vec2.x = vector.x * widthHalf + widthHalf;
