@@ -19,6 +19,7 @@ export class Plane extends Group {
     const { width, height } = compInfo;
     const material = item.metadata.components.material;
     const pieceSize = material.piece_size;
+    this.materialUrl = material.value;
 
     // Get all textures.
     const textureLoader = new TextureLoader();
@@ -48,10 +49,17 @@ export class Plane extends Group {
       compInfo.width,
       compInfo.height,
     );
-    this.planeMesh.material.map = this.textures[components.material.value];
-    this.planeMesh.material.map.repeat = new Vector2(
-      compInfo.width / pieceSize.width,
-      compInfo.height / pieceSize.height,
-    );
+    const materialUrl = components.material.value;
+
+    if (this.materialUrl != materialUrl) {
+      this.materialUrl = materialUrl;
+      this.planeMesh.material.map = this.textures[materialUrl];
+      this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
+        RepeatWrapping;
+      this.planeMesh.material.map.repeat = new Vector2(
+        compInfo.width / pieceSize.width,
+        compInfo.height / pieceSize.height,
+      );
+    }
   }
 }

@@ -1618,7 +1618,7 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/WindScreens/1.png',
+            value: 'assets/models/thumbnails/Windscreens/1.png',
             piece_size: { width: 100, height: 100 },
             options: [
               {
@@ -1647,10 +1647,86 @@ export const items = [
     name: 'Gym Equipment',
     children: [
       {
-        name: 'Wall padding',
+        name: 'Wall Padding',
+        image_path: 'assets/models/thumbnails/Wall Padding/1.png',
+        format: 'configurator',
+        type: 'aplomb',
+        unit: 'ft',
+        default_size: {
+          width: 16,
+          height: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 16 },
+          height: { type: 'single', name: 'Height', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/Wall Padding/1.png',
+            piece_size: { width: 100, height: 100 },
+            options: [
+              {
+                name: '1',
+                value: 'assets/models/thumbnails/Wall Padding/1.png',
+              },
+              {
+                name: '2',
+                value: 'assets/models/thumbnails/Wall Padding/2.png',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Wall Padding/3.png',
+              },
+              {
+                name: '4',
+                value: 'assets/models/thumbnails/Wall Padding/4.png',
+              },
+            ],
+          },
+        },
       },
       {
         name: 'Divider Curtain',
+        image_path: 'assets/models/thumbnails/Divider Curtain/1.png',
+        format: 'configurator',
+        type: 'aplomb',
+        unit: 'ft',
+        default_size: {
+          width: 16,
+          height: 10,
+          unit: 'ft',
+        },
+        max_size: 1000,
+        components: {
+          width: { type: 'single', name: 'Width', value: 16 },
+          height: { type: 'single', name: 'Height', value: 10 },
+          material: {
+            type: 'material',
+            name: 'Material',
+            value: 'assets/models/thumbnails/Divider Curtain/1.png',
+            piece_size: { width: 100, height: 100 },
+            options: [
+              {
+                name: '1',
+                value: 'assets/models/thumbnails/Divider Curtain/1.png',
+              },
+              {
+                name: '2',
+                value: 'assets/models/thumbnails/Divider Curtain/2.png',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Divider Curtain/3.png',
+              },
+              {
+                name: '4',
+                value: 'assets/models/thumbnails/Divider Curtain/4.png',
+              },
+            ],
+          },
+        },
       },
     ],
   },
