@@ -1459,7 +1459,7 @@ export const items = [
     children: [
       {
         name: 'Turf Rolls',
-        image_path: 'assets/models/thumbnails/Turf Rolls/Mat1.png',
+        image_path: 'assets/models/thumbnails/Turf Rolls/1.jpg',
         format: 'configurator',
         type: 'horizontality',
         unit: 'ft',
@@ -1475,15 +1475,32 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/Turf Rolls/Mat1.png',
+            value: 'assets/models/thumbnails/Turf Rolls/1.jpg',
+            piece_size: { width: 100, height: 100 },
             options: [
               {
-                name: 'Mat1',
-                value: 'assets/models/thumbnails/Turf Rolls/Mat1.png',
+                name: '1',
+                value: 'assets/models/thumbnails/Turf Rolls/1.jpg',
               },
               {
-                name: 'Mat2',
-                value: 'assets/models/thumbnails/Turf Rolls/Mat2.png',
+                name: '2',
+                value: 'assets/models/thumbnails/Turf Rolls/2.jpg',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Turf Rolls/3.jpg',
+              },
+              {
+                name: '4',
+                value: 'assets/models/thumbnails/Turf Rolls/4.jpg',
+              },
+              {
+                name: '5',
+                value: 'assets/models/thumbnails/Turf Rolls/5.jpg',
+              },
+              {
+                name: '6',
+                value: 'assets/models/thumbnails/Turf Rolls/6.jpg',
               },
             ],
           },
@@ -1491,7 +1508,7 @@ export const items = [
       },
       {
         name: 'Turf Mats',
-        image_path: 'assets/models/thumbnails/Turf Mats/Mat1.png',
+        image_path: 'assets/models/thumbnails/Turf Mats/1.jpg',
         format: 'configurator',
         type: 'horizontality',
         unit: 'ft',
@@ -1507,15 +1524,20 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/Turf Mats/Mat1.png',
+            value: 'assets/models/thumbnails/Turf Mats/1.jpg',
+            piece_size: { width: 100, height: 100 },
             options: [
               {
-                name: 'Mat1',
-                value: 'assets/models/thumbnails/Turf Mats/Mat1.png',
+                name: '1',
+                value: 'assets/models/thumbnails/Turf Mats/1.jpg',
               },
               {
-                name: 'Mat2',
-                value: 'assets/models/thumbnails/Turf Mats/Mat2.png',
+                name: '2',
+                value: 'assets/models/thumbnails/Turf Mats/2.jpg',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Turf Mats/3.jpg',
               },
             ],
           },
@@ -1523,7 +1545,7 @@ export const items = [
       },
       {
         name: 'Rubber',
-        image_path: 'assets/models/thumbnails/Rubber/Mat1.png',
+        image_path: 'assets/models/thumbnails/Rubber/1.jpg',
         format: 'configurator',
         type: 'horizontality',
         unit: 'ft',
@@ -1539,15 +1561,32 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/Rubber/Mat1.png',
+            value: 'assets/models/thumbnails/Rubber/1.jpg',
+            piece_size: { width: 100, height: 100 },
             options: [
               {
-                name: 'Mat1',
-                value: 'assets/models/thumbnails/Rubber/Mat1.png',
+                name: '1',
+                value: 'assets/models/thumbnails/Rubber/1.jpg',
               },
               {
-                name: 'Mat2',
-                value: 'assets/models/thumbnails/Rubber/Mat2.png',
+                name: '2',
+                value: 'assets/models/thumbnails/Rubber/2.jpg',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Rubber/3.jpg',
+              },
+              {
+                name: '4',
+                value: 'assets/models/thumbnails/Rubber/4.jpg',
+              },
+              {
+                name: '5',
+                value: 'assets/models/thumbnails/Rubber/5.jpg',
+              },
+              {
+                name: '6',
+                value: 'assets/models/thumbnails/Rubber/6.jpg',
               },
             ],
           },
@@ -1559,11 +1598,11 @@ export const items = [
     ],
   },
   {
-    name: 'WindScreen',
+    name: 'Windscreens',
     children: [
       {
-        name: 'WindScreens',
-        image_path: 'assets/models/thumbnails/WindScreens/Mat1.png',
+        name: 'Windscreens',
+        image_path: 'assets/models/thumbnails/Windscreens/1.png',
         format: 'configurator',
         type: 'aplomb',
         unit: 'ft',
@@ -1579,16 +1618,24 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/WindScreens/Mat1.png',
+            value: 'assets/models/thumbnails/WindScreens/1.png',
             piece_size: { width: 100, height: 100 },
             options: [
               {
-                name: 'Mat1',
-                value: 'assets/models/thumbnails/WindScreens/Mat1.png',
+                name: '1',
+                value: 'assets/models/thumbnails/Windscreens/1.png',
               },
               {
-                name: 'Mat2',
-                value: 'assets/models/thumbnails/WindScreens/Mat2.png',
+                name: '2',
+                value: 'assets/models/thumbnails/Windscreens/2.png',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Windscreens/3.png',
+              },
+              {
+                name: '4',
+                value: 'assets/models/thumbnails/Windscreens/4.png',
               },
             ],
           },
@@ -1798,7 +1845,7 @@ export const items = [
     children: [
       {
         name: 'Concrete',
-        image_path: 'assets/models/thumbnails/Concrete/Mat1.png',
+        image_path: 'assets/models/thumbnails/Concrete/1.png',
         format: 'configurator',
         type: 'horizontality',
         unit: 'ft',
@@ -1814,16 +1861,24 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/Concrete/Mat1.png',
+            value: 'assets/models/thumbnails/Concrete/1.png',
             piece_size: { width: 100, height: 100 },
             options: [
               {
-                name: 'Mat1',
-                value: 'assets/models/thumbnails/Concrete/Mat1.png',
+                name: '1',
+                value: 'assets/models/thumbnails/Concrete/1.png',
               },
               {
-                name: 'Mat2',
-                value: 'assets/models/thumbnails/Concrete/Mat2.png',
+                name: '2',
+                value: 'assets/models/thumbnails/Concrete/2.png',
+              },
+              {
+                name: '3',
+                value: 'assets/models/thumbnails/Concrete/3.png',
+              },
+              {
+                name: '4',
+                value: 'assets/models/thumbnails/Concrete/4.png',
               },
             ],
           },
