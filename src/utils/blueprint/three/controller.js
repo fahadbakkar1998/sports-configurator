@@ -99,6 +99,14 @@ export class Controller extends EventDispatcher {
     if (!item.position_set) {
       scope.setSelectedObject(item);
       scope.switchState(states.DRAGGING);
+      const groundIntersections = this.getIntersections(this.mouse, [
+        this.plane,
+      ]);
+      if (groundIntersections && groundIntersections.length) {
+        const intersectionPoint = groundIntersections[0].point;
+        item.position.x = intersectionPoint.x;
+        item.position.z = intersectionPoint.z;
+      }
       let pos = item.position.clone();
       pos.y = 0;
       let vec = scope.three.projectVector(pos);
