@@ -1615,11 +1615,17 @@ export const items = [
         components: {
           width: { type: 'single', name: 'Width', value: 16 },
           height: { type: 'single', name: 'Height', value: 10 },
+          opacity: {
+            type: 'single',
+            name: 'Opacity',
+            value: 0.3,
+            offset: 0.01,
+          },
           material: {
             type: 'material',
             name: 'Material',
             value: 'assets/models/thumbnails/Windscreens/1.png',
-            piece_size: { width: 100, height: 100 },
+            piece_size: { width: 30, height: 30 },
             options: [
               {
                 name: '1',
@@ -1636,6 +1642,30 @@ export const items = [
               {
                 name: '4',
                 value: 'assets/models/thumbnails/Windscreens/4.png',
+              },
+              {
+                name: '5',
+                value: 'assets/models/thumbnails/Windscreens/5.png',
+              },
+              {
+                name: '6',
+                value: 'assets/models/thumbnails/Windscreens/6.png',
+              },
+              {
+                name: '7',
+                value: 'assets/models/thumbnails/Windscreens/7.png',
+              },
+              {
+                name: '8',
+                value: 'assets/models/thumbnails/Windscreens/8.png',
+              },
+              {
+                name: '9',
+                value: 'assets/models/thumbnails/Windscreens/9.png',
+              },
+              {
+                name: '10',
+                value: 'assets/models/thumbnails/Windscreens/10.png',
               },
             ],
           },

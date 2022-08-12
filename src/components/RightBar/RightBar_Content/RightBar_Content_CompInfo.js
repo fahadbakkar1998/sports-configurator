@@ -38,7 +38,7 @@ const RightBar_Content_CompInfo = ({
                   comp.value = getUFloat(val);
                   updateComponents();
                 }}
-                offset={0.1}></DragLabel>
+                offset={comp.offset || 0.1}></DragLabel>
               <input
                 className={classnames('input', {
                   immutability: comp.immutability,

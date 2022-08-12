@@ -17,7 +17,8 @@ export class Plane extends Group {
     this.textures = {};
 
     const { width, length } = compInfo;
-    const material = item.metadata.components.material;
+    const components = item.metadata.components;
+    const material = components.material;
     const pieceSize = material.piece_size;
     this.materialUrl = material.value;
 
@@ -32,6 +33,8 @@ export class Plane extends Group {
       new MeshBasicMaterial({
         side: DoubleSide,
         map: this.textures[material.value],
+        transparent: true,
+        opacity: this.getOpacity(components),
       }),
     );
     this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
@@ -43,12 +46,26 @@ export class Plane extends Group {
     this.add(this.planeMesh);
   }
 
+  getOpacity(components) {
+    if (components.opacity) {
+      const opacity = components.opacity.value;
+      if (!opacity || opacity < 0 || opacity > 1) components.opacity.value = 1;
+      components.opacity.value = parseFloat(
+        components.opacity.value.toFixed(2),
+      );
+      return components.opacity.value;
+    }
+
+    return 1;
+  }
+
   redrawComponents({ components, compInfo }) {
     const pieceSize = components.material.piece_size;
     this.planeMesh.geometry = new PlaneGeometry(
       compInfo.width,
       compInfo.length,
     );
+    this.planeMesh.material.opacity = this.getOpacity(components);
     const materialUrl = components.material.value;
 
     if (this.materialUrl != materialUrl) {
