@@ -7,8 +7,8 @@ const RightBar_Header = () => {
       <div className="item" onClick={saveDesign}>
         Save
       </div>
-      <div className="item">Share</div>
-      <div className="item">Add to Cart</div>
+      <div className="item"></div>
+      <div className="item"></div>
     </div>
   );
 };

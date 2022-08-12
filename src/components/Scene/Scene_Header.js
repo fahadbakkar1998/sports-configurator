@@ -39,7 +39,7 @@ const Scene_Header = () => {
         }}>
         3D
       </div>
-      <div
+      {/* <div
         className={cn('item', { active: isWireFrame })}
         onClick={() => {
           updateWireFrameMode(!isWireFrame);
@@ -78,7 +78,7 @@ const Scene_Header = () => {
           setVisibility(!visibility);
         }}>
         Visibility
-      </div>
+      </div> */}
     </div>
   );
 };
