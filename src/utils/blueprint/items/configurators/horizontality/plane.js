@@ -30,7 +30,7 @@ export class Plane extends Group {
     );
 
     if (material) {
-      let pieceSize = material.piece_size || { width: 30, length: 30 };
+      const pieceSize = material.piece_size || { width: 30, length: 30 };
       this.materialUrl = material.value;
 
       // Get all textures.
@@ -39,7 +39,13 @@ export class Plane extends Group {
         this.textures[option.value] = textureLoader.load(option.value);
       });
 
-      this.updateMaterial({ pieceSize, compInfo });
+      this.planeMesh.material.map = this.textures[this.materialUrl];
+      this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
+        RepeatWrapping;
+      this.planeMesh.material.map.repeat = new Vector2(
+        width / pieceSize.width,
+        length / pieceSize.height,
+      );
     }
 
     this.add(this.planeMesh);
@@ -58,16 +64,6 @@ export class Plane extends Group {
     return 1;
   }
 
-  updateMaterial({ pieceSize, compInfo }) {
-    this.planeMesh.material.map = this.textures[this.materialUrl];
-    this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
-      RepeatWrapping;
-    this.planeMesh.material.map.repeat = new Vector2(
-      compInfo.width / pieceSize.width,
-      compInfo.length / pieceSize.height,
-    );
-  }
-
   redrawComponents({ components, compInfo }) {
     this.planeMesh.geometry = new PlaneGeometry(
       compInfo.width,
@@ -80,9 +76,16 @@ export class Plane extends Group {
 
       if (this.materialUrl != materialUrl) {
         this.materialUrl = materialUrl;
-        const pieceSize = material.piece_size || { width: 30, height: 30 };
-        this.updateMaterial({ pieceSize, compInfo });
+        this.planeMesh.material.map = this.textures[this.materialUrl];
+        this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
+          RepeatWrapping;
       }
+
+      const pieceSize = material.piece_size || { width: 30, height: 30 };
+      this.planeMesh.material.map.repeat = new Vector2(
+        compInfo.width / pieceSize.width,
+        compInfo.length / pieceSize.height,
+      );
     }
 
     this.planeMesh.material.opacity = this.getOpacity(components);
