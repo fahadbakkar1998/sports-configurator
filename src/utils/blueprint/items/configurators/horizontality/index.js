@@ -1,8 +1,7 @@
 import { FloorItem } from '../../floor_item';
-import { OutItem } from '../../out_item';
 import { Root } from './root';
 
-export class Horizontality extends OutItem {
+export class Horizontality extends FloorItem {
   constructor(info) {
     super(info);
     this.scene = info.model.scene.scene;

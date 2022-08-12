@@ -1,4 +1,3 @@
-import { Vector2 } from 'three';
 import { Item } from './item.js';
 import { Utils } from '../core/utils.js';
 
@@ -57,26 +56,26 @@ export class OutItem extends Item {
     if (!isOutARoom) return false;
 
     // check if we are outside all other objects
-    // if (this.obstructFloorMoves) {
-    //   let objects = this.model.scene.getItems();
-    //   for (let i = 0; i < objects.length; i++) {
-    //     if (objects[i] === this || !objects[i].obstructFloorMoves) {
-    //       continue;
-    //     }
-    //     if (
-    //       !Utils.polygonOutsidePolygon(
-    //         corners,
-    //         objects[i].getCorners('x', 'z'),
-    //       ) ||
-    //       Utils.polygonPolygonIntersect(
-    //         corners,
-    //         objects[i].getCorners('x', 'z'),
-    //       )
-    //     ) {
-    //       return false;
-    //     }
-    //   }
-    // }
+    if (this.obstructFloorMoves) {
+      let objects = this.model.scene.getItems();
+      for (let i = 0; i < objects.length; i++) {
+        if (objects[i] === this || !objects[i].obstructFloorMoves) {
+          continue;
+        }
+        if (
+          !Utils.polygonOutsidePolygon(
+            corners,
+            objects[i].getCorners('x', 'z'),
+          ) ||
+          Utils.polygonPolygonIntersect(
+            corners,
+            objects[i].getCorners('x', 'z'),
+          )
+        ) {
+          return false;
+        }
+      }
+    }
     return true;
   }
 }

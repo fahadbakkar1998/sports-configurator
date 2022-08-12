@@ -1,9 +1,8 @@
-import { OnFloorItem } from '../../on_floor_item';
-import { OutItem } from '../../out_item';
+import { FloorItem } from '../../floor_item';
 import { Root } from './root';
 import { calculateTunnel, calculateBarrier } from '../net_quoter';
 
-export class ShellCage extends OutItem {
+export class ShellCage extends FloorItem {
   constructor(info) {
     super(info);
     this.scene = info.model.scene.scene;

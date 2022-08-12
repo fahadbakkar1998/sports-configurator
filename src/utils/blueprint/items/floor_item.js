@@ -1,4 +1,3 @@
-import { Vector2 } from 'three';
 import { Item } from './item.js';
 import { Utils } from '../core/utils.js';
 
@@ -45,44 +44,45 @@ export class FloorItem extends Item {
   /* */
   isValidPosition(vec3) {
     let corners = this.getCorners('x', 'z', vec3);
-    // check if we are in a room
-    let rooms = this.model.floorplan.getRooms();
-    let isInARoom = false;
-    for (let i = 0; i < rooms.length; i++) {
-      const inPolygon = Utils.polygonInsidePolygon(
-        corners,
-        rooms[i].interiorCorners,
-      );
-      if (
-        inPolygon &&
-        !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
-      ) {
-        isInARoom = true;
-      }
-    }
-    if (!isInARoom) return false;
 
-    // check if we are outside all other objects
-    // if (this.obstructFloorMoves) {
-    //   let objects = this.model.scene.getItems();
-    //   for (let i = 0; i < objects.length; i++) {
-    //     if (objects[i] === this || !objects[i].obstructFloorMoves) {
-    //       continue;
-    //     }
-    //     if (
-    //       !Utils.polygonOutsidePolygon(
-    //         corners,
-    //         objects[i].getCorners('x', 'z'),
-    //       ) ||
-    //       Utils.polygonPolygonIntersect(
-    //         corners,
-    //         objects[i].getCorners('x', 'z'),
-    //       )
-    //     ) {
-    //       return false;
-    //     }
+    // // check if we are in a room
+    // let rooms = this.model.floorplan.getRooms();
+    // let isInARoom = false;
+    // for (let i = 0; i < rooms.length; i++) {
+    //   const inPolygon = Utils.polygonInsidePolygon(
+    //     corners,
+    //     rooms[i].interiorCorners,
+    //   );
+    //   if (
+    //     inPolygon &&
+    //     !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
+    //   ) {
+    //     isInARoom = true;
     //   }
     // }
+    // if (!isInARoom) return false;
+
+    // check if we are outside all other objects
+    if (this.obstructFloorMoves) {
+      let objects = this.model.scene.getItems();
+      for (let i = 0; i < objects.length; i++) {
+        if (objects[i] === this || !objects[i].obstructFloorMoves) {
+          continue;
+        }
+        if (
+          !Utils.polygonOutsidePolygon(
+            corners,
+            objects[i].getCorners('x', 'z'),
+          ) ||
+          Utils.polygonPolygonIntersect(
+            corners,
+            objects[i].getCorners('x', 'z'),
+          )
+        ) {
+          return false;
+        }
+      }
+    }
     return true;
   }
 }

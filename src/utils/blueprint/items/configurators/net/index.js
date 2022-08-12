@@ -1,9 +1,8 @@
 import { FloorItem } from '../../floor_item';
-import { OutItem } from '../../out_item';
 import { Root } from './root';
 import { calculateBarrier } from '../net_quoter';
 
-export class Net extends OutItem {
+export class Net extends FloorItem {
   constructor(info) {
     super(info);
     this.scene = info.model.scene.scene;
