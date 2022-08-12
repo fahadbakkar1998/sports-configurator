@@ -1691,30 +1691,7 @@ export const items = [
         components: {
           width: { type: 'single', name: 'Width', value: 16 },
           height: { type: 'single', name: 'Height', value: 10 },
-          material: {
-            type: 'material',
-            name: 'Material',
-            value: 'assets/models/thumbnails/Wall Padding/1.png',
-            piece_size: { width: 100, height: 100 },
-            options: [
-              {
-                name: '1',
-                value: 'assets/models/thumbnails/Wall Padding/1.png',
-              },
-              {
-                name: '2',
-                value: 'assets/models/thumbnails/Wall Padding/2.png',
-              },
-              {
-                name: '3',
-                value: 'assets/models/thumbnails/Wall Padding/3.png',
-              },
-              {
-                name: '4',
-                value: 'assets/models/thumbnails/Wall Padding/4.png',
-              },
-            ],
-          },
+          color: { type: 'color', name: 'Color', value: '#0000CD' },
         },
       },
       {
@@ -1732,29 +1709,12 @@ export const items = [
         components: {
           width: { type: 'single', name: 'Width', value: 16 },
           height: { type: 'single', name: 'Height', value: 10 },
-          material: {
-            type: 'material',
-            name: 'Material',
-            value: 'assets/models/thumbnails/Divider Curtain/1.png',
-            piece_size: { width: 100, height: 100 },
-            options: [
-              {
-                name: '1',
-                value: 'assets/models/thumbnails/Divider Curtain/1.png',
-              },
-              {
-                name: '2',
-                value: 'assets/models/thumbnails/Divider Curtain/2.png',
-              },
-              {
-                name: '3',
-                value: 'assets/models/thumbnails/Divider Curtain/3.png',
-              },
-              {
-                name: '4',
-                value: 'assets/models/thumbnails/Divider Curtain/4.png',
-              },
-            ],
+          color: { type: 'color', name: 'Color', value: '#000000' },
+          opacity: {
+            type: 'single',
+            name: 'Opacity',
+            value: 0.5,
+            offset: 0.01,
           },
         },
       },
