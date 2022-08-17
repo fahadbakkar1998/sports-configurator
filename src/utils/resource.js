@@ -1599,8 +1599,8 @@ export const items = [
         type: 'basketball',
         unit: 'ft',
         default_size: {
-          width: 94,
-          length: 50,
+          width: 100,
+          length: 60,
           unit: 'ft',
         },
         max_size: 200,
