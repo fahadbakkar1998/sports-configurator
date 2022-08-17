@@ -1593,7 +1593,169 @@ export const items = [
         },
       },
       {
-        name: 'Court Tiles',
+        name: 'Basketball',
+        image_path: 'assets/models/thumbnails/16.jpg',
+        format: 'configurator',
+        type: 'basketball',
+        unit: 'ft',
+        default_size: {
+          width: 94,
+          length: 50,
+          unit: 'ft',
+        },
+        max_size: 200,
+        components: {
+          dimension: {
+            name: 'Dimension',
+            value: {
+              outer_width: { type: 'single', name: 'Outer Width', value: 60 },
+              outer_length: {
+                type: 'single',
+                name: 'Outer Length',
+                value: 100,
+              },
+              court_width: { type: 'single', name: 'Court Width', value: 50 },
+              court_length: { type: 'single', name: 'Court Length', value: 94 },
+              rim_height: { type: 'single', name: 'Rim Height', value: 10 },
+              no_charge_zone_arc: {
+                type: 'single',
+                name: 'No Charge Zone Arc',
+                value: 4,
+              },
+              center_circle_diameter: {
+                name: 'Center Circle Diameter',
+                value: {
+                  in: { name: 'In', type: 'single', value: 4 },
+                  out: { name: 'Out', type: 'single', value: 12 },
+                },
+              },
+              three_point_line_distance: {
+                name: '3-point line distance from the basket',
+                value: {
+                  max: { type: 'single', name: 'Max', value: 23.75 },
+                  min: { type: 'single', name: 'Min', value: 22 },
+                },
+              },
+              key: {
+                type: 'single',
+                name: 'Key (shaded lane or restricted area) width',
+                value: 16,
+              },
+              free_three_point_line_distance: {
+                type: 'single',
+                name: 'Free-throw line distance from point on the floor directly below the backboard',
+                value: 15,
+              },
+              corner_width: { type: 'single', name: 'Corner Width', value: 3 },
+              line_width: { type: 'single', name: 'Line Width', value: 0.2 },
+            },
+          },
+          material: {
+            name: 'Material',
+            value: {
+              outer_ground: {
+                type: 'material',
+                name: 'Outer Ground',
+                value: 'assets/models/thumbnails/Rubber/1.jpg',
+                piece_size: { width: 100, height: 100 },
+                options: [
+                  {
+                    name: '1',
+                    value: 'assets/models/thumbnails/Rubber/1.jpg',
+                  },
+                  {
+                    name: '2',
+                    value: 'assets/models/thumbnails/Rubber/2.jpg',
+                  },
+                  {
+                    name: '3',
+                    value: 'assets/models/thumbnails/Rubber/3.jpg',
+                  },
+                  {
+                    name: '4',
+                    value: 'assets/models/thumbnails/Rubber/4.jpg',
+                  },
+                  {
+                    name: '5',
+                    value: 'assets/models/thumbnails/Rubber/5.jpg',
+                  },
+                  {
+                    name: '6',
+                    value: 'assets/models/thumbnails/Rubber/6.jpg',
+                  },
+                ],
+              },
+              inner_ground: {
+                type: 'material',
+                name: 'Inner Ground',
+                value: 'assets/models/thumbnails/Concrete/1.png',
+                piece_size: { width: 100, height: 100 },
+                options: [
+                  {
+                    name: '1',
+                    value: 'assets/models/thumbnails/Concrete/1.png',
+                  },
+                  {
+                    name: '2',
+                    value: 'assets/models/thumbnails/Concrete/2.png',
+                  },
+                  {
+                    name: '3',
+                    value: 'assets/models/thumbnails/Concrete/3.png',
+                  },
+                  {
+                    name: '4',
+                    value: 'assets/models/thumbnails/Concrete/4.png',
+                  },
+                ],
+              },
+              key_ground: {
+                type: 'material',
+                name: 'Key Ground',
+                value: 'assets/models/thumbnails/Turf Mats/1.jpg',
+                piece_size: { width: 100, height: 100 },
+                options: [
+                  {
+                    name: '1',
+                    value: 'assets/models/thumbnails/Turf Mats/1.jpg',
+                  },
+                  {
+                    name: '2',
+                    value: 'assets/models/thumbnails/Turf Mats/2.jpg',
+                  },
+                  {
+                    name: '3',
+                    value: 'assets/models/thumbnails/Turf Mats/3.jpg',
+                  },
+                ],
+              },
+              line_color: { type: 'color', name: 'Color', value: '#FFFFFF' },
+            },
+          },
+          hoops: {
+            type: 'select',
+            name: 'Hoops',
+            value:
+              'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb',
+            options: [
+              {
+                name: 'Jam In Ground Adjustable Basketball Goal',
+                value:
+                  'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb',
+              },
+              {
+                name: 'OmniJam Portable Basketball Goal',
+                value:
+                  'assets/models/gltf/OmniJam Portable Basketball Goal.glb',
+              },
+              {
+                name: 'RollaSport Portable Basketball Goal',
+                value:
+                  'assets/models/gltf/RollaSport Portable Basketball Goal.glb',
+              },
+            ],
+          },
+        },
       },
     ],
   },
