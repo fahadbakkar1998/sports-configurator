@@ -6,6 +6,7 @@ export class Basketball extends FloorItem {
     super(info);
     this.scene = info.model.scene.scene;
     this.root = new Root(this);
+    this.root.rotateX(-Math.PI / 2);
     this.add(this.root);
   }
 

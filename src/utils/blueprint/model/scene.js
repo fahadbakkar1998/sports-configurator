@@ -305,8 +305,8 @@ export class Scene extends EventDispatcher {
       model: this.model,
       geometry: new BoxGeometry(width, height, length),
       material: new MeshStandardMaterial({
-        // color: 0xff0000,
-        // side: DoubleSide,
+        color: 0xff0000,
+        side: DoubleSide,
         visible: false,
       }),
     });

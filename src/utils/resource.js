@@ -1608,14 +1608,14 @@ export const items = [
           dimension: {
             name: 'Dimension',
             value: {
-              outer_width: { type: 'single', name: 'Outer Width', value: 60 },
+              outer_width: { type: 'single', name: 'Outer Width', value: 100 },
               outer_length: {
                 type: 'single',
                 name: 'Outer Length',
-                value: 100,
+                value: 60,
               },
-              court_width: { type: 'single', name: 'Court Width', value: 50 },
-              court_length: { type: 'single', name: 'Court Length', value: 94 },
+              court_width: { type: 'single', name: 'Court Width', value: 94 },
+              court_length: { type: 'single', name: 'Court Length', value: 50 },
               rim_height: { type: 'single', name: 'Rim Height', value: 10 },
               no_charge_zone_arc: {
                 type: 'single',
@@ -1632,8 +1632,8 @@ export const items = [
               three_point_line_distance: {
                 name: '3-point line distance from the basket',
                 value: {
-                  max: { type: 'single', name: 'Max', value: 23.75 },
                   min: { type: 'single', name: 'Min', value: 22 },
+                  max: { type: 'single', name: 'Max', value: 23.75 },
                 },
               },
               key: {
@@ -1648,6 +1648,11 @@ export const items = [
               },
               corner_width: { type: 'single', name: 'Corner Width', value: 3 },
               line_width: { type: 'single', name: 'Line Width', value: 0.2 },
+              hoops_distance: {
+                type: 'single',
+                name: 'Hoops Distance',
+                value: 1,
+              },
             },
           },
           material: {
