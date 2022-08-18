@@ -7,7 +7,7 @@ import {
   Geometry,
 } from 'three';
 import { Dimensioning } from '../../../core/dimensioning';
-import { addFaces } from '../../../core/common';
+import { addFaces } from '../../../../../common';
 
 export class OutEdge extends Group {
   constructor({ item, compInfo }) {

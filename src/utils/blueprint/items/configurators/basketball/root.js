@@ -1,7 +1,11 @@
-import { Group, BoxGeometry, TextureLoader } from 'three';
+import { Group, BoxGeometry, TextureLoader, LoadingManager } from 'three';
 import { Dimensioning } from '../../../core/dimensioning';
 import { minSize } from '../../../core/constants';
 import { Outside } from './outside';
+import DRACOLoader from '../../../loaders/three-dracoloader';
+import GLTFLoader from '../../../loaders/GLTFLoader';
+import OBJLoader from '@calvinscofield/three-objloader';
+import FBXLoader from '../../../loaders/FBXLoader';
 
 export class Root extends Group {
   constructor(item) {
@@ -10,14 +14,30 @@ export class Root extends Group {
     const dimensionInfo = this.getDimensionInfo(components);
     if (!item.metadata.unit) item.metadata.unit = 'm';
     this.item = item;
-    this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
     this.maxSize = item.metadata.max_size;
+
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath('assets/models/draco/gltf/');
+
+    this.gltfLoadingManager = new LoadingManager();
+    this.gltfLoader = new GLTFLoader(this.gltfLoadingManager);
+    this.gltfLoader.setCrossOrigin('');
+    this.gltfLoader.setDRACOLoader(this.dracoLoader);
+
+    this.objLoader = new OBJLoader();
+
+    this.fbxLoadingManager = new LoadingManager();
+    this.fbxLoader = new FBXLoader(this.fbxLoadingManager);
+
     this.textures = this.getAllTextures(components);
+    this.models = this.getAllModels(components);
+
     this.outside = new Outside({
       item,
       compInfo: { dimensionInfo, textures: this.textures },
     });
+
     this.add(this.outside);
     this.redrawComponents(components);
   }
@@ -125,6 +145,35 @@ export class Root extends Group {
     });
 
     return textures;
+  }
+
+  loadModel({ url, type }) {
+    return new Promise((resolve, reject) => {
+      switch (type) {
+        case 'gltf':
+          this.gltfLoader.load(url, resolve, console.log, reject);
+          break;
+        default:
+          resolve();
+          break;
+      }
+    });
+  }
+
+  async getAllModels(components) {
+    const models = {};
+    const hoops = components.hoops;
+    const promises = [];
+    hoops.options.forEach((option) => {
+      promises.push(
+        this.loadModel({
+          url: option.value,
+          type: hoops.types[option.value],
+        }).then((model) => model && (models[option.value] = model)),
+      );
+    });
+    await Promise.all(promises);
+    console.log('getAllModels: ', models);
   }
 
   redrawItem({ outerWidth, outerLength }) {

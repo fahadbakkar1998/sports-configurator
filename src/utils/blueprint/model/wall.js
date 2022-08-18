@@ -8,7 +8,7 @@ import {
   configWallHeight,
 } from '../core/configuration.js';
 import { Utils } from '../core/utils.js';
-import { getFloat, getUFloat } from '../../../utils/common';
+import { getFloat, getUFloat } from '../../../common';
 
 /* The default wall texture. */
 export const defaultWallTexture = {

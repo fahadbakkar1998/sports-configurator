@@ -10,7 +10,7 @@ import {
 import useZustand from '../../../utils/useZustand';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
-import { getFloat, getUFloat, rgbToHex } from '../../../utils/common';
+import { getFloat, getUFloat, rgbToHex } from '../../../common';
 import { updateUnit } from '../../../utils/bpSupport';
 import cn from 'classnames';
 

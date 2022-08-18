@@ -1,13 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import { HexColorPicker } from 'react-colorful';
-import { isLeafComponent } from './common';
 import DragLabel from '../../Common/DragLabel';
 import useZustand from '../../../utils/useZustand';
 // import Slider from 'rc-slider';
 // import 'rc-slider/assets/index.css';
 import MultiRangeSlider from 'multi-range-slider-react';
-import { getUFloat } from '../../../utils/common';
+import { getUFloat, isLeafComponent } from '../../../common';
 import cn from 'classnames';
 
 const RightBar_Content_CompInfo = ({

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import classnames from 'classnames';
 import DragLabel from '../../Common/DragLabel';
 import MultiRangeSlider from 'multi-range-slider-react';
-import { getUFloat } from '../../../utils/common';
+import { getUFloat } from '../../../common';
 import useZustand from '../../../utils/useZustand';
 
 const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {

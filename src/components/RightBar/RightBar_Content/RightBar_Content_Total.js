@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { equals } from '../../../utils/common';
+import { equals } from '../../../common';
 import { items } from '../../../utils/resource';
 import useZustand from '../../../utils/useZustand';
 import { getTotalPrice } from '../../../utils/bpSupport';

@@ -15,7 +15,7 @@ import {
   PlaneGeometry,
 } from 'three';
 import { Configuration, configWallThickness } from '../core/configuration';
-import { degToRad } from '../../common';
+import { degToRad } from '../../../common';
 import { Vector2 } from 'three';
 
 export class Roof extends EventDispatcher {

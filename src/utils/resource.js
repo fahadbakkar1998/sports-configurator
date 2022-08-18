@@ -1767,6 +1767,13 @@ export const items = [
                   'assets/models/gltf/RollaSport Portable Basketball Goal.glb',
               },
             ],
+            types: {
+              'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb':
+                'gltf',
+              'assets/models/gltf/OmniJam Portable Basketball Goal.glb': 'gltf',
+              'assets/models/gltf/RollaSport Portable Basketball Goal.glb':
+                'gltf',
+            },
           },
         },
       },

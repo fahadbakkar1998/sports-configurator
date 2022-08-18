@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import useZustand from '../../../utils/useZustand';
-import { getUFloat, rgbToHex } from '../../../utils/common';
+import { getUFloat, rgbToHex, isLeafComponent } from '../../../common';
 import { wallTextures } from '../../../utils/resource';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
 import { HexColorPicker } from 'react-colorful';
 import cn from 'classnames';
 import RightBar_Content_CompInfo from './RightBar_Content_CompInfo';
-import { isLeafComponent } from './common';
 import RightBar_Content_AddChildComp from './RightBar_Content_AddChildComp';
 
 let isDot = false;
