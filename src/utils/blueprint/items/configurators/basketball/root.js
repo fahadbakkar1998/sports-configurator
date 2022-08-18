@@ -6,7 +6,7 @@ import { Outside } from './outside';
 export class Root extends Group {
   constructor(item) {
     super();
-    if (!item.metadata) item.metadata.unit = 'm';
+    if (!item.metadata.unit) item.metadata.unit = 'm';
     this.item = item;
     this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
@@ -75,8 +75,8 @@ export class Root extends Group {
       dimension.free_three_point_line_distance.value,
       this.unit,
     );
-    const cornerWidth = Dimensioning.cmFromMeasureRaw(
-      dimension.corner_width.value,
+    const cornerLineDistance = Dimensioning.cmFromMeasureRaw(
+      dimension.corner_line_distance.value,
       this.unit,
     );
     const lineWidth = Dimensioning.cmFromMeasureRaw(
@@ -96,7 +96,7 @@ export class Root extends Group {
       threeMaxPointLineDistance,
       key,
       freeThreePointLineDistance,
-      cornerWidth,
+      cornerLineDistance,
       lineWidth,
     };
   }
@@ -112,9 +112,9 @@ export class Root extends Group {
     });
 
     // Get inner ground textures.
-    textures.innerGround = {};
-    components.material.value.inner_ground.options.forEach((option) => {
-      textures.innerGround[option.value] = textureLoader.load(option.value);
+    textures.courtGround = {};
+    components.material.value.court_ground.options.forEach((option) => {
+      textures.courtGround[option.value] = textureLoader.load(option.value);
     });
 
     // Get key ground textures.

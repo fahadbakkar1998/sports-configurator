@@ -7,25 +7,32 @@ import {
   RepeatWrapping,
   Vector2,
 } from 'three';
-import { minSize } from '../../../core/constants';
+import { minSize, minGap } from '../../../core/constants';
+import { Court } from './court';
 
 export class Outside extends Group {
   constructor({ item, compInfo }) {
     super();
-    if (!item.metadata) item.metadata.unit = 'm';
     this.item = item;
-    this.scene = item.model.scene.scene;
-    this.unit = item.metadata.unit;
-    this.maxSize = item.metadata.max_size;
     const components = item.metadata.components;
+    const dimensionInfo = compInfo.dimensionInfo;
 
-    this.planeMesh = new Mesh(
+    this.groundMesh = new Mesh(
       new PlaneGeometry(minSize, minSize),
       new MeshBasicMaterial({
         side: DoubleSide,
       }),
     );
-    this.add(this.planeMesh);
+    this.add(this.groundMesh);
+
+    // Add court.
+    this.court = new Court({ item, compInfo });
+    this.court.position.z = minGap;
+    this.court.position.y = -(
+      (dimensionInfo.outerLength - dimensionInfo.courtLength) / 2 -
+      (dimensionInfo.outerWidth - dimensionInfo.courtWidth) / 2
+    );
+    this.add(this.court);
 
     this.redrawComponents({ components, compInfo });
   }
@@ -35,15 +42,15 @@ export class Outside extends Group {
     const outer_ground = components.material.value.outer_ground;
     const materialUrl = outer_ground.value;
 
-    this.planeMesh.geometry = new PlaneGeometry(
+    this.groundMesh.geometry = new PlaneGeometry(
       dimensionInfo.outerWidth,
       dimensionInfo.outerLength,
     );
 
     if (this.materialUrl != materialUrl) {
       this.materialUrl = materialUrl;
-      this.planeMesh.material.map = compInfo.textures.outerGround[materialUrl];
-      this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
+      this.groundMesh.material.map = compInfo.textures.outerGround[materialUrl];
+      this.groundMesh.material.map.wrapS = this.groundMesh.material.map.wrapT =
         RepeatWrapping;
     }
 
@@ -51,7 +58,7 @@ export class Outside extends Group {
       width: minSize,
       height: minSize,
     };
-    this.planeMesh.material.map.repeat = new Vector2(
+    this.groundMesh.material.map.repeat = new Vector2(
       dimensionInfo.outerWidth / pieceSize.width,
       dimensionInfo.outerLength / pieceSize.height,
     );

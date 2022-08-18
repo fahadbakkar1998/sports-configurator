@@ -1629,7 +1629,7 @@ export const items = [
                   out: { name: 'Out', type: 'single', value: 12 },
                 },
               },
-              three_point_line_distance: {
+              three_point_line_distance: { // from the basket
                 name: '3-point line distance from the basket',
                 value: {
                   min: { type: 'single', name: 'Min', value: 22 },
@@ -1641,13 +1641,13 @@ export const items = [
                 name: 'Key (shaded lane or restricted area) width',
                 value: 16,
               },
-              free_three_point_line_distance: {
+              free_three_point_line_distance: { // from the backboard
                 type: 'single',
                 name: 'Free-throw line distance from point on the floor directly below the backboard',
                 value: 15,
               },
-              corner_width: { type: 'single', name: 'Corner Width', value: 3 },
-              line_width: { type: 'single', name: 'Line Width', value: 0.2 },
+              corner_line_distance: { type: 'single', name: 'Corner Width', value: 22 },
+              line_width: { type: 'single', name: 'Line Width', value: 0.3 },
               hoops_distance: {
                 type: 'single',
                 name: 'Hoops Distance',
@@ -1690,7 +1690,7 @@ export const items = [
                   },
                 ],
               },
-              inner_ground: {
+              court_ground: {
                 type: 'material',
                 name: 'Inner Ground',
                 value: 'assets/models/thumbnails/Concrete/1.png',
@@ -1734,7 +1734,7 @@ export const items = [
                   },
                 ],
               },
-              line_color: { type: 'color', name: 'Color', value: '#FFFFFF' },
+              line_color: { type: 'color', name: 'Color', value: '#FF0000' },
             },
           },
           hoops: {
