@@ -1,4 +1,4 @@
-import { Group, BoxGeometry, TextureLoader, AxesHelper } from 'three';
+import { Group, BoxGeometry, TextureLoader } from 'three';
 import { Dimensioning } from '../../../core/dimensioning';
 import { minSize } from '../../../core/constants';
 import { Outside } from './outside';
@@ -6,24 +6,20 @@ import { Outside } from './outside';
 export class Root extends Group {
   constructor(item) {
     super();
+    const components = item.metadata.components;
+    const dimensionInfo = this.getDimensionInfo(components);
     if (!item.metadata.unit) item.metadata.unit = 'm';
     this.item = item;
     this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
     this.maxSize = item.metadata.max_size;
-
-    const components = item.metadata.components;
-    const dimensionInfo = this.getDimensionInfo(components);
-    this.redrawItem(dimensionInfo);
     this.textures = this.getAllTextures(components);
-
     this.outside = new Outside({
       item,
       compInfo: { dimensionInfo, textures: this.textures },
     });
     this.add(this.outside);
-
-    this.add(new AxesHelper(1000));
+    this.redrawComponents(components);
   }
 
   getDimensionInfo(components) {
@@ -71,16 +67,20 @@ export class Root extends Group {
       this.unit,
     );
     const key = Dimensioning.cmFromMeasureRaw(dimension.key.value, this.unit);
-    const freeThreePointLineDistance = Dimensioning.cmFromMeasureRaw(
-      dimension.free_three_point_line_distance.value,
-      this.unit,
-    );
-    const cornerLineDistance = Dimensioning.cmFromMeasureRaw(
-      dimension.corner_line_distance.value,
+    const freeThrowLineDistance = Dimensioning.cmFromMeasureRaw(
+      dimension.free_throw_line_distance.value,
       this.unit,
     );
     const lineWidth = Dimensioning.cmFromMeasureRaw(
       dimension.line_width.value,
+      this.unit,
+    );
+    const hoopsDistance = Dimensioning.cmFromMeasureRaw(
+      dimension.hoops_distance.value,
+      this.unit,
+    );
+    const basketDistance = Dimensioning.cmFromMeasureRaw(
+      dimension.basket_distance.value,
       this.unit,
     );
     return {
@@ -95,9 +95,10 @@ export class Root extends Group {
       threeMinPointLineDistance,
       threeMaxPointLineDistance,
       key,
-      freeThreePointLineDistance,
-      cornerLineDistance,
+      freeThrowLineDistance,
       lineWidth,
+      hoopsDistance,
+      basketDistance,
     };
   }
 

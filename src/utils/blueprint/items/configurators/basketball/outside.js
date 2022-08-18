@@ -13,10 +13,8 @@ import { Court } from './court';
 export class Outside extends Group {
   constructor({ item, compInfo }) {
     super();
-    this.item = item;
-    const components = item.metadata.components;
-    const dimensionInfo = compInfo.dimensionInfo;
 
+    // Add outside ground.
     this.groundMesh = new Mesh(
       new PlaneGeometry(minSize, minSize),
       new MeshBasicMaterial({
@@ -28,13 +26,7 @@ export class Outside extends Group {
     // Add court.
     this.court = new Court({ item, compInfo });
     this.court.position.z = minGap;
-    this.court.position.y = -(
-      (dimensionInfo.outerLength - dimensionInfo.courtLength) / 2 -
-      (dimensionInfo.outerWidth - dimensionInfo.courtWidth) / 2
-    );
     this.add(this.court);
-
-    this.redrawComponents({ components, compInfo });
   }
 
   redrawComponents({ components, compInfo }) {
@@ -62,5 +54,11 @@ export class Outside extends Group {
       dimensionInfo.outerWidth / pieceSize.width,
       dimensionInfo.outerLength / pieceSize.height,
     );
+
+    this.court.position.y = -(
+      (dimensionInfo.outerLength - dimensionInfo.courtLength) / 2 -
+      (dimensionInfo.outerWidth - dimensionInfo.courtWidth) / 2
+    );
+    this.court.redrawComponents({ components, compInfo });
   }
 }

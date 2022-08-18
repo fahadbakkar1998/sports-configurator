@@ -1,14 +1,10 @@
-import { Group } from 'three';
+import { AxesHelper, Group } from 'three';
 
 export class Hoops extends Group {
   constructor({ item, compInfo }) {
     super();
-    if (!item.metadata) item.metadata.unit = 'm';
-    this.item = item;
-    this.scene = item.model.scene.scene;
-    this.unit = item.metadata.unit;
-    this.maxSize = item.metadata.max_size;
+    this.add(new AxesHelper(1000));
   }
 
-  redrawComponents(components) {}
+  redrawComponents({ components, compInfo }) {}
 }

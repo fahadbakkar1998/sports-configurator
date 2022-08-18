@@ -1629,7 +1629,8 @@ export const items = [
                   out: { name: 'Out', type: 'single', value: 12 },
                 },
               },
-              three_point_line_distance: { // from the basket
+              three_point_line_distance: {
+                // from the basket
                 name: '3-point line distance from the basket',
                 value: {
                   min: { type: 'single', name: 'Min', value: 22 },
@@ -1641,16 +1642,23 @@ export const items = [
                 name: 'Key (shaded lane or restricted area) width',
                 value: 16,
               },
-              free_three_point_line_distance: { // from the backboard
+              free_throw_line_distance: {
+                // from the backboard
                 type: 'single',
                 name: 'Free-throw line distance from point on the floor directly below the backboard',
                 value: 15,
               },
-              corner_line_distance: { type: 'single', name: 'Corner Width', value: 22 },
               line_width: { type: 'single', name: 'Line Width', value: 0.3 },
               hoops_distance: {
+                // from the baseline
                 type: 'single',
                 name: 'Hoops Distance',
+                value: 1,
+              },
+              basket_distance: {
+                // from the backboard
+                type: 'single',
+                name: 'Basket Distance',
                 value: 1,
               },
             },
