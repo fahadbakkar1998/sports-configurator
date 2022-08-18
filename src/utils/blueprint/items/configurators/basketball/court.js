@@ -152,6 +152,7 @@ export class Court extends Group {
     // Add paint area.
     this.paintArea1 = new PaintArea({ item, compInfo });
     this.paintArea1.position.z = minGap;
+    this.paintArea1.rotateZ(-Math.PI / 2);
     this.add(this.paintArea1);
   }
 
@@ -306,7 +307,6 @@ export class Court extends Group {
       courtWidth / 2 -
       (freeThrowLineDistance + basketDistanceFromBaseline) / 2
     );
-    this.paintArea1.rotateZ(-Math.PI / 2);
     this.paintArea1.redrawComponents({ components, compInfo });
   }
 }

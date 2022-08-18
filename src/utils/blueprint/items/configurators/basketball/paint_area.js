@@ -85,6 +85,8 @@ export class PaintArea extends Group {
     // Add hoops.
     this.hoops = new Hoops({ item, compInfo });
     this.hoops.position.z = minGap;
+    this.hoops.rotateX(-Math.PI / 2);
+    this.hoops.rotateZ(Math.PI);
     this.add(this.hoops);
   }
 
@@ -106,6 +108,7 @@ export class PaintArea extends Group {
       lineWidth,
       hoopsDistance,
       basketDistance,
+      backboardDistance,
     } = dimensionInfo;
     const material = components.material.value;
     const key_ground = material.key_ground;
@@ -173,7 +176,8 @@ export class PaintArea extends Group {
     this.paintAreaCircleMesh.material.color.set(lineColor);
 
     // Update hoops.
-    this.hoops.position.y = hoopsDistance - laneLineLength / 2;
+    this.hoops.position.y =
+      hoopsDistance - backboardDistance - laneLineLength / 2;
     this.hoops.redrawComponents({ components, compInfo });
   }
 }

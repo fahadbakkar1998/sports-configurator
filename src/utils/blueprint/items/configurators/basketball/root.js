@@ -1,4 +1,4 @@
-import { Group, BoxGeometry, TextureLoader, LoadingManager } from 'three';
+import { Group, BoxGeometry, TextureLoader, LoadingManager, Mesh } from 'three';
 import { Dimensioning } from '../../../core/dimensioning';
 import { minSize } from '../../../core/constants';
 import { Outside } from './outside';
@@ -6,6 +6,7 @@ import DRACOLoader from '../../../loaders/three-dracoloader';
 import GLTFLoader from '../../../loaders/GLTFLoader';
 import OBJLoader from '@calvinscofield/three-objloader';
 import FBXLoader from '../../../loaders/FBXLoader';
+import { getSingleGeoMatOfGltf } from '../../../../../common';
 
 export class Root extends Group {
   constructor(item) {
@@ -31,15 +32,16 @@ export class Root extends Group {
     this.fbxLoader = new FBXLoader(this.fbxLoadingManager);
 
     this.textures = this.getAllTextures(components);
-    this.models = this.getAllModels(components);
 
-    this.outside = new Outside({
-      item,
-      compInfo: { dimensionInfo, textures: this.textures },
+    this.getAllModels(components).then((models) => {
+      this.models = models;
+      this.outside = new Outside({
+        item,
+        compInfo: { dimensionInfo, textures: this.textures, models },
+      });
+      this.add(this.outside);
+      this.redrawComponents(components);
     });
-
-    this.add(this.outside);
-    this.redrawComponents(components);
   }
 
   getDimensionInfo(components) {
@@ -103,6 +105,10 @@ export class Root extends Group {
       dimension.basket_distance.value,
       this.unit,
     );
+    const backboardDistance = Dimensioning.cmFromMeasureRaw(
+      dimension.backboard_distance.value,
+      this.unit,
+    );
     return {
       outerWidth,
       outerLength,
@@ -119,6 +125,7 @@ export class Root extends Group {
       lineWidth,
       hoopsDistance,
       basketDistance,
+      backboardDistance,
     };
   }
 
@@ -151,7 +158,16 @@ export class Root extends Group {
     return new Promise((resolve, reject) => {
       switch (type) {
         case 'gltf':
-          this.gltfLoader.load(url, resolve, console.log, reject);
+          this.gltfLoader.load(
+            url,
+            (model) => {
+              const { geometry, material } = getSingleGeoMatOfGltf(model);
+              const singleModelMesh = new Mesh(geometry, material);
+              resolve(singleModelMesh);
+            },
+            () => {},
+            reject,
+          );
           break;
         default:
           resolve();
@@ -173,7 +189,7 @@ export class Root extends Group {
       );
     });
     await Promise.all(promises);
-    console.log('getAllModels: ', models);
+    return models;
   }
 
   redrawItem({ outerWidth, outerLength }) {
@@ -187,7 +203,7 @@ export class Root extends Group {
     this.redrawItem(dimensionInfo);
     this.outside.redrawComponents({
       components,
-      compInfo: { dimensionInfo, textures: this.textures },
+      compInfo: { dimensionInfo, textures: this.textures, models: this.models },
     });
   }
 }

@@ -12,6 +12,7 @@ export class Basketball extends FloorItem {
 
   redrawComponents() {
     this.root.redrawComponents(this.metadata.components);
+    this.scene.needsUpdate = true;
   }
 
   getPrice() {
