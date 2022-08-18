@@ -109,6 +109,10 @@ export class Root extends Group {
       dimension.backboard_distance.value,
       this.unit,
     );
+    const restrictedAreaWidth = Dimensioning.cmFromMeasureRaw(
+      dimension.restricted_area_width.value,
+      this.unit,
+    );
     return {
       outerWidth,
       outerLength,
@@ -126,6 +130,7 @@ export class Root extends Group {
       hoopsDistance,
       basketDistance,
       backboardDistance,
+      restrictedAreaWidth,
     };
   }
 

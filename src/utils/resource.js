@@ -1668,6 +1668,12 @@ export const items = [
                 value: 1,
                 immutability: true,
               },
+              restricted_area_width: {
+                type: 'single',
+                name: 'Restricted Area Width',
+                value: 8,
+                immutability: true,
+              },
             },
           },
           material: {

@@ -154,6 +154,11 @@ export class Court extends Group {
     this.paintArea1.position.z = minGap;
     this.paintArea1.rotateZ(-Math.PI / 2);
     this.add(this.paintArea1);
+
+    this.paintArea2 = new PaintArea({ item, compInfo });
+    this.paintArea2.position.z = minGap;
+    this.paintArea2.rotateZ(Math.PI / 2);
+    this.add(this.paintArea2);
   }
 
   redrawComponents({ components, compInfo }) {
@@ -308,5 +313,9 @@ export class Court extends Group {
       (freeThrowLineDistance + basketDistanceFromBaseline) / 2
     );
     this.paintArea1.redrawComponents({ components, compInfo });
+
+    this.paintArea2.position.x =
+      courtWidth / 2 - (freeThrowLineDistance + basketDistanceFromBaseline) / 2;
+    this.paintArea2.redrawComponents({ components, compInfo });
   }
 }

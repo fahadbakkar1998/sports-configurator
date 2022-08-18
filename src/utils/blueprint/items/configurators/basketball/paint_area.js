@@ -7,6 +7,7 @@ import {
   RepeatWrapping,
   Vector2,
   TorusGeometry,
+  RingGeometry,
 } from 'three';
 import { minSize, minGap } from '../../../core/constants';
 import { Hoops } from './hoops';
@@ -82,6 +83,35 @@ export class PaintArea extends Group {
     this.paintAreaCircleMesh.position.z = minGap;
     this.add(this.paintAreaCircleMesh);
 
+    // Add restricted area sideline.
+    this.restrictedAreaSideline1Mesh = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.restrictedAreaSideline1Mesh.position.z = minGap;
+    this.add(this.restrictedAreaSideline1Mesh);
+
+    this.restrictedAreaSideline2Mesh = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.restrictedAreaSideline2Mesh.position.z = minGap;
+    this.add(this.restrictedAreaSideline2Mesh);
+
+    // Add restricted area circle.
+    this.restrictedAreaCircle = new Mesh(
+      new RingGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.restrictedAreaCircle.position.z = minGap;
+    this.add(this.restrictedAreaCircle);
+
     // Add hoops.
     this.hoops = new Hoops({ item, compInfo });
     this.hoops.position.z = minGap;
@@ -109,6 +139,7 @@ export class PaintArea extends Group {
       hoopsDistance,
       basketDistance,
       backboardDistance,
+      restrictedAreaWidth,
     } = dimensionInfo;
     const material = components.material.value;
     const key_ground = material.key_ground;
@@ -174,6 +205,37 @@ export class PaintArea extends Group {
       1000,
     );
     this.paintAreaCircleMesh.material.color.set(lineColor);
+
+    // Update restricted area sideline.
+    this.restrictedAreaSideline1Mesh.position.x = -restrictedAreaWidth / 2;
+    this.restrictedAreaSideline1Mesh.position.y =
+      (basketDistance - laneLineLength) / 2;
+    this.restrictedAreaSideline1Mesh.geometry = new PlaneGeometry(
+      lineWidth,
+      basketDistance,
+    );
+    this.restrictedAreaSideline1Mesh.material.color.set(lineColor);
+
+    this.restrictedAreaSideline2Mesh.position.x = restrictedAreaWidth / 2;
+    this.restrictedAreaSideline2Mesh.position.y =
+      (basketDistance - laneLineLength) / 2;
+    this.restrictedAreaSideline2Mesh.geometry = new PlaneGeometry(
+      lineWidth,
+      basketDistance,
+    );
+    this.restrictedAreaSideline2Mesh.material.color.set(lineColor);
+
+    // Update restricted area circle.
+    this.restrictedAreaCircle.position.y = basketDistance - laneLineLength / 2;
+    this.restrictedAreaCircle.geometry = new RingGeometry(
+      (restrictedAreaWidth - lineWidth) / 2,
+      (restrictedAreaWidth + lineWidth) / 2,
+      30,
+      1,
+      0,
+      Math.PI,
+    );
+    this.restrictedAreaCircle.material.color.set(lineColor);
 
     // Update hoops.
     this.hoops.position.y =

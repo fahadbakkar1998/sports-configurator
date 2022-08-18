@@ -15,7 +15,7 @@ export class Hoops extends Group {
       this.modelUrl = hoopsValue;
       if (this.modelMesh != models[hoopsValue]) {
         if (this.modelMesh) this.remove(this.modelMesh);
-        this.modelMesh = models[hoopsValue];
+        this.modelMesh = models[hoopsValue].clone();
         this.add(this.modelMesh);
       }
     }
