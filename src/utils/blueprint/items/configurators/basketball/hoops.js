@@ -1,4 +1,4 @@
-import { AxesHelper, Group, Vector3 } from 'three';
+import { Group } from 'three';
 import { setMeshSize } from '../../../../../common';
 
 export class Hoops extends Group {

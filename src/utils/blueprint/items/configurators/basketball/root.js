@@ -46,6 +46,9 @@ export class Root extends Group {
 
   getDimensionInfo(components) {
     const dimension = components.dimension.value;
+
+    
+
     const outerWidth = Dimensioning.cmFromMeasureRaw(
       dimension.outer_width.value,
       this.unit,
