@@ -139,7 +139,6 @@ export class PaintArea extends Group {
       hoopsDistance,
       basketDistance,
       backboardDistance,
-      restrictedAreaWidth,
     } = dimensionInfo;
     const material = components.material.value;
     const key_ground = material.key_ground;
@@ -207,7 +206,7 @@ export class PaintArea extends Group {
     this.paintAreaCircleMesh.material.color.set(lineColor);
 
     // Update restricted area sideline.
-    this.restrictedAreaSideline1Mesh.position.x = -restrictedAreaWidth / 2;
+    this.restrictedAreaSideline1Mesh.position.x = -noChargeZoneArc;
     this.restrictedAreaSideline1Mesh.position.y =
       (basketDistance - laneLineLength) / 2;
     this.restrictedAreaSideline1Mesh.geometry = new PlaneGeometry(
@@ -216,7 +215,7 @@ export class PaintArea extends Group {
     );
     this.restrictedAreaSideline1Mesh.material.color.set(lineColor);
 
-    this.restrictedAreaSideline2Mesh.position.x = restrictedAreaWidth / 2;
+    this.restrictedAreaSideline2Mesh.position.x = noChargeZoneArc;
     this.restrictedAreaSideline2Mesh.position.y =
       (basketDistance - laneLineLength) / 2;
     this.restrictedAreaSideline2Mesh.geometry = new PlaneGeometry(
@@ -228,8 +227,8 @@ export class PaintArea extends Group {
     // Update restricted area circle.
     this.restrictedAreaCircle.position.y = basketDistance - laneLineLength / 2;
     this.restrictedAreaCircle.geometry = new RingGeometry(
-      (restrictedAreaWidth - lineWidth) / 2,
-      (restrictedAreaWidth + lineWidth) / 2,
+      noChargeZoneArc - lineWidth / 2,
+      noChargeZoneArc + lineWidth / 2,
       30,
       1,
       0,

@@ -1594,7 +1594,7 @@ export const items = [
       },
       {
         name: 'Basketball',
-        image_path: 'assets/models/thumbnails/16.jpg',
+        image_path: 'assets/models/thumbnails/Basketball.png',
         format: 'configurator',
         type: 'basketball',
         unit: 'ft',
@@ -1648,30 +1648,31 @@ export const items = [
                 name: 'Free-throw line distance from point on the floor directly below the backboard',
                 value: 15,
               },
-              line_width: { type: 'single', name: 'Line Width', value: 0.3 },
+              line_width: {
+                type: 'single',
+                name: 'Line Width',
+                value: 0.3,
+                immutability: true,
+              },
               hoops_distance: {
                 // from the baseline
                 type: 'single',
                 name: 'Hoops Distance',
                 value: 1,
+                immutability: true,
               },
               basket_distance: {
                 // from the backboard
                 type: 'single',
                 name: 'Basket Distance',
                 value: 1,
+                immutability: true,
               },
               backboard_distance: {
                 // from the center
                 type: 'single',
                 name: 'Backboard Distance',
                 value: 1,
-                immutability: true,
-              },
-              restricted_area_width: {
-                type: 'single',
-                name: 'Restricted Area Width',
-                value: 8,
                 immutability: true,
               },
             },
@@ -1682,76 +1683,444 @@ export const items = [
               outer_ground: {
                 type: 'material',
                 name: 'Outer Ground',
-                value: 'assets/models/thumbnails/Rubber/1.jpg',
-                piece_size: { width: 100, height: 100 },
+                value: 'assets/models/thumbnails/Basketball/23.png',
+                piece_size: { width: 1000, height: 1000 },
                 options: [
                   {
                     name: '1',
-                    value: 'assets/models/thumbnails/Rubber/1.jpg',
+                    value: 'assets/models/thumbnails/Basketball/1.png',
                   },
                   {
                     name: '2',
-                    value: 'assets/models/thumbnails/Rubber/2.jpg',
+                    value: 'assets/models/thumbnails/Basketball/2.png',
                   },
                   {
                     name: '3',
-                    value: 'assets/models/thumbnails/Rubber/3.jpg',
+                    value: 'assets/models/thumbnails/Basketball/3.png',
                   },
                   {
                     name: '4',
-                    value: 'assets/models/thumbnails/Rubber/4.jpg',
+                    value: 'assets/models/thumbnails/Basketball/4.png',
                   },
                   {
                     name: '5',
-                    value: 'assets/models/thumbnails/Rubber/5.jpg',
+                    value: 'assets/models/thumbnails/Basketball/5.png',
                   },
                   {
                     name: '6',
-                    value: 'assets/models/thumbnails/Rubber/6.jpg',
+                    value: 'assets/models/thumbnails/Basketball/6.png',
+                  },
+                  {
+                    name: '7',
+                    value: 'assets/models/thumbnails/Basketball/7.png',
+                  },
+                  {
+                    name: '8',
+                    value: 'assets/models/thumbnails/Basketball/8.png',
+                  },
+                  {
+                    name: '9',
+                    value: 'assets/models/thumbnails/Basketball/9.png',
+                  },
+                  {
+                    name: '10',
+                    value: 'assets/models/thumbnails/Basketball/10.png',
+                  },
+                  {
+                    name: '11',
+                    value: 'assets/models/thumbnails/Basketball/11.png',
+                  },
+                  {
+                    name: '12',
+                    value: 'assets/models/thumbnails/Basketball/12.png',
+                  },
+                  {
+                    name: '13',
+                    value: 'assets/models/thumbnails/Basketball/13.png',
+                  },
+                  {
+                    name: '14',
+                    value: 'assets/models/thumbnails/Basketball/14.png',
+                  },
+                  {
+                    name: '15',
+                    value: 'assets/models/thumbnails/Basketball/15.png',
+                  },
+                  {
+                    name: '16',
+                    value: 'assets/models/thumbnails/Basketball/16.png',
+                  },
+                  {
+                    name: '17',
+                    value: 'assets/models/thumbnails/Basketball/17.png',
+                  },
+                  {
+                    name: '18',
+                    value: 'assets/models/thumbnails/Basketball/18.png',
+                  },
+                  {
+                    name: '19',
+                    value: 'assets/models/thumbnails/Basketball/19.png',
+                  },
+                  {
+                    name: '20',
+                    value: 'assets/models/thumbnails/Basketball/20.png',
+                  },
+                  {
+                    name: '21',
+                    value: 'assets/models/thumbnails/Basketball/21.png',
+                  },
+                  {
+                    name: '22',
+                    value: 'assets/models/thumbnails/Basketball/22.png',
+                  },
+                  {
+                    name: '23',
+                    value: 'assets/models/thumbnails/Basketball/23.png',
+                  },
+                  {
+                    name: '24',
+                    value: 'assets/models/thumbnails/Basketball/24.png',
+                  },
+                  {
+                    name: '25',
+                    value: 'assets/models/thumbnails/Basketball/25.png',
+                  },
+                  {
+                    name: '26',
+                    value: 'assets/models/thumbnails/Basketball/26.png',
+                  },
+                  {
+                    name: '27',
+                    value: 'assets/models/thumbnails/Basketball/27.png',
+                  },
+                  {
+                    name: '28',
+                    value: 'assets/models/thumbnails/Basketball/28.png',
+                  },
+                  {
+                    name: '29',
+                    value: 'assets/models/thumbnails/Basketball/29.png',
+                  },
+                  {
+                    name: '30',
+                    value: 'assets/models/thumbnails/Basketball/30.png',
+                  },
+                  {
+                    name: '31',
+                    value: 'assets/models/thumbnails/Basketball/31.png',
+                  },
+                  {
+                    name: '32',
+                    value: 'assets/models/thumbnails/Basketball/32.png',
+                  },
+                  {
+                    name: '33',
+                    value: 'assets/models/thumbnails/Basketball/33.png',
+                  },
+                  {
+                    name: '34',
+                    value: 'assets/models/thumbnails/Basketball/34.png',
+                  },
+                  {
+                    name: '35',
+                    value: 'assets/models/thumbnails/Basketball/35.png',
                   },
                 ],
               },
               court_ground: {
                 type: 'material',
                 name: 'Inner Ground',
-                value: 'assets/models/thumbnails/Concrete/1.png',
-                piece_size: { width: 100, height: 100 },
+                value: 'assets/models/thumbnails/Basketball/23.png',
+                piece_size: { width: 1000, height: 1000 },
                 options: [
                   {
                     name: '1',
-                    value: 'assets/models/thumbnails/Concrete/1.png',
+                    value: 'assets/models/thumbnails/Basketball/1.png',
                   },
                   {
                     name: '2',
-                    value: 'assets/models/thumbnails/Concrete/2.png',
+                    value: 'assets/models/thumbnails/Basketball/2.png',
                   },
                   {
                     name: '3',
-                    value: 'assets/models/thumbnails/Concrete/3.png',
+                    value: 'assets/models/thumbnails/Basketball/3.png',
                   },
                   {
                     name: '4',
-                    value: 'assets/models/thumbnails/Concrete/4.png',
+                    value: 'assets/models/thumbnails/Basketball/4.png',
+                  },
+                  {
+                    name: '5',
+                    value: 'assets/models/thumbnails/Basketball/5.png',
+                  },
+                  {
+                    name: '6',
+                    value: 'assets/models/thumbnails/Basketball/6.png',
+                  },
+                  {
+                    name: '7',
+                    value: 'assets/models/thumbnails/Basketball/7.png',
+                  },
+                  {
+                    name: '8',
+                    value: 'assets/models/thumbnails/Basketball/8.png',
+                  },
+                  {
+                    name: '9',
+                    value: 'assets/models/thumbnails/Basketball/9.png',
+                  },
+                  {
+                    name: '10',
+                    value: 'assets/models/thumbnails/Basketball/10.png',
+                  },
+                  {
+                    name: '11',
+                    value: 'assets/models/thumbnails/Basketball/11.png',
+                  },
+                  {
+                    name: '12',
+                    value: 'assets/models/thumbnails/Basketball/12.png',
+                  },
+                  {
+                    name: '13',
+                    value: 'assets/models/thumbnails/Basketball/13.png',
+                  },
+                  {
+                    name: '14',
+                    value: 'assets/models/thumbnails/Basketball/14.png',
+                  },
+                  {
+                    name: '15',
+                    value: 'assets/models/thumbnails/Basketball/15.png',
+                  },
+                  {
+                    name: '16',
+                    value: 'assets/models/thumbnails/Basketball/16.png',
+                  },
+                  {
+                    name: '17',
+                    value: 'assets/models/thumbnails/Basketball/17.png',
+                  },
+                  {
+                    name: '18',
+                    value: 'assets/models/thumbnails/Basketball/18.png',
+                  },
+                  {
+                    name: '19',
+                    value: 'assets/models/thumbnails/Basketball/19.png',
+                  },
+                  {
+                    name: '20',
+                    value: 'assets/models/thumbnails/Basketball/20.png',
+                  },
+                  {
+                    name: '21',
+                    value: 'assets/models/thumbnails/Basketball/21.png',
+                  },
+                  {
+                    name: '22',
+                    value: 'assets/models/thumbnails/Basketball/22.png',
+                  },
+                  {
+                    name: '23',
+                    value: 'assets/models/thumbnails/Basketball/23.png',
+                  },
+                  {
+                    name: '24',
+                    value: 'assets/models/thumbnails/Basketball/24.png',
+                  },
+                  {
+                    name: '25',
+                    value: 'assets/models/thumbnails/Basketball/25.png',
+                  },
+                  {
+                    name: '26',
+                    value: 'assets/models/thumbnails/Basketball/26.png',
+                  },
+                  {
+                    name: '27',
+                    value: 'assets/models/thumbnails/Basketball/27.png',
+                  },
+                  {
+                    name: '28',
+                    value: 'assets/models/thumbnails/Basketball/28.png',
+                  },
+                  {
+                    name: '29',
+                    value: 'assets/models/thumbnails/Basketball/29.png',
+                  },
+                  {
+                    name: '30',
+                    value: 'assets/models/thumbnails/Basketball/30.png',
+                  },
+                  {
+                    name: '31',
+                    value: 'assets/models/thumbnails/Basketball/31.png',
+                  },
+                  {
+                    name: '32',
+                    value: 'assets/models/thumbnails/Basketball/32.png',
+                  },
+                  {
+                    name: '33',
+                    value: 'assets/models/thumbnails/Basketball/33.png',
+                  },
+                  {
+                    name: '34',
+                    value: 'assets/models/thumbnails/Basketball/34.png',
+                  },
+                  {
+                    name: '35',
+                    value: 'assets/models/thumbnails/Basketball/35.png',
                   },
                 ],
               },
               key_ground: {
                 type: 'material',
                 name: 'Key Ground',
-                value: 'assets/models/thumbnails/Turf Mats/1.jpg',
-                piece_size: { width: 100, height: 100 },
+                value: 'assets/models/thumbnails/Basketball/31.png',
+                piece_size: { width: 1000, height: 1000 },
                 options: [
                   {
                     name: '1',
-                    value: 'assets/models/thumbnails/Turf Mats/1.jpg',
+                    value: 'assets/models/thumbnails/Basketball/1.png',
                   },
                   {
                     name: '2',
-                    value: 'assets/models/thumbnails/Turf Mats/2.jpg',
+                    value: 'assets/models/thumbnails/Basketball/2.png',
                   },
                   {
                     name: '3',
-                    value: 'assets/models/thumbnails/Turf Mats/3.jpg',
+                    value: 'assets/models/thumbnails/Basketball/3.png',
+                  },
+                  {
+                    name: '4',
+                    value: 'assets/models/thumbnails/Basketball/4.png',
+                  },
+                  {
+                    name: '5',
+                    value: 'assets/models/thumbnails/Basketball/5.png',
+                  },
+                  {
+                    name: '6',
+                    value: 'assets/models/thumbnails/Basketball/6.png',
+                  },
+                  {
+                    name: '7',
+                    value: 'assets/models/thumbnails/Basketball/7.png',
+                  },
+                  {
+                    name: '8',
+                    value: 'assets/models/thumbnails/Basketball/8.png',
+                  },
+                  {
+                    name: '9',
+                    value: 'assets/models/thumbnails/Basketball/9.png',
+                  },
+                  {
+                    name: '10',
+                    value: 'assets/models/thumbnails/Basketball/10.png',
+                  },
+                  {
+                    name: '11',
+                    value: 'assets/models/thumbnails/Basketball/11.png',
+                  },
+                  {
+                    name: '12',
+                    value: 'assets/models/thumbnails/Basketball/12.png',
+                  },
+                  {
+                    name: '13',
+                    value: 'assets/models/thumbnails/Basketball/13.png',
+                  },
+                  {
+                    name: '14',
+                    value: 'assets/models/thumbnails/Basketball/14.png',
+                  },
+                  {
+                    name: '15',
+                    value: 'assets/models/thumbnails/Basketball/15.png',
+                  },
+                  {
+                    name: '16',
+                    value: 'assets/models/thumbnails/Basketball/16.png',
+                  },
+                  {
+                    name: '17',
+                    value: 'assets/models/thumbnails/Basketball/17.png',
+                  },
+                  {
+                    name: '18',
+                    value: 'assets/models/thumbnails/Basketball/18.png',
+                  },
+                  {
+                    name: '19',
+                    value: 'assets/models/thumbnails/Basketball/19.png',
+                  },
+                  {
+                    name: '20',
+                    value: 'assets/models/thumbnails/Basketball/20.png',
+                  },
+                  {
+                    name: '21',
+                    value: 'assets/models/thumbnails/Basketball/21.png',
+                  },
+                  {
+                    name: '22',
+                    value: 'assets/models/thumbnails/Basketball/22.png',
+                  },
+                  {
+                    name: '23',
+                    value: 'assets/models/thumbnails/Basketball/23.png',
+                  },
+                  {
+                    name: '24',
+                    value: 'assets/models/thumbnails/Basketball/24.png',
+                  },
+                  {
+                    name: '25',
+                    value: 'assets/models/thumbnails/Basketball/25.png',
+                  },
+                  {
+                    name: '26',
+                    value: 'assets/models/thumbnails/Basketball/26.png',
+                  },
+                  {
+                    name: '27',
+                    value: 'assets/models/thumbnails/Basketball/27.png',
+                  },
+                  {
+                    name: '28',
+                    value: 'assets/models/thumbnails/Basketball/28.png',
+                  },
+                  {
+                    name: '29',
+                    value: 'assets/models/thumbnails/Basketball/29.png',
+                  },
+                  {
+                    name: '30',
+                    value: 'assets/models/thumbnails/Basketball/30.png',
+                  },
+                  {
+                    name: '31',
+                    value: 'assets/models/thumbnails/Basketball/31.png',
+                  },
+                  {
+                    name: '32',
+                    value: 'assets/models/thumbnails/Basketball/32.png',
+                  },
+                  {
+                    name: '33',
+                    value: 'assets/models/thumbnails/Basketball/33.png',
+                  },
+                  {
+                    name: '34',
+                    value: 'assets/models/thumbnails/Basketball/34.png',
+                  },
+                  {
+                    name: '35',
+                    value: 'assets/models/thumbnails/Basketball/35.png',
                   },
                 ],
               },
