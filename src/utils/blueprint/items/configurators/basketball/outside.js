@@ -57,9 +57,8 @@ export class Outside extends Group {
 
     const OCWGap = (dimensionInfo.outerWidth - dimensionInfo.courtWidth) / 2; // Width Gap between outer and court
     const OCLGap = (dimensionInfo.outerLength - dimensionInfo.courtLength) / 2; // Length Gap between outer and court
-    console.log('test: ', OCWGap, OCLGap);
     const estimateLGap = Math.min(OCWGap, OCLGap);
-    this.court.position.y = -estimateLGap / 2;
+    this.court.position.y = estimateLGap - OCLGap;
     this.court.redrawComponents({ components, compInfo });
   }
 }
