@@ -310,12 +310,12 @@ export class Court extends Group {
     // Update paint area.
     this.paintArea1.position.x = -(
       courtWidth / 2 -
-      (freeThrowLineDistance + basketDistanceFromBaseline) / 2
+      (freeThrowLineDistance + hoopsDistance) / 2
     );
     this.paintArea1.redrawComponents({ components, compInfo });
 
     this.paintArea2.position.x =
-      courtWidth / 2 - (freeThrowLineDistance + basketDistanceFromBaseline) / 2;
+      courtWidth / 2 - (freeThrowLineDistance + hoopsDistance) / 2;
     this.paintArea2.redrawComponents({ components, compInfo });
   }
 }

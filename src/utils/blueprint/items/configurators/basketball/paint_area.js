@@ -144,8 +144,7 @@ export class PaintArea extends Group {
     const key_ground = material.key_ground;
     const groundMatUrl = key_ground.value;
     const lineColor = material.line_color.value;
-    const laneLineLength =
-      freeThrowLineDistance + hoopsDistance + basketDistance;
+    const laneLineLength = freeThrowLineDistance + hoopsDistance;
 
     // Update ground material.
     this.groundMesh.geometry = new PlaneGeometry(key, laneLineLength);

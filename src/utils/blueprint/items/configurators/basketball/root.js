@@ -47,7 +47,42 @@ export class Root extends Group {
   getDimensionInfo(components) {
     const dimension = components.dimension.value;
 
-    
+    // Condition
+    if (dimension.court_width.value > dimension.outer_width.value)
+      dimension.court_width.value = dimension.outer_width.value;
+    if (dimension.court_length.value > dimension.outer_length.value)
+      dimension.court_length.value = dimension.outer_length.value;
+    const center_circle_diameter = dimension.center_circle_diameter.value;
+    if (
+      dimension.no_charge_zone_arc.value >
+      center_circle_diameter.out.value / 2
+    )
+      dimension.no_charge_zone_arc.value = center_circle_diameter.out.value / 2;
+    if (center_circle_diameter.in.value > center_circle_diameter.out.value)
+      center_circle_diameter.in.value = center_circle_diameter.out.value;
+    if (center_circle_diameter.out.value > dimension.key.value)
+      center_circle_diameter.out.value = dimension.key.value;
+    const limitThreePointLineDistance =
+      dimension.court_width.value / 2 -
+      dimension.hoops_distance.value -
+      dimension.basket_distance.value;
+    const three_point_line_distance = dimension.three_point_line_distance.value;
+    if (three_point_line_distance.max.value > limitThreePointLineDistance)
+      three_point_line_distance.max.value = limitThreePointLineDistance;
+    const limetThreePointLineDistance = Math.min(
+      three_point_line_distance.max.value,
+      dimension.court_length.value / 2,
+    );
+    if (three_point_line_distance.min.value > limetThreePointLineDistance)
+      three_point_line_distance.min.value = limetThreePointLineDistance;
+    if (dimension.key.value > dimension.court_length.value)
+      dimension.key.value = dimension.court_length.value;
+    const limitFreeThrowLineDistance =
+      dimension.three_point_line_distance.value.max.value +
+      dimension.basket_distance.value -
+      dimension.center_circle_diameter.value.out.value / 2;
+    if (dimension.free_throw_line_distance.value > limitFreeThrowLineDistance)
+      dimension.free_throw_line_distance.value = limitFreeThrowLineDistance;
 
     const outerWidth = Dimensioning.cmFromMeasureRaw(
       dimension.outer_width.value,

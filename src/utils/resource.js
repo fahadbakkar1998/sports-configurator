@@ -1643,7 +1643,7 @@ export const items = [
                 value: 16,
               },
               free_throw_line_distance: {
-                // from the backboard
+                // from the hoops (backboard)
                 type: 'single',
                 name: 'Free-throw line distance from point on the floor directly below the backboard',
                 value: 15,
@@ -1662,7 +1662,7 @@ export const items = [
                 immutability: true,
               },
               basket_distance: {
-                // from the backboard
+                // from the hoops (backboard)
                 type: 'single',
                 name: 'Basket Distance',
                 value: 1,
