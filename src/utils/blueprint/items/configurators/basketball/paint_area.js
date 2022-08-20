@@ -123,16 +123,8 @@ export class PaintArea extends Group {
   redrawComponents({ components, compInfo }) {
     const dimensionInfo = compInfo.dimensionInfo;
     const {
-      outerWidth,
-      outerLength,
-      courtWidth,
-      courtLength,
-      rimHeight,
       noChargeZoneArc,
-      centerInCircleDiameter,
       centerOutCircleDiameter,
-      threeMinPointLineDistance,
-      threeMaxPointLineDistance,
       key,
       freeThrowLineDistance,
       lineWidth,
