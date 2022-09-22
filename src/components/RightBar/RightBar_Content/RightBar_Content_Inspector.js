@@ -198,6 +198,23 @@ const RightBar_Content_Inspector = () => {
     }
   }
 
+  /* House Dimension */
+  const curElevation =
+    (selectedRoof &&
+      parseFloat(
+        Blueprint.Dimensioning.cmToMeasureRaw(
+          selectedRoof.item.room.corners[0].elevation,
+        ).toFixed(decimalPlaces),
+      )) ||
+    0;
+
+  const updateElevation = (val) => {
+    const cloneSelectedRoof = { ...selectedRoof };
+    cloneSelectedRoof.item.room.corners[0].elevation =
+      Blueprint.Dimensioning.cmFromMeasureRaw(val);
+    setSelectedRoof(cloneSelectedRoof);
+  };
+
   /* ROOF */
   const curRoofMiddleHeight =
     (selectedRoof &&
@@ -211,11 +228,40 @@ const RightBar_Content_Inspector = () => {
     0;
 
   console.log('curRoofMiddleHeight: ', curRoofMiddleHeight);
+  console.log('selectedWall: ', selectedWall);
+  console.log(
+    'selectedRoof: ',
+    selectedRoof && selectedRoof.item.room.corners[0].elevation,
+    selectedRoof &&
+      Blueprint.Dimensioning.cmToMeasureRaw(
+        selectedRoof.item.room.corners[0].elevation,
+      ),
+  );
 
   return (
     <div className="RightBar_Content_Inspector">
       {selectedRoof && selectedRoof.item && (
         <>
+          <div className="property-header">House Dimensions</div>
+
+          {/* House Height */}
+          <div className="input-group">
+            <DragLabel
+              name={`Height(${curUnit}):`}
+              value={curElevation}
+              setValue={(val) => {
+                updateElevation(val);
+              }}
+              offset={0.01}></DragLabel>
+            <input
+              className="input"
+              type="text"
+              value={curElevation + inputSuffix}
+              onChange={(e) => {
+                updateElevation(getUFloat(e.target.value));
+              }}></input>
+          </div>
+
           <div className="property-header">Roof</div>
 
           <div className="input-group">

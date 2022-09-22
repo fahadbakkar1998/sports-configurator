@@ -56,6 +56,7 @@ export class Dimensioning {
    */
   static cmFromMeasureRaw(measure, unit) {
     if (!unit) unit = Configuration.getStringValue(configDimUnit);
+    console.log('cmFromMeasureRaw unit: ', unit);
 
     switch (unit) {
       case dimFeetAndInch:
