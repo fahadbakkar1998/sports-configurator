@@ -1567,6 +1567,29 @@ export const items = [
         },
         max_size: 200,
         components: {
+          type: {
+            type: 'select',
+            name: 'Type',
+            value: 'basketball',
+            options: [
+              {
+                name: 'Basketball',
+                value: 'basketball',
+              },
+              {
+                name: 'Pickleball',
+                value: 'pickleball',
+              },
+              {
+                name: 'Tennis',
+                value: 'tennis',
+              },
+              {
+                name: 'Volleyball',
+                value: 'volleyball',
+              },
+            ],
+          },
           dimension: {
             name: 'Dimension',
             value: {
@@ -2118,6 +2141,26 @@ export const items = [
               'assets/models/gltf/RollaSport Portable Basketball Goal.glb':
                 'gltf',
             },
+          },
+          show_basketball_line: {
+            type: 'checkbox',
+            name: 'Basketball Line',
+            value: 1,
+          },
+          show_pickleball_line: {
+            type: 'checkbox',
+            name: 'Pickleball Line',
+            value: 0,
+          },
+          show_tennis_line: {
+            type: 'checkbox',
+            name: 'Tennis Line',
+            value: 0,
+          },
+          show_volleyball_line: {
+            type: 'checkbox',
+            name: 'Volleyball Line',
+            value: 0,
           },
         },
       },

@@ -123,6 +123,8 @@ $commonHeight: 1.8vmax;
           justify-content: center;
           padding: $fontPadding;
           transition: 0.2s;
+          max-height: 50vh;
+          overflow: auto;
 
           &.show {
             display: flex;
@@ -413,6 +415,8 @@ $commonHeight: 1.8vmax;
           font-size: calc($commonHeight - 5 * $fontPadding);
           gap: $fontPadding;
           flex-wrap: wrap;
+          max-height: 50vh;
+          overflow: auto;
 
           &.show {
             display: none;
@@ -435,6 +439,7 @@ $commonHeight: 1.8vmax;
 
             &.immutability {
               background-color: $backDarkColor;
+              border-color: $backDarkColor;
             }
           }
 

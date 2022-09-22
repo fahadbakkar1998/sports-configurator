@@ -62,19 +62,19 @@ export class Root extends Group {
       center_circle_diameter.in.value = center_circle_diameter.out.value;
     if (center_circle_diameter.out.value > dimension.key.value)
       center_circle_diameter.out.value = dimension.key.value;
-    const limitThreePointLineDistance =
+    const upLimitThreePointLineDistance =
       dimension.court_width.value / 2 -
       dimension.hoops_distance.value -
       dimension.basket_distance.value;
     const three_point_line_distance = dimension.three_point_line_distance.value;
-    if (three_point_line_distance.max.value > limitThreePointLineDistance)
-      three_point_line_distance.max.value = limitThreePointLineDistance;
-    const limetThreePointLineDistance = Math.min(
+    if (three_point_line_distance.max.value > upLimitThreePointLineDistance)
+      three_point_line_distance.max.value = upLimitThreePointLineDistance;
+    const downLimitThreePointLineDistance = Math.min(
       three_point_line_distance.max.value,
       dimension.court_length.value / 2,
     );
-    if (three_point_line_distance.min.value > limetThreePointLineDistance)
-      three_point_line_distance.min.value = limetThreePointLineDistance;
+    if (three_point_line_distance.min.value > downLimitThreePointLineDistance)
+      three_point_line_distance.min.value = downLimitThreePointLineDistance;
     if (dimension.key.value > dimension.court_length.value)
       dimension.key.value = dimension.court_length.value;
     const limitFreeThrowLineDistance =

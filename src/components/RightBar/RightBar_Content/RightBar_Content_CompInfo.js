@@ -165,6 +165,22 @@ const RightBar_Content_CompInfo = ({
               </div>
             </>
           )}
+          {comp.type === 'checkbox' && (
+            <div className="input-group">
+              <span>{`${comp.name}:`}</span>
+              <input
+                className={classnames('input', {
+                  immutability: comp.immutability,
+                })}
+                type="checkbox"
+                checked={comp.value}
+                onChange={(e) => {
+                  if (comp.immutability) return;
+                  comp.value = e.target.checked ? 1 : 0;
+                  updateComponents();
+                }}></input>
+            </div>
+          )}
         </>
       ) : (
         <div
