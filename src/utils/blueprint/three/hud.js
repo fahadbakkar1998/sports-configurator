@@ -142,7 +142,13 @@ export class HUD extends EventDispatcher {
   }
 
   makeCone(item) {
-    let coneGeo = new CylinderGeometry(this.coneRadius, 0, this.coneHeight);
+    let coneGeo = new CylinderGeometry(
+      this.coneRadius,
+      0,
+      this.coneHeight,
+      16,
+      16,
+    );
     let coneMat = new MeshBasicMaterial({ color: this.getColor() });
     let cone = new Mesh(coneGeo, coneMat);
     cone.position.copy(this.rotateVector(item));
