@@ -34,6 +34,7 @@ import {
 import { EVENT_CORNER_2D_MOVED } from '../core/events.js';
 import { EVENT_NOTHING_CLICKED } from '../core/events.js';
 import { FloorplannerView2D, floorplannerModes } from './floorplanner_view.js';
+import { decimalPlaces } from '../../../constants.js';
 
 /* how much will we move a corner to make a wall axis aligned (cm) */
 //export const configSnapTolerance = 25;//In CMS
@@ -198,15 +199,31 @@ export class Floorplanner2D extends EventDispatcher {
       let units = Configuration.getStringValue(configDimUnit);
       this.activeCorner.elevation = getAValidInput(
         `Elevation at this point (in ${units},\n${cid}): `,
-        Dimensioning.cmToMeasureRaw(this.activeCorner.elevation),
+        parseFloat(
+          Dimensioning.cmToMeasureRaw(this.activeCorner.elevation).toFixed(
+            decimalPlaces,
+          ),
+        ),
       ); //Number(userInput);
       let x = getAValidInput(
-        `Location: X (${Dimensioning.cmToMeasureRaw(this.activeCorner.x)}): `,
-        Dimensioning.cmToMeasureRaw(this.activeCorner.x),
+        `Location: X (${Dimensioning.cmToMeasureRaw(
+          this.activeCorner.x,
+        ).toFixed(decimalPlaces)}): `,
+        parseFloat(
+          Dimensioning.cmToMeasureRaw(this.activeCorner.x).toFixed(
+            decimalPlaces,
+          ),
+        ),
       ); //Number(userInput);
       let y = getAValidInput(
-        `Location: Y (${Dimensioning.cmToMeasureRaw(this.activeCorner.y)}): `,
-        Dimensioning.cmToMeasureRaw(this.activeCorner.y),
+        `Location: Y (${Dimensioning.cmToMeasureRaw(
+          this.activeCorner.y,
+        ).toFixed(decimalPlaces)}): `,
+        parseFloat(
+          Dimensioning.cmToMeasureRaw(this.activeCorner.y).toFixed(
+            decimalPlaces,
+          ),
+        ),
       ); //Number(userInput);
       this.activeCorner.move(
         Dimensioning.cmFromMeasureRaw(x),

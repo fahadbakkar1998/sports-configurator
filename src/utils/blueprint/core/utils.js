@@ -312,6 +312,8 @@ export class Utils {
       startY = tMinY - 10;
     }
 
+    console.log('pointInPolygon start: ', startX, startY);
+
     let tIntersects = 0;
     for (tI = 0; tI < corners.length; tI++) {
       let tFirstCorner = corners[tI],
@@ -345,7 +347,8 @@ export class Utils {
   static polygonOutsidePolygon(insideCorners, outsideCorners, start) {
     start = start || new Vector2(0, 0);
     for (let tI = 0; tI < insideCorners.length; tI++) {
-      if (Utils.pointInPolygon(insideCorners[tI], outsideCorners, start)) {
+      if (Utils.pointInPolygon2(insideCorners[tI], outsideCorners)) {
+        console.log('pass pointInPolygon: ', insideCorners[tI], outsideCorners);
         return false;
       }
     }

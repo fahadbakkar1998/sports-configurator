@@ -8,6 +8,7 @@ import { HexColorPicker } from 'react-colorful';
 import cn from 'classnames';
 import RightBar_Content_CompInfo from './RightBar_Content_CompInfo';
 import RightBar_Content_AddChildComp from './RightBar_Content_AddChildComp';
+import { decimalPlaces } from '../../../constants';
 
 let isDot = false;
 
@@ -152,21 +153,41 @@ const RightBar_Content_Inspector = () => {
     (cur3dItemEvent &&
       cur3dItemEvent.item &&
       cur3dItemEvent.item.getWidth &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getWidth())) ||
+      parseFloat(
+        Blueprint.Dimensioning.cmToMeasureRaw(
+          cur3dItemEvent.item.getWidth(),
+        ).toFixed(decimalPlaces),
+      )) ||
     0;
+
+  if (cur3dItemWidth) {
+    console.log(
+      'cur 3d item width: ',
+      cur3dItemEvent.item.getWidth(),
+      cur3dItemWidth,
+    );
+  }
 
   const cur3dItemHeight =
     (cur3dItemEvent &&
       cur3dItemEvent.item &&
       cur3dItemEvent.item.getHeight &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getHeight())) ||
+      parseFloat(
+        Blueprint.Dimensioning.cmToMeasureRaw(
+          cur3dItemEvent.item.getHeight(),
+        ).toFixed(decimalPlaces),
+      )) ||
     0;
 
   const cur3dItemDepth =
     (cur3dItemEvent &&
       cur3dItemEvent.item &&
       cur3dItemEvent.item.getDepth &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur3dItemEvent.item.getDepth())) ||
+      parseFloat(
+        Blueprint.Dimensioning.cmToMeasureRaw(
+          cur3dItemEvent.item.getDepth(),
+        ).toFixed(decimalPlaces),
+      )) ||
     0;
 
   let cur3dItemMaterial;
@@ -182,8 +203,14 @@ const RightBar_Content_Inspector = () => {
     (selectedRoof &&
       selectedRoof.item &&
       selectedRoof.item.middleHeight &&
-      Blueprint.Dimensioning.cmToMeasureRaw(selectedRoof.item.middleHeight)) ||
+      parseFloat(
+        Blueprint.Dimensioning.cmToMeasureRaw(
+          selectedRoof.item.middleHeight,
+        ).toFixed(decimalPlaces),
+      )) ||
     0;
+
+  console.log('curRoofMiddleHeight: ', curRoofMiddleHeight);
 
   return (
     <div className="RightBar_Content_Inspector">
@@ -215,27 +242,31 @@ const RightBar_Content_Inspector = () => {
               }}>
               <option value="GABLED">Gabled</option>
               <option value="SINGLE">Single Slop</option>
+              <option value="FLAT">Flat</option>
             </select>
           </div>
 
-          <div className="input-group">
-            <DragLabel
-              name={`Height(${curUnit}):`}
-              value={curRoofMiddleHeight}
-              setValue={(val) => {
-                updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
-              }}
-              offset={0.01}></DragLabel>
-            <input
-              className="input"
-              type="text"
-              value={curRoofMiddleHeight + inputSuffix}
-              onChange={(e) => {
-                updateCurRoofNum({
-                  setMiddleHeight: getUFloat(e.target.value),
-                });
-              }}></input>
-          </div>
+          {selectedRoof.item.type !== 'FLAT' && (
+            <div className="input-group">
+              <DragLabel
+                name={`Height(${curUnit}):`}
+                value={curRoofMiddleHeight}
+                setValue={(val) => {
+                  updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
+                }}
+                offset={0.01}></DragLabel>
+              <input
+                className="input"
+                type="text"
+                value={curRoofMiddleHeight + inputSuffix}
+                onChange={(e) => {
+                  const val = getUFloat(e.target.value);
+                  updateCurRoofNum({
+                    setMiddleHeight: val,
+                  });
+                }}></input>
+            </div>
+          )}
         </>
       )}
 

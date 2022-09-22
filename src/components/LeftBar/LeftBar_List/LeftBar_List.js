@@ -13,6 +13,7 @@ import DragLabel from '../../Common/DragLabel';
 import { getFloat, getUFloat, rgbToHex } from '../../../common';
 import { updateUnit } from '../../../utils/bpSupport';
 import cn from 'classnames';
+import { decimalPlaces } from '../../../constants';
 
 let isDot = false;
 
@@ -114,28 +115,28 @@ const LeftBar_List = () => {
     (cur2dItemEvent &&
       cur2dItemEvent.item &&
       cur2dItemEvent.item.x &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.x)) ||
+      parseFloat(Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.x).toFixed(decimalPlaces))) ||
     0;
 
   const cur2dItemY =
     (cur2dItemEvent &&
       cur2dItemEvent.item &&
       cur2dItemEvent.item.y &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.y)) ||
+      parseFloat(Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.y).toFixed(decimalPlaces))) ||
     0;
 
   const cur2dItemElevation =
     (cur2dItemEvent &&
       cur2dItemEvent.item &&
       cur2dItemEvent.item.elevation &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.elevation)) ||
+      parseFloat(Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.elevation).toFixed(decimalPlaces))) ||
     0;
 
   const cur2dItemWallSize =
     (cur2dItemEvent &&
       cur2dItemEvent.item &&
       cur2dItemEvent.item.wallSize &&
-      Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.wallSize)) ||
+      parseFloat(Blueprint.Dimensioning.cmToMeasureRaw(cur2dItemEvent.item.wallSize).toFixed(decimalPlaces))) ||
     0;
 
   return (
@@ -221,6 +222,7 @@ const LeftBar_List = () => {
             value={curUnit}
             onChange={(e) => {
               const unit = e.target.value;
+              console.log('input unit: ', unit);
               updateUnit(unit);
               setCurUnit(unit);
             }}>

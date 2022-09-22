@@ -1,6 +1,7 @@
 import { FloorItem } from '../../floor_item';
 import { Root } from './root';
 import { calculateBarrier } from '../net_quoter';
+import { decimalPlaces } from '../../../../../constants';
 
 export class Net extends FloorItem {
   constructor(info) {
@@ -21,6 +22,6 @@ export class Net extends FloorItem {
     const width = components.width.value;
     const height = components.height.value;
     const price = calculateBarrier({ use, width, height })[netType];
-    return price.toFixed(2);
+    return price.toFixed(decimalPlaces);
   }
 }

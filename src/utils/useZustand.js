@@ -56,7 +56,7 @@ const useZustand = create((set) => ({
       isWireFrame,
     })),
 
-  curUnit: Blueprint.dimMeter,
+  curUnit: Blueprint.dimFeetAndInch,
   setCurUnit: (curUnit) =>
     set((state) => ({
       curUnit,

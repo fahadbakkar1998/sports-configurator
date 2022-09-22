@@ -78,6 +78,9 @@ export class Roof extends EventDispatcher {
       case 'SINGLE':
         this.offsetFromLeft = this.roomWidth;
         break;
+      case 'FLAT':
+        this.setMiddleHeight = 0;
+        break;
     }
     this.redraw();
   }

@@ -8,6 +8,7 @@ import {
   Vector2,
   RepeatWrapping,
 } from 'three';
+import { decimalPlaces } from '../../../../../constants';
 
 export class Plane extends Group {
   constructor({ item, compInfo }) {
@@ -56,7 +57,7 @@ export class Plane extends Group {
       const opacity = components.opacity.value;
       if (!opacity || opacity < 0 || opacity > 1) components.opacity.value = 1;
       components.opacity.value = parseFloat(
-        components.opacity.value.toFixed(2),
+        components.opacity.value.toFixed(decimalPlaces),
       );
       return components.opacity.value;
     }

@@ -21,6 +21,7 @@ import { HalfEdge } from './half_edge.js';
 import { Corner } from './corner.js';
 import { Wall } from './wall.js';
 import { Room } from './room.js';
+import { decimalPlaces } from '../../../constants.js';
 
 /* */
 export const defaultFloorPlanTolerance = 10.0;
@@ -565,9 +566,9 @@ export class Floorplan extends EventDispatcher {
 
     cornerIds.forEach((corner) => {
       floorplans.corners[corner.id] = {
-        x: Dimensioning.cmToMeasureRaw(corner.x),
-        y: Dimensioning.cmToMeasureRaw(corner.y),
-        elevation: Dimensioning.cmToMeasureRaw(corner.elevation),
+        x: parseFloat(Dimensioning.cmToMeasureRaw(corner.x).toFixed(decimalPlaces)),
+        y: parseFloat(Dimensioning.cmToMeasureRaw(corner.y).toFixed(decimalPlaces)),
+        elevation: parseFloat(Dimensioning.cmToMeasureRaw(corner.elevation).toFixed(decimalPlaces)),
       };
     });
 

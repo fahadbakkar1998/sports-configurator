@@ -2,6 +2,7 @@ import { EventDispatcher } from 'three';
 import { EVENT_UPDATED } from '../core/events.js';
 import { cmPerPixel, pixelsPerCm, Dimensioning } from '../core/dimensioning.js';
 import { Configuration, configScale } from '../core/configuration.js';
+import { decimalPlaces } from '../../../constants.js';
 
 /*
  * The View to be used by a Floorplanner to render in/interact with.
@@ -86,11 +87,11 @@ export class CarbonSheet extends EventDispatcher {
 
       if (scope._widthPixels < 2.0) {
         scope._widthPixels = scope._rawWidthPixels;
-        scope.width = Dimensioning.cmToMeasureRaw(scope._rawWidth);
+        scope.width = parseFloat(Dimensioning.cmToMeasureRaw(scope._rawWidth).toFixed(decimalPlaces));
       }
       if (scope._heightPixels < 2.0) {
         scope._heightPixels = scope._rawHeightPixels;
-        scope.height = Dimensioning.cmToMeasureRaw(scope._rawHeight);
+        scope.height = parseFloat(Dimensioning.cmToMeasureRaw(scope._rawHeight).toFixed(decimalPlaces));
       }
       scope._loaded = true;
       scope._calibrate();
@@ -179,7 +180,7 @@ export class CarbonSheet extends EventDispatcher {
   }
 
   get width() {
-    return Dimensioning.cmToMeasureRaw(this._width);
+    return parseFloat(Dimensioning.cmToMeasureRaw(this._width).toFixed(decimalPlaces));
   }
 
   set height(val) {
@@ -196,7 +197,7 @@ export class CarbonSheet extends EventDispatcher {
   }
 
   get height() {
-    return Dimensioning.cmToMeasureRaw(this._height);
+    return parseFloat(Dimensioning.cmToMeasureRaw(this._height).toFixed(decimalPlaces));
   }
 
   drawOriginCrossHair() {

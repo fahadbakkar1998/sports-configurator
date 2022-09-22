@@ -43,6 +43,7 @@ export class OutItem extends Item {
     let corners = this.getCorners('x', 'z', vec3);
     // check if we are in a room
     let rooms = this.model.floorplan.getRooms();
+    console.log('corners: ', corners, rooms);
     let isOutARoom = false;
     for (let i = 0; i < rooms.length; i++) {
       const outPolygon = Utils.polygonOutsidePolygon(
@@ -53,6 +54,7 @@ export class OutItem extends Item {
         isOutARoom = true;
       }
     }
+    console.log('isOutARoom: ', isOutARoom);
     if (!isOutARoom) return false;
 
     // check if we are outside all other objects

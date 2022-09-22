@@ -3,44 +3,6 @@ export const items = [
     name: 'Indoor Netting',
     children: [
       {
-        name: 'OmniJam Portable Basketball Goal',
-        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model_path: 'assets/models/gltf/OmniJam Portable Basketball Goal.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: 'Dimension',
-          unit: 'ft',
-          height: 20,
-        },
-      },
-      {
-        name: 'Jam In Ground Adjustable Basketball Goal',
-        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model_path:
-          'assets/models/gltf/Jam In Ground Adjustable Basketball Goal.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: 'Dimension',
-          unit: 'ft',
-          height: 20,
-        },
-      },
-      {
-        name: 'RollaSport Portable Basketball Goal',
-        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
-        model_path:
-          'assets/models/gltf/RollaSport Portable Basketball Goal.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: 'Dimension',
-          unit: 'ft',
-          height: 20,
-        },
-      },
-      {
         name: 'Indoor Batting Cage',
         children: [
           {
@@ -2643,10 +2605,26 @@ export const rectHome = JSON.stringify({
   floorplan: {
     version: '0.0.2a',
     corners: {
-      '4bb4443f-7fab-f22d-5497-212403689ff9': { x: 0, y: 0, elevation: 2.5 },
-      'ab04e8c7-2de5-2980-3ac6-358f020f0aac': { x: 10, y: 0, elevation: 2.5 },
-      'c038166d-c9fc-d71a-f009-1a3010ea9749': { x: 10, y: 10, elevation: 2.5 },
-      '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': { x: 0, y: 10, elevation: 2.5 },
+      '4bb4443f-7fab-f22d-5497-212403689ff9': {
+        x: -15.000024504209856,
+        y: -15.00005731262652,
+        elevation: 15.000106525251521,
+      },
+      'ab04e8c7-2de5-2980-3ac6-358f020f0aac': {
+        x: 25.00002990421087,
+        y: -15.00005731262652,
+        elevation: 15.000106525251521,
+      },
+      'c038166d-c9fc-d71a-f009-1a3010ea9749': {
+        x: 25.00002990421087,
+        y: 25.000062712627535,
+        elevation: 15.000106525251521,
+      },
+      '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': {
+        x: -15.000024504209856,
+        y: 25.000062712627535,
+        elevation: 15.000106525251521,
+      },
     },
     walls: [
       {
@@ -2748,8 +2726,8 @@ export const rectHome = JSON.stringify({
       y: 0,
       anchorX: 0,
       anchorY: 0,
-      width: 0.01,
-      height: 0.01,
+      width: 0.03280841666667,
+      height: 0.03280841666667,
     },
   },
   items: [],

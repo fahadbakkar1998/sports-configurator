@@ -1,6 +1,7 @@
 import { FloorItem } from '../../floor_item';
 import { Root } from './root';
 import { calculateTunnel, calculateBarrier } from '../net_quoter';
+import { decimalPlaces } from '../../../../../constants';
 
 export class ShellCage extends FloorItem {
   constructor(info) {
@@ -57,6 +58,6 @@ export class ShellCage extends FloorItem {
     // calculate rib lines price.
     price += outContainerLength * ribLineNum * ribLinePricePerUnit;
 
-    return price.toFixed(2);
+    return price.toFixed(decimalPlaces);
   }
 }

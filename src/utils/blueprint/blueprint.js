@@ -4,6 +4,7 @@ import { Floorplanner2D } from './floorplanner/floorplanner.js';
 import { Configuration, configDimUnit } from './core/configuration.js';
 import { dimMeter } from './core/dimensioning.js';
 import { immerable } from 'immer';
+import { dimFeetAndInch } from './core/constants.js';
 
 // Classes from core module
 export { Version } from './core/version.js';
@@ -206,7 +207,7 @@ export class BlueprintJS {
    * let blueprint3d = new BP3DJS.BlueprintJS(opts);
    */
   constructor(options) {
-    Configuration.setValue(configDimUnit, dimMeter);
+    Configuration.setValue(configDimUnit, dimFeetAndInch);
 
     /*
      * @property {Object} options

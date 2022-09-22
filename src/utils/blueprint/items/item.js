@@ -11,6 +11,7 @@ import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
 import { minGap } from '../core/constants';
+import { decimalPlaces } from '../../../constants.js';
 
 /*
  * An Item is an abstract entity for all things placed in the scene, e.g. at
@@ -184,6 +185,12 @@ export class Item extends Mesh {
             staticSize.width,
             staticSize.unit,
           );
+          console.log(
+            'item static width: ',
+            staticSize.width,
+            staticSize.unit,
+            width,
+          );
           const height = Dimensioning.cmFromMeasureRaw(
             staticSize.height,
             staticSize.unit,
@@ -205,6 +212,12 @@ export class Item extends Mesh {
           const width = Dimensioning.cmFromMeasureRaw(
             defaultSize.width,
             defaultSize.unit,
+          );
+          console.log(
+            'item default width: ',
+            defaultSize.width,
+            defaultSize.unit,
+            width,
           );
           const height = Dimensioning.cmFromMeasureRaw(
             defaultSize.height,
@@ -568,6 +581,7 @@ export class Item extends Mesh {
   getCorners(xDim, yDim, position) {
     position = position || this.position;
     let halfSize = this.halfSize.clone();
+    console.log('half size: ', halfSize);
     let c1 = new Vector3(-halfSize.x, 0, -halfSize.z);
     let c2 = new Vector3(halfSize.x, 0, -halfSize.z);
     let c3 = new Vector3(halfSize.x, 0, halfSize.z);
@@ -630,7 +644,9 @@ export class Item extends Mesh {
     // objectBox.setFromObject(this);
     this.geometry.computeBoundingBox();
     let objectBox = this.geometry.boundingBox.clone();
-    return objectBox.max.clone().sub(objectBox.min).divideScalar(2);
+    const halfSize = objectBox.max.clone().sub(objectBox.min).divideScalar(2);
+    console.log('object half size: ', halfSize);
+    return halfSize;
   }
 
   /* */
