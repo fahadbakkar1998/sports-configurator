@@ -6,12 +6,12 @@ import {
   loadDesign,
   loadDefaultDesign,
   updateFloorPlanMode,
-} from '../../../utils/bpSupport';
-import useZustand from '../../../utils/useZustand';
+} from '../../../utils/bp.support';
+import useZustand from '../../../utils/use.zustand';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
 import { getFloat, getUFloat, rgbToHex } from '../../../common';
-import { updateUnit } from '../../../utils/bpSupport';
+import { updateUnit } from '../../../utils/bp.support';
 import cn from 'classnames';
 import { decimalPlaces } from '../../../constants';
 

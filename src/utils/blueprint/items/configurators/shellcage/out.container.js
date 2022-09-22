@@ -1,6 +1,6 @@
 import { Group, Vector3 } from 'three';
-import { OutPlane } from './out_plane';
-import { RibLine } from './rib_line';
+import { OutPlane } from './out.plane';
+import { RibLine } from './rib.line';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class OutContainer extends Group {

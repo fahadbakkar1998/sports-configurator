@@ -1,4 +1,4 @@
-import { FloorItem } from './floor_item.js';
+import { FloorItem } from './floor.item.js';
 
 export class OnFloorItem extends FloorItem {
   constructor(info) {

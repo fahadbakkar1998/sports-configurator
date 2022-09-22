@@ -10,7 +10,7 @@ import {
   RingGeometry,
 } from 'three';
 import { minSize, minGap } from '../../../core/constants';
-import { PaintArea } from './paint_area';
+import { PaintArea } from './paint.area';
 
 export class Court extends Group {
   constructor({ item, compInfo }) {

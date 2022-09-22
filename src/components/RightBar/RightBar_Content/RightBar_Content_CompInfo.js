@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { HexColorPicker } from 'react-colorful';
 import DragLabel from '../../Common/DragLabel';
-import useZustand from '../../../utils/useZustand';
+import useZustand from '../../../utils/use.zustand';
 // import Slider from 'rc-slider';
 // import 'rc-slider/assets/index.css';
 import MultiRangeSlider from 'multi-range-slider-react';

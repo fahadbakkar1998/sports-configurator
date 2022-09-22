@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import * as Blueprint from '../../utils/blueprint/blueprint';
-import useZustand from '../../utils/useZustand';
-import { loadDefaultDesign } from '../../utils/bpSupport';
+import useZustand from '../../utils/use.zustand';
+import { loadDefaultDesign } from '../../utils/bp.support';
 import cn from 'classnames';
 
 const Scene_Content = () => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { equals } from '../../../common';
 import { items } from '../../../utils/resource';
-import useZustand from '../../../utils/useZustand';
-import { getTotalPrice } from '../../../utils/bpSupport';
+import useZustand from '../../../utils/use.zustand';
+import { getTotalPrice } from '../../../utils/bp.support';
 import cn from 'classnames';
 
 const RightBar_Content_Total = () => {

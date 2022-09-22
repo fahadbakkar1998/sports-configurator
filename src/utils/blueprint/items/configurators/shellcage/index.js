@@ -1,6 +1,6 @@
-import { FloorItem } from '../../floor_item';
+import { FloorItem } from '../../floor.item';
 import { Root } from './root';
-import { calculateTunnel, calculateBarrier } from '../net_quoter';
+import { calculateTunnel, calculateBarrier } from '../net.quoter';
 import { decimalPlaces } from '../../../../../constants';
 
 export class ShellCage extends FloorItem {

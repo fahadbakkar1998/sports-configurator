@@ -37,7 +37,7 @@ import {
   sphereRadius,
 } from '../core/constants.js';
 
-import { OrbitControls } from './orbitcontrols.js';
+import { OrbitControls } from './orbit.controls.js';
 
 // import {Controls} from './controls.js';
 import { Controller } from './controller.js';

@@ -1,6 +1,6 @@
 import React from 'react';
-import useZustand from '../../../utils/useZustand';
-import { addItem } from '../../../utils/bpSupport';
+import useZustand from '../../../utils/use.zustand';
+import { addItem } from '../../../utils/bp.support';
 import cn from 'classnames';
 
 const itemTypes = {

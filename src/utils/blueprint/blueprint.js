@@ -117,7 +117,7 @@ export {
 export { WallTypes, sphereRadius } from './core/constants.js';
 
 // Classes from model module
-export { HalfEdge } from './model/half_edge.js';
+export { HalfEdge } from './model/half.edge.js';
 export { Corner } from './model/corner.js';
 export { defaultFloorPlanTolerance, Floorplan } from './model/floorplan.js';
 export { Model } from './model/model.js';
@@ -131,12 +131,12 @@ export {
   gridWidth,
   gridColor,
   deleteColor,
-} from './floorplanner/floorplanner_view.js';
+} from './floorplanner/floorplanner.view.js';
 export {
   roomColor,
   roomColorHover,
   roomColorSelected,
-} from './floorplanner/floorplanner_view.js';
+} from './floorplanner/floorplanner.view.js';
 export {
   wallWidth,
   wallWidthHover,
@@ -144,12 +144,12 @@ export {
   wallColor,
   wallColorHover,
   wallColorSelected,
-} from './floorplanner/floorplanner_view.js';
+} from './floorplanner/floorplanner.view.js';
 export {
   edgeColor,
   edgeColorHover,
   edgeWidth,
-} from './floorplanner/floorplanner_view.js';
+} from './floorplanner/floorplanner.view.js';
 export {
   cornerRadius,
   cornerRadiusHover,
@@ -157,8 +157,8 @@ export {
   cornerColor,
   cornerColorHover,
   cornerColorSelected,
-} from './floorplanner/floorplanner_view.js';
-export { FloorplannerView2D } from './floorplanner/floorplanner_view.js';
+} from './floorplanner/floorplanner.view.js';
+export { FloorplannerView2D } from './floorplanner/floorplanner.view.js';
 
 export { Floorplanner2D } from './floorplanner/floorplanner.js';
 export { CarbonSheet } from './floorplanner/carbonsheet.js';
@@ -166,18 +166,18 @@ export { CarbonSheet } from './floorplanner/carbonsheet.js';
 // Classes from items module
 export { item_types, Factory } from './items/factory.js';
 export { Item } from './items/item.js';
-export { FloorItem } from './items/floor_item.js';
-export { WallItem } from './items/wall_item.js';
-export { WallFloorItem } from './items/wall_floor_item.js';
-export { OnFloorItem } from './items/on_floor_item.js';
-export { InWallItem } from './items/in_wall_item.js';
-export { InWallFloorItem } from './items/in_wall_floor_item.js';
-export { RoofItem } from './items/roof_item.js';
+export { FloorItem } from './items/floor.item.js';
+export { WallItem } from './items/wall.item.js';
+export { WallFloorItem } from './items/wall.floor.item.js';
+export { OnFloorItem } from './items/on.floor.item.js';
+export { InWallItem } from './items/in.wall.item.js';
+export { InWallFloorItem } from './items/in.wall.floor.item.js';
+export { RoofItem } from './items/roof.item.js';
 
 // Classes from three module
 export { states, Controller } from './three/controller.js';
-export { OrbitControls } from './three/orbitcontrols.js';
-export { FirstPersonControls } from './three/first-person-controls.js';
+export { OrbitControls } from './three/orbit.controls.js';
+export { FirstPersonControls } from './three/first.person.controls.js';
 export { PointerLockControls } from './three/pointerlockcontrols.js';
 export { STATE, Controls } from './three/controls.js';
 export { Edge } from './three/edge.js';

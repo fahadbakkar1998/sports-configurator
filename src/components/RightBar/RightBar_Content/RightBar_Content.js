@@ -1,5 +1,5 @@
 import React from 'react';
-import useZustand from '../../../utils/useZustand';
+import useZustand from '../../../utils/use.zustand';
 import RightBar_Content_Header from './RightBar_Content_Header';
 import RightBar_Content_Inspector from './RightBar_Content_Inspector';
 import RightBar_Content_Total from './RightBar_Content_Total';

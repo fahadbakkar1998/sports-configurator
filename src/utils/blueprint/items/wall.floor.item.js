@@ -1,4 +1,4 @@
-import { WallItem } from './wall_item.js';
+import { WallItem } from './wall.item.js';
 
 export class WallFloorItem extends WallItem {
   constructor(info) {

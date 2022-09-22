@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useZustand from '../../../utils/useZustand';
+import useZustand from '../../../utils/use.zustand';
 import { getUFloat, rgbToHex, isLeafComponent } from '../../../common';
 import { wallTextures } from '../../../utils/resource';
 import * as Blueprint from '../../../utils/blueprint/blueprint';

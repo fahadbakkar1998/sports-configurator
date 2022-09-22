@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import DragLabel from '../../Common/DragLabel';
 import MultiRangeSlider from 'multi-range-slider-react';
 import { getUFloat } from '../../../common';
-import useZustand from '../../../utils/useZustand';
+import useZustand from '../../../utils/use.zustand';
 
 const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
   const { cur3dItemEvent } = useZustand();

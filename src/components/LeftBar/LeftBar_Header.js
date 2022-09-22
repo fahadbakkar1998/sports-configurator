@@ -1,5 +1,5 @@
 import React from 'react';
-import useZustand from '../../utils/useZustand';
+import useZustand from '../../utils/use.zustand';
 import cn from 'classnames';
 
 const LeftBar_Header = () => {

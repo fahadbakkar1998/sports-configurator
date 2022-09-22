@@ -1,4 +1,4 @@
-import { FloorItem } from '../../floor_item';
+import { FloorItem } from '../../floor.item';
 import { Root } from './root';
 
 export class Basketball extends FloorItem {

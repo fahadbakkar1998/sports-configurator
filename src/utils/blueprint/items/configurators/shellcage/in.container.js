@@ -1,5 +1,5 @@
 import { Group, Vector3 } from 'three';
-import { InPlane } from './in_plane';
+import { InPlane } from './in.plane';
 import { Divider } from './divider';
 import { Dimensioning } from '../../../core/dimensioning';
 

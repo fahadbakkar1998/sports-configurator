@@ -9,7 +9,7 @@ import { Utils } from '../core/utils.js';
 import { WallTypes, cornerTolerance } from '../core/constants.js';
 //import {Dimensioning} from '../core/dimensioning.js';
 import { Configuration, configWallHeight } from '../core/configuration.js';
-import { updateVisibility } from '../../bpSupport.js';
+import { updateVisibility } from '../../bp.support.js';
 
 /*
  * Corners are used to define Walls.

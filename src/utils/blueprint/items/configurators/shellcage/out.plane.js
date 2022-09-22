@@ -1,5 +1,5 @@
 import { Group, Vector3 } from 'three';
-import { OutEdge } from './out_edge';
+import { OutEdge } from './out.edge';
 
 export class OutPlane extends Group {
   constructor({ item, compInfo }) {

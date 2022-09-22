@@ -33,7 +33,7 @@ import {
 } from '../core/events.js';
 import { EVENT_CORNER_2D_MOVED } from '../core/events.js';
 import { EVENT_NOTHING_CLICKED } from '../core/events.js';
-import { FloorplannerView2D, floorplannerModes } from './floorplanner_view.js';
+import { FloorplannerView2D, floorplannerModes } from './floorplanner.view.js';
 import { decimalPlaces } from '../../../constants.js';
 
 /* how much will we move a corner to make a wall axis aligned (cm) */

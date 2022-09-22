@@ -1,6 +1,6 @@
-import { FloorItem } from '../../floor_item';
+import { FloorItem } from '../../floor.item';
 import { Root } from './root';
-import { calculateBarrier } from '../net_quoter';
+import { calculateBarrier } from '../net.quoter';
 import { decimalPlaces } from '../../../../../constants';
 
 export class Net extends FloorItem {

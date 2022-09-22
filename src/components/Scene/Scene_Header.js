@@ -1,12 +1,12 @@
 import React from 'react';
-import useZustand from '../../utils/useZustand';
+import useZustand from '../../utils/use.zustand';
 import {
   updateWireFrameMode,
   updateSnapToRect,
   updateSameElevation,
   updateRoofMode,
   updateVisibility,
-} from '../../utils/bpSupport';
+} from '../../utils/bp.support';
 import cn from 'classnames';
 
 const Scene_Header = () => {

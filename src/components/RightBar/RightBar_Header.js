@@ -1,5 +1,5 @@
 import React from 'react';
-import { saveDesign } from '../../utils/bpSupport';
+import { saveDesign } from '../../utils/bp.support';
 
 const RightBar_Header = () => {
   return (

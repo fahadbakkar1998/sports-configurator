@@ -1,6 +1,6 @@
 import { Group, Vector3, BoxGeometry } from 'three';
-import { OutContainer } from './out_container';
-import { InContainer } from './in_container';
+import { OutContainer } from './out.container';
+import { InContainer } from './in.container';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class Root extends Group {

@@ -17,7 +17,7 @@ import { Dimensioning } from '../core/dimensioning.js';
 import { WallTypes, cornerTolerance } from '../core/constants.js';
 import { Version } from '../core/version.js';
 
-import { HalfEdge } from './half_edge.js';
+import { HalfEdge } from './half.edge.js';
 import { Corner } from './corner.js';
 import { Wall } from './wall.js';
 import { Room } from './room.js';

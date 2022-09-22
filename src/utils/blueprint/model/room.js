@@ -23,7 +23,7 @@ import {
 import { WallTypes } from '../core/constants.js';
 
 import { Utils } from '../core/utils.js';
-import { HalfEdge } from './half_edge.js';
+import { HalfEdge } from './half.edge.js';
 
 /* Default texture to be used if nothing is provided. */
 export const defaultRoomTexture = {
