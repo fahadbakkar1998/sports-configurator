@@ -46,8 +46,6 @@ import { Floorplan3D } from './floorPlan.js';
 import { Lights } from './lights.js';
 import { Skybox } from './skybox.js';
 
-import { defaultWallTexture, selectedWallTexture } from '../model/wall';
-
 export class Main extends EventDispatcher {
   constructor(model, element, canvasElement, opts) {
     super();
@@ -128,6 +126,7 @@ export class Main extends EventDispatcher {
     ];
     this.clippingEmpty = Object.freeze([]);
     this.clippingEnabled = false;
+    this.keyboard = new KeyboardState();
 
     this.init();
   }
@@ -238,11 +237,13 @@ export class Main extends EventDispatcher {
     );
 
     function animate() {
-      // requestAnimationFrame(animate);
       scope.renderer.setAnimationLoop(function () {
+        scope.keyboard.update();
+        if (scope.keyboard.down('delete')) {
+          console.log('test');
+        }
         scope.render();
       });
-      scope.render();
     }
     scope.switchFPSMode(false);
     animate();
