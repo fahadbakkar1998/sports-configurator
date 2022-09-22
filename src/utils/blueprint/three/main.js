@@ -240,11 +240,13 @@ export class Main extends EventDispatcher {
       scope.renderer.setAnimationLoop(function () {
         scope.keyboard.update();
         if (scope.keyboard.down('delete')) {
-          console.log('test');
+          scope.controller.selectedObject &&
+            scope.controller.selectedObject.remove();
         }
         scope.render();
       });
     }
+
     scope.switchFPSMode(false);
     animate();
 
@@ -259,6 +261,7 @@ export class Main extends EventDispatcher {
         scope.hasClicked = true;
       });
   }
+
   exportForBlender() {
     this.skybox.setEnabled(false);
     this.controller.showGroundPlane(false);
