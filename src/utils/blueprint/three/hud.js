@@ -31,10 +31,6 @@ export class HUD extends EventDispatcher {
     this.rotating = false;
     this.mouseover = false;
 
-    this.tolerance = 10;
-    this.height = 5;
-    this.distance = 20;
-
     this.color = '#ffffff';
     this.hoverColor = '#f1c40f';
 
@@ -146,7 +142,7 @@ export class HUD extends EventDispatcher {
   }
 
   makeCone(item) {
-    let coneGeo = new CylinderGeometry(5, 0, 10);
+    let coneGeo = new CylinderGeometry(this.coneRadius, 0, this.coneHeight);
     let coneMat = new MeshBasicMaterial({ color: this.getColor() });
     let cone = new Mesh(coneGeo, coneMat);
     cone.position.copy(this.rotateVector(item));
@@ -155,13 +151,24 @@ export class HUD extends EventDispatcher {
   }
 
   makeSphere() {
-    let geometry = new SphereGeometry(4, 16, 16);
+    let geometry = new SphereGeometry(this.sphereRadius, 16, 16);
     let material = new MeshBasicMaterial({ color: this.getColor() });
     let sphere = new Mesh(geometry, material);
     return sphere;
   }
 
+  setVars(item) {
+    const width = item.getWidth();
+    const depth = item.getDepth();
+    this.coneRadius = width / 20;
+    this.sphereRadius = this.coneRadius * 0.8;
+    this.coneHeight = this.coneRadius * 2;
+    this.distance = this.coneHeight + 20;
+    this.height = this.coneRadius + 4;
+  }
+
   makeObject(item) {
+    this.setVars(item);
     let object = new Object3D();
     let line = new LineSegments(
       this.makeLineGeometry(item),
