@@ -566,9 +566,15 @@ export class Floorplan extends EventDispatcher {
 
     cornerIds.forEach((corner) => {
       floorplans.corners[corner.id] = {
-        x: parseFloat(Dimensioning.cmToMeasureRaw(corner.x).toFixed(decimalPlaces)),
-        y: parseFloat(Dimensioning.cmToMeasureRaw(corner.y).toFixed(decimalPlaces)),
-        elevation: parseFloat(Dimensioning.cmToMeasureRaw(corner.elevation).toFixed(decimalPlaces)),
+        x: parseFloat(
+          Dimensioning.cmToMeasureRaw(corner.x).toFixed(decimalPlaces),
+        ),
+        y: parseFloat(
+          Dimensioning.cmToMeasureRaw(corner.y).toFixed(decimalPlaces),
+        ),
+        elevation: parseFloat(
+          Dimensioning.cmToMeasureRaw(corner.elevation).toFixed(decimalPlaces),
+        ),
       };
     });
 

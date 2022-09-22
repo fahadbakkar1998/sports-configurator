@@ -191,10 +191,10 @@ export class Edge extends EventDispatcher {
   updateObjectVisibility() {
     let scope = this;
     this.wall.items.forEach((item) => {
-    item.updateEdgeVisibility(scope.visible, scope.front);
+      item.updateEdgeVisibility(scope.visible, scope.front);
     });
     this.wall.onItems.forEach((item) => {
-    item.updateEdgeVisibility(scope.visible, scope.front);
+      item.updateEdgeVisibility(scope.visible, scope.front);
     });
   }
 
