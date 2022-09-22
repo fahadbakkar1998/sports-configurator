@@ -1432,8 +1432,8 @@ export const items = [
         },
         max_size: 1000,
         components: {
-          width: { type: 'single', name: 'Width', value: 10 },
-          length: { type: 'single', name: 'Length', value: 10 },
+          width: { type: 'single', name: 'Width', value: 12 },
+          length: { type: 'single', name: 'Length', value: 15 },
           material: {
             type: 'material',
             name: 'Material',
@@ -1512,14 +1512,14 @@ export const items = [
         type: 'horizontality',
         unit: 'ft',
         default_size: {
-          width: 10,
-          length: 10,
+          width: 4,
+          length: 4,
           unit: 'ft',
         },
         max_size: 1000,
         components: {
-          width: { type: 'single', name: 'Width', value: 10 },
-          length: { type: 'single', name: 'Length', value: 10 },
+          width: { type: 'single', name: 'Width', value: 4 },
+          length: { type: 'single', name: 'Length', value: 4 },
           material: {
             type: 'material',
             name: 'Material',
@@ -2209,14 +2209,14 @@ export const items = [
         type: 'aplomb',
         unit: 'ft',
         default_size: {
-          width: 16,
-          height: 10,
+          width: 2,
+          height: 7,
           unit: 'ft',
         },
         max_size: 1000,
         components: {
-          width: { type: 'single', name: 'Width', value: 16 },
-          height: { type: 'single', name: 'Height', value: 10 },
+          width: { type: 'single', name: 'Width', value: 2 },
+          height: { type: 'single', name: 'Height', value: 7 },
           color: { type: 'color', name: 'Color', value: '#0000CD' },
         },
       },
@@ -2224,23 +2224,41 @@ export const items = [
         name: 'Divider Curtain',
         image_path: 'assets/models/thumbnails/Divider Curtain/1.png',
         format: 'configurator',
-        type: 'aplomb',
+        type: 'dividerCurtain',
         unit: 'ft',
         default_size: {
-          width: 16,
-          height: 10,
+          width: 50,
+          height: 20,
           unit: 'ft',
         },
-        max_size: 1000,
+        max_size: 200,
         components: {
-          width: { type: 'single', name: 'Width', value: 16 },
-          height: { type: 'single', name: 'Height', value: 10 },
-          color: { type: 'color', name: 'Color', value: '#000000' },
-          opacity: {
-            type: 'single',
-            name: 'Opacity',
-            value: 0.5,
-            offset: 0.01,
+          width: { type: 'single', name: 'Width', value: 50 },
+          mesh: {
+            name: 'Mesh',
+            value: {
+              height: { type: 'single', name: 'Height', value: 10 },
+              color: { type: 'color', name: 'Color', value: '#AAAAAA' },
+              opacity: {
+                type: 'single',
+                name: 'Opacity',
+                value: 0.5,
+                offset: 0.01,
+              },
+            },
+          },
+          vinyl: {
+            name: 'Vinyl',
+            value: {
+              height: { type: 'single', name: 'Height', value: 10 },
+              color: { type: 'color', name: 'Color', value: '#0074D9' },
+              opacity: {
+                type: 'single',
+                name: 'Opacity',
+                value: 0.5,
+                offset: 0.01,
+              },
+            },
           },
         },
       },

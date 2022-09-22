@@ -12,6 +12,7 @@ import { Net } from './configurators/net';
 import { Horizontality } from './configurators/horizontality';
 import { Aplomb } from './configurators/aplomb';
 import { Basketball } from './configurators/basketball';
+import { DividerCurtain } from './configurators/divider.curtain';
 
 export const item_types = {
   0: Item,
@@ -28,6 +29,7 @@ export const item_types = {
   horizontality: Horizontality,
   aplomb: Aplomb,
   basketball: Basketball,
+  dividerCurtain: DividerCurtain,
 };
 
 /* Factory class to create items. */
