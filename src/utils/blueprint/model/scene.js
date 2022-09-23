@@ -234,6 +234,8 @@ export class Scene extends EventDispatcher {
     };
 
     let fbxCallback = function (fbxModel) {
+      scope.scene.add(fbxModel);
+      return;
       let newMaterials = [];
       let newGeometry = new Geometry();
       fbxModel.traverse(function (child) {
