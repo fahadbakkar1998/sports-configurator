@@ -1470,7 +1470,7 @@ export const items = [
       },
       {
         name: 'Turf Mats',
-        image_path: 'assets/models/thumbnails/Turf Mats/1.jpg',
+        image_path: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
         format: 'configurator',
         type: 'horizontality',
         unit: 'ft',
@@ -1486,20 +1486,28 @@ export const items = [
           material: {
             type: 'material',
             name: 'Material',
-            value: 'assets/models/thumbnails/Turf Mats/1.jpg',
+            value: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
             piece_size: { width: 100, height: 100 },
             options: [
               {
-                name: '1',
-                value: 'assets/models/thumbnails/Turf Mats/1.jpg',
+                name: 'WinterGreen',
+                value: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
               },
               {
-                name: '2',
-                value: 'assets/models/thumbnails/Turf Mats/2.jpg',
+                name: 'Verde',
+                value: 'assets/models/thumbnails/Turf Mats/Verde.jpg',
               },
               {
-                name: '3',
-                value: 'assets/models/thumbnails/Turf Mats/3.jpg',
+                name: 'Red',
+                value: 'assets/models/thumbnails/Turf Mats/Red.jpg',
+              },
+              {
+                name: 'Green',
+                value: 'assets/models/thumbnails/Turf Mats/Green.jpg',
+              },
+              {
+                name: 'Verde1',
+                value: 'assets/models/thumbnails/Turf Mats/Verde1.jpg',
               },
             ],
           },
