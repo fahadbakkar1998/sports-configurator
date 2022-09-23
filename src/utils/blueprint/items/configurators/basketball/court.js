@@ -15,6 +15,7 @@ import { PaintArea } from './paint.area';
 export class Court extends Group {
   constructor({ item, compInfo }) {
     super();
+    this.scene = item.scene;
 
     // Add court ground.
     this.groundMesh = new Mesh(
@@ -54,6 +55,63 @@ export class Court extends Group {
     );
     this.centerOutCircleMesh.position.z = minGap;
     this.add(this.centerOutCircleMesh);
+
+    // Add service line.
+    this.serviceLineMesh1 = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.serviceLineMesh1.position.z = minGap;
+    this.add(this.serviceLineMesh1);
+
+    this.serviceLineMesh2 = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.serviceLineMesh2.position.z = minGap;
+    this.add(this.serviceLineMesh2);
+
+    // Add middle out line.
+    this.middleOutLine1 = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.middleOutLine1.position.z = minGap;
+    this.add(this.middleOutLine1);
+
+    this.middleOutLine2 = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.middleOutLine2.position.z = minGap;
+    this.add(this.middleOutLine2);
+
+    // Add middle in line.
+    this.middleInLine1 = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.middleInLine1.position.z = minGap;
+    this.add(this.middleInLine1);
+
+    this.middleInLine2 = new Mesh(
+      new PlaneGeometry(),
+      new MeshBasicMaterial({
+        side: DoubleSide,
+      }),
+    );
+    this.middleInLine2.position.z = minGap;
+    this.add(this.middleInLine2);
 
     // Add sideline.
     this.sideline1Mesh = new Mesh(
@@ -174,12 +232,55 @@ export class Court extends Group {
       lineWidth,
       hoopsDistance,
       basketDistance,
+      serviceLineDistance,
     } = dimensionInfo;
     const material = components.material.value;
     const court_ground = material.court_ground;
     const groundMatUrl = court_ground.value;
     const lineColor = material.line_color.value;
     const basketDistanceFromBaseline = hoopsDistance + basketDistance;
+    const middleOutLineLength = courtWidth / 2 - serviceLineDistance;
+    const showBasketballLine = components.show_basketball_line.value
+      ? true
+      : false;
+    const showPickleballLine = components.show_pickleball_line.value
+      ? true
+      : false;
+    const showTennisLine = components.show_tennis_line.value ? true : false;
+    const showVolleyballLine = components.show_volleyball_line.value
+      ? true
+      : false;
+
+    // Show lines based on condition.
+    this.centerLineMesh.visible =
+      showBasketballLine ||
+      showPickleballLine ||
+      showTennisLine ||
+      showVolleyballLine;
+    this.centerInCircleMesh.visible =
+      this.centerOutCircleMesh.visible =
+      this.cornerLine11Mesh.visible =
+      this.cornerLine12Mesh.visible =
+      this.cornerLine21Mesh.visible =
+      this.cornerLine22Mesh.visible =
+      this.threePointLine1Mesh.visible =
+      this.threePointLine2Mesh.visible =
+      this.paintArea1.visible =
+      this.paintArea2.visible =
+        showBasketballLine;
+    this.serviceLineMesh1.visible = this.serviceLineMesh2.visible =
+      showPickleballLine || showTennisLine || showVolleyballLine;
+    this.middleOutLine1.visible = this.middleOutLine2.visible =
+      showPickleballLine;
+    this.middleInLine1.visible = this.middleInLine2.visible = showTennisLine;
+    this.sideline1Mesh.visible =
+      this.sideline2Mesh.visible =
+      this.baseline1Mesh.visible =
+      this.baseline2Mesh.visible =
+        showBasketballLine ||
+        showPickleballLine ||
+        showTennisLine ||
+        showVolleyballLine;
 
     // Update ground material.
     this.groundMesh.geometry = new PlaneGeometry(courtWidth, courtLength);
@@ -222,6 +323,48 @@ export class Court extends Group {
       1000,
     );
     this.centerOutCircleMesh.material.color.set(lineColor);
+
+    // Update service line.
+    this.serviceLineMesh1.position.x = -serviceLineDistance;
+    this.serviceLineMesh1.geometry = new PlaneGeometry(lineWidth, courtLength);
+    this.serviceLineMesh1.material.color.set(lineColor);
+    this.serviceLineMesh2.position.x = serviceLineDistance;
+    this.serviceLineMesh2.geometry = new PlaneGeometry(lineWidth, courtLength);
+    this.serviceLineMesh2.material.color.set(lineColor);
+
+    // Update middle out line.
+    this.middleOutLine1.position.x = -(
+      middleOutLineLength / 2 +
+      serviceLineDistance
+    );
+    this.middleOutLine1.geometry = new PlaneGeometry(
+      middleOutLineLength,
+      lineWidth,
+    );
+    this.middleOutLine1.material.color.set(lineColor);
+
+    this.middleOutLine2.position.x =
+      middleOutLineLength / 2 + serviceLineDistance;
+    this.middleOutLine2.geometry = new PlaneGeometry(
+      middleOutLineLength,
+      lineWidth,
+    );
+    this.middleOutLine2.material.color.set(lineColor);
+
+    // Update middle in line.
+    this.middleInLine1.position.x = -serviceLineDistance / 2;
+    this.middleInLine1.geometry = new PlaneGeometry(
+      serviceLineDistance,
+      lineWidth,
+    );
+    this.middleInLine1.material.color.set(lineColor);
+
+    this.middleInLine2.position.x = serviceLineDistance / 2;
+    this.middleInLine2.geometry = new PlaneGeometry(
+      serviceLineDistance,
+      lineWidth,
+    );
+    this.middleInLine2.material.color.set(lineColor);
 
     // Update sideline.
     this.sideline1Mesh.position.y = -courtLength / 2;

@@ -52,6 +52,8 @@ export class Root extends Group {
       dimension.court_width.value = dimension.outer_width.value;
     if (dimension.court_length.value > dimension.outer_length.value)
       dimension.court_length.value = dimension.outer_length.value;
+    if (dimension.service_line_distance.value > dimension.court_width.value / 4)
+      dimension.service_line_distance.value = dimension.court_width.value / 4;
     const center_circle_diameter = dimension.center_circle_diameter.value;
     if (
       dimension.no_charge_zone_arc.value >
@@ -78,9 +80,9 @@ export class Root extends Group {
     if (dimension.key.value > dimension.court_length.value)
       dimension.key.value = dimension.court_length.value;
     const limitFreeThrowLineDistance =
-      dimension.three_point_line_distance.value.max.value +
+      three_point_line_distance.max.value +
       dimension.basket_distance.value -
-      dimension.center_circle_diameter.value.out.value / 2;
+      center_circle_diameter.out.value / 2;
     if (dimension.free_throw_line_distance.value > limitFreeThrowLineDistance)
       dimension.free_throw_line_distance.value = limitFreeThrowLineDistance;
 
@@ -98,6 +100,10 @@ export class Root extends Group {
     );
     const courtLength = Dimensioning.cmFromMeasureRaw(
       dimension.court_length.value,
+      this.unit,
+    );
+    const serviceLineDistance = Dimensioning.cmFromMeasureRaw(
+      dimension.service_line_distance.value,
       this.unit,
     );
     const rimHeight = Dimensioning.cmFromMeasureRaw(
@@ -152,6 +158,7 @@ export class Root extends Group {
       outerLength,
       courtWidth,
       courtLength,
+      serviceLineDistance,
       rimHeight,
       noChargeZoneArc,
       centerInCircleDiameter,

@@ -1567,29 +1567,6 @@ export const items = [
         },
         max_size: 200,
         components: {
-          type: {
-            type: 'select',
-            name: 'Type',
-            value: 'basketball',
-            options: [
-              {
-                name: 'Basketball',
-                value: 'basketball',
-              },
-              {
-                name: 'Pickleball',
-                value: 'pickleball',
-              },
-              {
-                name: 'Tennis',
-                value: 'tennis',
-              },
-              {
-                name: 'Volleyball',
-                value: 'volleyball',
-              },
-            ],
-          },
           dimension: {
             name: 'Dimension',
             value: {
@@ -1632,6 +1609,12 @@ export const items = [
                 type: 'single',
                 name: 'Free-throw line distance from point on the floor directly below the backboard',
                 value: 15,
+              },
+              service_line_distance: {
+                // from the center
+                type: 'single',
+                name: 'Service Line Distance',
+                value: 14,
               },
               line_width: {
                 type: 'single',
