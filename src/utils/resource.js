@@ -19,9 +19,9 @@ export const items = [
                   name: '55L',
                   unit: 'ft',
                   width: 55,
-                  height: 12,
-                  length: 12,
-                  // price: 2795,
+                  // height: 12,
+                  // length: 12,
+                  price: 2795,
                 },
                 accessories: [
                   {
@@ -67,9 +67,9 @@ export const items = [
                 default_size: {
                   unit: 'ft',
                   width: 55,
-                  height: 12,
-                  length: 12,
-                  // price: 1196,
+                  // height: 22,
+                  // length: 12,
+                  price: 1196,
                 },
                 accessories: [
                   {
@@ -260,7 +260,6 @@ export const items = [
                       hole_size: {
                         type: 'single',
                         name: 'HoleSize',
-                        // value: 0.15625,
                         value: 0.3,
                         immutability: true,
                       },
@@ -406,7 +405,7 @@ export const items = [
                   name: '55L',
                   unit: 'ft',
                   width: 55,
-                  height: 26,
+                  height: 22,
                   length: 12,
                   price: 2795,
                 },
@@ -415,7 +414,7 @@ export const items = [
                     name: '70L',
                     unit: 'ft',
                     width: 70,
-                    height: 12,
+                    height: 22,
                     length: 12,
                     extraPrice: 200,
                   },
@@ -462,9 +461,9 @@ export const items = [
                 format: 'gltf',
                 default_size: {
                   unit: 'ft',
-                  width: 55,
-                  height: 12,
-                  length: 36,
+                  width: 70,
+                  // height: 12,
+                  // length: 36,
                   price: 3427,
                 },
                 accessories: [
@@ -496,16 +495,16 @@ export const items = [
         children: [
           {
             name: 'Single Hitting Cage',
-            image_path: 'assets/models/thumbnails/Outdoor Varsity 55.png',
-            model_path: 'assets/models/gltf/Outdoor Varsity 55.glb',
+            image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
+            model_path: 'assets/models/gltf/Single Hitting Cage.glb',
             type: '5',
             format: 'gltf',
             default_size: {
               unit: 'ft',
-              width: 70,
-              height: 12,
-              length: 12,
-              // price: 4385,
+              width: 55,
+              // height: 12,
+              // length: 12,
+              price: 4385,
             },
             accessories: [
               {
@@ -729,10 +728,10 @@ export const items = [
         format: 'gltf',
         default_size: {
           unit: 'ft',
-          width: 70,
-          height: 12,
-          length: 12,
-          // price: 4385,
+          width: 35,
+          // height: 12,
+          // length: 12,
+          price: 4385,
         },
         accessories: [
           {
@@ -817,10 +816,10 @@ export const items = [
         format: 'gltf',
         default_size: {
           unit: 'ft',
-          width: 70,
-          height: 12,
-          length: 12,
-          // price: 4385,
+          width: 55,
+          // height: 12,
+          // length: 12,
+          price: 4385,
         },
         accessories: [
           {
@@ -906,9 +905,9 @@ export const items = [
         default_size: {
           unit: 'ft',
           width: 70,
-          height: 12,
-          length: 12,
-          // price: 4385,
+          // height: 12,
+          // length: 12,
+          price: 4385,
         },
         accessories: [
           {
@@ -993,10 +992,10 @@ export const items = [
         format: 'gltf',
         default_size: {
           unit: 'ft',
-          width: 55,
-          height: 12,
-          length: 12,
-          // price: 3783,
+          width: 35,
+          // height: 12,
+          // length: 12,
+          price: 3783,
         },
         accessories: [
           {
@@ -1065,8 +1064,8 @@ export const items = [
         default_size: {
           unit: 'ft',
           width: 55,
-          height: 12,
-          length: 12,
+          // height: 12,
+          // length: 12,
           price: 4783,
         },
         accessories: [
@@ -1135,10 +1134,10 @@ export const items = [
         format: 'gltf',
         default_size: {
           unit: 'ft',
-          width: 55,
-          height: 12,
-          length: 12,
-          // price: 5783,
+          width: 70,
+          // height: 12,
+          // length: 12,
+          price: 5783,
         },
         accessories: [
           {
@@ -1207,8 +1206,8 @@ export const items = [
         default_size: {
           unit: 'ft',
           width: 55,
-          height: 12,
-          length: 12,
+          // height: 12,
+          // length: 12,
           price: 6449,
         },
         staticSizes: [
@@ -1279,8 +1278,8 @@ export const items = [
         default_size: {
           unit: 'ft',
           width: 55,
-          height: 12,
-          length: 12,
+          // height: 12,
+          // length: 12,
           price: 6449,
         },
         staticSizes: [
@@ -1351,8 +1350,8 @@ export const items = [
         default_size: {
           unit: 'ft',
           width: 55,
-          height: 12,
-          length: 24,
+          // height: 12,
+          // length: 24,
           price: 6449,
         },
         staticSizes: [
@@ -2301,9 +2300,6 @@ export const items = [
   {
     name: 'Training Equipment',
     children: [
-      // {
-      //   name: 'Pitching Machine',
-      // },
       {
         name: 'L-Screen',
         image_path: 'assets/models/thumbnails/L-Screen.png',
@@ -2314,8 +2310,8 @@ export const items = [
           name: '7W*9H',
           unit: 'ft',
           width: 7,
-          height: 9,
-          length: 1,
+          // height: 9,
+          // length: 1,
           price: 599,
         },
         accessories: [
@@ -2393,8 +2389,8 @@ export const items = [
           name: '5W*7H',
           unit: 'ft',
           width: 5,
-          height: 7,
-          length: 1,
+          // height: 7,
+          // length: 1,
           price: 399,
         },
         accessories: [
@@ -2477,8 +2473,8 @@ export const items = [
           name: '24W*8H',
           unit: 'ft',
           width: 24,
-          height: 8,
-          length: 5,
+          // height: 8,
+          // length: 5,
           price: 2445,
         },
       },
@@ -2538,102 +2534,119 @@ export const items = [
         image_path: 'assets/models/thumbnails/1.jpg',
         model_path: 'assets/models/js/1.js',
         type: '1',
+        default_size: { unit: 'ft', width: 4 },
       },
       {
         name: '2',
         image_path: 'assets/models/thumbnails/2.jpg',
         model_path: 'assets/models/js/2.js',
         type: '9',
+        default_size: { unit: 'ft', width: 4 },
       },
-      {
-        name: '3',
-        image_path: 'assets/models/thumbnails/3.jpg',
-        model_path: 'assets/models/js/3.js',
-        type: '1',
-      },
+      // {
+      //   name: '3',
+      //   image_path: 'assets/models/thumbnails/3.jpg',
+      //   model_path: 'assets/models/js/3.js',
+      //   type: '1',
+      //   default_size: { unit: 'ft', width: 4 },
+      // },
       {
         name: '4',
         image_path: 'assets/models/thumbnails/4.jpg',
         model_path: 'assets/models/js/4.js',
         type: '9',
+        default_size: { unit: 'ft', width: 6 },
       },
       {
         name: '5',
         image_path: 'assets/models/thumbnails/5.jpg',
         model_path: 'assets/models/js/5.js',
         type: '1',
+        default_size: { unit: 'ft', width: 4 },
       },
       {
         name: '6',
         image_path: 'assets/models/thumbnails/6.jpg',
         model_path: 'assets/models/js/6.js',
         type: '9',
+        default_size: { unit: 'ft', width: 8 },
       },
       {
         name: '7',
         image_path: 'assets/models/thumbnails/7.jpg',
         model_path: 'assets/models/js/7.js',
         type: '9',
+        default_size: { unit: 'ft', width: 4 },
       },
-      {
-        name: '8',
-        image_path: 'assets/models/thumbnails/8.jpg',
-        model_path: 'assets/models/js/8.js',
-        type: '8',
-      },
+      // {
+      //   name: '8',
+      //   image_path: 'assets/models/thumbnails/8.jpg',
+      //   model_path: 'assets/models/js/8.js',
+      //   type: '8',
+      //   default_size: { unit: 'ft', width: 4 },
+      // },
       {
         name: '9',
         image_path: 'assets/models/thumbnails/9.jpg',
         model_path: 'assets/models/js/9.js',
         type: '1',
+        default_size: { unit: 'ft', width: 5 },
       },
       {
         name: '10',
         image_path: 'assets/models/thumbnails/10.jpg',
         model_path: 'assets/models/js/10.js',
         type: '9',
+        default_size: { unit: 'ft', width: 8 },
       },
       {
         name: '11',
         image_path: 'assets/models/thumbnails/11.jpg',
         model_path: 'assets/models/js/11.js',
         type: '1',
+        default_size: { unit: 'ft', width: 4 },
       },
-      {
-        name: '12',
-        image_path: 'assets/models/thumbnails/12.jpg',
-        model_path: 'assets/models/js/12.js',
-        type: '1',
-      },
-      {
-        name: '13',
-        image_path: 'assets/models/thumbnails/13.jpg',
-        model_path: 'assets/models/js/13.js',
-        type: '1',
-      },
-      {
-        name: '14',
-        image_path: 'assets/models/thumbnails/14.jpg',
-        model_path: 'assets/models/js/14.js',
-        type: '1',
-      },
+      // {
+      //   name: '12',
+      //   image_path: 'assets/models/thumbnails/12.jpg',
+      //   model_path: 'assets/models/js/12.js',
+      //   type: '1',
+      //   default_size: { unit: 'ft', width: 6 },
+      // },
+      // {
+      //   name: '13',
+      //   image_path: 'assets/models/thumbnails/13.jpg',
+      //   model_path: 'assets/models/js/13.js',
+      //   type: '1',
+      //   default_size: { unit: 'ft', width: 4 },
+      // },
+      // {
+      //   name: '14',
+      //   image_path: 'assets/models/thumbnails/14.jpg',
+      //   model_path: 'assets/models/js/14.js',
+      //   type: '1',
+      //   default_size: { unit: 'ft', width: 8 },
+      // },
       {
         name: '15',
         image_path: 'assets/models/thumbnails/15.jpg',
         model_path: 'assets/models/js/15.js',
         type: '1',
+        default_size: { unit: 'ft', width: 4 },
       },
       {
         name: '16',
         image_path: 'assets/models/thumbnails/16.jpg',
         model_path: 'assets/models/js/16.js',
         type: '3',
+        default_size: { unit: 'ft', width: 4 },
       },
       {
         name: '17',
         image_path: 'assets/models/thumbnails/17.jpg',
         model_path: 'assets/models/js/17.js',
         type: '1',
+        default_size: { unit: 'ft', width: 4 },
       },
     ],
   },
@@ -2652,6 +2665,8 @@ export const items = [
 // net: Net,
 // horizontality: Horizontality,
 // aplomb: Aplomb,
+// basketball: Basketball,
+// dividerCurtain: DividerCurtain,
 
 export const rectHome = JSON.stringify({
   floorplan: {
