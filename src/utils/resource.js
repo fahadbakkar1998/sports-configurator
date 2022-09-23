@@ -2648,6 +2648,14 @@ export const items = [
         type: '1',
         default_size: { unit: 'ft', width: 4 },
       },
+      {
+        name: '18',
+        image_path: 'assets/models/thumbnails/CurtainCage Easy Slide.png',
+        model_path: 'assets/models/fbx/ybot.fbx',
+        type: '5',
+        format: 'gltf',
+        default_size: { unit: 'ft', width: 4 },
+      },
     ],
   },
 ];

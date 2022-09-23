@@ -46,7 +46,6 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "three": "^0.98.0",
-    "three-dracoloader": "^0.0.1",
     "three-effectcomposer": "^0.0.1",
     "three-gltf-exporter": "0.0.1",
     "three-gltf-loader": "1.98.0",

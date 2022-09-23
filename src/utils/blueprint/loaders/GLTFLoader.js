@@ -7,7 +7,7 @@
  */
 
 var THREE = require('three');
-var DRACOLoader = require('./three-dracoloader');
+var DRACOLoader = require('./three.dracoloader');
 
 var _GLTFLoader = (function () {
   function GLTFLoader(manager) {

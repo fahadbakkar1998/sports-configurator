@@ -37,6 +37,7 @@ var _FBXLoader = (function () {
     crossOrigin: 'anonymous',
 
     load: function (url, onLoad, onProgress, onError) {
+      console.log('test');
       var self = this;
 
       var path =

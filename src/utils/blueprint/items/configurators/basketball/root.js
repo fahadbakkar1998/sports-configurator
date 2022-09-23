@@ -2,7 +2,7 @@ import { Group, BoxGeometry, TextureLoader, LoadingManager, Mesh } from 'three';
 import { Dimensioning } from '../../../core/dimensioning';
 import { minSize } from '../../../core/constants';
 import { Outside } from './outside';
-import DRACOLoader from '../../../loaders/three-dracoloader';
+import DRACOLoader from '../../../loaders/three.dracoloader';
 import GLTFLoader from '../../../loaders/GLTFLoader';
 import OBJLoader from '@calvinscofield/three-objloader';
 import FBXLoader from '../../../loaders/FBXLoader';

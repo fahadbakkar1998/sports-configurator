@@ -10,7 +10,7 @@ import {
   DoubleSide,
   Vector3,
 } from 'three';
-import DRACOLoader from '../loaders/three-dracoloader';
+import DRACOLoader from '../loaders/three.dracoloader';
 import GLTFLoader from '../loaders/GLTFLoader';
 import OBJLoader from '@calvinscofield/three-objloader';
 import FBXLoader from '../loaders/FBXLoader';
