@@ -386,9 +386,9 @@ const RightBar_Content_Inspector = () => {
               className="item-info-logo"
               src={cur3dItemEvent.item.metadata.image_path}></img>
             <div className="item-info">{cur3dItemEvent.item.metadata.name}</div>
-            <div className="item-info">
+            {/* <div className="item-info">
               Cost: ${cur3dItemEvent.item.getPrice()}
-            </div>
+            </div> */}
             <div
               className="item-remove"
               onClick={() => {
