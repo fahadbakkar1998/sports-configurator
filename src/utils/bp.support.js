@@ -1,7 +1,9 @@
 import { rectHome } from './resource';
 import * as Blueprint from './blueprint/blueprint';
+import axios from 'axios';
+import { backendUrl } from '../constants';
 
-export const saveDesign = () => {
+export const saveDesign = ({ productId }) => {
   let data = window.blueprintJS.model.exportDataObj();
   let a = window.document.createElement('a');
   let blob = new Blob([JSON.stringify(data)], { type: 'text' });
@@ -15,6 +17,19 @@ export const saveDesign = () => {
   document.body.removeChild(a);
 };
 
+export const saveCart = async ({ productId }) => {
+  const info = window.blueprintJS.model.exportDataObj();
+  const name = Object.values(info.floorplan.rooms)
+    .map((e) => e.name)
+    .join(',');
+  console.log('save design: ', name, info);
+  if (productId) {
+    await axios.post(`${backendUrl}/update/${productId}`, { name, info });
+  } else {
+    await axios.post(`${backendUrl}/add`, { name, info });
+  }
+};
+
 export const loadDesign = (data) => {
   console.log('bpSupport_loadDesign_data: ', JSON.parse(data));
   window.blueprintJS.model.loadSerialized(data);
@@ -24,6 +39,11 @@ export const loadDesign = (data) => {
 export const loadDefaultDesign = () => {
   window.blueprintJS.model.loadSerialized(rectHome);
   updateFloorPlan();
+};
+
+export const loadCart = async (productId) => {
+  const res = await axios.get(`${backendUrl}/${productId}`);
+  loadDesign(JSON.stringify(res.data.info));
 };
 
 export const addItem = (item) => {

@@ -91,6 +91,18 @@ const useZustand = create((set) => ({
     set((state) => ({
       loading,
     })),
+
+  products: [],
+  setProducts: (products) =>
+    set((state) => ({
+      products,
+    })),
+
+  selProductId: null,
+  setSelProductId: (selProductId) =>
+    set((state) => ({
+      selProductId,
+    })),
 }));
 
 export default useZustand;

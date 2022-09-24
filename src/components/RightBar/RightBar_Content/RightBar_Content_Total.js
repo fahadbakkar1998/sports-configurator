@@ -2,13 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { equals } from '../../../common';
 import { items } from '../../../utils/resource';
 import useZustand from '../../../utils/use.zustand';
-import { getTotalPrice } from '../../../utils/bp.support';
+import {
+  getTotalPrice,
+  loadCart,
+  loadDefaultDesign,
+} from '../../../utils/bp.support';
 import cn from 'classnames';
+import axios from 'axios';
+import { backendUrl } from '../../../constants';
 
 const RightBar_Content_Total = () => {
   const [bpJS, setBpJS] = globalStore.useState('blueprintJS');
   const [itemGroups, setItemGroups] = useState([]);
-  const { cur3dItemEvent } = useZustand();
+  const {
+    cur3dItemEvent,
+    products,
+    setProducts,
+    selProductId,
+    setSelProductId,
+  } = useZustand();
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
 
   useEffect(() => {
     if (bpJS && bpJS.model.scene.items) {
@@ -28,6 +44,22 @@ const RightBar_Content_Total = () => {
     }
   }, [bpJS]);
 
+  const loadProducts = async () => {
+    const res = await axios.get(`${backendUrl}/`);
+    setProducts(res.data);
+    if (res.data && res.data.length && selProductId) {
+      const firstProductId = res.data[0]._id;
+      firstProductId !== selProductId && loadProductScene(firstProductId);
+    } else {
+      setSelProductId(null);
+    }
+  };
+
+  const loadProductScene = async (productId) => {
+    loadCart(productId);
+    setSelProductId(productId);
+  };
+
   const getHeaderName = (hierarchy) => {
     if (!hierarchy || !hierarchy.length) return '';
     let headerName = items[hierarchy[0]].name;
@@ -41,6 +73,37 @@ const RightBar_Content_Total = () => {
 
   return (
     <div className="RightBar_Content_Total">
+      {products.length && (
+        <div className="item-group">
+          {/* <div className="header">Estimated Totals</div>
+          <div className="item">${getTotalPrice()}</div> */}
+          <div className="header">Products</div>
+          {React.Children.toArray(
+            products.map((product) => (
+              <div className="item">
+                <div
+                  className={cn('item-name', {
+                    active: selProductId === product._id,
+                  })}
+                  onClick={() => {
+                    loadProductScene(product._id);
+                  }}>
+                  {product.name}
+                </div>
+                <img
+                  className="item-remove"
+                  src="assets/images/close.png"
+                  onClick={async () => {
+                    await axios.post(`${backendUrl}/remove/${product._id}`);
+                    loadProducts();
+                  }}
+                />
+              </div>
+            )),
+          )}
+        </div>
+      )}
+
       {React.Children.toArray(
         itemGroups.map((itemGroup) => (
           <div className="item-group">
@@ -69,10 +132,6 @@ const RightBar_Content_Total = () => {
           </div>
         )),
       )}
-      <div className="item-group">
-        <div className="header">Estimated Totals</div>
-        <div className="item">${getTotalPrice()}</div>
-      </div>
     </div>
   );
 };

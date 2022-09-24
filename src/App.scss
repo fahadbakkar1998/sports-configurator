@@ -580,6 +580,8 @@ $commonHeight: 1.8vmax;
             justify-content: space-between;
 
             .item-name {
+              cursor: pointer;
+
               &.active {
                 color: $activeColor;
               }
