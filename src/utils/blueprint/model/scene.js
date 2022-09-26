@@ -177,6 +177,7 @@ export class Scene extends EventDispatcher {
     };
 
     let gltfCallback = function (gltfModel) {
+      console.log('gltf model: ', gltfModel);
       let newMaterials = [];
       let newGeometry = new Geometry();
       gltfModel.scene.traverse(function (child) {
