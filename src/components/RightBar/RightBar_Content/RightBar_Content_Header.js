@@ -16,7 +16,7 @@ const RightBar_Content_Header = () => {
       <div
         className={cn('item', { active: rightBarMode === 'TOTAL' })}
         onClick={() => setRightBarMode('TOTAL')}>
-        Total
+        Items
       </div>
     </div>
   );
