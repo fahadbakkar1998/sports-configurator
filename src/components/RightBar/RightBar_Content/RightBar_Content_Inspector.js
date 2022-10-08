@@ -446,7 +446,7 @@ const RightBar_Content_Inspector = () => {
                                     })}
                                     onClick={() =>
                                       updateCur3dStaticSize(index)
-                                    }>{`${staticSize.name}(+${staticSize.extraPrice})`}</div>
+                                    }>{`${staticSize.name}`}</div>
                                 ),
                               ),
                             )}
@@ -585,7 +585,7 @@ const RightBar_Content_Inspector = () => {
                                       })}
                                       onClick={() =>
                                         updateCur3dAccessory(i, j + 1)
-                                      }>{`${type.name}(+${type.extraPrice})`}</div>
+                                      }>{`${type.name}`}</div>
                                   )),
                                 )}
                             </div>
