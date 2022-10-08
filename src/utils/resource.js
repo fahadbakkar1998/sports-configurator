@@ -439,34 +439,6 @@ export const items = [
                     extraPrice: 200,
                   },
                 ],
-                accessories: [
-                  {
-                    name: 'Golf Compatible',
-                    types: [
-                      {
-                        name: 'Not Golf Compatible',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: 'Golf Compatible',
-                        extraPrice: 299,
-                      },
-                    ],
-                  },
-                  {
-                    name: 'Storage Cart',
-                    types: [
-                      {
-                        name: 'No Storage Cart',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: 'With Storage Cart',
-                        extraPrice: 496,
-                      },
-                    ],
-                  },
-                ],
               },
               {
                 name: 'Double Lane',
@@ -491,34 +463,6 @@ export const items = [
                     extraPrice: 200,
                   },
                 ],
-                accessories: [
-                  {
-                    name: 'Golf Compatible',
-                    types: [
-                      {
-                        name: 'Not Golf Compatible',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: 'Golf Compatible',
-                        extraPrice: 299,
-                      },
-                    ],
-                  },
-                  {
-                    name: 'Storage Cart',
-                    types: [
-                      {
-                        name: 'No Storage Cart',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: 'With Storage Cart',
-                        extraPrice: 496,
-                      },
-                    ],
-                  },
-                ],
               },
               {
                 name: 'Triple Lane',
@@ -541,34 +485,6 @@ export const items = [
                     height: 22,
                     length: 12,
                     extraPrice: 200,
-                  },
-                ],
-                accessories: [
-                  {
-                    name: 'Golf Compatible',
-                    types: [
-                      {
-                        name: 'Not Golf Compatible',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: 'Golf Compatible',
-                        extraPrice: 299,
-                      },
-                    ],
-                  },
-                  {
-                    name: 'Storage Cart',
-                    types: [
-                      {
-                        name: 'No Storage Cart',
-                        extraPrice: 0,
-                      },
-                      {
-                        name: 'With Storage Cart',
-                        extraPrice: 496,
-                      },
-                    ],
                   },
                 ],
               },
@@ -721,19 +637,28 @@ export const items = [
             },
             accessories: [
               {
-                name: 'Number of Lanes',
+                name: 'Golf Compatible',
                 types: [
                   {
-                    name: '2 Lanes',
+                    name: 'Not Golf Compatible',
                     extraPrice: 0,
                   },
                   {
-                    name: '3 Lanes',
-                    extraPrice: 1538,
+                    name: 'Golf Compatible',
+                    extraPrice: 299,
+                  },
+                ],
+              },
+              {
+                name: 'Storage Cart',
+                types: [
+                  {
+                    name: 'No Storage Cart',
+                    extraPrice: 0,
                   },
                   {
-                    name: '4 Lanes',
-                    extraPrice: 2967,
+                    name: 'With Storage Cart',
+                    extraPrice: 496,
                   },
                 ],
               },
@@ -2129,19 +2054,28 @@ export const items = [
             },
             accessories: [
               {
-                name: 'Number of Lanes',
+                name: 'Golf Compatible',
                 types: [
                   {
-                    name: '2 Lanes',
+                    name: 'Not Golf Compatible',
                     extraPrice: 0,
                   },
                   {
-                    name: '3 Lanes',
-                    extraPrice: 1538,
+                    name: 'Golf Compatible',
+                    extraPrice: 299,
+                  },
+                ],
+              },
+              {
+                name: 'Storage Cart',
+                types: [
+                  {
+                    name: 'No Storage Cart',
+                    extraPrice: 0,
                   },
                   {
-                    name: '4 Lanes',
-                    extraPrice: 2967,
+                    name: 'With Storage Cart',
+                    extraPrice: 496,
                   },
                 ],
               },
