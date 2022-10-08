@@ -17,6 +17,9 @@ const RightBar_Content_CompInfo = ({
   onClick,
   updateComponents,
 }) => {
+  console.log('isOpen: ', isOpen);
+  console.log('comp.immutability: ', comp.immutability);
+
   const { cur3dItemEvent } = useZustand();
 
   const style = {
@@ -29,7 +32,10 @@ const RightBar_Content_CompInfo = ({
     <>
       {isLeafComponent(comp) ? (
         <>
-          <div className={classnames('input-group', { hide: !isOpen })}>
+          <div
+            className={classnames('input-group', {
+              hide: !isOpen || comp.immutability,
+            })}>
             {comp.type === 'single' && (
               <>
                 <DragLabel
@@ -104,7 +110,7 @@ const RightBar_Content_CompInfo = ({
                 <>
                   <div
                     className={classnames('RightBar_Content_Comp', {
-                      show: isOpen,
+                      hide: !isOpen,
                     })}
                     onClick={onClick}>
                     <div
@@ -184,7 +190,9 @@ const RightBar_Content_CompInfo = ({
         </>
       ) : (
         <div
-          className={classnames('RightBar_Content_Comp', { show: isOpen })}
+          className={classnames('RightBar_Content_Comp', {
+            hide: !isOpen || comp.immutability,
+          })}
           onClick={onClick}>
           <div
             className={classnames('arrow', { open: openChildren })}

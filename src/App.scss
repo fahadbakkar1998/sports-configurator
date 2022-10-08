@@ -95,10 +95,10 @@ $commonHeight: 1.8vmax;
           border-bottom: 1px solid $borderColor;
           height: $commonHeight;
           transition: 0.2s;
-          display: none;
+          display: flex;
 
-          &.show {
-            display: flex;
+          &.hide {
+            display: none;
           }
 
           div {
@@ -118,7 +118,7 @@ $commonHeight: 1.8vmax;
 
         .LeftBar_List_Leaf {
           width: 33.33%;
-          display: none;
+          display: flex;
           align-items: center;
           justify-content: center;
           padding: $fontPadding;
@@ -126,8 +126,8 @@ $commonHeight: 1.8vmax;
           max-height: 50vh;
           overflow: auto;
 
-          &.show {
-            display: flex;
+          &.hide {
+            display: none;
           }
 
           .container {
@@ -372,10 +372,10 @@ $commonHeight: 1.8vmax;
           border-bottom: 1px solid $borderColor;
           height: $commonHeight;
           transition: 0.2s;
-          display: none;
+          display: flex;
 
-          &.show {
-            display: flex;
+          &.hide {
+            display: none;
           }
 
           div {
@@ -418,7 +418,7 @@ $commonHeight: 1.8vmax;
           max-height: 50vh;
           overflow: auto;
 
-          &.show {
+          &.hide {
             display: none;
           }
 

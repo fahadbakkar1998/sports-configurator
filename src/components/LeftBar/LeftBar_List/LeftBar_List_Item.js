@@ -34,7 +34,7 @@ const LeftBar_List_Item = ({
     <>
       {item.children ? (
         <div
-          className={cn('LeftBar_List_Item', { show: isOpen })}
+          className={cn('LeftBar_List_Item', { hide: !isOpen })}
           onClick={onClick}>
           <div className={cn('arrow', { open: openChildren })} style={style}>
             &gt;
@@ -42,7 +42,7 @@ const LeftBar_List_Item = ({
           <div className="name">{item.name}</div>
         </div>
       ) : (
-        <div className={cn('LeftBar_List_Leaf', { show: isOpen })}>
+        <div className={cn('LeftBar_List_Leaf', { hide: !isOpen })}>
           <div className="container">
             <img
               className="image"
