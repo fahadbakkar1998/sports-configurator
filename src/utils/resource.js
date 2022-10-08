@@ -3427,31 +3427,13 @@ export const rectHome = JSON.stringify({
 
 export const wallTextures = [
   {
-    name: 'Grey',
-    url: 'assets/rooms/textures/wallmap.png',
-    stretch: true,
-    scale: 1,
-  },
-  {
-    name: 'Bricks',
-    url: 'assets/rooms/textures/light_brick.jpg',
-    stretch: false,
-    scale: 50,
-  },
-  {
-    name: 'Marble',
-    url: 'assets/rooms/textures/marbletiles.jpg',
+    name: 'Turf',
+    url: 'assets/rooms/textures/WinterGreen.jpg',
     stretch: false,
     scale: 300,
   },
   {
-    name: 'LightWood',
-    url: 'assets/rooms/textures/light_fine_wood.jpg',
-    stretch: false,
-    scale: 300,
-  },
-  {
-    name: 'HardWood',
+    name: 'Luxury Vinyl',
     url: 'assets/rooms/textures/hardwood.png',
     stretch: false,
     scale: 300,

@@ -295,7 +295,7 @@ const RightBar_Content_Inspector = () => {
           {selectedRoof.item.type !== 'FLAT' && (
             <div className="input-group">
               <DragLabel
-                name={`Height(${curUnit}):`}
+                name={`Pitch(${curUnit}):`}
                 value={curRoofMiddleHeight}
                 setValue={(val) => {
                   updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
