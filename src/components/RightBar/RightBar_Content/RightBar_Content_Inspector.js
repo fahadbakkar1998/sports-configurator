@@ -593,7 +593,7 @@ const RightBar_Content_Inspector = () => {
                         ),
                       ),
                     )}
-                  {cur3dItemMaterial && (
+                  {/* {cur3dItemMaterial && (
                     <>
                       <div className="property-header">Color</div>{' '}
                       {React.Children.toArray(
@@ -638,7 +638,7 @@ const RightBar_Content_Inspector = () => {
                         )),
                       )}
                     </>
-                  )}
+                  )} */}
                 </>
               )}
             </>
