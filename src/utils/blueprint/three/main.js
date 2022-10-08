@@ -243,7 +243,8 @@ export class Main extends EventDispatcher {
           scope.controller.selectedObject &&
             scope.controller.selectedObject.remove();
         }
-        scope.render(true); // IMPORTANT
+        // scope.render(true); // IMPORTANT
+        scope.render(false); // IMPORTANT
       });
     }
 
