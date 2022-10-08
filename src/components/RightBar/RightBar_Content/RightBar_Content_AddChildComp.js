@@ -57,23 +57,43 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
                 </>
               )}
               {comp.addition[fieldKey].type === 'interval' && (
+                // <>
+                //   <span>{`${comp.addition[fieldKey].name}(${unit}):`}</span>
+                //   <MultiRangeSlider
+                //     min={0}
+                //     max={max_size}
+                //     step={parseInt(max_size / 50)}
+                //     ruler={true}
+                //     label={true}
+                //     preventWheel={false}
+                //     minValue={comp.addition[fieldKey].value[0]}
+                //     maxValue={comp.addition[fieldKey].value[1]}
+                //     onInput={(e) => {
+                //       comp.addition[fieldKey].value[0] = e.minValue;
+                //       comp.addition[fieldKey].value[1] = e.maxValue;
+                //       updateComponents();
+                //     }}
+                //   />
+                // </>
                 <>
-                  <span>{`${comp.addition[fieldKey].name}(${unit}):`}</span>
-                  <MultiRangeSlider
-                    min={0}
-                    max={max_size}
-                    step={parseInt(max_size / 50)}
-                    ruler={true}
-                    label={true}
-                    preventWheel={false}
-                    minValue={comp.addition[fieldKey].value[0]}
-                    maxValue={comp.addition[fieldKey].value[1]}
-                    onInput={(e) => {
-                      comp.addition[fieldKey].value[0] = e.minValue;
-                      comp.addition[fieldKey].value[1] = e.maxValue;
+                  <DragLabel
+                    name={`${comp.addition[fieldKey].name}(${unit}):`}
+                    value={comp.addition[fieldKey].value[1]}
+                    setValue={(val) => {
+                      comp.addition[fieldKey].value[1] = getUFloat(val);
                       updateComponents();
                     }}
-                  />
+                    offset={0.1}></DragLabel>
+                  <input
+                    className={classnames('input')}
+                    type="text"
+                    value={comp.addition[fieldKey].value[1]}
+                    onChange={(e) => {
+                      comp.addition[fieldKey].value[1] = getUFloat(
+                        e.target.value,
+                      );
+                      updateComponents();
+                    }}></input>
                 </>
               )}
             </div>

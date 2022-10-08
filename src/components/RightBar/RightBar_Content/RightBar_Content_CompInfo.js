@@ -61,25 +61,46 @@ const RightBar_Content_CompInfo = ({
               </>
             )}
             {comp.type === 'interval' && (
+              // <>
+              //   <span>{`${comp.name}(${unit}):`}</span>
+              //   <MultiRangeSlider
+              //     min={0}
+              //     max={max_size}
+              //     step={parseInt(max_size / 50)}
+              //     ruler={true}
+              //     label={true}
+              //     preventWheel={false}
+              //     minValue={comp.value[0]}
+              //     maxValue={comp.value[1]}
+              //     onInput={(e) => {
+              //       if (comp.immutability) return;
+              //       comp.value[0] = e.minValue;
+              //       comp.value[1] = e.maxValue;
+              //       updateComponents();
+              //     }}
+              //   />
+              // </>
               <>
-                <span>{`${comp.name}(${unit}):`}</span>
-                {/* <Slider /> */}
-                <MultiRangeSlider
-                  min={0}
-                  max={max_size}
-                  step={parseInt(max_size / 50)}
-                  ruler={true}
-                  label={true}
-                  preventWheel={false}
-                  minValue={comp.value[0]}
-                  maxValue={comp.value[1]}
-                  onInput={(e) => {
+                <DragLabel
+                  name={`${comp.name}(${unit}):`}
+                  value={comp.value[1]}
+                  setValue={(val) => {
                     if (comp.immutability) return;
-                    comp.value[0] = e.minValue;
-                    comp.value[1] = e.maxValue;
+                    comp.value[1] = getUFloat(val);
                     updateComponents();
                   }}
-                />
+                  offset={comp.offset || 0.1}></DragLabel>
+                <input
+                  className={classnames('input', {
+                    immutability: comp.immutability,
+                  })}
+                  type="text"
+                  value={comp.value[1]}
+                  onChange={(e) => {
+                    if (comp.immutability) return;
+                    comp.value[1] = getUFloat(e.target.value);
+                    updateComponents();
+                  }}></input>
               </>
             )}
             {comp.type === 'select' &&

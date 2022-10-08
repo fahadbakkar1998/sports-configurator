@@ -310,6 +310,7 @@ export const items = [
                     immutability: true,
                   },
                 },
+                immutability: true,
               },
               in_container: {
                 name: 'Interior',
@@ -408,6 +409,7 @@ export const items = [
                   },
                 },
                 price_per_unit: 0.9,
+                immutability: true,
               },
             },
           },
