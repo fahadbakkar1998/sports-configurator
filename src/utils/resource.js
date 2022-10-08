@@ -939,22 +939,22 @@ export const items = [
                 value: {
                   outer_width: {
                     type: 'single',
-                    name: 'Outer Width',
+                    name: 'Outer Length',
                     value: 100,
                   },
                   outer_length: {
                     type: 'single',
-                    name: 'Outer Length',
+                    name: 'Outer Width',
                     value: 60,
                   },
                   court_width: {
                     type: 'single',
-                    name: 'Court Width',
+                    name: 'Court Length',
                     value: 94,
                   },
                   court_length: {
                     type: 'single',
-                    name: 'Court Length',
+                    name: 'Court Width',
                     value: 50,
                   },
                   rim_height: { type: 'single', name: 'Rim Height', value: 10 },
@@ -2368,22 +2368,22 @@ export const items = [
                 value: {
                   outer_width: {
                     type: 'single',
-                    name: 'Outer Width',
+                    name: 'Outer Length',
                     value: 100,
                   },
                   outer_length: {
                     type: 'single',
-                    name: 'Outer Length',
+                    name: 'Outer Width',
                     value: 60,
                   },
                   court_width: {
                     type: 'single',
-                    name: 'Court Width',
+                    name: 'Court Length',
                     value: 94,
                   },
                   court_length: {
                     type: 'single',
-                    name: 'Court Length',
+                    name: 'Court Width',
                     value: 50,
                   },
                   rim_height: { type: 'single', name: 'Rim Height', value: 10 },
