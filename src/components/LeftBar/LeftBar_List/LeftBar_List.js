@@ -229,10 +229,10 @@ const LeftBar_List = () => {
           Delete Walls
         </div>
 
-        <div className="property-header">Setting</div>
+        {/* <div className="property-header">Setting</div> */}
 
         {/* Select unit */}
-        <div className="input-group">
+        {/* <div className="input-group">
           <div>Unit:</div>
 
           <select
@@ -256,7 +256,7 @@ const LeftBar_List = () => {
               {Blueprint.dimFeetAndInch}
             </option>
           </select>
-        </div>
+        </div> */}
 
         {cur2dItemEvent && cur2dItemEvent.type === 'CORNER' && (
           <>

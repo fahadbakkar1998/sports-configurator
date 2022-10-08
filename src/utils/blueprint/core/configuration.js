@@ -40,7 +40,7 @@ export let wallInformation = {
   labels: true,
   exteriorLabel: 'e:',
   interiorLabel: 'i:',
-  midlineLabel: 'm:',
+  unit: 'ft',
 };
 
 /* Global configuration to customize the whole system. */

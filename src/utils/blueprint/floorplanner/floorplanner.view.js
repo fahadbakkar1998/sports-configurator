@@ -355,9 +355,9 @@ export class FloorplannerView2D {
       // dont draw labels on walls this short
       return;
     }
-    let label = !wallInformation.labels ? '' : wallInformation.midlineLabel;
+    let label = !wallInformation.labels ? '' : `${wallInformation.unit}: `;
     this.drawTextLabel(
-      `${label}${Dimensioning.cmToMeasure(length)}`,
+      `${label}${Dimensioning.cmToMeasure(length, 1, wallInformation.unit)}`,
       this.viewModel.convertX(pos.x),
       this.viewModel.convertY(pos.y),
     );
