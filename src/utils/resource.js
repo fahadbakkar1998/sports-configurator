@@ -3031,6 +3031,7 @@ export const items = [
                 value: 'assets/models/thumbnails/Windscreens/10.png',
               },
             ],
+            immutability: true,
           },
         },
       },
