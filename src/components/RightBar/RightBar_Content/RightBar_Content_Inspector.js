@@ -459,7 +459,7 @@ const RightBar_Content_Inspector = () => {
                           {/* Dimension width */}
                           <div className="input-group">
                             <DragLabel
-                              name={`Width(${curUnit}):`}
+                              name={`Length(${curUnit}):`}
                               value={cur3dItemWidth}
                               setValue={(width) =>
                                 updateCur3dItemSize({ width: getUFloat(width) })
@@ -472,6 +472,26 @@ const RightBar_Content_Inspector = () => {
                               onChange={(e) => {
                                 updateCur3dItemSize({
                                   width: getUFloat(e.target.value),
+                                });
+                              }}></input>
+                          </div>
+
+                          {/* Dimension depth */}
+                          <div className="input-group">
+                            <DragLabel
+                              name={`Width(${curUnit}):`}
+                              value={cur3dItemDepth}
+                              setValue={(depth) =>
+                                updateCur3dItemSize({ depth: getUFloat(depth) })
+                              }
+                              offset={0.01}></DragLabel>
+                            <input
+                              className="input"
+                              type="text"
+                              value={cur3dItemDepth + inputSuffix}
+                              onChange={(e) => {
+                                updateCur3dItemSize({
+                                  depth: getUFloat(e.target.value),
                                 });
                               }}></input>
                           </div>
@@ -494,26 +514,6 @@ const RightBar_Content_Inspector = () => {
                               onChange={(e) => {
                                 updateCur3dItemSize({
                                   height: getUFloat(e.target.value),
-                                });
-                              }}></input>
-                          </div>
-
-                          {/* Dimension length */}
-                          <div className="input-group">
-                            <DragLabel
-                              name={`Length(${curUnit}):`}
-                              value={cur3dItemDepth}
-                              setValue={(depth) =>
-                                updateCur3dItemSize({ depth: getUFloat(depth) })
-                              }
-                              offset={0.01}></DragLabel>
-                            <input
-                              className="input"
-                              type="text"
-                              value={cur3dItemDepth + inputSuffix}
-                              onChange={(e) => {
-                                updateCur3dItemSize({
-                                  depth: getUFloat(e.target.value),
                                 });
                               }}></input>
                           </div>
