@@ -284,7 +284,11 @@ export class Scene extends EventDispatcher {
   }
 
   async addConfigurator(itemInfo) {
-    if (!itemInfo.type || !itemInfo.components || !itemInfo.default_size)
+    if (
+      !itemInfo.configurator_name ||
+      !itemInfo.components ||
+      !itemInfo.default_size
+    )
       return;
     if (!itemInfo.unit) itemInfo.unit = 'm';
     // this.dispatchEvent({ type: EVENT_ITEM_LOADING });
@@ -303,7 +307,7 @@ export class Scene extends EventDispatcher {
         itemInfo.default_size.length,
         itemInfo.unit,
       ) || minSize;
-    const configurator = new (Factory.getClass(itemInfo.type))({
+    const configurator = new (Factory.getClass(itemInfo.configurator_name))({
       metadata: itemInfo,
       model: this.model,
       geometry: new BoxGeometry(width, height, length),

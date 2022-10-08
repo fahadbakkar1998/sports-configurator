@@ -43,7 +43,7 @@ export const items = [
                 image_path:
                   'assets/models/thumbnails/CurtainCage Easy Slide.png',
                 model_path: 'assets/models/gltf/CurtainCage Easy Slide.glb',
-                type: '5',
+                type: '1',
                 format: 'gltf',
                 default_size: {
                   name: '55L',
@@ -86,7 +86,7 @@ export const items = [
                 image_path:
                   'assets/models/thumbnails/CurtainCage Line Lift.png',
                 model_path: 'assets/models/gltf/CurtainCage Line Lift.glb',
-                type: '5',
+                type: '1',
                 format: 'gltf',
                 default_size: {
                   unit: 'ft',
@@ -158,7 +158,8 @@ export const items = [
             name: 'ShellCage Multi-Lane',
             image_path: 'assets/models/thumbnails/Shell Cage.png',
             format: 'configurator',
-            type: 'shellcage',
+            configurator_name: 'shellcage',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 40,
@@ -417,7 +418,7 @@ export const items = [
                 name: 'Single Lane',
                 image_path: 'assets/models/thumbnails/Air Cage.png',
                 model_path: 'assets/models/gltf/Air Cage.glb',
-                type: '5',
+                type: '1',
                 format: 'gltf',
                 default_size: {
                   name: '55L',
@@ -469,7 +470,7 @@ export const items = [
                 name: 'Double Lane',
                 image_path: 'assets/models/thumbnails/Air Cage.png',
                 model_path: 'assets/models/gltf/Air Cage.glb',
-                type: '5',
+                type: '1',
                 format: 'gltf',
                 default_size: {
                   name: '55L',
@@ -521,7 +522,7 @@ export const items = [
                 name: 'Triple Lane',
                 image_path: 'assets/models/thumbnails/Air Cage.png',
                 model_path: 'assets/models/gltf/Air Cage.glb',
-                type: '5',
+                type: '1',
                 format: 'gltf',
                 default_size: {
                   name: '55L',
@@ -580,7 +581,8 @@ export const items = [
             name: 'Barrier Net',
             image_path: 'assets/models/thumbnails/Barrier Net.png',
             format: 'configurator',
-            type: 'net',
+            configurator_name: 'net',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 40,
@@ -707,7 +709,7 @@ export const items = [
             name: 'Tunnel (Single / Double / Triple / Quad)',
             image_path: 'assets/models/thumbnails/Phantom.png',
             model_path: 'assets/models/gltf/Phantom.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -739,7 +741,7 @@ export const items = [
             name: 'Open Sided Hitting Cage',
             image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
             model_path: 'assets/models/gltf/Single Hitting Cage.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -832,7 +834,7 @@ export const items = [
         name: 'Soccer Goals',
         image_path: 'assets/models/thumbnails/Goals.png',
         model_path: 'assets/models/gltf/Goals.glb',
-        type: '5',
+        type: '1',
         format: 'gltf',
         default_size: {
           name: '24W*8H',
@@ -849,7 +851,8 @@ export const items = [
             name: 'Turf Rolls',
             image_path: 'assets/models/thumbnails/Turf Rolls/1.jpg',
             format: 'configurator',
-            type: 'horizontality',
+            configurator_name: 'horizontality',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 12,
@@ -898,7 +901,8 @@ export const items = [
             name: 'Turf Mats',
             image_path: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
             format: 'configurator',
-            type: 'horizontality',
+            configurator_name: 'horizontality',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 10,
@@ -943,7 +947,8 @@ export const items = [
             name: 'Rubber',
             image_path: 'assets/models/thumbnails/Rubber/1.jpg',
             format: 'configurator',
-            type: 'horizontality',
+            configurator_name: 'horizontality',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 4,
@@ -992,7 +997,8 @@ export const items = [
             name: 'Multi-Sport Courts',
             image_path: 'assets/models/thumbnails/Basketball.png',
             format: 'configurator',
-            type: 'basketball',
+            configurator_name: 'basketball',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 100,
@@ -1607,7 +1613,8 @@ export const items = [
             name: 'Wall Padding',
             image_path: 'assets/models/thumbnails/Wall Padding/1.png',
             format: 'configurator',
-            type: 'aplomb',
+            configurator_name: 'aplomb',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 2,
@@ -1625,7 +1632,8 @@ export const items = [
             name: 'Divider Curtain',
             image_path: 'assets/models/thumbnails/Divider Curtain/1.png',
             format: 'configurator',
-            type: 'dividerCurtain',
+            configurator_name: 'dividerCurtain',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 50,
@@ -1981,7 +1989,8 @@ export const items = [
             name: 'Barrier Net',
             image_path: 'assets/models/thumbnails/Barrier Net.png',
             format: 'configurator',
-            type: 'net',
+            configurator_name: 'net',
+            type: '5',
             unit: 'ft',
             default_size: {
               width: 40,
@@ -2232,7 +2241,8 @@ export const items = [
             name: 'Turf Rolls',
             image_path: 'assets/models/thumbnails/Turf Rolls/1.jpg',
             format: 'configurator',
-            type: 'horizontality',
+            configurator_name: 'horizontality',
+            type: '5',
             unit: 'ft',
             default_size: {
               width: 12,
@@ -2281,7 +2291,8 @@ export const items = [
             name: 'Turf Mats',
             image_path: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
             format: 'configurator',
-            type: 'horizontality',
+            configurator_name: 'horizontality',
+            type: '5',
             unit: 'ft',
             default_size: {
               width: 10,
@@ -2326,7 +2337,8 @@ export const items = [
             name: 'Rubber',
             image_path: 'assets/models/thumbnails/Rubber/1.jpg',
             format: 'configurator',
-            type: 'horizontality',
+            configurator_name: 'horizontality',
+            type: '5',
             unit: 'ft',
             default_size: {
               width: 4,
@@ -2375,7 +2387,8 @@ export const items = [
             name: 'Multi-Sport Courts',
             image_path: 'assets/models/thumbnails/Basketball.png',
             format: 'configurator',
-            type: 'basketball',
+            configurator_name: 'basketball',
+            type: '5',
             unit: 'ft',
             default_size: {
               width: 100,
@@ -2987,7 +3000,8 @@ export const items = [
         name: 'Windscreens',
         image_path: 'assets/models/thumbnails/Windscreens/1.png',
         format: 'configurator',
-        type: 'aplomb',
+        configurator_name: 'aplomb',
+        type: '5',
         unit: 'ft',
         default_size: {
           width: 16,
@@ -3258,24 +3272,24 @@ export const rectHome = JSON.stringify({
     version: '0.0.2a',
     corners: {
       '4bb4443f-7fab-f22d-5497-212403689ff9': {
-        x: -15.000024504209856,
-        y: -15.00005731262652,
-        elevation: 15.000106525251521,
+        x: 0,
+        y: 0,
+        elevation: 15,
       },
       'ab04e8c7-2de5-2980-3ac6-358f020f0aac': {
-        x: 25.00002990421087,
-        y: -15.00005731262652,
-        elevation: 15.000106525251521,
+        x: 100,
+        y: 0,
+        elevation: 15,
       },
       'c038166d-c9fc-d71a-f009-1a3010ea9749': {
-        x: 25.00002990421087,
-        y: 25.000062712627535,
-        elevation: 15.000106525251521,
+        x: 100,
+        y: 100,
+        elevation: 15,
       },
       '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': {
-        x: -15.000024504209856,
-        y: 25.000062712627535,
-        elevation: 15.000106525251521,
+        x: 0,
+        y: 100,
+        elevation: 15,
       },
     },
     walls: [
@@ -3297,8 +3311,14 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 364.1221682976095, y: 302.09874020427594 },
-        b: { x: 551.5972597957242, y: 333.6421682976096 },
+        a: {
+          x: 364.1221682976095,
+          y: 302.09874020427594,
+        },
+        b: {
+          x: 551.5972597957242,
+          y: 333.6421682976096,
+        },
       },
       {
         corner1: 'ab04e8c7-2de5-2980-3ac6-358f020f0aac',
@@ -3318,8 +3338,14 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 603.3235350530827, y: 309.21587164830146 },
-        b: { x: 583.0881283516987, y: 465.14753505308255 },
+        a: {
+          x: 603.3235350530827,
+          y: 309.21587164830146,
+        },
+        b: {
+          x: 583.0881283516987,
+          y: 465.14753505308255,
+        },
       },
       {
         corner1: 'c038166d-c9fc-d71a-f009-1a3010ea9749',
@@ -3339,8 +3365,14 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 534.2355350530825, y: 465.1475350530825 },
-        b: { x: 358.06846494691763, y: 465.14753505308244 },
+        a: {
+          x: 534.2355350530825,
+          y: 465.1475350530825,
+        },
+        b: {
+          x: 358.06846494691763,
+          y: 465.14753505308244,
+        },
       },
       {
         corner1: '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532',
@@ -3360,13 +3392,21 @@ export const rectHome = JSON.stringify({
           scale: 0,
         },
         wallType: 'STRAIGHT',
-        a: { x: 372.43687474062824, y: 450.7791252593718 },
-        b: { x: 372.43687474062824, y: 262.7088747406283 },
+        a: {
+          x: 372.43687474062824,
+          y: 450.7791252593718,
+        },
+        b: {
+          x: 372.43687474062824,
+          y: 262.7088747406283,
+        },
       },
     ],
     rooms: {
       '4bb4443f-7fab-f22d-5497-212403689ff9,ab04e8c7-2de5-2980-3ac6-358f020f0aac,c038166d-c9fc-d71a-f009-1a3010ea9749,453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532':
-        { name: 'Simple' },
+        {
+          name: 'Simple',
+        },
     },
     wallTextures: [],
     floorTextures: {},
@@ -3378,8 +3418,8 @@ export const rectHome = JSON.stringify({
       y: 0,
       anchorX: 0,
       anchorY: 0,
-      width: 0.03280841666667,
-      height: 0.03280841666667,
+      width: 0.03,
+      height: 0.03,
     },
   },
   items: [],

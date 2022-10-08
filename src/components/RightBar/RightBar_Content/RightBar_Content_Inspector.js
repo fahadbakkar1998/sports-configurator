@@ -242,7 +242,7 @@ const RightBar_Content_Inspector = () => {
     <div className="RightBar_Content_Inspector">
       {selectedRoof && selectedRoof.item && (
         <>
-          <div className="property-header">House Dimensions</div>
+          <div className="property-header">Building Dimensions</div>
 
           {/* House Height */}
           <div className="input-group">

@@ -45,22 +45,22 @@ export class FloorItem extends Item {
   isValidPosition(vec3) {
     let corners = this.getCorners('x', 'z', vec3);
 
-    // // check if we are in a room
-    // let rooms = this.model.floorplan.getRooms();
-    // let isInARoom = false;
-    // for (let i = 0; i < rooms.length; i++) {
-    //   const inPolygon = Utils.polygonInsidePolygon(
-    //     corners,
-    //     rooms[i].interiorCorners,
-    //   );
-    //   if (
-    //     inPolygon &&
-    //     !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
-    //   ) {
-    //     isInARoom = true;
-    //   }
-    // }
-    // if (!isInARoom) return false;
+    // check if we are in a room
+    let rooms = this.model.floorplan.getRooms();
+    let isInARoom = false;
+    for (let i = 0; i < rooms.length; i++) {
+      const inPolygon = Utils.polygonInsidePolygon(
+        corners,
+        rooms[i].interiorCorners,
+      );
+      if (
+        inPolygon &&
+        !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
+      ) {
+        isInARoom = true;
+      }
+    }
+    if (!isInARoom) return false;
 
     // check if we are outside all other objects
     if (this.obstructFloorMoves) {
