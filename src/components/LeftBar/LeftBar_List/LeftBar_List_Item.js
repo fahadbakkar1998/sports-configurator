@@ -25,6 +25,7 @@ const LeftBar_List_Item = ({
 }) => {
   const selectedWall = useZustand((state) => state.selectedWall);
   const selectedFloor = useZustand((state) => state.selectedFloor);
+  const setEditMode = useZustand((state) => state.setEditMode);
 
   const style = {
     marginLeft: `${depth * 1}vw`,
@@ -48,6 +49,11 @@ const LeftBar_List_Item = ({
               className="image"
               src={item.image_path}
               onClick={() => {
+                if (item.format === 'building' && item.size_key === 'custom') {
+                  setEditMode('FLOOR PLAN');
+                  return;
+                }
+
                 addItem({
                   ...item,
                   selectedWall,

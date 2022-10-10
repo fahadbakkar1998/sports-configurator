@@ -1,4 +1,4 @@
-import { rectHome } from './resource';
+import { buildingSizes, rectHome } from './resource';
 import * as Blueprint from './blueprint/blueprint';
 import axios from 'axios';
 import { backendUrl } from '../constants';
@@ -47,40 +47,48 @@ export const loadCart = async (productId) => {
 };
 
 export const addItem = (item) => {
+  if (!item.format) return;
   console.log('bpSupport_addItem_item: ', item);
-
   item.resizable = true;
-
-  if (item.format === 'configurator') {
-    window.blueprintJS.model.scene.addConfigurator(
-      JSON.parse(JSON.stringify(item)),
-    );
-    return;
-  }
-
   item.resizeProportionally = true;
 
-  if ([2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 && item.selectedWall) {
-    // Wall Items
-    var placeAt = item.selectedWall.item.center.clone();
-    window.blueprintJS.model.scene.addItem({
-      ...item,
-      newItemDefinitions: { position: placeAt, edge: item.selectedWall.item },
-    });
-    return;
-  }
+  switch (item.format) {
+    case 'configurator':
+      window.blueprintJS.model.scene.addConfigurator(
+        JSON.parse(JSON.stringify(item)),
+      );
+      break;
+    case 'building':
+      loadDesign(buildingSizes[item.size_key]);
+      break;
+    default:
+      if (
+        [2, 3, 7, 9].indexOf(parseInt(item.type)) != -1 &&
+        item.selectedWall
+      ) {
+        // Wall Items
+        var placeAt = item.selectedWall.item.center.clone();
+        window.blueprintJS.model.scene.addItem({
+          ...item,
+          newItemDefinitions: {
+            position: placeAt,
+            edge: item.selectedWall.item,
+          },
+        });
+      }
 
-  if ([0, 1, 8].indexOf(parseInt(item.type)) != -1 && item.selectedFloor) {
-    // Floor Items
-    var placeAt = item.selectedFloor.item.center.clone();
-    window.blueprintJS.model.scene.addItem({
-      ...item,
-      newItemDefinitions: { position: placeAt },
-    });
-    return;
-  }
+      if ([0, 1, 8].indexOf(parseInt(item.type)) != -1 && item.selectedFloor) {
+        // Floor Items
+        var placeAt = item.selectedFloor.item.center.clone();
+        window.blueprintJS.model.scene.addItem({
+          ...item,
+          newItemDefinitions: { position: placeAt },
+        });
+      }
 
-  window.blueprintJS.model.scene.addItem(item);
+      window.blueprintJS.model.scene.addItem(item);
+      break;
+  }
 };
 
 export const updateFloorPlanMode = (mode) => {
