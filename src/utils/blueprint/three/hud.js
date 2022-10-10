@@ -1,59 +1,47 @@
 import {
   EventDispatcher,
-  Scene as ThreeScene,
-  Geometry,
+  Scene,
   Vector3,
-  LineBasicMaterial,
   CylinderGeometry,
   MeshBasicMaterial,
   Mesh,
   SphereGeometry,
   Object3D,
-  LineSegments,
+  MeshLambertMaterial,
 } from 'three';
 
 import { EVENT_ITEM_SELECTED, EVENT_ITEM_UNSELECTED } from '../core/events.js';
 
-//As far as I understand the HUD is here to show a rotation control on every item
-//If this idea is correct then it seriously sucks. A whole rendering to show just cones and lines as arrows?
+// As far as I understand, the HUD is here to show a rotation control on every item
+// If this idea is correct, then it seriously sucks. A whole rendering to show just cones and lines as arrows?
 export class HUD extends EventDispatcher {
   constructor(three, scene) {
     super();
+    let scope = this;
     this.three = three;
-    if (!scene) {
-      this.scene = new ThreeScene();
-    } else {
-      this.scene = scene;
-    }
-
+    this.scene = scene ? scene : new Scene();
     this.selectedItem = null;
-
     this.rotating = false;
     this.mouseover = false;
-
     this.color = '#ffffff';
     this.hoverColor = '#f1c40f';
-
     this.activeObject = null;
-
-    let scope = this;
-    this.itemselectedevent = (o) => {
+    this.itemSelectedEvent = (o) => {
       scope.itemSelected(o.item);
     };
-    this.itemunselectedevent = () => {
+    this.itemUnselectedEvent = () => {
       scope.itemUnselected();
     };
-
     this.init();
   }
 
   init() {
     // this.three.itemSelectedCallbacks.add(itemSelected);
     // this.three.itemUnselectedCallbacks.add(itemUnselected);
-    this.three.addEventListener(EVENT_ITEM_SELECTED, this.itemselectedevent);
+    this.three.addEventListener(EVENT_ITEM_SELECTED, this.itemSelectedEvent);
     this.three.addEventListener(
       EVENT_ITEM_UNSELECTED,
-      this.itemunselectedevent,
+      this.itemUnselectedEvent,
     );
   }
 
@@ -67,6 +55,7 @@ export class HUD extends EventDispatcher {
 
   resetSelectedItem() {
     this.selectedItem = null;
+
     if (this.activeObject) {
       this.scene.remove(this.activeObject);
       this.activeObject = null;
@@ -76,6 +65,7 @@ export class HUD extends EventDispatcher {
   itemSelected(item) {
     if (this.selectedItem != item) {
       this.resetSelectedItem();
+
       if (item.allowRotate && !item.fixed) {
         this.selectedItem = item;
         this.activeObject = this.makeObject(this.selectedItem);
@@ -100,12 +90,13 @@ export class HUD extends EventDispatcher {
 
   setColor() {
     let scope = this;
+
     if (scope.activeObject) {
       scope.activeObject.children.forEach((obj) => {
         obj.material.color.set(scope.getColor());
       });
     }
-    // this.three.needsUpdate();
+
     scope.three.ensureNeedsUpdate();
   }
 
@@ -122,7 +113,7 @@ export class HUD extends EventDispatcher {
   }
 
   makeLineGeometry(item) {
-    let geometry = new Geometry();
+    let geometry = new CylinderGeometry();
     geometry.vertices.push(new Vector3(0, 0, 0), this.rotateVector(item));
     return geometry;
   }
@@ -137,56 +128,69 @@ export class HUD extends EventDispatcher {
   }
 
   makeLineMaterial() {
-    let mat = new LineBasicMaterial({ color: this.getColor(), linewidth: 3 });
+    let mat = new MeshLambertMaterial({ color: this.getColor() });
     return mat;
   }
 
-  makeCone(item) {
-    let coneGeo = new CylinderGeometry(
-      this.coneRadius,
-      0,
-      this.coneHeight,
-      16,
-      16,
-    );
-    let coneMat = new MeshBasicMaterial({ color: this.getColor() });
-    let cone = new Mesh(coneGeo, coneMat);
-    cone.position.copy(this.rotateVector(item));
-    cone.rotation.x = -Math.PI / 2.0;
-    return cone;
-  }
-
-  makeSphere() {
-    let geometry = new SphereGeometry(this.sphereRadius, 16, 16);
-    let material = new MeshBasicMaterial({ color: this.getColor() });
-    let sphere = new Mesh(geometry, material);
-    return sphere;
-  }
-
   setVars(item) {
-    const width = item.getWidth();
-    const depth = item.getDepth();
-    this.coneRadius = width / 20;
-    this.sphereRadius = this.coneRadius * 0.8;
+    const length = Math.max(item.getWidth(), item.getDepth());
+    this.coneRadius = length / 20;
     this.coneHeight = this.coneRadius * 2;
-    this.distance = this.coneHeight + 20;
-    this.height = this.coneRadius + 4;
+    this.sphereRadius = this.coneRadius * 0.8;
+    this.lineRadius = this.coneRadius * 0.6;
+    this.lineLength = length / 2 + 200;
+    this.height = this.coneRadius + 50;
+    // console.log(
+    //   'hud dimensions: ',
+    //   this.coneRadius,
+    //   this.coneHeight,
+    //   this.sphereRadius,
+    //   this.lineRadius,
+    //   this.lineLength,
+    //   this.height,
+    // );
+  }
+
+  makeLineMesh() {
+    const geo = new CylinderGeometry(
+      this.lineRadius,
+      this.lineRadius,
+      this.lineLength,
+    );
+    const mat = new MeshBasicMaterial({ color: this.getColor() });
+    const mesh = new Mesh(geo, mat);
+    mesh.position.set(0, 0, this.lineLength / 2);
+    mesh.rotation.x = -Math.PI / 2.0;
+    return mesh;
+  }
+
+  makeConeMesh() {
+    const geo = new CylinderGeometry(this.coneRadius, 0, this.coneHeight);
+    const mat = new MeshBasicMaterial({ color: this.getColor() });
+    const mesh = new Mesh(geo, mat);
+    mesh.position.set(0, 0, this.lineLength + this.coneHeight / 2);
+    mesh.rotation.x = -Math.PI / 2;
+    return mesh;
+  }
+
+  makeSphereMesh() {
+    const geo = new SphereGeometry(this.sphereRadius, 16, 16);
+    const mat = new MeshBasicMaterial({ color: this.getColor() });
+    const mesh = new Mesh(geo, mat);
+    return mesh;
   }
 
   makeObject(item) {
     this.setVars(item);
     let object = new Object3D();
-    let line = new LineSegments(
-      this.makeLineGeometry(item),
-      this.makeLineMaterial(this.rotating),
-    );
-    let cone = this.makeCone(item);
-    let sphere = this.makeSphere(item);
-    object.add(line);
-    object.add(cone);
-    object.add(sphere);
-    object.rotation.y = item.rotation.y;
+    let lineMesh = this.makeLineMesh();
+    let coneMesh = this.makeConeMesh();
+    let sphereMesh = this.makeSphereMesh();
+    object.add(lineMesh);
+    object.add(coneMesh);
+    object.add(sphereMesh);
     object.position.x = item.position.x;
+    object.rotation.y = item.rotation.y;
     object.position.z = item.position.z;
     object.position.y = this.height;
     return object;
