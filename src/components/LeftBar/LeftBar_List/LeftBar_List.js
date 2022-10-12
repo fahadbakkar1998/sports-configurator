@@ -275,7 +275,7 @@ const LeftBar_List = () => {
                   refs.current[refIndex].value = validValue;
                   moveCorner({ x: validValue });
                 }}
-                offset={0.01}></DragLabel>
+                offset={0.1}></DragLabel>
               <input
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
@@ -299,7 +299,7 @@ const LeftBar_List = () => {
                   refs.current[refIndex].value = validValue;
                   moveCorner({ y: validValue });
                 }}
-                offset={0.01}></DragLabel>
+                offset={0.1}></DragLabel>
               <input
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
@@ -323,7 +323,7 @@ const LeftBar_List = () => {
                   refs.current[refIndex].value = validValue;
                   updateCur2dItemNum({ elevation: validValue });
                 }}
-                offset={0.01}></DragLabel>
+                offset={0.1}></DragLabel>
               <input
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
@@ -347,16 +347,22 @@ const LeftBar_List = () => {
               <DragLabel
                 name={`Length(${dimUnit}):`}
                 value={cur2dItemWallSize}
-                setValue={(wallSize) =>
-                  updateCur2dItemNum({ wallSize: getUFloat(wallSize) })
-                }
-                offset={0.01}></DragLabel>
+                refIndex={refLabelIndex++}
+                setValue={(value, refIndex) => {
+                  const validValue = getUFloat(value);
+                  refs.current[refIndex].value = validValue;
+                  updateCur2dItemNum({ wallSize: validValue });
+                }}
+                offset={0.1}></DragLabel>
               <input
+                ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemWallSize + inputSuffix}
-                onChange={(e) => {
-                  updateCur2dItemNum({ wallSize: getUFloat(e.target.value) });
+                defaultValue={cur2dItemWallSize + inputSuffix}
+                onBlur={(e) => {
+                  const validValue = getUFloat(e.target.value);
+                  e.target.value = validValue;
+                  updateCur2dItemNum({ wallSize: validValue });
                 }}></input>
             </div>
           </>

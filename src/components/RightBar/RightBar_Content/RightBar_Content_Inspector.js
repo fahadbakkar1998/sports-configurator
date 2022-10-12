@@ -252,7 +252,7 @@ const RightBar_Content_Inspector = () => {
               setValue={(val) => {
                 updateElevation(val);
               }}
-              offset={0.01}></DragLabel>
+              offset={0.1}></DragLabel>
             <input
               className="input"
               type="text"
@@ -300,7 +300,7 @@ const RightBar_Content_Inspector = () => {
                 setValue={(val) => {
                   updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
                 }}
-                offset={0.01}></DragLabel>
+                offset={0.1}></DragLabel>
               <input
                 className="input"
                 type="text"
@@ -469,7 +469,7 @@ const RightBar_Content_Inspector = () => {
                                       width: getUFloat(width),
                                     })
                                   }
-                                  offset={0.01}></DragLabel>
+                                  offset={0.1}></DragLabel>
                                 <input
                                   className="input"
                                   type="text"
@@ -491,7 +491,7 @@ const RightBar_Content_Inspector = () => {
                                       depth: getUFloat(depth),
                                     })
                                   }
-                                  offset={0.01}></DragLabel>
+                                  offset={0.1}></DragLabel>
                                 <input
                                   className="input"
                                   type="text"
@@ -513,7 +513,7 @@ const RightBar_Content_Inspector = () => {
                                       height: getUFloat(height),
                                     })
                                   }
-                                  offset={0.01}></DragLabel>
+                                  offset={0.1}></DragLabel>
                                 <input
                                   className="input"
                                   type="text"

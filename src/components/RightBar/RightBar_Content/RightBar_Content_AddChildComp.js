@@ -8,6 +8,10 @@ import useZustand from '../../../utils/use.zustand';
 const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
   const { cur3dItemEvent } = useZustand();
   const nameRef = useRef();
+  const refs = useRef([]);
+
+  let refLabelIndex = 0,
+    refInputIndex = 0;
 
   const { unit, max_size } = cur3dItemEvent.item.metadata;
   const style = {
@@ -41,17 +45,24 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
                   <DragLabel
                     name={`${comp.addition[fieldKey].name}(${unit}):`}
                     value={comp.addition[fieldKey].value}
-                    setValue={(val) => {
-                      comp.addition[fieldKey].value = getUFloat(val);
+                    refIndex={refLabelIndex++}
+                    setValue={(value, refIndex) => {
+                      const validValue = getUFloat(value);
+                      refs.current[refIndex].value = comp.addition[
+                        fieldKey
+                      ].value = validValue;
                       updateComponents();
                     }}
                     offset={0.1}></DragLabel>
                   <input
+                    ref={(element) => (refs.current[refInputIndex++] = element)}
                     className={classnames('input')}
                     type="text"
-                    value={comp.addition[fieldKey].value}
-                    onChange={(e) => {
-                      comp.addition[fieldKey].value = getUFloat(e.target.value);
+                    defaultValue={comp.addition[fieldKey].value}
+                    onBlur={(e) => {
+                      const validValue = getFloat(e.target.value);
+                      e.target.value = comp.addition[fieldKey].value =
+                        validValue;
                       updateComponents();
                     }}></input>
                 </>
