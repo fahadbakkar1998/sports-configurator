@@ -429,7 +429,7 @@ export const items = [
                 default_size: {
                   name: '55L',
                   unit: 'ft',
-                  width: 55,
+                  width: 70,
                   height: 22,
                   length: 12,
                 },
@@ -477,7 +477,7 @@ export const items = [
                 default_size: {
                   name: '55L',
                   unit: 'ft',
-                  width: 55,
+                  width: 35,
                   height: 22,
                   length: 12,
                 },
@@ -757,10 +757,10 @@ export const items = [
           },
         ],
       },
-      {
-        name: "Pitcher's Screens",
-        image_path: 'logo512.png',
-      },
+      // {
+      //   name: "Pitcher's Screens",
+      //   image_path: 'logo512.png',
+      // },
       {
         name: 'Soccer Goals',
         image_path: 'assets/models/thumbnails/Goals.png',
@@ -3039,10 +3039,10 @@ export const items = [
           },
         },
       },
-      {
-        name: "Pitcher's Screens",
-        image_path: 'logo512.png',
-      },
+      // {
+      //   name: "Pitcher's Screens",
+      //   image_path: 'logo512.png',
+      // },
       {
         name: 'Soccer Goals',
         image_path: 'assets/models/thumbnails/Goals.png',
@@ -3237,164 +3237,6 @@ export const items = [
 // aplomb: Aplomb,
 // basketball: Basketball,
 // dividerCurtain: DividerCurtain,
-
-export const rectHome = JSON.stringify({
-  floorplan: {
-    version: '0.0.2a',
-    corners: {
-      '4bb4443f-7fab-f22d-5497-212403689ff9': {
-        x: 0,
-        y: 0,
-        elevation: 15,
-      },
-      'ab04e8c7-2de5-2980-3ac6-358f020f0aac': {
-        x: 100,
-        y: 0,
-        elevation: 15,
-      },
-      'c038166d-c9fc-d71a-f009-1a3010ea9749': {
-        x: 100,
-        y: 100,
-        elevation: 15,
-      },
-      '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532': {
-        x: 0,
-        y: 100,
-        elevation: 15,
-      },
-    },
-    walls: [
-      {
-        corner1: '4bb4443f-7fab-f22d-5497-212403689ff9',
-        corner2: 'ab04e8c7-2de5-2980-3ac6-358f020f0aac',
-        frontTexture: {
-          url: 'assets/rooms/textures/marbletiles.jpg',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: {
-          x: 364.1221682976095,
-          y: 302.09874020427594,
-        },
-        b: {
-          x: 551.5972597957242,
-          y: 333.6421682976096,
-        },
-      },
-      {
-        corner1: 'ab04e8c7-2de5-2980-3ac6-358f020f0aac',
-        corner2: 'c038166d-c9fc-d71a-f009-1a3010ea9749',
-        frontTexture: {
-          url: 'assets/rooms/textures/marbletiles.jpg',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: {
-          x: 603.3235350530827,
-          y: 309.21587164830146,
-        },
-        b: {
-          x: 583.0881283516987,
-          y: 465.14753505308255,
-        },
-      },
-      {
-        corner1: 'c038166d-c9fc-d71a-f009-1a3010ea9749',
-        corner2: '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532',
-        frontTexture: {
-          url: 'assets/rooms/textures/marbletiles.jpg',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: {
-          x: 534.2355350530825,
-          y: 465.1475350530825,
-        },
-        b: {
-          x: 358.06846494691763,
-          y: 465.14753505308244,
-        },
-      },
-      {
-        corner1: '453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532',
-        corner2: '4bb4443f-7fab-f22d-5497-212403689ff9',
-        frontTexture: {
-          url: 'assets/rooms/textures/marbletiles.jpg',
-          stretch: {
-            url: 'assets/rooms/textures/wallmap.png',
-            stretch: true,
-            scale: 0,
-          },
-          scale: 300,
-        },
-        backTexture: {
-          url: 'assets/rooms/textures/wallmap.png',
-          stretch: true,
-          scale: 0,
-        },
-        wallType: 'STRAIGHT',
-        a: {
-          x: 372.43687474062824,
-          y: 450.7791252593718,
-        },
-        b: {
-          x: 372.43687474062824,
-          y: 262.7088747406283,
-        },
-      },
-    ],
-    rooms: {
-      '4bb4443f-7fab-f22d-5497-212403689ff9,ab04e8c7-2de5-2980-3ac6-358f020f0aac,c038166d-c9fc-d71a-f009-1a3010ea9749,453f6fc6-0f51-a4bd-bcb8-9f7ff08d6532':
-        {
-          name: 'Simple',
-        },
-    },
-    wallTextures: [],
-    floorTextures: {},
-    newFloorTextures: {},
-    carbonSheet: {
-      url: '',
-      transparency: 1,
-      x: 0,
-      y: 0,
-      anchorX: 0,
-      anchorY: 0,
-      width: 0.03,
-      height: 0.03,
-    },
-  },
-  items: [],
-});
 
 export const buildingSizes = {
   size1: JSON.stringify({

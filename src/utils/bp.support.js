@@ -1,4 +1,4 @@
-import { buildingSizes, rectHome } from './resource';
+import { buildingSizes } from './resource';
 import * as Blueprint from './blueprint/blueprint';
 import axios from 'axios';
 import { backendUrl } from '../constants';
@@ -37,7 +37,7 @@ export const loadDesign = (data) => {
 };
 
 export const loadDefaultDesign = () => {
-  window.blueprintJS.model.loadSerialized(rectHome);
+  window.blueprintJS.model.loadSerialized(buildingSizes.size3);
   updateFloorPlan();
 };
 
