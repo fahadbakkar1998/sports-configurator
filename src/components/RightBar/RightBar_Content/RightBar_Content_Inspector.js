@@ -165,13 +165,13 @@ const RightBar_Content_Inspector = () => {
       )) ||
     0;
 
-  if (cur3dItemWidth) {
-    console.log(
-      'cur 3d item width: ',
-      cur3dItemEvent.item.getWidth(),
-      cur3dItemWidth,
-    );
-  }
+  // if (cur3dItemWidth) {
+  //   console.log(
+  //     'cur 3d item width: ',
+  //     cur3dItemEvent.item.getWidth(),
+  //     cur3dItemWidth,
+  //   );
+  // }
 
   const cur3dItemHeight =
     (cur3dItemEvent &&
@@ -232,16 +232,16 @@ const RightBar_Content_Inspector = () => {
       )) ||
     0;
 
-  console.log('curRoofMiddleHeight: ', curRoofMiddleHeight);
-  console.log('selectedWall: ', selectedWall);
-  console.log(
-    'selectedRoof: ',
-    selectedRoof && selectedRoof.item.room.corners[0].elevation,
-    selectedRoof &&
-      Blueprint.Dimensioning.cmToMeasureRaw(
-        selectedRoof.item.room.corners[0].elevation,
-      ),
-  );
+  // console.log('curRoofMiddleHeight: ', curRoofMiddleHeight);
+  // console.log('selectedWall: ', selectedWall);
+  // console.log(
+  //   'selectedRoof: ',
+  //   selectedRoof && selectedRoof.item.room.corners[0].elevation,
+  //   selectedRoof &&
+  //     Blueprint.Dimensioning.cmToMeasureRaw(
+  //       selectedRoof.item.room.corners[0].elevation,
+  //     ),
+  // );
 
   return (
     <div className="RightBar_Content_Inspector">

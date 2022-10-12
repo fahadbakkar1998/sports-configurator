@@ -22,7 +22,7 @@ export const saveCart = async ({ productId }) => {
   const name = Object.values(info.floorplan.rooms)
     .map((e) => e.name)
     .join(',');
-  console.log('save design: ', name, info);
+  // console.log('save design: ', name, info);
   if (productId) {
     await axios.post(`${backendUrl}/update/${productId}`, { name, info });
   } else {
@@ -31,7 +31,7 @@ export const saveCart = async ({ productId }) => {
 };
 
 export const loadDesign = (data) => {
-  console.log('bpSupport_loadDesign_data: ', JSON.parse(data));
+  // console.log('bpSupport_loadDesign_data: ', JSON.parse(data));
   window.blueprintJS.model.loadSerialized(data);
   updateFloorPlan();
 };
@@ -48,7 +48,7 @@ export const loadCart = async (productId) => {
 
 export const addItem = (item) => {
   if (!item.format) return;
-  console.log('bpSupport_addItem_item: ', item);
+  // console.log('bpSupport_addItem_item: ', item);
   item.resizable = true;
   item.resizeProportionally = true;
 

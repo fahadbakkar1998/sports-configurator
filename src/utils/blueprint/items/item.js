@@ -185,12 +185,12 @@ export class Item extends Mesh {
             staticSize.width,
             staticSize.unit,
           );
-          console.log(
-            'item static width: ',
-            staticSize.width,
-            staticSize.unit,
-            width,
-          );
+          // console.log(
+          //   'item static width: ',
+          //   staticSize.width,
+          //   staticSize.unit,
+          //   width,
+          // );
           const height = Dimensioning.cmFromMeasureRaw(
             staticSize.height,
             staticSize.unit,
@@ -213,12 +213,12 @@ export class Item extends Mesh {
             defaultSize.width,
             defaultSize.unit,
           );
-          console.log(
-            'item default width: ',
-            defaultSize.width,
-            defaultSize.unit,
-            width,
-          );
+          // console.log(
+          //   'item default width: ',
+          //   defaultSize.width,
+          //   defaultSize.unit,
+          //   width,
+          // );
           const height = Dimensioning.cmFromMeasureRaw(
             defaultSize.height,
             defaultSize.unit,

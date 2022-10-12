@@ -442,7 +442,7 @@ export class Wall extends EventDispatcher {
     } else if (this.end === corner) {
       return this.start;
     } else {
-      console.log('wall_oppositeCorner: ', 'Wall does not connect to corner');
+      // console.log('wall_oppositeCorner: ', 'Wall does not connect to corner');
       return null;
     }
   }

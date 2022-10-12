@@ -319,10 +319,10 @@ DRACOLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype), {
   },
 
   debug: function () {
-    console.log(
-      'Task load: ',
-      this.workerPool.map((worker) => worker._taskLoad),
-    );
+    // console.log(
+    //   'Task load: ',
+    //   this.workerPool.map((worker) => worker._taskLoad),
+    // );
   },
 
   dispose: function () {

@@ -48,29 +48,29 @@ const Scene_Content = () => {
     // });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_ITEM_SELECTED, (o) => {
-      console.log('Scene_Content_EVENT_ITEM_SELECTED: ', o);
+      // console.log('Scene_Content_EVENT_ITEM_SELECTED: ', o);
       setCur3dItemEvent(o);
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_ITEM_UNSELECTED, (o) => {
-      console.log('Scene_Content_EVENT_ITEM_UNSELECTED: ', o);
+      // console.log('Scene_Content_EVENT_ITEM_UNSELECTED: ', o);
       setCur3dItemEvent(null);
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_WALL_CLICKED, (o) => {
-      console.log('Scene_Content_EVENT_WALL_CLICKED: ', o);
+      // console.log('Scene_Content_EVENT_WALL_CLICKED: ', o);
       setSelectedWall(o);
       setSelectedRoof({ item: o.item.room.roof });
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_FLOOR_CLICKED, (o) => {
-      console.log('Scene_Content_EVENT_FLOOR_CLICKED: ', o);
+      // console.log('Scene_Content_EVENT_FLOOR_CLICKED: ', o);
       setSelectedFloor(o);
       setSelectedRoof({ item: o.item.roof });
     });
 
     blueprintJS.three.addEventListener(Blueprint.EVENT_NOTHING_CLICKED, (o) => {
-      console.log('Scene_Content_EVENT_NOTHING_CLICKED: ', o);
+      // console.log('Scene_Content_EVENT_NOTHING_CLICKED: ', o);
       setSelectedWall(null);
       setSelectedFloor(null);
       setSelectedRoof(null);
@@ -96,7 +96,7 @@ const Scene_Content = () => {
     blueprintJS.floorplanner.addEventListener(
       Blueprint.EVENT_MODE_RESET,
       (o) => {
-        console.log('Scene_Content_EVENT_MODE_RESET: ', o);
+        // console.log('Scene_Content_EVENT_MODE_RESET: ', o);
         setFloorPlanMode(o.mode);
       },
     );
@@ -105,7 +105,7 @@ const Scene_Content = () => {
     blueprintJS.floorplanner.floorplan.addEventListener(
       Blueprint.EVENT_NOTHING_CLICKED,
       (o) => {
-        console.log('Scene_Content_EVENT_NOTHING_CLICKED: ', o);
+        // console.log('Scene_Content_EVENT_NOTHING_CLICKED: ', o);
         setCur2dItemEvent(null);
       },
     );
@@ -114,7 +114,7 @@ const Scene_Content = () => {
     blueprintJS.floorplanner.floorplan.addEventListener(
       Blueprint.EVENT_CORNER_2D_CLICKED,
       (o) => {
-        console.log('Scene_Content_EVENT_CORNER_2D_CLICKED: ', o);
+        // console.log('Scene_Content_EVENT_CORNER_2D_CLICKED: ', o);
         o.type = 'CORNER';
         setCur2dItemEvent(o);
       },
@@ -123,7 +123,7 @@ const Scene_Content = () => {
     blueprintJS.floorplanner.floorplan.addEventListener(
       Blueprint.EVENT_CORNER_2D_MOVED,
       (o) => {
-        console.log('Scene_Content_EVENT_CORNER_2D_MOVED: ', o);
+        // console.log('Scene_Content_EVENT_CORNER_2D_MOVED: ', o);
         o.type = 'CORNER';
         setCur2dItemEvent(o);
       },
@@ -133,7 +133,7 @@ const Scene_Content = () => {
     blueprintJS.floorplanner.floorplan.addEventListener(
       Blueprint.EVENT_WALL_2D_CLICKED,
       (o) => {
-        console.log('Scene_Content_EVENT_WALL_2D_CLICKED: ', o);
+        // console.log('Scene_Content_EVENT_WALL_2D_CLICKED: ', o);
         o.type = 'WALL';
         setCur2dItemEvent(o);
       },
@@ -143,7 +143,7 @@ const Scene_Content = () => {
     blueprintJS.floorplanner.floorplan.addEventListener(
       Blueprint.EVENT_ROOM_2D_CLICKED,
       (o) => {
-        console.log('Scene_Content_EVENT_ROOM_2D_CLICKED: ', o);
+        // console.log('Scene_Content_EVENT_ROOM_2D_CLICKED: ', o);
         o.type = 'ROOM';
         setCur2dItemEvent(o);
       },
@@ -153,7 +153,7 @@ const Scene_Content = () => {
     blueprintJS.three.scene.addEventListener(
       Blueprint.EVENT_ITEM_LOADING,
       (o) => {
-        console.log('Scene_Content_EVENT_ITEM_LOADING: ', o);
+        // console.log('Scene_Content_EVENT_ITEM_LOADING: ', o);
         setLoading(true);
       },
     );
@@ -161,7 +161,7 @@ const Scene_Content = () => {
     blueprintJS.three.scene.addEventListener(
       Blueprint.EVENT_ITEM_LOADED,
       (o) => {
-        console.log('Scene_Content_EVENT_ITEM_LOADED: ', o);
+        // console.log('Scene_Content_EVENT_ITEM_LOADED: ', o);
         setLoading(false);
         setBpJS({ ...blueprintJS });
       },

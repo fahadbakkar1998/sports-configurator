@@ -53,7 +53,7 @@ export class Configuration {
 
   /* Set a configuration parameter. */
   static setValue(key, value) {
-    console.log('configuration set value: ', key, value);
+    // console.log('configuration set value: ', key, value);
     config[key] = value;
   }
 

@@ -348,7 +348,7 @@ export class Utils {
     start = start || new Vector2(0, 0);
     for (let tI = 0; tI < insideCorners.length; tI++) {
       if (Utils.pointInPolygon2(insideCorners[tI], outsideCorners)) {
-        console.log('pass pointInPolygon: ', insideCorners[tI], outsideCorners);
+        // console.log('pass pointInPolygon: ', insideCorners[tI], outsideCorners);
         return false;
       }
     }
