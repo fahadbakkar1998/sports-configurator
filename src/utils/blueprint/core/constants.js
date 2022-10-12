@@ -23,13 +23,13 @@ export const dimCentiMeter = 'cm';
 /* Dimensioning in MilliMeter. */
 export const dimMilliMeter = 'mm';
 
-export const sphereRadius = 40000;
+export const floorPlanerScale = 0.1;
+
+export const sphereRadius = 40000 * floorPlanerScale;
 
 /* The tolerance in cms between corners, otherwise below this tolerance they will snap together as one corner */
-export const cornerTolerance = 20;
+export const cornerTolerance = 20 * floorPlanerScale;
 
-export const minSize = 1;
+export const minSize = 1 * floorPlanerScale;
 
-export const minGap = 1;
-
-export const floorPlanerScale = 0.1;
+export const minGap = 1 * floorPlanerScale;
