@@ -249,16 +249,22 @@ const RightBar_Content_Inspector = () => {
             <DragLabel
               name={`Height(${curUnit}):`}
               value={curElevation}
-              setValue={(val) => {
-                updateElevation(val);
+              refIndex={refLabelIndex++}
+              setValue={(value, refIndex) => {
+                const validValue = getUFloat(value);
+                updateElevation(validValue);
+                refs.current[refIndex].value = validValue;
               }}
               offset={0.1}></DragLabel>
             <input
+              ref={(element) => (refs.current[refInputIndex++] = element)}
               className="input"
               type="text"
-              value={curElevation + inputSuffix}
-              onChange={(e) => {
-                updateElevation(getUFloat(e.target.value));
+              defaultValue={curElevation + inputSuffix}
+              onBlur={(e) => {
+                const validValue = getUFloat(e.target.value);
+                updateElevation(validValue);
+                e.target.value = validValue;
               }}></input>
           </div>
 
@@ -297,19 +303,24 @@ const RightBar_Content_Inspector = () => {
               <DragLabel
                 name={`Pitch(${curUnit}):`}
                 value={curRoofMiddleHeight}
-                setValue={(val) => {
-                  updateCurRoofNum({ setMiddleHeight: getUFloat(val) });
+                refIndex={refLabelIndex++}
+                setValue={(value, refIndex) => {
+                  const validValue = getUFloat(value);
+                  updateCurRoofNum({ setMiddleHeight: validValue });
+                  refs.current[refIndex].value = validValue;
                 }}
                 offset={0.1}></DragLabel>
               <input
+                ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={curRoofMiddleHeight + inputSuffix}
-                onChange={(e) => {
-                  const val = getUFloat(e.target.value);
+                defaultValue={curRoofMiddleHeight + inputSuffix}
+                onBlur={(e) => {
+                  const validValue = getUFloat(e.target.value);
                   updateCurRoofNum({
-                    setMiddleHeight: val,
+                    setMiddleHeight: validValue,
                   });
+                  e.target.value = validValue;
                 }}></input>
             </div>
           )}
@@ -464,20 +475,30 @@ const RightBar_Content_Inspector = () => {
                                 <DragLabel
                                   name={`Length(${curUnit}):`}
                                   value={cur3dItemWidth}
-                                  setValue={(width) =>
+                                  refIndex={refLabelIndex++}
+                                  setValue={(value, refIndex) => {
+                                    const validValue = getUFloat(value);
                                     updateCur3dItemSize({
-                                      width: getUFloat(width),
-                                    })
-                                  }
+                                      width: validValue,
+                                    });
+                                    refs.current[refIndex].value = validValue;
+                                  }}
                                   offset={0.1}></DragLabel>
                                 <input
+                                  ref={(element) =>
+                                    (refs.current[refInputIndex++] = element)
+                                  }
                                   className="input"
                                   type="text"
-                                  value={cur3dItemWidth + inputSuffix}
-                                  onChange={(e) => {
+                                  defaultValue={cur3dItemWidth + inputSuffix}
+                                  onBlur={(e) => {
+                                    const validValue = getUFloat(
+                                      e.target.value,
+                                    );
                                     updateCur3dItemSize({
-                                      width: getUFloat(e.target.value),
+                                      width: validValue,
                                     });
+                                    e.target.value = validValue;
                                   }}></input>
                               </div>
 
@@ -486,20 +507,30 @@ const RightBar_Content_Inspector = () => {
                                 <DragLabel
                                   name={`Width(${curUnit}):`}
                                   value={cur3dItemDepth}
-                                  setValue={(depth) =>
+                                  refIndex={refLabelIndex++}
+                                  setValue={(value, refIndex) => {
+                                    const validValue = getUFloat(value);
                                     updateCur3dItemSize({
-                                      depth: getUFloat(depth),
-                                    })
-                                  }
+                                      depth: validValue,
+                                    });
+                                    refs.current[refIndex].value = validValue;
+                                  }}
                                   offset={0.1}></DragLabel>
                                 <input
+                                  ref={(element) =>
+                                    (refs.current[refInputIndex++] = element)
+                                  }
                                   className="input"
                                   type="text"
-                                  value={cur3dItemDepth + inputSuffix}
-                                  onChange={(e) => {
+                                  defaultValue={cur3dItemDepth + inputSuffix}
+                                  onBlur={(e) => {
+                                    const validValue = getUFloat(
+                                      e.target.value,
+                                    );
                                     updateCur3dItemSize({
-                                      depth: getUFloat(e.target.value),
+                                      depth: validValue,
                                     });
+                                    e.target.value = validValue;
                                   }}></input>
                               </div>
 
@@ -508,20 +539,30 @@ const RightBar_Content_Inspector = () => {
                                 <DragLabel
                                   name={`Height(${curUnit}):`}
                                   value={cur3dItemHeight}
-                                  setValue={(height) =>
+                                  refIndex={refLabelIndex++}
+                                  setValue={(value, refIndex) => {
+                                    const validValue = getUFloat(value);
                                     updateCur3dItemSize({
-                                      height: getUFloat(height),
-                                    })
-                                  }
+                                      height: validValue,
+                                    });
+                                    refs.current[refIndex].value = validValue;
+                                  }}
                                   offset={0.1}></DragLabel>
                                 <input
+                                  ref={(element) =>
+                                    (refs.current[refInputIndex++] = element)
+                                  }
                                   className="input"
                                   type="text"
-                                  value={cur3dItemHeight + inputSuffix}
-                                  onChange={(e) => {
+                                  defaultValue={cur3dItemHeight + inputSuffix}
+                                  onBlur={(e) => {
+                                    const validValue = getUFloat(
+                                      e.target.value,
+                                    );
                                     updateCur3dItemSize({
-                                      height: getUFloat(e.target.value),
+                                      height: validValue,
                                     });
+                                    e.target.value = validValue;
                                   }}></input>
                               </div>
 

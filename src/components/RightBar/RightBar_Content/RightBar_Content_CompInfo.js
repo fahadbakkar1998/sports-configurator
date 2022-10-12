@@ -104,10 +104,10 @@ const RightBar_Content_CompInfo = ({
                   }}
                   offset={comp.offset || 0.1}></DragLabel>
                 <input
+                  ref={(element) => (refs.current[refInputIndex++] = element)}
                   className={classnames('input', {
                     immutability: comp.immutability,
                   })}
-                  ref={(element) => (refs.current[refInputIndex++] = element)}
                   type="text"
                   defaultValue={comp.value[1]}
                   onBlur={(e) => {
