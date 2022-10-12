@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import LeftBar_List_Item from './LeftBar_List_Item';
 import { items } from '../../../utils/resource';
 import {
@@ -65,9 +65,14 @@ const LeftBar_List = () => {
   const cur2dItemEvent = useZustand((state) => state.cur2dItemEvent);
   const setCur2dItemEvent = useZustand((state) => state.setCur2dItemEvent);
 
+  const refs = useRef([]);
+
   const dimUnit = Blueprint.Configuration.getStringValue(
     Blueprint.configDimUnit,
   );
+
+  let refLabelIndex = 0,
+    refInputIndex = 0;
 
   const inputSuffix = isDot ? '.' : '';
 
@@ -155,8 +160,6 @@ const LeftBar_List = () => {
       )) ||
     0;
 
-  console.log('cur2dItemEvent: ', cur2dItemEvent);
-
   return (
     <div className="LeftBar_List">
       <div className={cn('content', { active: editMode === 'FLOOR PLAN' })}>
@@ -240,7 +243,6 @@ const LeftBar_List = () => {
             value={curUnit}
             onChange={(e) => {
               const unit = e.target.value;
-              console.log('input unit: ', unit);
               updateUnit(unit);
               setCurUnit(unit);
             }}>
@@ -267,14 +269,23 @@ const LeftBar_List = () => {
               <DragLabel
                 name={`X(${dimUnit}):`}
                 value={cur2dItemX}
-                setValue={(x) => moveCorner({ x: getFloat(x) })}
+                refIndex={refLabelIndex++}
+                setValue={(value, refIndex) => {
+                  const validValue = getFloat(value);
+                  console.log('test: ', refIndex, refs.current[refIndex]);
+                  refs.current[refIndex].value = validValue;
+                  moveCorner({ x: validValue });
+                }}
                 offset={0.01}></DragLabel>
               <input
+                ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemX + inputSuffix}
-                onChange={(e) => {
-                  moveCorner({ x: getFloat(e.target.value) });
+                defaultValue={cur2dItemX + inputSuffix}
+                onBlur={(e) => {
+                  const validValue = getFloat(e.target.value);
+                  e.target.value = validValue;
+                  moveCorner({ x: validValue });
                 }}></input>
             </div>
 
@@ -283,13 +294,22 @@ const LeftBar_List = () => {
               <DragLabel
                 name={`Y(${dimUnit}):`}
                 value={cur2dItemY}
-                setValue={(y) => moveCorner({ y: getFloat(y) })}
+                refIndex={refLabelIndex++}
+                setValue={(value, refIndex) => {
+                  const validValue = getFloat(value);
+                  console.log('test: ', refIndex, refs.current[refIndex]);
+                  refs.current[refIndex].value = validValue;
+                  moveCorner({ y: validValue });
+                }}
                 offset={0.01}></DragLabel>
               <input
+                ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemY + inputSuffix}
-                onChange={(e) => {
+                defaultValue={cur2dItemY + inputSuffix}
+                onBlur={(e) => {
+                  const validValue = getFloat(e.target.value);
+                  e.target.value = validValue;
                   moveCorner({ y: getFloat(e.target.value) });
                 }}></input>
             </div>

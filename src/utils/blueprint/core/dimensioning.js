@@ -57,7 +57,7 @@ export class Dimensioning {
    */
   static cmFromMeasureRaw(measure, unit) {
     if (!unit) unit = Configuration.getStringValue(configDimUnit);
-    console.log('cmFromMeasureRaw unit: ', unit);
+    // console.log('cmFromMeasureRaw unit: ', unit);
 
     switch (unit) {
       case dimFeetAndInch:
@@ -98,10 +98,10 @@ export class Dimensioning {
    * @returns Float.
    */
   static cmToMeasureRaw(cm, power = 1, unit) {
-    console.log('before unit: ', unit);
-    console.log('config dim unit: ', configDimUnit);
+    // console.log('before unit: ', unit);
+    // console.log('config dim unit: ', configDimUnit);
     if (!unit) unit = Configuration.getStringValue(configDimUnit);
-    console.log('after unit: ', unit);
+    // console.log('after unit: ', unit);
 
     switch (unit) {
       case dimFeetAndInch: // dimFeetAndInch returns only the feet

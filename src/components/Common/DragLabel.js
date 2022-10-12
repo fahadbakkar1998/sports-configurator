@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-const DragLabel = ({ name, value, setValue, offset }) => {
+const DragLabel = ({ name, value, setValue, offset, refIndex }) => {
   // We are creating a snapshot of the values when the drag starts
   // because the [value] will itself change & we need the original
   // [value] to calculate during a drag.
@@ -26,7 +26,7 @@ const DragLabel = ({ name, value, setValue, offset }) => {
     // Only change the value if the drag was actually started.
     const onUpdate = (event) => {
       if (startVal) {
-        setValue((event.clientX - startVal) * offset + snapshot);
+        setValue((event.clientX - startVal) * offset + snapshot, refIndex);
       }
     };
 
