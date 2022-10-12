@@ -9,7 +9,7 @@ import {
   TorusGeometry,
   RingGeometry,
 } from 'three';
-import { minSize, minGap } from '../../../core/constants';
+import { minSize, minGap, floorPlanerScale } from '../../../core/constants';
 import { PaintArea } from './paint.area';
 
 export class Court extends Group {
@@ -298,8 +298,8 @@ export class Court extends Group {
       height: minSize,
     };
     this.groundMesh.material.map.repeat = new Vector2(
-      courtWidth / pieceSize.width,
-      courtLength / pieceSize.height,
+      courtWidth / (pieceSize.width * floorPlanerScale),
+      courtLength / (pieceSize.height * floorPlanerScale),
     );
 
     // Update center line

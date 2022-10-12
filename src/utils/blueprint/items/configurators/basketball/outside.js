@@ -7,7 +7,7 @@ import {
   RepeatWrapping,
   Vector2,
 } from 'three';
-import { minSize, minGap } from '../../../core/constants';
+import { minSize, minGap, floorPlanerScale } from '../../../core/constants';
 import { Court } from './court';
 
 export class Outside extends Group {
@@ -51,8 +51,8 @@ export class Outside extends Group {
       height: minSize,
     };
     this.groundMesh.material.map.repeat = new Vector2(
-      dimensionInfo.outerWidth / pieceSize.width,
-      dimensionInfo.outerLength / pieceSize.height,
+      dimensionInfo.outerWidth / (pieceSize.width * floorPlanerScale),
+      dimensionInfo.outerLength / (pieceSize.height * floorPlanerScale),
     );
 
     const OCWGap = (dimensionInfo.outerWidth - dimensionInfo.courtWidth) / 2; // Width Gap between outer and court

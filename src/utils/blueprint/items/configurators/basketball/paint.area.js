@@ -9,7 +9,7 @@ import {
   TorusGeometry,
   RingGeometry,
 } from 'three';
-import { minSize, minGap } from '../../../core/constants';
+import { minSize, minGap, floorPlanerScale } from '../../../core/constants';
 import { Hoops } from './hoops';
 
 export class PaintArea extends Group {
@@ -153,8 +153,8 @@ export class PaintArea extends Group {
       height: minSize,
     };
     this.groundMesh.material.map.repeat = new Vector2(
-      key / pieceSize.width,
-      laneLineLength / pieceSize.height,
+      key / (pieceSize.width * floorPlanerScale),
+      laneLineLength / (pieceSize.height * floorPlanerScale),
     );
 
     // Update lane line.
