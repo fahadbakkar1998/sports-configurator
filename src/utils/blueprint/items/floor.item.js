@@ -1,5 +1,6 @@
 import { Item } from './item.js';
 import { Utils } from '../core/utils.js';
+import { itemLayerHeight } from '../../../constants.js';
 
 /*
  * A Floor Item is an entity to be placed related to a floor.
@@ -18,7 +19,8 @@ export class FloorItem extends Item {
       this.position.z = center.z;
       this.position.y =
         0.5 *
-        (this.geometry.boundingBox.max.y - this.geometry.boundingBox.min.y);
+          (this.geometry.boundingBox.max.y - this.geometry.boundingBox.min.y) +
+        itemLayerHeight;
     }
   }
 

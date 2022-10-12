@@ -13,10 +13,10 @@ import {
   Shape,
   ShapeGeometry,
   Mesh,
-  BoxGeometry,
 } from 'three';
 import { EVENT_CHANGED } from '../core/events.js';
 import { Configuration, configWallHeight } from '../core/configuration.js';
+import { floorLayerHeight } from '../../../constants.js';
 
 export class Floor extends EventDispatcher {
   constructor(scene, room, three) {
@@ -138,6 +138,7 @@ export class Floor extends EventDispatcher {
 
   addToScene() {
     this.scene.add(this.floorPlane);
+    this.floorPlane.position.y = floorLayerHeight;
     this.scene.add(this.roofPlane);
     // scene.add(roofPlane);
     // hack so we can do intersect testing

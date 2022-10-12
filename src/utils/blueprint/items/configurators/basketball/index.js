@@ -1,3 +1,4 @@
+import { itemLayerHeight } from '../../../../../constants';
 import { FloorItem } from '../../floor.item';
 import { Root } from './root';
 
@@ -8,6 +9,7 @@ export class Basketball extends FloorItem {
     this.root = new Root(this);
     this.root.rotateX(-Math.PI / 2);
     this.add(this.root);
+    this.root.position.y = itemLayerHeight;
   }
 
   redrawComponents() {

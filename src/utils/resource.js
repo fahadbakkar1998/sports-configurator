@@ -9,20 +9,20 @@ export const items = [
             name: 'Standard Sizes',
             children: [
               {
-                name: 'Size 1',
-                image_path: 'logo512.png',
+                name: '100ft X 100ft',
+                image_path: 'assets/models/thumbnails/Building/1.png',
                 format: 'building',
                 size_key: 'size1',
               },
               {
-                name: 'Size 2',
-                image_path: 'logo512.png',
+                name: '200ft X 200ft',
+                image_path: 'assets/models/thumbnails/Building/2.png',
                 format: 'building',
                 size_key: 'size2',
               },
               {
-                name: 'Size 3',
-                image_path: 'logo512.png',
+                name: '300ft X 300ft',
+                image_path: 'assets/models/thumbnails/Building/3.png',
                 format: 'building',
                 size_key: 'size3',
               },
@@ -30,7 +30,7 @@ export const items = [
           },
           {
             name: 'Custom Size',
-            image_path: 'logo512.png',
+            image_path: 'assets/models/thumbnails/Building/Custom.png',
             format: 'building',
             size_key: 'custom',
           },

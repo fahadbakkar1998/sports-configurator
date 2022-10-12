@@ -1,3 +1,4 @@
+import { itemLayerHeight } from '../../../../../constants';
 import { FloorItem } from '../../floor.item';
 import { Root } from './root';
 
@@ -7,6 +8,7 @@ export class Aplomb extends FloorItem {
     this.scene = info.model.scene.scene;
     this.root = new Root(this);
     this.add(this.root);
+    this.root.position.y = itemLayerHeight;
   }
 
   redrawComponents() {

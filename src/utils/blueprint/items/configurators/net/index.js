@@ -1,7 +1,7 @@
 import { FloorItem } from '../../floor.item';
 import { Root } from './root';
 import { calculateBarrier } from '../net.quoter';
-import { decimalPlaces } from '../../../../../constants';
+import { decimalPlaces, itemLayerHeight } from '../../../../../constants';
 
 export class Net extends FloorItem {
   constructor(info) {
@@ -9,6 +9,7 @@ export class Net extends FloorItem {
     this.scene = info.model.scene.scene;
     this.root = new Root(this);
     this.add(this.root);
+    this.root.position.y = itemLayerHeight;
   }
 
   redrawComponents() {
