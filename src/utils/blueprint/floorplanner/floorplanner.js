@@ -750,17 +750,17 @@ export class Floorplanner2D extends EventDispatcher {
   }
 
   zoom() {
-    let centerX = this.canvasElement.innerWidth() / 2.0;
-    let centerY = this.canvasElement.innerHeight() / 2.0;
-    let originScreen = new Vector2(centerX, centerY);
-    let currentPan = new Vector2(
-      this.unScaledOriginX + centerX,
-      this.unScaledOriginY + centerY,
-    );
-    currentPan = currentPan.multiplyScalar(this.scale).sub(originScreen);
+    // let centerX = this.canvasElement.innerWidth() / 2.0;
+    // let centerY = this.canvasElement.innerHeight() / 2.0;
+    // let originScreen = new Vector2(centerX, centerY);
+    // let currentPan = new Vector2(
+    //   this.unScaledOriginX + centerX,
+    //   this.unScaledOriginY + centerY,
+    // );
+    // currentPan = currentPan.multiplyScalar(this.scale).sub(originScreen);
 
-    this.originX = currentPan.x;
-    this.originY = currentPan.y;
+    // this.originX = currentPan.x;
+    // this.originY = currentPan.y;
 
     this.view.zoom(this.scale);
   }
