@@ -427,22 +427,13 @@ export const items = [
                 type: '1',
                 format: 'gltf',
                 default_size: {
-                  name: '55L',
+                  name: '70L',
                   unit: 'ft',
                   width: 70,
                   height: 22,
                   length: 12,
+                  disableDimensioning: true,
                 },
-                staticSizes: [
-                  {
-                    name: '70L',
-                    unit: 'ft',
-                    width: 70,
-                    height: 22,
-                    length: 12,
-                    extraPrice: 200,
-                  },
-                ],
               },
               {
                 name: 'Double Lane',
@@ -456,17 +447,8 @@ export const items = [
                   width: 55,
                   height: 22,
                   length: 12,
+                  disableDimensioning: true,
                 },
-                staticSizes: [
-                  {
-                    name: '70L',
-                    unit: 'ft',
-                    width: 70,
-                    height: 22,
-                    length: 12,
-                    extraPrice: 200,
-                  },
-                ],
               },
               {
                 name: 'Triple Lane',
@@ -475,22 +457,13 @@ export const items = [
                 type: '1',
                 format: 'gltf',
                 default_size: {
-                  name: '55L',
+                  name: '35L',
                   unit: 'ft',
                   width: 35,
                   height: 22,
                   length: 12,
+                  disableDimensioning: true,
                 },
-                staticSizes: [
-                  {
-                    name: '70L',
-                    unit: 'ft',
-                    width: 70,
-                    height: 22,
-                    length: 12,
-                    extraPrice: 200,
-                  },
-                ],
               },
             ],
           },

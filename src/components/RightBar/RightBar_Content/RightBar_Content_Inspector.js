@@ -454,100 +454,111 @@ const RightBar_Content_Inspector = () => {
                         </>
                       ) : (
                         <>
-                          <div className="property-header">Dimensions</div>
+                          {!cur3dItemEvent.item.metadata.default_size
+                            .disableDimensioning && (
+                            <>
+                              <div className="property-header">Dimensions</div>
 
-                          {/* Dimension width */}
-                          <div className="input-group">
-                            <DragLabel
-                              name={`Length(${curUnit}):`}
-                              value={cur3dItemWidth}
-                              setValue={(width) =>
-                                updateCur3dItemSize({ width: getUFloat(width) })
-                              }
-                              offset={0.01}></DragLabel>
-                            <input
-                              className="input"
-                              type="text"
-                              value={cur3dItemWidth + inputSuffix}
-                              onChange={(e) => {
-                                updateCur3dItemSize({
-                                  width: getUFloat(e.target.value),
-                                });
-                              }}></input>
-                          </div>
+                              {/* Dimension width */}
+                              <div className="input-group">
+                                <DragLabel
+                                  name={`Length(${curUnit}):`}
+                                  value={cur3dItemWidth}
+                                  setValue={(width) =>
+                                    updateCur3dItemSize({
+                                      width: getUFloat(width),
+                                    })
+                                  }
+                                  offset={0.01}></DragLabel>
+                                <input
+                                  className="input"
+                                  type="text"
+                                  value={cur3dItemWidth + inputSuffix}
+                                  onChange={(e) => {
+                                    updateCur3dItemSize({
+                                      width: getUFloat(e.target.value),
+                                    });
+                                  }}></input>
+                              </div>
 
-                          {/* Dimension depth */}
-                          <div className="input-group">
-                            <DragLabel
-                              name={`Width(${curUnit}):`}
-                              value={cur3dItemDepth}
-                              setValue={(depth) =>
-                                updateCur3dItemSize({ depth: getUFloat(depth) })
-                              }
-                              offset={0.01}></DragLabel>
-                            <input
-                              className="input"
-                              type="text"
-                              value={cur3dItemDepth + inputSuffix}
-                              onChange={(e) => {
-                                updateCur3dItemSize({
-                                  depth: getUFloat(e.target.value),
-                                });
-                              }}></input>
-                          </div>
+                              {/* Dimension depth */}
+                              <div className="input-group">
+                                <DragLabel
+                                  name={`Width(${curUnit}):`}
+                                  value={cur3dItemDepth}
+                                  setValue={(depth) =>
+                                    updateCur3dItemSize({
+                                      depth: getUFloat(depth),
+                                    })
+                                  }
+                                  offset={0.01}></DragLabel>
+                                <input
+                                  className="input"
+                                  type="text"
+                                  value={cur3dItemDepth + inputSuffix}
+                                  onChange={(e) => {
+                                    updateCur3dItemSize({
+                                      depth: getUFloat(e.target.value),
+                                    });
+                                  }}></input>
+                              </div>
 
-                          {/* Dimension height */}
-                          <div className="input-group">
-                            <DragLabel
-                              name={`Height(${curUnit}):`}
-                              value={cur3dItemHeight}
-                              setValue={(height) =>
-                                updateCur3dItemSize({
-                                  height: getUFloat(height),
-                                })
-                              }
-                              offset={0.01}></DragLabel>
-                            <input
-                              className="input"
-                              type="text"
-                              value={cur3dItemHeight + inputSuffix}
-                              onChange={(e) => {
-                                updateCur3dItemSize({
-                                  height: getUFloat(e.target.value),
-                                });
-                              }}></input>
-                          </div>
+                              {/* Dimension height */}
+                              <div className="input-group">
+                                <DragLabel
+                                  name={`Height(${curUnit}):`}
+                                  value={cur3dItemHeight}
+                                  setValue={(height) =>
+                                    updateCur3dItemSize({
+                                      height: getUFloat(height),
+                                    })
+                                  }
+                                  offset={0.01}></DragLabel>
+                                <input
+                                  className="input"
+                                  type="text"
+                                  value={cur3dItemHeight + inputSuffix}
+                                  onChange={(e) => {
+                                    updateCur3dItemSize({
+                                      height: getUFloat(e.target.value),
+                                    });
+                                  }}></input>
+                              </div>
 
-                          {/* Dimension resizable */}
-                          <div className="input-group">
-                            <div>Resizable:</div>
-                            <input
-                              className="input"
-                              type="checkbox"
-                              checked={cur3dItemEvent.item.resizable || false}
-                              onChange={(e) => {
-                                updateCur3dItemValue({
-                                  resizable: e.target.checked,
-                                });
-                              }}></input>
-                          </div>
+                              {/* Dimension resizable */}
+                              <div className="input-group">
+                                <div>Resizable:</div>
+                                <input
+                                  className="input"
+                                  type="checkbox"
+                                  checked={
+                                    cur3dItemEvent.item.resizable || false
+                                  }
+                                  onChange={(e) => {
+                                    updateCur3dItemValue({
+                                      resizable: e.target.checked,
+                                    });
+                                  }}></input>
+                              </div>
 
-                          {/* Dimension proportionally */}
-                          <div className="input-group">
-                            <div>Proportionally:</div>
-                            <input
-                              className="input"
-                              type="checkbox"
-                              checked={
-                                cur3dItemEvent.item.resizeProportionally ||
-                                false
-                              }
-                              onChange={(e) => {
-                                updateCur3dItemValue({
-                                  resizeProportionally: e.target.checked,
-                                });
-                              }}></input>
-                          </div>
+                              {/* Dimension proportionally */}
+                              <div className="input-group">
+                                <div>Proportionally:</div>
+                                <input
+                                  className="input"
+                                  type="checkbox"
+                                  checked={
+                                    cur3dItemEvent.item.resizeProportionally ||
+                                    false
+                                  }
+                                  onChange={(e) => {
+                                    updateCur3dItemValue({
+                                      resizeProportionally: e.target.checked,
+                                    });
+                                  }}></input>
+                              </div>
+                            </>
+                          )}
                         </>
                       )}
                     </>
