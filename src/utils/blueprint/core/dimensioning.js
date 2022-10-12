@@ -1,4 +1,5 @@
 import { Configuration, configDimUnit, configScale } from './configuration.js';
+import { floorPlanerScale } from './constants.js';
 
 /* Dimensioning in Inch. */
 export const dimInch = 'inch';
@@ -61,15 +62,21 @@ export class Dimensioning {
     switch (unit) {
       case dimFeetAndInch:
         return (
-          Math.round(decimals * (measure * 30.480016459203095991)) / decimals
+          Math.round(
+            decimals * (measure * 30.480016459203095991 * floorPlanerScale),
+          ) / decimals
         );
       case dimInch:
         return (
-          Math.round(decimals * (measure * 2.5400013716002578512)) / decimals
+          Math.round(
+            decimals * (measure * 2.5400013716002578512 * floorPlanerScale),
+          ) / decimals
         );
       case dimMilliMeter:
         return (
-          Math.round(decimals * (measure * 0.10000005400001014955)) / decimals
+          Math.round(
+            decimals * (measure * 0.10000005400001014955 * floorPlanerScale),
+          ) / decimals
         );
       case dimCentiMeter:
         return measure;
@@ -98,20 +105,31 @@ export class Dimensioning {
 
     switch (unit) {
       case dimFeetAndInch: // dimFeetAndInch returns only the feet
-        let allInFeet = cm * Math.pow(0.032808416666669996953, power);
-        return allInFeet;
+        const fts = Math.round(
+          (cm * Math.pow(0.032808416666669996953, power)) / floorPlanerScale,
+        );
+        return fts;
       case dimInch:
-        let inches =
-          Math.round(decimals * (cm * Math.pow(0.3937, power))) / decimals;
+        const inches = Math.round(
+          (decimals * (cm * Math.pow(0.3937, power))) /
+            (decimals * floorPlanerScale),
+        );
         return inches;
       case dimMilliMeter:
-        let mm = Math.round(decimals * (cm * Math.pow(10, power))) / decimals;
-        return mm;
+        const mms = Math.round(
+          (decimals * (cm * Math.pow(10, power))) /
+            (decimals * floorPlanerScale),
+        );
+        return mms;
       case dimCentiMeter:
-        return Math.round(decimals * cm) / decimals;
+        const cms = Math.round((decimals * cm) / (decimals * floorPlanerScale));
+        return cms;
       default:
-        let m = Math.round(decimals * (cm * Math.pow(0.01, power))) / decimals;
-        return m;
+        const ms = Math.round(
+          (decimals * (cm * Math.pow(0.01, power))) /
+            (decimals * floorPlanerScale),
+        );
+        return ms;
     }
   }
 
@@ -120,28 +138,22 @@ export class Dimensioning {
    * @returns String.
    */
   static cmToMeasure(cm, power = 1, unit) {
-    if (!unit) unit = Configuration.getStringValue(configDimUnit);
+    const measureRaw = Dimensioning.cmToMeasureRaw(cm, power, unit);
 
     switch (unit) {
       case dimFeetAndInch:
-        let allInFeet = cm * Math.pow(0.032808416666669996953, power);
-        let floorFeet = Math.floor(allInFeet);
-        let remainingFeet = allInFeet - floorFeet;
+        let floorFeet = Math.floor(measureRaw);
+        let remainingFeet = measureRaw - floorFeet;
         let remainingInches = Math.round(remainingFeet * 12);
         return floorFeet + "'" + remainingInches + '"';
       case dimInch:
-        let inches =
-          Math.round(decimals * (cm * Math.pow(0.3937, power))) / decimals;
-        return inches + "'";
+        return measureRaw + "'";
       case dimMilliMeter:
-        let mm = Math.round(decimals * (cm * Math.pow(10, power))) / decimals;
-        return '' + mm + 'mm';
+        return measureRaw + 'mm';
       case dimCentiMeter:
-        return '' + Math.round(decimals * cm) / decimals + 'cm';
-      case dimMeter:
+        return measureRaw + 'cm';
       default:
-        let m = Math.round(decimals * (cm * Math.pow(0.01, power))) / decimals;
-        return '' + m + 'm';
+        return measureRaw + 'm';
     }
   }
 }
