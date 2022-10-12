@@ -1,10 +1,13 @@
 import { itemLayerHeight } from '../../../../../constants';
-import { FloorItem } from '../../floor.item';
+import { Factory } from '../../factory';
 import { Root } from './root';
 
-export class DividerCurtain extends FloorItem {
+export class DividerCurtain {
   constructor(info) {
-    super(info);
+    Object.setPrototypeOf(
+      this,
+      new (Factory.getClass(info.metadata.type))(info),
+    );
     this.scene = info.model.scene.scene;
     this.root = new Root(this);
     this.add(this.root);

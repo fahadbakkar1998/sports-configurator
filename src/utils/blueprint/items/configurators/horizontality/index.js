@@ -1,10 +1,13 @@
 import { itemLayerHeight } from '../../../../../constants';
-import { FloorItem } from '../../floor.item';
+import { Factory } from '../../factory';
 import { Root } from './root';
 
-export class Horizontality extends FloorItem {
+export class Horizontality {
   constructor(info) {
-    super(info);
+    Object.setPrototypeOf(
+      this,
+      new (Factory.getClass(info.metadata.type))(info),
+    );
     this.scene = info.model.scene.scene;
     this.root = new Root(this);
     this.root.rotateX(Math.PI / 2);

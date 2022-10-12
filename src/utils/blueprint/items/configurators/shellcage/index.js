@@ -1,11 +1,14 @@
-import { FloorItem } from '../../floor.item';
 import { Root } from './root';
 import { calculateTunnel, calculateBarrier } from '../net.quoter';
 import { decimalPlaces, itemLayerHeight } from '../../../../../constants';
+import { Factory } from '../../factory';
 
-export class ShellCage extends FloorItem {
+export class ShellCage {
   constructor(info) {
-    super(info);
+    Object.setPrototypeOf(
+      this,
+      new (Factory.getClass(info.metadata.type))(info),
+    );
     this.scene = info.model.scene.scene;
     this.root = new Root(this);
     this.add(this.root);
