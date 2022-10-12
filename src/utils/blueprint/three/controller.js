@@ -8,6 +8,7 @@ import {
   MeshBasicMaterial,
   Raycaster,
 } from 'three';
+import { sphereRadius } from '../core/constants.js';
 import { EVENT_ITEM_REMOVED, EVENT_ITEM_LOADED } from '../core/events.js';
 import { Utils } from '../core/utils.js';
 
@@ -142,7 +143,7 @@ export class Controller extends EventDispatcher {
 
   setGroundPlane() {
     // ground plane used to find intersections
-    let size = 10000;
+    let size = sphereRadius * 2;
 
     // The below line was originally setting the plane visibility to false
     // Now its setting visibility to true. This is necessary to be detected
