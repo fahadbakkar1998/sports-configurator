@@ -12,13 +12,8 @@ export class Aplomb {
     this.root = new Root(this);
     this.add(this.root);
     this.root.position.y = itemLayerHeight;
-  }
-
-  redrawComponents() {
-    this.root.redrawComponents(this.metadata.components);
-  }
-
-  getPrice() {
-    return 0;
+    this.redrawComponents = () => {
+      this.root.redrawComponents(this.metadata.components);
+    };
   }
 }

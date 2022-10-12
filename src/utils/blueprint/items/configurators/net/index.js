@@ -13,19 +13,18 @@ export class Net {
     this.root = new Root(this);
     this.add(this.root);
     this.root.position.y = itemLayerHeight;
+    this.redrawComponents = () => {
+      this.root.redrawComponents(this.metadata.components);
+    };
   }
 
-  redrawComponents() {
-    this.root.redrawComponents(this.metadata.components);
-  }
-
-  getPrice() {
-    const components = this.metadata.components;
-    const use = components.use.value;
-    const netType = components.net_type.value;
-    const width = components.width.value;
-    const height = components.height.value;
-    const price = calculateBarrier({ use, width, height })[netType];
-    return price.toFixed(decimalPlaces);
-  }
+  // getPrice() {
+  //   const components = this.metadata.components;
+  //   const use = components.use.value;
+  //   const netType = components.net_type.value;
+  //   const width = components.width.value;
+  //   const height = components.height.value;
+  //   const price = calculateBarrier({ use, width, height })[netType];
+  //   return price.toFixed(decimalPlaces);
+  // }
 }

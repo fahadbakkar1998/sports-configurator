@@ -17,6 +17,7 @@ import {
 import { EVENT_CHANGED } from '../core/events.js';
 import { Configuration, configWallHeight } from '../core/configuration.js';
 import { floorLayerHeight } from '../../../constants.js';
+import { floorPlanerScale } from '../core/constants.js';
 
 export class Floor extends EventDispatcher {
   constructor(scene, room, three) {
@@ -65,7 +66,7 @@ export class Floor extends EventDispatcher {
     let floorTexture = new TextureLoader().load(textureSettings.url);
     floorTexture.wrapS = RepeatWrapping;
     floorTexture.wrapT = RepeatWrapping;
-    floorTexture.repeat.set(1, 1);
+    floorTexture.repeat.set(1 / floorPlanerScale, 1 / floorPlanerScale);
     let floorMaterialTop = new MeshPhongMaterial({
       map: floorTexture,
       side: DoubleSide,

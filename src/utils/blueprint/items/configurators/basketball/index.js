@@ -13,14 +13,8 @@ export class Basketball {
     this.root.rotateX(-Math.PI / 2);
     this.add(this.root);
     this.root.position.y = itemLayerHeight;
-  }
-
-  redrawComponents() {
-    this.root.redrawComponents(this.metadata.components);
-    this.scene.needsUpdate = true;
-  }
-
-  getPrice() {
-    return 0;
+    this.redrawComponents = () => {
+      this.root.redrawComponents(this.metadata.components);
+    };
   }
 }
