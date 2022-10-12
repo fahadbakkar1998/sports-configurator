@@ -9,46 +9,24 @@ import {
   RepeatWrapping,
 } from 'three';
 import { decimalPlaces } from '../../../../../constants';
+import {
+  floorPlanerScale,
+  minSize,
+  textureLoader,
+} from '../../../core/constants';
 
 export class Plane extends Group {
-  constructor({ item, compInfo }) {
+  constructor() {
     super();
-    this.scene = item.model.scene.scene;
-    this.unit = item.metadata.unit;
     this.textures = {};
-    const { width, height } = compInfo;
-    const components = item.metadata.components;
-    const material = components.material;
 
     this.planeMesh = new Mesh(
-      new PlaneGeometry(width, height),
+      new PlaneGeometry(minSize, minSize),
       new MeshBasicMaterial({
         side: DoubleSide,
         transparent: true,
-        opacity: this.getOpacity(components),
-        color: (components.color && components.color.value) || '#FFFFFF',
       }),
     );
-
-    if (material) {
-      const pieceSize = material.piece_size || { width: 30, height: 30 };
-      this.materialUrl = material.value;
-
-      // Get all textures.
-      const textureLoader = new TextureLoader();
-      material.options.forEach((option) => {
-        this.textures[option.value] = textureLoader.load(option.value);
-      });
-
-      this.planeMesh.material.map = this.textures[this.materialUrl];
-      this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
-        RepeatWrapping;
-      this.planeMesh.material.map.repeat = new Vector2(
-        width / pieceSize.width,
-        height / pieceSize.height,
-      );
-    }
-
     this.add(this.planeMesh);
   }
 
@@ -76,22 +54,26 @@ export class Plane extends Group {
       const materialUrl = material.value;
 
       if (this.materialUrl != materialUrl) {
+        if (!this.textures[materialUrl]) {
+          this.textures[materialUrl] = textureLoader.load(materialUrl);
+        }
+        this.planeMesh.material.map = this.textures[materialUrl];
         this.materialUrl = materialUrl;
-        this.planeMesh.material.map = this.textures[this.materialUrl];
-        this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
-          RepeatWrapping;
       }
 
+      this.planeMesh.material.map.wrapS = this.planeMesh.material.map.wrapT =
+        RepeatWrapping;
       const pieceSize = material.piece_size || { width: 30, height: 30 };
       this.planeMesh.material.map.repeat = new Vector2(
-        compInfo.width / pieceSize.width,
-        compInfo.height / pieceSize.height,
+        compInfo.width / (pieceSize.width * floorPlanerScale),
+        compInfo.height / (pieceSize.height * floorPlanerScale),
+      );
+    } else {
+      this.planeMesh.material.color.set(
+        (components.color && components.color.value) || '#FFFFFF',
       );
     }
 
     this.planeMesh.material.opacity = this.getOpacity(components);
-    this.planeMesh.material.color.set(
-      (components.color && components.color.value) || '#FFFFFF',
-    );
   }
 }

@@ -8,18 +8,13 @@ export class Root extends Group {
     super();
     if (!item.metadata) item.metadata.unit = 'm';
     this.item = item;
-    this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
     this.maxSize = item.metadata.max_size;
 
-    const dimensionInfo = this.getDimensionInfo(item.metadata.components);
-    this.redrawItem(dimensionInfo);
-
-    this.plane = new Plane({
-      item,
-      compInfo: dimensionInfo,
-    });
+    this.plane = new Plane();
     this.add(this.plane);
+
+    this.redrawComponents(item.metadata.components);
   }
 
   getDimensionInfo(components) {

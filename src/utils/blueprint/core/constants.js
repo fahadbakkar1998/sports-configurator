@@ -1,4 +1,5 @@
 import Enum from 'es6-enum';
+import { TextureLoader } from 'three';
 
 export const VIEW_TOP = 'TOP_VIEW';
 export const VIEW_FRONT = 'FRONT_VIEW';
@@ -33,3 +34,5 @@ export const cornerTolerance = 20 * floorPlanerScale;
 export const minSize = 1 * floorPlanerScale;
 
 export const minGap = 1 * floorPlanerScale;
+
+export const textureLoader = new TextureLoader();
