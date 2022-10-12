@@ -73,7 +73,7 @@ const RightBar_Content_Total = () => {
 
   return (
     <div className="RightBar_Content_Total">
-      {products.length && (
+      {products.length ? (
         <div className="item-group">
           {/* <div className="header">Estimated Totals</div>
           <div className="item">${getTotalPrice()}</div> */}
@@ -102,6 +102,8 @@ const RightBar_Content_Total = () => {
             )),
           )}
         </div>
+      ) : (
+        <></>
       )}
 
       {React.Children.toArray(
