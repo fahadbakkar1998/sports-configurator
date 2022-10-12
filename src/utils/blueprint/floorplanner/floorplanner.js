@@ -36,6 +36,9 @@ import { EVENT_NOTHING_CLICKED } from '../core/events.js';
 import { FloorplannerView2D, floorplannerModes } from './floorplanner.view.js';
 import { decimalPlaces } from '../../../constants.js';
 
+let startEvent = { type: 'start' };
+let endEvent = { type: 'end' };
+
 /* how much will we move a corner to make a wall axis aligned (cm) */
 //export const configSnapTolerance = 25;//In CMS
 /*
@@ -118,6 +121,7 @@ export class Floorplanner2D extends EventDispatcher {
     this.gridSnapMode = false;
     this.shiftKey = false;
     this.ctrlKey = false;
+    this.scale = 1;
 
     // Initialization:
     this.setMode(floorplannerModes.MOVE);
@@ -137,6 +141,9 @@ export class Floorplanner2D extends EventDispatcher {
     });
     this.canvasElement.bind('dblclick', (event) => {
       scope.doubleClick(event);
+    });
+    this.canvasElement.bind('wheel', (event) => {
+      scope.onMouseWheel(event);
     });
     document.addEventListener('keyup', function (event) {
       scope.keyUp(event);
@@ -254,6 +261,22 @@ export class Floorplanner2D extends EventDispatcher {
       }
       this.updateView();
     }
+  }
+
+  onMouseWheel(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.dispatchEvent(startEvent);
+    if (event.originalEvent.deltaY < 0) {
+      // zoom in
+      this.scale += 0.1;
+    } else {
+      // zoom out
+      this.scale -= 0.1;
+    }
+    if (this.scale < 1) this.scale = 1;
+    this.zoom();
+    this.dispatchEvent(endEvent);
   }
 
   keyUp(e) {
@@ -734,12 +757,12 @@ export class Floorplanner2D extends EventDispatcher {
       this.unScaledOriginX + centerX,
       this.unScaledOriginY + centerY,
     );
-    currentPan = currentPan
-      .multiplyScalar(Configuration.getNumericValue(configScale))
-      .sub(originScreen);
+    currentPan = currentPan.multiplyScalar(this.scale).sub(originScreen);
 
     this.originX = currentPan.x;
     this.originY = currentPan.y;
+
+    this.view.zoom(this.scale);
   }
 
   /* Convert from THREEjs coords to canvas coords. */

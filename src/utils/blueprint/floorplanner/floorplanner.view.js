@@ -227,22 +227,13 @@ export class FloorplannerView2D {
   /*
    * @deprecated
    */
-  zoom() {
+  zoom(scale) {
     let originX = this.viewModel.canvasElement.innerWidth() / 2.0;
     let originY = this.viewModel.canvasElement.innerHeight() / 2.0;
-
-    if (Configuration.getNumericValue(configScale) != 1) {
-      this.context.setTransform(1, 0, 0, 1, 0, 0);
-      this.context.translate(originX, originY);
-      this.context.scale(
-        Configuration.getNumericValue(configScale),
-        Configuration.getNumericValue(configScale),
-      );
-      this.context.translate(-originX, -originY);
-    } else {
-      // this.context.restore();
-      this.context.setTransform(1, 0, 0, 1, 0, 0);
-    }
+    this.context.setTransform(1, 0, 0, 1, 0, 0);
+    this.context.translate(originX, originY);
+    this.context.scale(scale, scale);
+    this.context.translate(-originX, -originY);
     this.draw();
   }
 
