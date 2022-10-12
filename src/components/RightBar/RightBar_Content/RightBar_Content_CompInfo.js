@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classnames from 'classnames';
 import { HexColorPicker } from 'react-colorful';
 import DragLabel from '../../Common/DragLabel';
@@ -17,16 +17,20 @@ const RightBar_Content_CompInfo = ({
   onClick,
   updateComponents,
 }) => {
-  console.log('isOpen: ', isOpen);
-  console.log('comp.immutability: ', comp.immutability);
+  // console.log('isOpen: ', isOpen);
+  // console.log('comp.immutability: ', comp.immutability);
 
   const { cur3dItemEvent } = useZustand();
+  const refs = useRef([]);
 
   const style = {
     marginLeft: `${depth * 1}vw`,
   };
 
   const { unit, max_size } = cur3dItemEvent.item.metadata;
+
+  let refLabelIndex = 0,
+    refInputIndex = 0;
 
   return (
     <>
@@ -41,22 +45,28 @@ const RightBar_Content_CompInfo = ({
                 <DragLabel
                   name={`${comp.name}(${unit}):`}
                   value={comp.value}
-                  setValue={(val) => {
+                  refIndex={refLabelIndex++}
+                  setValue={(value, refIndex) => {
                     if (comp.immutability) return;
-                    comp.value = getUFloat(val);
+                    const validValue = getUFloat(value);
+                    comp.value = validValue;
                     updateComponents();
+                    refs.current[refIndex].value = comp.value;
                   }}
                   offset={comp.offset || 0.1}></DragLabel>
                 <input
+                  ref={(element) => (refs.current[refInputIndex++] = element)}
                   className={classnames('input', {
                     immutability: comp.immutability,
                   })}
                   type="text"
-                  value={comp.value}
-                  onChange={(e) => {
+                  defaultValue={comp.value}
+                  onBlur={(e) => {
                     if (comp.immutability) return;
-                    comp.value = getUFloat(e.target.value);
+                    const validValue = getUFloat(e.target.value);
+                    comp.value = validValue;
                     updateComponents();
+                    e.target.value = comp.value;
                   }}></input>
               </>
             )}
@@ -84,22 +94,28 @@ const RightBar_Content_CompInfo = ({
                 <DragLabel
                   name={`${comp.name}(${unit}):`}
                   value={comp.value[1]}
-                  setValue={(val) => {
+                  refIndex={refLabelIndex++}
+                  setValue={(value, refIndex) => {
                     if (comp.immutability) return;
-                    comp.value[1] = getUFloat(val);
+                    const validValue = getUFloat(value);
+                    comp.value[1] = validValue;
                     updateComponents();
+                    refs.current[refIndex].value = comp.value[1];
                   }}
                   offset={comp.offset || 0.1}></DragLabel>
                 <input
                   className={classnames('input', {
                     immutability: comp.immutability,
                   })}
+                  ref={(element) => (refs.current[refInputIndex++] = element)}
                   type="text"
-                  value={comp.value[1]}
-                  onChange={(e) => {
+                  defaultValue={comp.value[1]}
+                  onBlur={(e) => {
                     if (comp.immutability) return;
-                    comp.value[1] = getUFloat(e.target.value);
+                    const validValue = getUFloat(e.target.value);
+                    comp.value[1] = validValue;
                     updateComponents();
+                    e.target.value = comp.value[1];
                   }}></input>
               </>
             )}

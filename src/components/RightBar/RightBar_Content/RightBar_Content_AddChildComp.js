@@ -90,19 +90,24 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
                   <DragLabel
                     name={`${comp.addition[fieldKey].name}(${unit}):`}
                     value={comp.addition[fieldKey].value[1]}
-                    setValue={(val) => {
-                      comp.addition[fieldKey].value[1] = getUFloat(val);
+                    refIndex={refLabelIndex++}
+                    setValue={(value, refIndex) => {
+                      const validValue = getUFloat(value);
+                      refs.current[refIndex].value = comp.addition[
+                        fieldKey
+                      ].value[1] = validValue;
                       updateComponents();
                     }}
                     offset={0.1}></DragLabel>
                   <input
+                    ref={(element) => (refs.current[refInputIndex++] = element)}
                     className={classnames('input')}
                     type="text"
-                    value={comp.addition[fieldKey].value[1]}
-                    onChange={(e) => {
-                      comp.addition[fieldKey].value[1] = getUFloat(
-                        e.target.value,
-                      );
+                    defaultValue={comp.addition[fieldKey].value[1]}
+                    onBlur={(e) => {
+                      const validValue = getUFloat(e.target.value);
+                      e.target.value = comp.addition[fieldKey].value[1] =
+                        validValue;
                       updateComponents();
                     }}></input>
                 </>

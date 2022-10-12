@@ -581,7 +581,7 @@ export class Item extends Mesh {
   getCorners(xDim, yDim, position) {
     position = position || this.position;
     let halfSize = this.halfSize.clone();
-    console.log('half size: ', halfSize);
+    // console.log('half size: ', halfSize);
     let c1 = new Vector3(-halfSize.x, 0, -halfSize.z);
     let c2 = new Vector3(halfSize.x, 0, -halfSize.z);
     let c3 = new Vector3(halfSize.x, 0, halfSize.z);
@@ -645,7 +645,7 @@ export class Item extends Mesh {
     this.geometry.computeBoundingBox();
     let objectBox = this.geometry.boundingBox.clone();
     const halfSize = objectBox.max.clone().sub(objectBox.min).divideScalar(2);
-    console.log('object half size: ', halfSize);
+    // console.log('object half size: ', halfSize);
     return halfSize;
   }
 

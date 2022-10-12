@@ -312,7 +312,7 @@ export class Utils {
       startY = tMinY - 10;
     }
 
-    console.log('pointInPolygon start: ', startX, startY);
+    // console.log('pointInPolygon start: ', startX, startY);
 
     let tIntersects = 0;
     for (tI = 0; tI < corners.length; tI++) {
