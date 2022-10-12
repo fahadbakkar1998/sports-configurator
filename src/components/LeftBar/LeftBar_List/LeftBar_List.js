@@ -272,7 +272,6 @@ const LeftBar_List = () => {
                 refIndex={refLabelIndex++}
                 setValue={(value, refIndex) => {
                   const validValue = getFloat(value);
-                  console.log('test: ', refIndex, refs.current[refIndex]);
                   refs.current[refIndex].value = validValue;
                   moveCorner({ x: validValue });
                 }}
@@ -297,7 +296,6 @@ const LeftBar_List = () => {
                 refIndex={refLabelIndex++}
                 setValue={(value, refIndex) => {
                   const validValue = getFloat(value);
-                  console.log('test: ', refIndex, refs.current[refIndex]);
                   refs.current[refIndex].value = validValue;
                   moveCorner({ y: validValue });
                 }}
@@ -319,16 +317,22 @@ const LeftBar_List = () => {
               <DragLabel
                 name={`Elevation(${dimUnit}):`}
                 value={cur2dItemElevation}
-                setValue={(elevation) =>
-                  updateCur2dItemNum({ elevation: getUFloat(elevation) })
-                }
+                refIndex={refLabelIndex++}
+                setValue={(value, refIndex) => {
+                  const validValue = getUFloat(value);
+                  refs.current[refIndex].value = validValue;
+                  updateCur2dItemNum({ elevation: validValue });
+                }}
                 offset={0.01}></DragLabel>
               <input
+                ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemElevation + inputSuffix}
-                onChange={(e) => {
-                  updateCur2dItemNum({ elevation: getUFloat(e.target.value) });
+                defaultValue={cur2dItemElevation + inputSuffix}
+                onBlur={(e) => {
+                  const validValue = getUFloat(e.target.value);
+                  e.target.value = validValue;
+                  updateCur2dItemNum({ elevation: validValue });
                 }}></input>
             </div>
           </>
