@@ -138,6 +138,7 @@ export class Dimensioning {
    * @returns String.
    */
   static cmToMeasure(cm, power = 1, unit) {
+    if (!unit) unit = Configuration.getStringValue(configDimUnit);
     const measureRaw = Dimensioning.cmToMeasureRaw(cm, power, unit);
 
     switch (unit) {
