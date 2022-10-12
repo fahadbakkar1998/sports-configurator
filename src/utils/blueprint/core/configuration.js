@@ -1,4 +1,4 @@
-import { dimCentiMeter } from './constants';
+import { dimCentiMeter, floorPlanerScale } from './constants';
 
 /* The dimensioning unit for 2D floorplan measurements. */
 export const configDimUnit = 'dimUnit';
@@ -21,13 +21,13 @@ export const configSnapTolerance = 'snapTolerance'; // In CMS
 
 export let config = {
   dimUnit: dimCentiMeter,
-  wallHeight: 250,
-  wallThickness: 10,
+  wallHeight: 250 * floorPlanerScale,
+  wallThickness: 10 * floorPlanerScale,
   systemUI: true,
   scale: 1,
   snapToGrid: false,
-  snapTolerance: 50,
-  gridSpacing: 25,
+  snapTolerance: 50 * floorPlanerScale,
+  gridSpacing: 25 * floorPlanerScale,
   snapToRect: true,
   sameElevation: true,
   visibility: true,

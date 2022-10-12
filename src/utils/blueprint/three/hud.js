@@ -9,6 +9,7 @@ import {
   Object3D,
   MeshLambertMaterial,
 } from 'three';
+import { floorPlanerScale } from '../core/constants.js';
 
 import { EVENT_ITEM_SELECTED, EVENT_ITEM_UNSELECTED } from '../core/events.js';
 
@@ -138,8 +139,8 @@ export class HUD extends EventDispatcher {
     this.coneHeight = this.coneRadius * 2;
     this.sphereRadius = this.coneRadius * 0.8;
     this.lineRadius = this.coneRadius * 0.6;
-    this.lineLength = length / 2 + 200;
-    this.height = this.coneRadius + 50;
+    this.lineLength = length / 2 + 200 * floorPlanerScale;
+    this.height = this.coneRadius + 50 * floorPlanerScale;
     // console.log(
     //   'hud dimensions: ',
     //   this.coneRadius,
