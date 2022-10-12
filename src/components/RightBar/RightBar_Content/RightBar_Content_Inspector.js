@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useZustand from '../../../utils/use.zustand';
-import { getUFloat, rgbToHex, isLeafComponent } from '../../../common';
+import { getUFloat, isLeafComponent } from '../../../common';
 import { wallTextures } from '../../../utils/resource';
 import * as Blueprint from '../../../utils/blueprint/blueprint';
 import DragLabel from '../../Common/DragLabel';
@@ -79,6 +79,11 @@ const RightBar_Content_Inspector = () => {
     setCur3dItemEvent,
     curUnit,
   } = useZustand();
+
+  const refs = useRef([]);
+
+  let refLabelIndex = 0,
+    refInputIndex = 0;
 
   const inputSuffix = isDot ? '.' : '';
 
@@ -260,7 +265,8 @@ const RightBar_Content_Inspector = () => {
               ref={(element) => (refs.current[refInputIndex++] = element)}
               className="input"
               type="text"
-              defaultValue={curElevation + inputSuffix}
+              value={curElevation + inputSuffix}
+              readOnly
               onBlur={(e) => {
                 const validValue = getUFloat(e.target.value);
                 updateElevation(validValue);
@@ -314,7 +320,8 @@ const RightBar_Content_Inspector = () => {
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                defaultValue={curRoofMiddleHeight + inputSuffix}
+                value={curRoofMiddleHeight + inputSuffix}
+                readOnly
                 onBlur={(e) => {
                   const validValue = getUFloat(e.target.value);
                   updateCurRoofNum({
@@ -490,7 +497,8 @@ const RightBar_Content_Inspector = () => {
                                   }
                                   className="input"
                                   type="text"
-                                  defaultValue={cur3dItemWidth + inputSuffix}
+                                  value={cur3dItemWidth + inputSuffix}
+                                  readOnly
                                   onBlur={(e) => {
                                     const validValue = getUFloat(
                                       e.target.value,
@@ -522,7 +530,8 @@ const RightBar_Content_Inspector = () => {
                                   }
                                   className="input"
                                   type="text"
-                                  defaultValue={cur3dItemDepth + inputSuffix}
+                                  value={cur3dItemDepth + inputSuffix}
+                                  readOnly
                                   onBlur={(e) => {
                                     const validValue = getUFloat(
                                       e.target.value,
@@ -554,7 +563,8 @@ const RightBar_Content_Inspector = () => {
                                   }
                                   className="input"
                                   type="text"
-                                  defaultValue={cur3dItemHeight + inputSuffix}
+                                  value={cur3dItemHeight + inputSuffix}
+                                  readOnly
                                   onBlur={(e) => {
                                     const validValue = getUFloat(
                                       e.target.value,

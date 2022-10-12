@@ -60,7 +60,8 @@ const RightBar_Content_CompInfo = ({
                     immutability: comp.immutability,
                   })}
                   type="text"
-                  defaultValue={comp.value}
+                  value={comp.value}
+                  readOnly
                   onBlur={(e) => {
                     if (comp.immutability) return;
                     const validValue = getUFloat(e.target.value);
@@ -109,7 +110,8 @@ const RightBar_Content_CompInfo = ({
                     immutability: comp.immutability,
                   })}
                   type="text"
-                  defaultValue={comp.value[1]}
+                  value={comp.value[1]}
+                  readOnly
                   onBlur={(e) => {
                     if (comp.immutability) return;
                     const validValue = getUFloat(e.target.value);
