@@ -12,8 +12,8 @@ export class Root extends Group {
     this.unit = item.metadata.unit;
     this.maxSize = item.metadata.max_size;
 
-    const outContainerInfo = this.getOutContainerInfo(item.metadata.components);
     const inContainerInfo = this.getInContainerInfo(item.metadata.components);
+    const outContainerInfo = this.getOutContainerInfo(item.metadata.components);
     this.redrawItem(outContainerInfo);
 
     this.outContainer = new OutContainer({
@@ -39,31 +39,16 @@ export class Root extends Group {
     this.add(this.inContainer);
   }
 
-  getOutContainerInfo(components) {
-    // condition
-    if (components.out_container.value.width.value < 0)
-      components.out_container.value.width.value = 0;
-    if (components.out_container.value.width.value > this.maxSize)
-      components.out_container.value.width.value = this.maxSize;
-
-    // calculate out_container size
-    const width = Dimensioning.cmFromMeasureRaw(
-      components.out_container.value.width.value,
-      this.unit,
-    );
-    const height = Dimensioning.cmFromMeasureRaw(
-      components.out_container.value.height.value,
-      this.unit,
-    );
-    const length = Dimensioning.cmFromMeasureRaw(
-      components.out_container.value.length.value,
-      this.unit,
-    );
-    return { width, height, length };
-  }
-
   getInContainerInfo(components) {
     // condition
+    const minWidth =
+      components.dividers.value
+        .map((divider) => divider.value.deltaX.value)
+        .reduce((a, b) => a + b, 0) + components.dividers.min_lane_width;
+    // console.log('minWidth: ', minWidth);
+    if (components.in_container.value.width.value < minWidth) {
+      components.in_container.value.width.value = minWidth;
+    }
     const rawGap = components.in_container.value.gap.value;
     const rawMaxLen = components.out_container.value.length.value - rawGap * 2;
     if (components.in_container.value.deltaZ.value[0] < 0) {
@@ -95,6 +80,10 @@ export class Root extends Group {
       components.in_container.value.deltaZ.value[0],
       this.unit,
     );
+    const width = Dimensioning.cmFromMeasureRaw(
+      components.in_container.value.width.value,
+      this.unit,
+    );
     if (startZ < 0) startZ = 0;
     if (startZ > outContainerInfo.length - gap * 2)
       startZ = outContainerInfo.length - gap * 2;
@@ -105,7 +94,6 @@ export class Root extends Group {
     if (endZ < startZ) endZ = startZ;
     if (endZ > outContainerInfo.length - gap * 2)
       endZ = outContainerInfo.length - gap * 2;
-    const width = outContainerInfo.width - gap * 2;
     const height = outContainerInfo.height - gap * 2;
     const length = endZ - startZ;
     return {
@@ -118,6 +106,31 @@ export class Root extends Group {
     };
   }
 
+  getOutContainerInfo(components) {
+    // condition
+    if (
+      components.out_container.value.width.value <
+      components.in_container.value.width.value
+    )
+      components.out_container.value.width.value =
+        components.in_container.value.width.value;
+
+    // calculate out_container size
+    const width = Dimensioning.cmFromMeasureRaw(
+      components.out_container.value.width.value,
+      this.unit,
+    );
+    const height = Dimensioning.cmFromMeasureRaw(
+      components.out_container.value.height.value,
+      this.unit,
+    );
+    const length = Dimensioning.cmFromMeasureRaw(
+      components.out_container.value.length.value,
+      this.unit,
+    );
+    return { width, height, length };
+  }
+
   redrawItem({ width, height, length }) {
     this.item.geometry = new BoxGeometry(width, height, length);
     this.item.position.y = height / 2;
@@ -125,8 +138,8 @@ export class Root extends Group {
   }
 
   redrawComponents(components) {
-    const outContainerInfo = this.getOutContainerInfo(components);
     const inContainerInfo = this.getInContainerInfo(components);
+    const outContainerInfo = this.getOutContainerInfo(components);
     this.redrawItem(outContainerInfo);
 
     this.outContainer.redrawComponents({

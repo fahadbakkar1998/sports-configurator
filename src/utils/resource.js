@@ -299,9 +299,9 @@ export const items = [
               out_container: {
                 name: 'Exterior',
                 value: {
+                  length: { type: 'single', name: 'Length', value: 60 },
                   width: { type: 'single', name: 'Width', value: 40 },
                   height: { type: 'single', name: 'Height', value: 10 },
-                  length: { type: 'single', name: 'Length', value: 60 },
                 },
               },
               out_edge: {
@@ -330,10 +330,12 @@ export const items = [
                     name: 'Length',
                     value: [0, 60],
                   },
+                  width: { type: 'single', name: 'Width', value: 40 },
                 },
               },
               dividers: {
                 name: 'Dividers',
+                min_lane_width: 10,
                 addition: {
                   deltaX: {
                     type: 'single',
