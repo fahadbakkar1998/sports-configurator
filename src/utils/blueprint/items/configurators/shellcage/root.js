@@ -105,18 +105,18 @@ export class Root extends Group {
       return { deltaX, deltaZ0, deltaZ1 };
     });
 
-    console.log('netHoleSize: ', netHoleSize);
-    console.log('netDiameter: ', netDiameter);
-    console.log('outLength: ', outLength);
-    console.log('outWidth: ', outWidth);
-    console.log('outHeight: ', outHeight);
-    console.log('outEdgeThickness: ', outEdgeThickness);
-    console.log('inGap: ', inGap);
-    console.log('inDeltaZ0: ', inDeltaZ0);
-    console.log('inDeltaZ1: ', inDeltaZ1);
-    console.log('dividersDimension: ', dividersDimension);
-    console.log('ribLineDiameter: ', ribLineDiameter);
-    console.log('allowableLaneWidth: ', allowableLaneWidth);
+    // console.log('netHoleSize: ', netHoleSize);
+    // console.log('netDiameter: ', netDiameter);
+    // console.log('outLength: ', outLength);
+    // console.log('outWidth: ', outWidth);
+    // console.log('outHeight: ', outHeight);
+    // console.log('outEdgeThickness: ', outEdgeThickness);
+    // console.log('inGap: ', inGap);
+    // console.log('inDeltaZ0: ', inDeltaZ0);
+    // console.log('inDeltaZ1: ', inDeltaZ1);
+    // console.log('dividersDimension: ', dividersDimension);
+    // console.log('ribLineDiameter: ', ribLineDiameter);
+    // console.log('allowableLaneWidth: ', allowableLaneWidth);
 
     return {
       netHoleSize,
@@ -134,9 +134,9 @@ export class Root extends Group {
     };
   }
 
-  redrawItem({ width, height, length }) {
-    this.item.geometry = new BoxGeometry(width, height, length);
-    this.item.position.y = height / 2;
+  redrawItem({ outWidth, outHeight, outLength }) {
+    this.item.geometry = new BoxGeometry(outWidth, outHeight, outLength);
+    this.item.position.y = outHeight / 2;
     this.item.refreshItem();
   }
 
@@ -163,10 +163,5 @@ export class Root extends Group {
           dimensionInfo.outLength / 2,
       ),
     );
-
-    this.outContainer.redrawRibLines({
-      components,
-      compInfo: dimensionInfo,
-    });
   }
 }

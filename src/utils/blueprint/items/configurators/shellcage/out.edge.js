@@ -6,9 +6,7 @@ import {
   DoubleSide,
   Geometry,
 } from 'three';
-import { Dimensioning } from '../../../core/dimensioning';
 import { addFaces } from '../../../../../common';
-import { tempVec } from '../../../core/constants';
 
 export class OutEdge extends Group {
   constructor() {
@@ -19,10 +17,10 @@ export class OutEdge extends Group {
     geometry.__dirtyVertices = true;
     geometry.dynamic = true;
     const vertices = [
-      tempVec, // left top
-      tempVec, // left bottom
-      tempVec, // right bottom
-      tempVec, // right top
+      new Vector3(), // left top
+      new Vector3(), // left bottom
+      new Vector3(), // right bottom
+      new Vector3(), // right top
     ];
     geometry.vertices = vertices;
     addFaces(geometry);

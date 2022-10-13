@@ -14,11 +14,11 @@ export class InContainer extends Group {
     this.add(this.backPlane);
 
     this.leftPlane = new InPlane();
-    this.leftPlane.rotateY(Math.PI / 2);
+    this.leftPlane.rotateY(-Math.PI / 2);
     this.add(this.leftPlane);
 
     this.rightPlane = new InPlane();
-    this.rightPlane.rotateY(-Math.PI / 2);
+    this.rightPlane.rotateY(Math.PI / 2);
     this.add(this.rightPlane);
 
     this.topPlane = new InPlane();

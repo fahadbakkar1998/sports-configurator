@@ -21,33 +21,33 @@ export class OutPlane extends Group {
     this.add(this.rightEdge);
   }
 
-  redrawComponents({ components, compInfo }) {
+  redrawComponents({ components, compInfo, subCompInfo }) {
     this.topEdge.redrawComponents({
       components,
       compInfo,
-      subCompInfo: { width: compInfo.outWidth },
+      subCompInfo: { width: subCompInfo.width },
     });
-    this.topEdge.position.copy(new Vector3(0, compInfo.outHeight / 2, 0));
+    this.topEdge.position.copy(new Vector3(0, subCompInfo.height / 2, 0));
 
     this.bottomEdge.redrawComponents({
       components,
       compInfo,
-      subCompInfo: { width: compInfo.outWidth },
+      subCompInfo: { width: subCompInfo.width },
     });
-    this.bottomEdge.position.copy(new Vector3(0, -compInfo.outHeight / 2, 0));
+    this.bottomEdge.position.copy(new Vector3(0, -subCompInfo.height / 2, 0));
 
     this.leftEdge.redrawComponents({
       components,
       compInfo,
-      subCompInfo: { width: compInfo.outHeight },
+      subCompInfo: { width: subCompInfo.height },
     });
-    this.leftEdge.position.copy(new Vector3(-compInfo.outWidth / 2, 0, 0));
+    this.leftEdge.position.copy(new Vector3(-subCompInfo.width / 2, 0, 0));
 
     this.rightEdge.redrawComponents({
       components,
       compInfo,
-      subCompInfo: { width: compInfo.outHeight },
+      subCompInfo: { width: subCompInfo.height },
     });
-    this.rightEdge.position.copy(new Vector3(compInfo.outWidth / 2, 0, 0));
+    this.rightEdge.position.copy(new Vector3(subCompInfo.width / 2, 0, 0));
   }
 }
