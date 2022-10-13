@@ -34,8 +34,8 @@ export class Root extends Group {
     if (components.in_container.value.deltaZ.value[1] < minInLength) {
       components.in_container.value.deltaZ.value[1] = minInLength;
     }
-    if (components.out_container.value.width < minOutWidth) {
-      components.out_container.value.width = minOutWidth;
+    if (components.out_container.value.width.value < minOutWidth) {
+      components.out_container.value.width.value = minOutWidth;
     }
     if (
       components.out_container.value.length.value <
