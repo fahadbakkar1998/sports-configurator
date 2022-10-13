@@ -6,129 +6,132 @@ import { Dimensioning } from '../../../core/dimensioning';
 export class Root extends Group {
   constructor(item) {
     super();
-    if (!item.metadata) item.metadata.unit = 'm';
+
+    if (!item.metadata?.unit) item.metadata.unit = 'm';
     this.item = item;
-    this.scene = item.model.scene.scene;
     this.unit = item.metadata.unit;
-    this.maxSize = item.metadata.max_size;
+    // this.maxSize = item.metadata.max_size;
 
-    const inContainerInfo = this.getInContainerInfo(item.metadata.components);
-    const outContainerInfo = this.getOutContainerInfo(item.metadata.components);
-    this.redrawItem(outContainerInfo);
-
-    this.outContainer = new OutContainer({
-      item,
-      compInfo: outContainerInfo,
-    });
+    this.outContainer = new OutContainer();
     this.add(this.outContainer);
-
-    this.inContainer = new InContainer({
-      item,
-      compInfo: inContainerInfo,
-    });
-    this.inContainer.position.copy(
-      new Vector3(
-        0,
-        0,
-        inContainerInfo.startZ +
-          inContainerInfo.gap +
-          inContainerInfo.length / 2 -
-          outContainerInfo.length / 2,
-      ),
-    );
+    this.inContainer = new InContainer();
     this.add(this.inContainer);
+
+    this.redrawComponents(item.metadata.components);
   }
 
-  getInContainerInfo(components) {
-    // condition
-    const minWidth =
-      components.dividers.value
+  getDimensionInfo(components) {
+    const dividers = components.dividers.value;
+    const minOutWidth =
+      dividers
         .map((divider) => divider.value.deltaX.value)
-        .reduce((a, b) => a + b, 0) + components.dividers.min_lane_width;
-    // console.log('minWidth: ', minWidth);
-    if (components.in_container.value.width.value < minWidth) {
-      components.in_container.value.width.value = minWidth;
+        .reduce((a, b) => a + b, 0) +
+      components.rib_line.value.allowableLaneWidth.value;
+    const minInLength = Math.max(
+      ...dividers.map((divider) => divider.value.deltaZ.value[1]),
+    );
+
+    if (components.in_container.value.deltaZ.value[1] < minInLength) {
+      components.in_container.value.deltaZ.value[1] = minInLength;
     }
-    const rawGap = components.in_container.value.gap.value;
-    const rawMaxLen = components.out_container.value.length.value - rawGap * 2;
-    if (components.in_container.value.deltaZ.value[0] < 0) {
-      components.in_container.value.deltaZ.value[0] = 0;
-    }
-    if (components.in_container.value.deltaZ.value[0] > rawMaxLen) {
-      components.in_container.value.deltaZ.value[0] = rawMaxLen;
+    if (components.out_container.value.width < minOutWidth) {
+      components.out_container.value.width = minOutWidth;
     }
     if (
-      components.in_container.value.deltaZ.value[1] <
-      components.in_container.value.deltaZ.value[0]
+      components.out_container.value.length.value <
+      components.in_container.value.deltaZ.value[1]
     ) {
-      components.in_container.value.deltaZ.value[1] =
-        components.in_container.value.deltaZ.value[0];
-    }
-    if (components.in_container.value.deltaZ.value[1] > rawMaxLen) {
-      components.in_container.value.deltaZ.value[1] = rawMaxLen;
+      components.out_container.value.length.value =
+        components.in_container.value.deltaZ.value[1];
     }
 
-    // calculate out_container size
-    const outContainerInfo = this.getOutContainerInfo(components);
-
-    // calculate in_container size
-    const gap = Dimensioning.cmFromMeasureRaw(
-      components.in_container.value.gap.value,
+    const netHoleSize = Dimensioning.cmFromMeasureRaw(
+      components.net.value.hole_size.value,
       this.unit,
     );
-    let startZ = Dimensioning.cmFromMeasureRaw(
-      components.in_container.value.deltaZ.value[0],
+    const netDiameter = Dimensioning.cmFromMeasureRaw(
+      components.net.value.diameter.value,
       this.unit,
     );
-    const width = Dimensioning.cmFromMeasureRaw(
-      components.in_container.value.width.value,
-      this.unit,
-    );
-    if (startZ < 0) startZ = 0;
-    if (startZ > outContainerInfo.length - gap * 2)
-      startZ = outContainerInfo.length - gap * 2;
-    let endZ = Dimensioning.cmFromMeasureRaw(
-      components.in_container.value.deltaZ.value[1],
-      this.unit,
-    );
-    if (endZ < startZ) endZ = startZ;
-    if (endZ > outContainerInfo.length - gap * 2)
-      endZ = outContainerInfo.length - gap * 2;
-    const height = outContainerInfo.height - gap * 2;
-    const length = endZ - startZ;
-    return {
-      width,
-      height,
-      length,
-      startZ,
-      endZ,
-      gap,
-    };
-  }
-
-  getOutContainerInfo(components) {
-    // condition
-    if (
-      components.out_container.value.width.value <
-      components.in_container.value.width.value
-    )
-      components.out_container.value.width.value =
-        components.in_container.value.width.value;
-
-    // calculate out_container size
-    const width = Dimensioning.cmFromMeasureRaw(
-      components.out_container.value.width.value,
-      this.unit,
-    );
-    const height = Dimensioning.cmFromMeasureRaw(
-      components.out_container.value.height.value,
-      this.unit,
-    );
-    const length = Dimensioning.cmFromMeasureRaw(
+    const outLength = Dimensioning.cmFromMeasureRaw(
       components.out_container.value.length.value,
       this.unit,
     );
-    return { width, height, length };
+    const outWidth = Dimensioning.cmFromMeasureRaw(
+      components.out_container.value.width.value,
+      this.unit,
+    );
+    const outHeight = Dimensioning.cmFromMeasureRaw(
+      components.out_container.value.height.value,
+      this.unit,
+    );
+    const outEdgeThickness = Dimensioning.cmFromMeasureRaw(
+      components.out_edge.value.thickness.value,
+      this.unit,
+    );
+    const inGap = Dimensioning.cmFromMeasureRaw(
+      components.in_container.value.gap.value,
+      this.unit,
+    );
+    const inDeltaZ0 = Dimensioning.cmFromMeasureRaw(
+      components.in_container.value.deltaZ.value[0],
+      this.unit,
+    );
+    const inDeltaZ1 = Dimensioning.cmFromMeasureRaw(
+      components.in_container.value.deltaZ.value[1],
+      this.unit,
+    );
+    const ribLineDiameter = Dimensioning.cmFromMeasureRaw(
+      components.rib_line.value.diameter.value,
+      this.unit,
+    );
+    const allowableLaneWidth = Dimensioning.cmFromMeasureRaw(
+      components.rib_line.value.allowableLaneWidth.value,
+      this.unit,
+    );
+    const dividersDimension = dividers.map((divider) => {
+      const deltaX = Dimensioning.cmFromMeasureRaw(
+        divider.value.deltaX.value,
+        this.unit,
+      );
+      const deltaZ0 = Dimensioning.cmFromMeasureRaw(
+        divider.value.deltaZ.value[0],
+        this.unit,
+      );
+      const deltaZ1 = Dimensioning.cmFromMeasureRaw(
+        divider.value.deltaZ.value[1],
+        this.unit,
+      );
+      return { deltaX, deltaZ0, deltaZ1 };
+    });
+
+    console.log('netHoleSize: ', netHoleSize);
+    console.log('netDiameter: ', netDiameter);
+    console.log('outLength: ', outLength);
+    console.log('outWidth: ', outWidth);
+    console.log('outHeight: ', outHeight);
+    console.log('outEdgeThickness: ', outEdgeThickness);
+    console.log('inGap: ', inGap);
+    console.log('inDeltaZ0: ', inDeltaZ0);
+    console.log('inDeltaZ1: ', inDeltaZ1);
+    console.log('dividersDimension: ', dividersDimension);
+    console.log('ribLineDiameter: ', ribLineDiameter);
+    console.log('allowableLaneWidth: ', allowableLaneWidth);
+
+    return {
+      netHoleSize,
+      netDiameter,
+      outLength,
+      outWidth,
+      outHeight,
+      outEdgeThickness,
+      inGap,
+      inDeltaZ0,
+      inDeltaZ1,
+      dividersDimension,
+      ribLineDiameter,
+      allowableLaneWidth,
+    };
   }
 
   redrawItem({ width, height, length }) {
@@ -138,33 +141,32 @@ export class Root extends Group {
   }
 
   redrawComponents(components) {
-    const inContainerInfo = this.getInContainerInfo(components);
-    const outContainerInfo = this.getOutContainerInfo(components);
-    this.redrawItem(outContainerInfo);
+    const dimensionInfo = this.getDimensionInfo(components);
+    this.redrawItem(dimensionInfo);
 
     this.outContainer.redrawComponents({
       components,
-      compInfo: outContainerInfo,
+      compInfo: dimensionInfo,
     });
 
     this.inContainer.redrawComponents({
       components,
-      compInfo: inContainerInfo,
+      compInfo: dimensionInfo,
     });
     this.inContainer.position.copy(
       new Vector3(
         0,
         0,
-        inContainerInfo.startZ +
-          inContainerInfo.gap +
-          inContainerInfo.length / 2 -
-          outContainerInfo.length / 2,
+        dimensionInfo.inDeltaZ0 +
+          dimensionInfo.inGap +
+          dimensionInfo.inDeltaZ1 / 2 -
+          dimensionInfo.outLength / 2,
       ),
     );
 
     this.outContainer.redrawRibLines({
       components,
-      compInfo: outContainerInfo,
+      compInfo: dimensionInfo,
     });
   }
 }

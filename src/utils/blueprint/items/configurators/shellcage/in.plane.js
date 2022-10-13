@@ -5,17 +5,15 @@ import {
   MeshBasicMaterial,
   DoubleSide,
 } from 'three';
+import { minSize } from '../../../core/constants';
 import { Net } from './net';
 
 export class InPlane extends Group {
-  constructor({ item, compInfo }) {
+  constructor() {
     super();
-    this.unit = item.metadata.unit;
-    this.scene = item.model.scene.scene;
-    const { width, height } = compInfo;
 
     this.planeMesh = new Mesh(
-      new PlaneGeometry(width, height),
+      new PlaneGeometry(minSize, minSize),
       new MeshBasicMaterial({
         color: 0x696969,
         side: DoubleSide,
@@ -25,16 +23,16 @@ export class InPlane extends Group {
     );
     this.add(this.planeMesh);
 
-    this.net = new Net({ item, compInfo });
+    this.net = new Net();
     this.add(this.net);
   }
 
-  redrawComponents({ components, compInfo }) {
+  redrawComponents({ components, compInfo, subCompInfo }) {
     this.planeMesh.geometry = new PlaneGeometry(
-      compInfo.width,
-      compInfo.height,
+      subCompInfo.width,
+      subCompInfo.height,
     );
 
-    this.net.redrawComponents({ components, compInfo });
+    this.net.redrawComponents({ components, compInfo, subCompInfo });
   }
 }

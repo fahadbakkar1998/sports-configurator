@@ -330,12 +330,10 @@ export const items = [
                     name: 'Length',
                     value: [0, 60],
                   },
-                  width: { type: 'single', name: 'Width', value: 40 },
                 },
               },
               dividers: {
                 name: 'Dividers',
-                min_lane_width: 10,
                 addition: {
                   deltaX: {
                     type: 'single',
