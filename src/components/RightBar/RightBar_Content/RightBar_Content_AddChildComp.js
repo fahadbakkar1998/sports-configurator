@@ -58,8 +58,7 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
                     ref={(element) => (refs.current[refInputIndex++] = element)}
                     className={classnames('input')}
                     type="text"
-                    value={comp.addition[fieldKey].value}
-                    readOnly
+                    defaultValue={comp.addition[fieldKey].value}
                     onBlur={(e) => {
                       const validValue = getFloat(e.target.value);
                       e.target.value = comp.addition[fieldKey].value =
@@ -104,8 +103,7 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
                     ref={(element) => (refs.current[refInputIndex++] = element)}
                     className={classnames('input')}
                     type="text"
-                    value={comp.addition[fieldKey].value[1]}
-                    readOnly
+                    defaultValue={comp.addition[fieldKey].value[1]}
                     onBlur={(e) => {
                       const validValue = getUFloat(e.target.value);
                       e.target.value = comp.addition[fieldKey].value[1] =

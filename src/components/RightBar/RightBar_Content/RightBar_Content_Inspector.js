@@ -265,8 +265,7 @@ const RightBar_Content_Inspector = () => {
               ref={(element) => (refs.current[refInputIndex++] = element)}
               className="input"
               type="text"
-              value={curElevation + inputSuffix}
-              readOnly
+              defaultValue={curElevation + inputSuffix}
               onBlur={(e) => {
                 const validValue = getUFloat(e.target.value);
                 updateElevation(validValue);
@@ -320,8 +319,7 @@ const RightBar_Content_Inspector = () => {
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={curRoofMiddleHeight + inputSuffix}
-                readOnly
+                defaultValue={curRoofMiddleHeight + inputSuffix}
                 onBlur={(e) => {
                   const validValue = getUFloat(e.target.value);
                   updateCurRoofNum({
@@ -497,8 +495,7 @@ const RightBar_Content_Inspector = () => {
                                   }
                                   className="input"
                                   type="text"
-                                  value={cur3dItemWidth + inputSuffix}
-                                  readOnly
+                                  defaultValue={cur3dItemWidth + inputSuffix}
                                   onBlur={(e) => {
                                     const validValue = getUFloat(
                                       e.target.value,
@@ -530,8 +527,7 @@ const RightBar_Content_Inspector = () => {
                                   }
                                   className="input"
                                   type="text"
-                                  value={cur3dItemDepth + inputSuffix}
-                                  readOnly
+                                  defaultValue={cur3dItemDepth + inputSuffix}
                                   onBlur={(e) => {
                                     const validValue = getUFloat(
                                       e.target.value,
@@ -563,8 +559,7 @@ const RightBar_Content_Inspector = () => {
                                   }
                                   className="input"
                                   type="text"
-                                  value={cur3dItemHeight + inputSuffix}
-                                  readOnly
+                                  defaultValue={cur3dItemHeight + inputSuffix}
                                   onBlur={(e) => {
                                     const validValue = getUFloat(
                                       e.target.value,

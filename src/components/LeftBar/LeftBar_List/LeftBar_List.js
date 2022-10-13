@@ -280,8 +280,7 @@ const LeftBar_List = () => {
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemX + inputSuffix}
-                readOnly
+                defaultValue={cur2dItemX + inputSuffix}
                 onBlur={(e) => {
                   const validValue = getFloat(e.target.value);
                   e.target.value = validValue;
@@ -305,8 +304,7 @@ const LeftBar_List = () => {
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemY + inputSuffix}
-                readOnly
+                defaultValue={cur2dItemY + inputSuffix}
                 onBlur={(e) => {
                   const validValue = getFloat(e.target.value);
                   e.target.value = validValue;
@@ -330,8 +328,7 @@ const LeftBar_List = () => {
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemElevation + inputSuffix}
-                readOnly
+                defaultValue={cur2dItemElevation + inputSuffix}
                 onBlur={(e) => {
                   const validValue = getUFloat(e.target.value);
                   e.target.value = validValue;
@@ -361,8 +358,7 @@ const LeftBar_List = () => {
                 ref={(element) => (refs.current[refInputIndex++] = element)}
                 className="input"
                 type="text"
-                value={cur2dItemWallSize + inputSuffix}
-                readOnly
+                defaultValue={cur2dItemWallSize + inputSuffix}
                 onBlur={(e) => {
                   const validValue = getUFloat(e.target.value);
                   e.target.value = validValue;
