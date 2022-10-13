@@ -10,7 +10,7 @@ import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
 import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
-import { minGap } from '../core/constants';
+import { floorPlanerScale, minGap } from '../core/constants';
 import { decimalPlaces } from '../../../constants.js';
 
 /*
@@ -447,7 +447,7 @@ export class Item extends Mesh {
     this.placeInRoom();
 
     // adjust size
-    if (this.getWidth() + this.getHeight() + this.getDepth() < 50) {
+    if (this.getWidth() + this.getHeight() + this.getDepth() < 50 * floorPlanerScale) {
       this.resize({ width: 50, proportionally: true });
     }
 

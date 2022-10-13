@@ -37,7 +37,7 @@ export const loadDesign = (data) => {
 };
 
 export const loadDefaultDesign = () => {
-  window.blueprintJS.model.loadSerialized(buildingSizes.size3);
+  window.blueprintJS.model.loadSerialized(buildingSizes.size1);
   updateFloorPlan();
 };
 
@@ -75,18 +75,19 @@ export const addItem = (item) => {
             edge: item.selectedWall.item,
           },
         });
-      }
-
-      if ([0, 1, 8].indexOf(parseInt(item.type)) != -1 && item.selectedFloor) {
+      } else if (
+        [0, 1, 8].indexOf(parseInt(item.type)) != -1 &&
+        item.selectedFloor
+      ) {
         // Floor Items
         var placeAt = item.selectedFloor.item.center.clone();
         window.blueprintJS.model.scene.addItem({
           ...item,
           newItemDefinitions: { position: placeAt },
         });
+      } else {
+        window.blueprintJS.model.scene.addItem(item);
       }
-
-      window.blueprintJS.model.scene.addItem(item);
       break;
   }
 };

@@ -390,7 +390,7 @@ export const items = [
                       deltaZ: {
                         type: 'interval',
                         name: 'Length',
-                        value: [10, 30],
+                        value: [0, 30],
                       },
                     },
                   },
