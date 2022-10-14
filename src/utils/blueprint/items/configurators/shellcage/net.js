@@ -6,95 +6,93 @@ import {
   MeshLambertMaterial,
   Mesh,
   DoubleSide,
+  InstancedMesh,
 } from 'three';
+import { tempMatrix1, tempVec1 } from '../../../core/constants';
 
 export class Net extends Group {
   constructor() {
     super();
-    this.netLines = [];
-  }
 
-  redrawComponents({ components, compInfo, subCompInfo }) {
-    this.netLines.forEach((netLine) => this.remove(netLine));
-    this.netLines = [];
-
-    const material = new MeshLambertMaterial({
+    this.netMaterial = new MeshLambertMaterial({
       color: 0x333333,
       side: DoubleSide,
     });
+  }
 
-    for (
-      let diffW = 0;
-      diffW < subCompInfo.width / 2;
-      diffW += compInfo.netHoleSize
-    ) {
-      const pipeSpline = new CatmullRomCurve3([
-        new Vector3(diffW, -subCompInfo.height / 2, 0),
-        new Vector3(diffW, subCompInfo.height / 2, 0),
-      ]);
-      const geometry = new TubeGeometry(
-        pipeSpline,
+  redrawComponents({ components, compInfo, subCompInfo }) {
+    const verticalCnt = parseInt(subCompInfo.width / compInfo.netHoleSize);
+
+    const verticalInstMesh = new InstancedMesh(
+      new TubeGeometry(
+        new CatmullRomCurve3([
+          new Vector3(0, -subCompInfo.height / 2, 0),
+          new Vector3(0, subCompInfo.height / 2, 0),
+        ]),
         10,
         compInfo.netDiameter / 2,
         10,
         false,
+      ),
+      new MeshLambertMaterial({
+        color: 0x333333,
+        side: DoubleSide,
+      }),
+      verticalCnt,
+    );
+
+    for (let i = 0; i < verticalCnt; i++) {
+      verticalInstMesh.setMatrixAt(
+        i,
+        tempMatrix1.setPosition(
+          tempVec1
+            .clone()
+            .set(-subCompInfo.width / 2 + i * compInfo.netHoleSize, 0, 0),
+        ),
       );
-      const netLine = new Mesh(geometry, material);
-      this.netLines.push(netLine);
-      this.add(netLine);
-      if (diffW !== 0) {
-        const pipeSpline = new CatmullRomCurve3([
-          new Vector3(-diffW, -subCompInfo.height / 2, 0),
-          new Vector3(-diffW, subCompInfo.height / 2, 0),
-        ]);
-        const geometry = new TubeGeometry(
-          pipeSpline,
-          10,
-          compInfo.netDiameter / 2,
-          10,
-          false,
-        );
-        const netLine = new Mesh(geometry, material);
-        this.netLines.push(netLine);
-        this.add(netLine);
-      }
     }
 
-    for (
-      let diffH = 0;
-      diffH < subCompInfo.height / 2;
-      diffH += compInfo.netHoleSize
-    ) {
-      const pipeSpline = new CatmullRomCurve3([
-        new Vector3(-subCompInfo.width / 2, diffH, 0),
-        new Vector3(subCompInfo.width / 2, diffH, 0),
-      ]);
-      const geometry = new TubeGeometry(
-        pipeSpline,
+    if (this.verticalInstMesh) {
+      this.remove(this.verticalInstMesh);
+    }
+    this.verticalInstMesh = verticalInstMesh;
+    this.add(this.verticalInstMesh);
+
+    const horizontalCnt = parseInt(subCompInfo.height / compInfo.netHoleSize);
+
+    const horizontalInstMesh = new InstancedMesh(
+      new TubeGeometry(
+        new CatmullRomCurve3([
+          new Vector3(-subCompInfo.width / 2, 0, 0),
+          new Vector3(subCompInfo.width / 2, 0, 0),
+        ]),
         10,
         compInfo.netDiameter / 2,
         10,
         false,
+      ),
+      new MeshLambertMaterial({
+        color: 0x333333,
+        side: DoubleSide,
+      }),
+      horizontalCnt,
+    );
+
+    for (let i = 0; i < horizontalCnt; i++) {
+      horizontalInstMesh.setMatrixAt(
+        i,
+        tempMatrix1.setPosition(
+          tempVec1
+            .clone()
+            .set(0, -subCompInfo.height / 2 + i * compInfo.netHoleSize, 0),
+        ),
       );
-      const netLine = new Mesh(geometry, material);
-      this.netLines.push(netLine);
-      this.add(netLine);
-      if (diffH !== 0) {
-        const pipeSpline = new CatmullRomCurve3([
-          new Vector3(-subCompInfo.width / 2, -diffH, 0),
-          new Vector3(subCompInfo.width / 2, -diffH, 0),
-        ]);
-        const geometry = new TubeGeometry(
-          pipeSpline,
-          10,
-          compInfo.netDiameter / 2,
-          10,
-          false,
-        );
-        const netLine = new Mesh(geometry, material);
-        this.netLines.push(netLine);
-        this.add(netLine);
-      }
     }
+
+    if (this.horizontalInstMesh) {
+      this.remove(this.horizontalInstMesh);
+    }
+    this.horizontalInstMesh = horizontalInstMesh;
+    this.add(this.horizontalInstMesh);
   }
 }

@@ -98,6 +98,7 @@ export class OutContainer extends Group {
           10,
           compInfo.ribLineDiameter / 2,
           10,
+          false,
         ),
         new MeshLambertMaterial({
           color: 0x333333,
