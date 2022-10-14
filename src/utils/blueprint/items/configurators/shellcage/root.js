@@ -37,12 +37,11 @@ export class Root extends Group {
     if (components.out_container.value.width.value < minOutWidth) {
       components.out_container.value.width.value = minOutWidth;
     }
-    if (
-      components.out_container.value.length.value <
-      components.in_container.value.deltaZ.value[1]
-    ) {
-      components.out_container.value.length.value =
-        components.in_container.value.deltaZ.value[1];
+    const minOutLength =
+      components.in_container.value.deltaZ.value[1] +
+      components.in_container.value.gap.value * 2;
+    if (components.out_container.value.length.value < minOutLength) {
+      components.out_container.value.length.value = minOutLength;
     }
 
     const netHoleSize = Dimensioning.cmFromMeasureRaw(

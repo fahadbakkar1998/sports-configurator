@@ -4,7 +4,6 @@ import {
   CatmullRomCurve3,
   TubeGeometry,
   MeshLambertMaterial,
-  Mesh,
   DoubleSide,
   InstancedMesh,
 } from 'three';
@@ -21,7 +20,7 @@ export class Net extends Group {
   }
 
   redrawComponents({ components, compInfo, subCompInfo }) {
-    const verticalCnt = parseInt(subCompInfo.width / compInfo.netHoleSize);
+    const verticalCnt = parseInt(subCompInfo.width / compInfo.netHoleSize) + 1;
 
     const verticalInstMesh = new InstancedMesh(
       new TubeGeometry(
@@ -58,7 +57,8 @@ export class Net extends Group {
     this.verticalInstMesh = verticalInstMesh;
     this.add(this.verticalInstMesh);
 
-    const horizontalCnt = parseInt(subCompInfo.height / compInfo.netHoleSize);
+    const horizontalCnt =
+      parseInt(subCompInfo.height / compInfo.netHoleSize) + 1;
 
     const horizontalInstMesh = new InstancedMesh(
       new TubeGeometry(
