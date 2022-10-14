@@ -7,13 +7,13 @@ import {
   Mesh,
   DoubleSide,
 } from 'three';
-import { tempVec } from '../../../core/constants';
+import { tempVec1 } from '../../../core/constants';
 
 export class RibLine extends Group {
   constructor() {
     super();
 
-    const pipeSpline = new CatmullRomCurve3([tempVec, tempVec]);
+    const pipeSpline = new CatmullRomCurve3([tempVec1, tempVec1]);
     const geometry = new TubeGeometry(pipeSpline);
     const material = new MeshLambertMaterial({
       color: 0x333333,

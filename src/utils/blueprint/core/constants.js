@@ -1,5 +1,5 @@
 import Enum from 'es6-enum';
-import { TextureLoader, Vector3 } from 'three';
+import { Matrix4, TextureLoader, Vector3 } from 'three';
 
 export const VIEW_TOP = 'TOP_VIEW';
 export const VIEW_FRONT = 'FRONT_VIEW';
@@ -37,4 +37,6 @@ export const minGap = 1 * floorPlanerScale;
 
 export const textureLoader = new TextureLoader();
 
-export const tempVec = new Vector3();
+export const tempVec1 = new Vector3();
+
+export const tempMatrix1 = new Matrix4();

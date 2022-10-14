@@ -2000,7 +2000,8 @@ var _GLTFLoader = (function () {
       .then(function (sourceURI) {
         // Load Texture resource.
 
-        var loader = THREE.Loader.Handlers.get(sourceURI);
+        const loadingManager = new THREE.LoadingManager();
+        var loader = loadingManager.getHandler(sourceURI);
 
         if (!loader) {
           loader = textureExtensions[EXTENSIONS.MSFT_TEXTURE_DDS]

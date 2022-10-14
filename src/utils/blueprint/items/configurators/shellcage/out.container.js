@@ -1,4 +1,13 @@
-import { Group, Vector3 } from 'three';
+import {
+  CatmullRomCurve3,
+  DoubleSide,
+  Group,
+  InstancedMesh,
+  MeshLambertMaterial,
+  TubeGeometry,
+  Vector3,
+} from 'three';
+import { tempMatrix1, tempVec1 } from '../../../core/constants';
 import { OutPlane } from './out.plane';
 import { RibLine } from './rib.line';
 
@@ -28,15 +37,6 @@ export class OutContainer extends Group {
     this.bottomPlane = new OutPlane();
     this.bottomPlane.rotateX(Math.PI / 2);
     this.add(this.bottomPlane);
-
-    this.ribLines = [];
-  }
-
-  generateRibLine() {
-    const ribLine = new RibLine();
-    this.ribLines.push(ribLine);
-    this.add(ribLine);
-    return ribLine;
   }
 
   redrawComponents({ components, compInfo }) {
@@ -89,45 +89,63 @@ export class OutContainer extends Group {
     const dividersDimension = compInfo.dividersDimension;
 
     if (dividersDimension) {
-      const curLibLinesNum = this.ribLines.length;
+      const instMesh = new InstancedMesh(
+        new TubeGeometry(
+          new CatmullRomCurve3([
+            new Vector3(0, 0, -compInfo.outLength / 2),
+            new Vector3(0, 0, compInfo.outLength / 2),
+          ]),
+          10,
+          compInfo.ribLineDiameter / 2,
+          10,
+        ),
+        new MeshLambertMaterial({
+          color: 0x333333,
+          side: DoubleSide,
+        }),
+        dividersDimension.length + 1,
+      );
       let dividerCurX = 0;
-
-      for (let i = dividersDimension.length; i < curLibLinesNum; i++) {
-        const ribLine = this.ribLines.pop();
-        this.remove(ribLine);
-      }
 
       for (let i in dividersDimension) {
         const dividerDimension = dividersDimension[i];
         dividerCurX += dividerDimension.deltaX;
-        if (!this.ribLines[i]) this.generateRibLine();
-        this.ribLines[i].position.copy(
-          new Vector3(
-            dividerCurX - compInfo.outWidth / 2 - dividerDimension.deltaX / 2,
-            compInfo.outHeight / 2,
-            0,
+        instMesh.setMatrixAt(
+          i,
+          tempMatrix1.setPosition(
+            tempVec1
+              .clone()
+              .set(
+                dividerCurX -
+                  compInfo.outWidth / 2 -
+                  dividerDimension.deltaX / 2,
+                compInfo.outHeight / 2 + compInfo.ribLineDiameter / 2,
+                0,
+              ),
           ),
         );
-        this.ribLines[i].redrawComponents({
-          components,
-          compInfo,
-        });
       }
 
-      if (!this.ribLines[dividersDimension.length]) this.generateRibLine();
-      this.ribLines[dividersDimension.length].position.copy(
-        new Vector3(
-          dividerCurX +
-            dividersDimension[dividersDimension.length - 1].deltaX / 2 -
-            compInfo.outWidth / 2,
-          compInfo.outHeight / 2,
-          0,
+      instMesh.setMatrixAt(
+        dividersDimension.length,
+        tempMatrix1.setPosition(
+          tempVec1
+            .clone()
+            .set(
+              dividerCurX +
+                dividersDimension[dividersDimension.length - 1].deltaX / 2 -
+                compInfo.outWidth / 2,
+              compInfo.outHeight / 2 + compInfo.ribLineDiameter / 2,
+              0,
+            ),
         ),
       );
-      this.ribLines[dividersDimension.length].redrawComponents({
-        components,
-        compInfo,
-      });
+
+      if (this.ribLineInstMesh) {
+        this.remove(this.ribLineInstMesh);
+      }
+      this.ribLineInstMesh = instMesh;
+      this.add(this.ribLineInstMesh);
     }
   }
 }

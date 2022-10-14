@@ -47,7 +47,7 @@
     "state-pool": "^0.7.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "three": "^0.98.0",
+    "three": "0.124.0",
     "three-effectcomposer": "^0.0.1",
     "three-gltf-exporter": "0.0.1",
     "three-gltf-loader": "1.98.0",

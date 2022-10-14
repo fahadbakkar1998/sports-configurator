@@ -1,6 +1,6 @@
 import {
   EventDispatcher,
-  JSONLoader,
+  // JSONLoader,
   Color,
   Geometry,
   Scene as ThreeScene,
@@ -44,8 +44,8 @@ export class Scene extends EventDispatcher {
     this.items = [];
     this.needsUpdate = false;
     // init item loader
-    this.loader = new JSONLoader();
-    this.loader.setCrossOrigin('');
+    // this.loader = new JSONLoader();
+    // this.loader.setCrossOrigin('');
 
     this.dracoLoader = new DRACOLoader();
     this.dracoLoader.setDecoderPath('assets/models/draco/gltf/');
@@ -273,7 +273,7 @@ export class Scene extends EventDispatcher {
     this.dispatchEvent({ type: EVENT_ITEM_LOADING });
 
     if (!itemInfo.format) {
-      this.loader.load(model_path, loaderCallback, () => {}, console.error);
+      // this.loader.load(model_path, loaderCallback, () => {}, console.error);
     } else if (itemInfo.format == 'gltf') {
       this.gltfLoader.load(model_path, gltfCallback, () => {}, console.error);
     } else if (itemInfo.format == 'obj') {

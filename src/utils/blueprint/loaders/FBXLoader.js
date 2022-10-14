@@ -3460,7 +3460,7 @@ var _FBXLoader = (function () {
   }
 
   var tempEuler = new THREE.Euler();
-  var tempVec = new THREE.Vector3();
+  var tempVec1 = new THREE.Vector3();
 
   // generate transformation from FBX transform data
   // ref: https://help.autodesk.com/view/FBX/2017/ENU/?guid=__files_GUID_10CDD63C_79C1_4F2D_BB28_AD2BE65A02ED_htm
@@ -3483,7 +3483,7 @@ var _FBXLoader = (function () {
     var inheritType = transformData.inheritType ? transformData.inheritType : 0;
 
     if (transformData.translation)
-      lTranslationM.setPosition(tempVec.fromArray(transformData.translation));
+      lTranslationM.setPosition(tempVec1.fromArray(transformData.translation));
 
     if (transformData.preRotation) {
       var array = transformData.preRotation.map(THREE.Math.degToRad);
@@ -3504,22 +3504,22 @@ var _FBXLoader = (function () {
     }
 
     if (transformData.scale)
-      lScalingM.scale(tempVec.fromArray(transformData.scale));
+      lScalingM.scale(tempVec1.fromArray(transformData.scale));
 
     // Pivots and offsets
     if (transformData.scalingOffset)
       lScalingOffsetM.setPosition(
-        tempVec.fromArray(transformData.scalingOffset),
+        tempVec1.fromArray(transformData.scalingOffset),
       );
     if (transformData.scalingPivot)
-      lScalingPivotM.setPosition(tempVec.fromArray(transformData.scalingPivot));
+      lScalingPivotM.setPosition(tempVec1.fromArray(transformData.scalingPivot));
     if (transformData.rotationOffset)
       lRotationOffsetM.setPosition(
-        tempVec.fromArray(transformData.rotationOffset),
+        tempVec1.fromArray(transformData.rotationOffset),
       );
     if (transformData.rotationPivot)
       lRotationPivotM.setPosition(
-        tempVec.fromArray(transformData.rotationPivot),
+        tempVec1.fromArray(transformData.rotationPivot),
       );
 
     // parent transform
