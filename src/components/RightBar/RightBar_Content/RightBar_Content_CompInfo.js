@@ -16,9 +16,10 @@ const RightBar_Content_CompInfo = ({
   openChildren,
   onClick,
   updateComponents,
+  immutability,
 }) => {
   // console.log('isOpen: ', isOpen);
-  // console.log('comp.immutability: ', comp.immutability);
+  // console.log('immutability: ', immutability);
 
   const { cur3dItemEvent } = useZustand();
   const refs = useRef([]);
@@ -38,7 +39,7 @@ const RightBar_Content_CompInfo = ({
         <>
           <div
             className={classnames('input-group', {
-              hide: !isOpen || comp.immutability,
+              hide: !isOpen || immutability,
             })}>
             {comp.type === 'single' && (
               <>
@@ -47,7 +48,7 @@ const RightBar_Content_CompInfo = ({
                   value={comp.value}
                   refIndex={refLabelIndex++}
                   setValue={(value, refIndex) => {
-                    if (comp.immutability) return;
+                    if (immutability) return;
                     const validValue = getUFloat(value);
                     comp.value = validValue;
                     updateComponents();
@@ -57,12 +58,12 @@ const RightBar_Content_CompInfo = ({
                 <input
                   ref={(element) => (refs.current[refInputIndex++] = element)}
                   className={classnames('input', {
-                    immutability: comp.immutability,
+                    immutability: immutability,
                   })}
                   type="text"
                   defaultValue={comp.value}
                   onBlur={(e) => {
-                    if (comp.immutability) return;
+                    if (immutability) return;
                     const validValue = getUFloat(e.target.value);
                     comp.value = validValue;
                     updateComponents();
@@ -83,7 +84,7 @@ const RightBar_Content_CompInfo = ({
               //     minValue={comp.value[0]}
               //     maxValue={comp.value[1]}
               //     onInput={(e) => {
-              //       if (comp.immutability) return;
+              //       if (immutability) return;
               //       comp.value[0] = e.minValue;
               //       comp.value[1] = e.maxValue;
               //       updateComponents();
@@ -96,7 +97,7 @@ const RightBar_Content_CompInfo = ({
                   value={comp.value[1]}
                   refIndex={refLabelIndex++}
                   setValue={(value, refIndex) => {
-                    if (comp.immutability) return;
+                    if (immutability) return;
                     const validValue = getUFloat(value);
                     comp.value[1] = validValue;
                     updateComponents();
@@ -106,12 +107,12 @@ const RightBar_Content_CompInfo = ({
                 <input
                   ref={(element) => (refs.current[refInputIndex++] = element)}
                   className={classnames('input', {
-                    immutability: comp.immutability,
+                    immutability: immutability,
                   })}
                   type="text"
                   defaultValue={comp.value[1]}
                   onBlur={(e) => {
-                    if (comp.immutability) return;
+                    if (immutability) return;
                     const validValue = getUFloat(e.target.value);
                     comp.value[1] = validValue;
                     updateComponents();
@@ -213,12 +214,12 @@ const RightBar_Content_CompInfo = ({
               <span>{`${comp.name}:`}</span>
               <input
                 className={classnames('input', {
-                  immutability: comp.immutability,
+                  immutability: immutability,
                 })}
                 type="checkbox"
                 checked={comp.value}
                 onChange={(e) => {
-                  if (comp.immutability) return;
+                  if (immutability) return;
                   comp.value = e.target.checked ? 1 : 0;
                   updateComponents();
                 }}></input>
@@ -228,7 +229,7 @@ const RightBar_Content_CompInfo = ({
       ) : (
         <div
           className={classnames('RightBar_Content_Comp', {
-            hide: !isOpen || comp.immutability,
+            hide: !isOpen || immutability,
           })}
           onClick={onClick}>
           <div

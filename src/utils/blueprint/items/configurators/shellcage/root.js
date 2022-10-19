@@ -21,7 +21,22 @@ export class Root extends Group {
   }
 
   getDimensionInfo(components) {
-    const dividers = components.dividers.value;
+    if (components.dividers.command === 'save') {
+      console.log('command save');
+      components.dividers.command = '';
+    } else {
+      console.log('command normal');
+      const lanes = parseInt(components.lanes.value);
+      for (let i = 0; i < components.dividers.value.length; i++) {
+        if (i < lanes - 1) components.dividers.value[i].immutability = false;
+        else components.dividers.value[i].immutability = true;
+      }
+    }
+
+    const dividers = components.dividers.value.filter(
+      (divider) => !divider.immutability,
+    );
+    // components.lanes.value = dividers.length + 1;
     const minOutWidth =
       dividers
         .map((divider) => divider.value.deltaX.value)
@@ -141,6 +156,7 @@ export class Root extends Group {
 
   redrawComponents(components) {
     const dimensionInfo = this.getDimensionInfo(components);
+    // console.log('Shell Cage Dimension Info: ', dimensionInfo, components);
     this.redrawItem(dimensionInfo);
 
     this.outContainer.redrawComponents({

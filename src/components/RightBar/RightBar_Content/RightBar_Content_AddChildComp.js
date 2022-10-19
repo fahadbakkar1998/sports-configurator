@@ -126,6 +126,7 @@ const RightBar_Content_AddChildComp = ({ comp, updateComponents, depth }) => {
               }
               comp.value.push({ name, value: comp.addition });
               comp.isAddition = false;
+              comp.command = 'save';
               updateComponents();
             }}>
             Save

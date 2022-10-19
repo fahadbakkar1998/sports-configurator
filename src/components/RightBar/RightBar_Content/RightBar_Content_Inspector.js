@@ -18,6 +18,7 @@ const recursiveComponent = ({
   isOpen,
   initialOpenDepth,
   updateComponents,
+  immutability,
 }) => {
   // const [openChildren, setOpenChildren] = useState(
   //   isOpen && depth < initialOpenDepth,
@@ -37,6 +38,7 @@ const recursiveComponent = ({
         isOpen={isOpen}
         openChildren={openChildren}
         updateComponents={updateComponents}
+        immutability={comp.immutability || immutability}
         // onClick={() =>
         //   setOpenChildren(!openChildren)
         // }
@@ -51,6 +53,7 @@ const recursiveComponent = ({
                 isOpen: openChildren,
                 initialOpenDepth,
                 updateComponents,
+                immutability: comp.value[childKey].immutability || immutability,
               }),
             ),
           )}

@@ -173,7 +173,16 @@ export const items = [
             },
             max_size: 100,
             components: {
-              // All points start at the back left.
+              lanes: {
+                type: 'select',
+                name: 'Lanes',
+                value: '4',
+                options: [
+                  { name: '2 lane', value: '2' },
+                  { name: '3 lane', value: '3' },
+                  { name: '4 lane', value: '4' },
+                ],
+              },
               net: {
                 name: 'Net',
                 value: {
@@ -345,7 +354,7 @@ export const items = [
                     type: 'single',
                     type: 'interval',
                     name: 'Length',
-                    value: [0, 50],
+                    value: [0, 60],
                   },
                 },
                 value: [
@@ -375,7 +384,7 @@ export const items = [
                       deltaZ: {
                         type: 'interval',
                         name: 'Length',
-                        value: [0, 40],
+                        value: [0, 60],
                       },
                     },
                   },
@@ -390,7 +399,7 @@ export const items = [
                       deltaZ: {
                         type: 'interval',
                         name: 'Length',
-                        value: [0, 30],
+                        value: [0, 60],
                       },
                     },
                   },
