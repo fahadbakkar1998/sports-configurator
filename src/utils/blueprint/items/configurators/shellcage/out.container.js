@@ -9,7 +9,6 @@ import {
 } from 'three';
 import { tempMatrix1, tempVec1 } from '../../../core/constants';
 import { OutPlane } from './out.plane';
-import { RibLine } from './rib.line';
 
 export class OutContainer extends Group {
   constructor() {
@@ -87,6 +86,7 @@ export class OutContainer extends Group {
 
   redrawRibLines({ components, compInfo }) {
     const dividersDimension = compInfo.dividersDimension;
+    console.log('dividersDimension: ', dividersDimension);
 
     if (dividersDimension) {
       const instMesh = new InstancedMesh(
@@ -127,18 +127,17 @@ export class OutContainer extends Group {
         );
       }
 
+      const x =
+        dividerCurX -
+        compInfo.outWidth / 2 +
+        (compInfo.outWidth - dividerCurX) / 2;
+      console.log('x: ', x);
       instMesh.setMatrixAt(
         dividersDimension.length,
         tempMatrix1.setPosition(
           tempVec1
             .clone()
-            .set(
-              dividerCurX +
-                dividersDimension[dividersDimension.length - 1].deltaX / 2 -
-                compInfo.outWidth / 2,
-              compInfo.outHeight / 2 + compInfo.ribLineDiameter / 2,
-              0,
-            ),
+            .set(x, compInfo.outHeight / 2 + compInfo.ribLineDiameter / 2, 0),
         ),
       );
 

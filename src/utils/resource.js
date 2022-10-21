@@ -178,6 +178,7 @@ export const items = [
                 name: 'Lanes',
                 value: '4',
                 options: [
+                  { name: '1 lane', value: '1' },
                   { name: '2 lane', value: '2' },
                   { name: '3 lane', value: '3' },
                   { name: '4 lane', value: '4' },
@@ -309,7 +310,12 @@ export const items = [
                 name: 'Exterior',
                 value: {
                   length: { type: 'single', name: 'Length', value: 60 },
-                  width: { type: 'single', name: 'Width', value: 40 },
+                  width: {
+                    type: 'single',
+                    name: 'Width',
+                    value: 40,
+                    immutability: true,
+                  },
                   height: { type: 'single', name: 'Height', value: 10 },
                 },
               },
@@ -417,7 +423,7 @@ export const items = [
                   allowableLaneWidth: {
                     type: 'single',
                     name: 'Limit Lane Width',
-                    value: 8,
+                    value: 10,
                     immutability: true,
                   },
                 },

@@ -23,12 +23,19 @@ export class Root extends Group {
   getDimensionInfo(components) {
     if (components.dividers.command === 'save') {
       console.log('command save');
-      components.dividers.command = '';
+      const dividerNum = components.dividers.value.length;
+      const laneOptionNum = components.lanes.options.length;
+      for (let i = laneOptionNum; i <= dividerNum; i++) {
+        components.lanes.options.push({
+          name: `${i + 1} lane`,
+          value: i + 1,
+        });
+      }
     } else {
       console.log('command normal');
-      const lanes = parseInt(components.lanes.value);
+      const laneNum = parseInt(components.lanes.value);
       for (let i = 0; i < components.dividers.value.length; i++) {
-        if (i < lanes - 1) components.dividers.value[i].immutability = false;
+        if (i < laneNum - 1) components.dividers.value[i].immutability = false;
         else components.dividers.value[i].immutability = true;
       }
     }
@@ -36,7 +43,7 @@ export class Root extends Group {
     const dividers = components.dividers.value.filter(
       (divider) => !divider.immutability,
     );
-    // components.lanes.value = dividers.length + 1;
+    components.lanes.value = dividers.length + 1;
     const minOutWidth =
       dividers
         .map((divider) => divider.value.deltaX.value)
@@ -46,11 +53,9 @@ export class Root extends Group {
       ...dividers.map((divider) => divider.value.deltaZ.value[1]),
     );
 
+    components.out_container.value.width.value = minOutWidth;
     if (components.in_container.value.deltaZ.value[1] < minInLength) {
       components.in_container.value.deltaZ.value[1] = minInLength;
-    }
-    if (components.out_container.value.width.value < minOutWidth) {
-      components.out_container.value.width.value = minOutWidth;
     }
     const minOutLength =
       components.in_container.value.deltaZ.value[1] +
@@ -58,6 +63,8 @@ export class Root extends Group {
     if (components.out_container.value.length.value < minOutLength) {
       components.out_container.value.length.value = minOutLength;
     }
+
+    components.dividers.command = '';
 
     const netHoleSize = Dimensioning.cmFromMeasureRaw(
       components.net.value.hole_size.value,
