@@ -13,6 +13,7 @@ import { Horizontality } from './configurators/horizontality';
 import { Aplomb } from './configurators/aplomb';
 import { Basketball } from './configurators/basketball';
 import { DividerCurtain } from './configurators/divider.curtain';
+import { OpenSided } from './configurators/open.sided';
 
 export const item_types = {
   0: Item,
@@ -30,6 +31,7 @@ export const item_types = {
   aplomb: Aplomb,
   basketball: Basketball,
   dividerCurtain: DividerCurtain,
+  openSided: OpenSided,
 };
 
 /* Factory class to create items. */

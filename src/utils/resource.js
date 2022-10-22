@@ -743,6 +743,59 @@ export const items = [
               },
             ],
           },
+          {
+            name: 'Open Sided Hitting Cage',
+            image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
+            format: 'configurator',
+            configurator_name: 'openSided',
+            type: '1',
+            unit: 'ft',
+            default_size: {
+              width: 55,
+              height: 10,
+              length: 10,
+              unit: 'ft',
+            },
+            components: {
+              dimension: {
+                name: 'Dimension',
+                value: {
+                  length: {
+                    type: 'single',
+                    name: 'Length',
+                    value: 10,
+                  },
+                  width: {
+                    type: 'single',
+                    name: 'Width',
+                    value: 50,
+                  },
+                  height: {
+                    type: 'single',
+                    name: 'Height',
+                    value: 10,
+                  },
+                },
+              },
+              net: {
+                name: 'Net',
+                value: {
+                  hole_size: {
+                    type: 'single',
+                    name: 'HoleSize',
+                    value: 0.3,
+                    immutability: true,
+                  },
+                  diameter: {
+                    type: 'single',
+                    name: 'Diameter',
+                    value: 0.03,
+                    immutability: true,
+                  },
+                },
+              },
+            },
+          },
         ],
       },
       // {
