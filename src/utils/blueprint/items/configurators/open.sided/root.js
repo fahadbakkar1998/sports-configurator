@@ -20,6 +20,7 @@ export class Root extends Group {
   getDimensionInfo(components) {
     const dimension = components.dimension.value;
     const net = components.net.value;
+    const edge = components.edge.value;
 
     const width = Dimensioning.cmFromMeasureRaw(
       dimension.width.value,
@@ -41,8 +42,12 @@ export class Root extends Group {
       net.diameter.value,
       this.unit,
     );
+    const edgeDiameter = Dimensioning.cmFromMeasureRaw(
+      edge.diameter.value,
+      this.unit,
+    );
 
-    return { width, height, length, netHoleSize, netDiameter };
+    return { width, height, length, netHoleSize, netDiameter, edgeDiameter };
   }
 
   redrawItem({ width, height, length }) {

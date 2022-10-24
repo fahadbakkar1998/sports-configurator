@@ -1,19 +1,21 @@
 import {
   CatmullRomCurve3,
-  DoubleSide,
+  CylinderGeometry,
   Group,
   InstancedMesh,
-  MeshLambertMaterial,
+  MeshBasicMaterial,
   TubeGeometry,
   Vector3,
 } from 'three';
-import { tempMatrix1, tempVec1 } from '../../../core/constants';
+import {
+  multiTempMatrix1,
+  tempMatrix1,
+  tempMatrix2,
+  tempVec1,
+  xVec,
+  zVec,
+} from '../../../core/constants';
 import { Plane } from './plane';
-
-const edgeMaterial = new MeshLambertMaterial({
-  color: 0x333333,
-  side: DoubleSide,
-});
 
 export class Container extends Group {
   constructor() {
@@ -82,63 +84,96 @@ export class Container extends Group {
       subCompInfo: { width: width, height: length },
     });
     this.topPlane.position.copy(new Vector3(0, height / 2, 0));
+
+    this.redrawEdges({ components, compInfo });
   }
 
-  // redrawRibLines({ components, compInfo }) {
-  //   const dividersDimension = compInfo.dividersDimension;
-  //   console.log('dividersDimension: ', dividersDimension);
+  makeEdgeMesh({ radius, length, count }) {
+    const geo = new CylinderGeometry(radius, radius, length);
+    const mat = new MeshBasicMaterial({ color: 0xaaaaaa });
+    const instMesh = new InstancedMesh(geo, mat, count);
+    return instMesh;
+  }
 
-  //   if (dividersDimension) {
-  //     const instMesh = new InstancedMesh(
-  //       new TubeGeometry(
-  //         new CatmullRomCurve3([
-  //           new Vector3(0, 0, -length / 2),
-  //           new Vector3(0, 0, length / 2),
-  //         ]),
-  //         10,
-  //         compInfo.ribLineDiameter / 2,
-  //         10,
-  //         false,
-  //       ),
-  //       new MeshLambertMaterial({
-  //         color: 0x333333,
-  //         side: DoubleSide,
-  //       }),
-  //       dividersDimension.length + 1,
-  //     );
-  //     let dividerCurX = 0;
+  redrawEdges({ components, compInfo }) {
+    const { width, height, length, edgeDiameter } = compInfo;
+    const netRadius = edgeDiameter / 2;
 
-  //     for (let i in dividersDimension) {
-  //       const dividerDimension = dividersDimension[i];
-  //       dividerCurX += dividerDimension.deltaX;
-  //       instMesh.setMatrixAt(
-  //         i,
-  //         tempMatrix1.setPosition(
-  //           tempVec1
-  //             .clone()
-  //             .set(
-  //               dividerCurX - width / 2 - dividerDimension.deltaX / 2,
-  //               height / 2 + compInfo.ribLineDiameter / 2,
-  //               0,
-  //             ),
-  //         ),
-  //       );
-  //     }
+    if (this.topHorizontalMesh) this.remove(this.topHorizontalMesh);
+    const topHorizontalMesh = this.makeEdgeMesh({
+      radius: netRadius,
+      length: width,
+      count: 2,
+    });
+    this.add(topHorizontalMesh);
+    this.topHorizontalMesh = topHorizontalMesh;
+    topHorizontalMesh.setMatrixAt(
+      0,
+      multiTempMatrix1.multiplyMatrices(
+        tempMatrix1.setPosition(
+          tempVec1.clone().set(0, height / 2, -length / 2),
+        ),
+        tempMatrix2.makeRotationAxis(zVec, Math.PI / 2),
+      ),
+    );
+    topHorizontalMesh.setMatrixAt(
+      1,
+      multiTempMatrix1.multiplyMatrices(
+        tempMatrix1.setPosition(
+          tempVec1.clone().set(0, height / 2, length / 2),
+        ),
+        tempMatrix2.makeRotationAxis(zVec, Math.PI / 2),
+      ),
+    );
 
-  //     const x = dividerCurX - width / 2 + (width - dividerCurX) / 2;
-  //     console.log('x: ', x);
-  //     instMesh.setMatrixAt(
-  //       dividersDimension.length,
-  //       tempMatrix1.setPosition(
-  //         tempVec1.clone().set(x, height / 2 + compInfo.ribLineDiameter / 2, 0),
-  //       ),
-  //     );
+    if (this.topVerticalMesh) this.remove(this.topVerticalMesh);
+    const topVerticalMesh = this.makeEdgeMesh({
+      radius: netRadius,
+      length: length,
+      count: 2,
+    });
+    this.add(topVerticalMesh);
+    this.topVerticalMesh = topVerticalMesh;
+    topVerticalMesh.setMatrixAt(
+      0,
+      multiTempMatrix1.multiplyMatrices(
+        tempMatrix1.setPosition(
+          tempVec1.clone().set(-width / 2, height / 2, 0),
+        ),
+        tempMatrix2.makeRotationAxis(xVec, Math.PI / 2),
+      ),
+    );
+    topVerticalMesh.setMatrixAt(
+      1,
+      multiTempMatrix1.multiplyMatrices(
+        tempMatrix1.setPosition(tempVec1.clone().set(width / 2, height / 2, 0)),
+        tempMatrix2.makeRotationAxis(xVec, Math.PI / 2),
+      ),
+    );
 
-  //     if (this.ribLineInstMesh) {
-  //       this.remove(this.ribLineInstMesh);
-  //     }
-  //     this.ribLineInstMesh = instMesh;
-  //     this.add(this.ribLineInstMesh);
-  //   }
-  // }
+    if (this.verticalMesh) this.remove(this.verticalMesh);
+    const verticalMesh = this.makeEdgeMesh({
+      radius: netRadius,
+      length: height,
+      count: 4,
+    });
+    this.add(verticalMesh);
+    this.verticalMesh = verticalMesh;
+    verticalMesh.setMatrixAt(
+      0,
+      tempMatrix1.setPosition(tempVec1.clone().set(-width / 2, 0, length / 2)),
+    );
+    verticalMesh.setMatrixAt(
+      1,
+      tempMatrix1.setPosition(tempVec1.clone().set(-width / 2, 0, -length / 2)),
+    );
+    verticalMesh.setMatrixAt(
+      2,
+      tempMatrix1.setPosition(tempVec1.clone().set(width / 2, 0, -length / 2)),
+    );
+    verticalMesh.setMatrixAt(
+      3,
+      tempMatrix1.setPosition(tempVec1.clone().set(width / 2, 0, length / 2)),
+    );
+  }
 }

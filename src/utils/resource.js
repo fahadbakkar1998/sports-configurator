@@ -295,7 +295,7 @@ export const items = [
                   hole_size: {
                     type: 'single',
                     name: 'HoleSize',
-                    value: 0.3,
+                    value: 0.6,
                     immutability: true,
                   },
                   diameter: {
@@ -604,7 +604,7 @@ export const items = [
               hole_size: {
                 type: 'single',
                 name: 'HoleSize',
-                value: 0.3,
+                value: 0.6,
                 immutability: true,
               },
               diameter: {
@@ -659,93 +659,6 @@ export const items = [
           {
             name: 'Open Sided Hitting Cage',
             image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
-            model_path: 'assets/models/gltf/Single Hitting Cage.glb',
-            type: '1',
-            format: 'gltf',
-            default_size: {
-              unit: 'ft',
-              width: 55,
-              // height: 12,
-              // length: 12,
-            },
-            accessories: [
-              {
-                name: 'Netting',
-                types: [
-                  {
-                    name: 'No Net',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: '#36 Poly-12*12- BD3227',
-                    extraPrice: 776,
-                  },
-                  {
-                    name: '#36 Poly-12*14- BD3227',
-                    extraPrice: 830,
-                  },
-                  {
-                    name: '#36 Nylon-12*12 with NetSeal - BC2270',
-                    extraPrice: 1308,
-                  },
-                  {
-                    name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
-                    extraPrice: 1385,
-                  },
-                ],
-              },
-              {
-                name: 'Pipe Gauge',
-                types: [
-                  {
-                    name: '13 Gauge',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: '10 Gauge',
-                    extraPrice: 146,
-                  },
-                ],
-              },
-              {
-                name: 'Coating',
-                types: [
-                  {
-                    name: 'Galvanized',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: 'Powder Coated Black',
-                    extraPrice: 2375,
-                  },
-                  {
-                    name: 'Powder-Coated-Brown',
-                    extraPrice: 2375,
-                  },
-                  {
-                    name: 'Powder-Coated-Green',
-                    extraPrice: 2375,
-                  },
-                ],
-              },
-              {
-                name: 'Delivery Address',
-                types: [
-                  {
-                    name: 'Commercial',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: 'Residential',
-                    extraPrice: 150,
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            name: 'Open Sided Hitting Cage',
-            image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
             format: 'configurator',
             configurator_name: 'openSided',
             type: '1',
@@ -783,13 +696,24 @@ export const items = [
                   hole_size: {
                     type: 'single',
                     name: 'HoleSize',
-                    value: 0.3,
+                    value: 0.6,
                     immutability: true,
                   },
                   diameter: {
                     type: 'single',
                     name: 'Diameter',
                     value: 0.03,
+                    immutability: true,
+                  },
+                },
+              },
+              edge: {
+                name: 'Edge',
+                value: {
+                  diameter: {
+                    type: 'single',
+                    name: 'Diameter',
+                    value: 0.6,
                     immutability: true,
                   },
                 },
@@ -2104,7 +2028,7 @@ export const items = [
               hole_size: {
                 type: 'single',
                 name: 'HoleSize',
-                value: 0.3,
+                value: 0.6,
                 immutability: true,
               },
               diameter: {
@@ -2159,89 +2083,66 @@ export const items = [
           {
             name: 'Open Sided Hitting Cage',
             image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
-            model_path: 'assets/models/gltf/Single Hitting Cage.glb',
+            format: 'configurator',
+            configurator_name: 'openSided',
             type: '5',
-            format: 'gltf',
+            unit: 'ft',
             default_size: {
-              unit: 'ft',
               width: 55,
-              // height: 12,
-              // length: 12,
+              height: 10,
+              length: 10,
+              unit: 'ft',
             },
-            accessories: [
-              {
-                name: 'Netting',
-                types: [
-                  {
-                    name: 'No Net',
-                    extraPrice: 0,
+            components: {
+              dimension: {
+                name: 'Dimension',
+                value: {
+                  length: {
+                    type: 'single',
+                    name: 'Length',
+                    value: 10,
                   },
-                  {
-                    name: '#36 Poly-12*12- BD3227',
-                    extraPrice: 776,
+                  width: {
+                    type: 'single',
+                    name: 'Width',
+                    value: 50,
                   },
-                  {
-                    name: '#36 Poly-12*14- BD3227',
-                    extraPrice: 830,
+                  height: {
+                    type: 'single',
+                    name: 'Height',
+                    value: 10,
                   },
-                  {
-                    name: '#36 Nylon-12*12 with NetSeal - BC2270',
-                    extraPrice: 1308,
-                  },
-                  {
-                    name: '#36 Nylon-12*14 with NetSeal - BC2470 ',
-                    extraPrice: 1385,
-                  },
-                ],
+                },
               },
-              {
-                name: 'Pipe Gauge',
-                types: [
-                  {
-                    name: '13 Gauge',
-                    extraPrice: 0,
+              net: {
+                name: 'Net',
+                value: {
+                  hole_size: {
+                    type: 'single',
+                    name: 'HoleSize',
+                    value: 0.6,
+                    immutability: true,
                   },
-                  {
-                    name: '10 Gauge',
-                    extraPrice: 146,
+                  diameter: {
+                    type: 'single',
+                    name: 'Diameter',
+                    value: 0.03,
+                    immutability: true,
                   },
-                ],
+                },
               },
-              {
-                name: 'Coating',
-                types: [
-                  {
-                    name: 'Galvanized',
-                    extraPrice: 0,
+              edge: {
+                name: 'Edge',
+                value: {
+                  diameter: {
+                    type: 'single',
+                    name: 'Diameter',
+                    value: 0.6,
+                    immutability: true,
                   },
-                  {
-                    name: 'Powder Coated Black',
-                    extraPrice: 2375,
-                  },
-                  {
-                    name: 'Powder-Coated-Brown',
-                    extraPrice: 2375,
-                  },
-                  {
-                    name: 'Powder-Coated-Green',
-                    extraPrice: 2375,
-                  },
-                ],
+                },
               },
-              {
-                name: 'Delivery Address',
-                types: [
-                  {
-                    name: 'Commercial',
-                    extraPrice: 0,
-                  },
-                  {
-                    name: 'Residential',
-                    extraPrice: 150,
-                  },
-                ],
-              },
-            ],
+            },
           },
         ],
       },
