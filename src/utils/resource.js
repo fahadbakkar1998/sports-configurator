@@ -658,7 +658,8 @@ export const items = [
           },
           {
             name: 'Open Sided Hitting Cage',
-            image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
+            image_path:
+              'assets/models/thumbnails/Open SIded Hitting Cage In.png',
             format: 'configurator',
             configurator_name: 'openSided',
             type: '1',
@@ -2084,7 +2085,8 @@ export const items = [
           },
           {
             name: 'Open Sided Hitting Cage',
-            image_path: 'assets/models/thumbnails/Single Hitting Cage.png',
+            image_path:
+              'assets/models/thumbnails/Open SIded Hitting Cage Out.png',
             format: 'configurator',
             configurator_name: 'openSided',
             type: '5',
