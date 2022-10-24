@@ -706,6 +706,7 @@ export const items = [
                     immutability: true,
                   },
                 },
+                immutability: true,
               },
               edge: {
                 name: 'Edge',
@@ -717,6 +718,7 @@ export const items = [
                     immutability: true,
                   },
                 },
+                immutability: true,
               },
             },
           },
