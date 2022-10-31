@@ -7,7 +7,7 @@ import {
   TubeGeometry,
   Vector3,
 } from 'three';
-import { tempMatrix1, tempVec1 } from '../../../core/constants';
+import { netColor, tempMatrix1, tempVec1 } from '../../../core/constants';
 import { OutPlane } from './out.plane';
 
 export class OutContainer extends Group {
@@ -101,7 +101,7 @@ export class OutContainer extends Group {
           false,
         ),
         new MeshLambertMaterial({
-          color: 0x333333,
+          color: netColor,
           side: DoubleSide,
         }),
         dividersDimension.length + 1,

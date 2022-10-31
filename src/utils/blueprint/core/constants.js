@@ -46,3 +46,5 @@ export const tempMatrix2 = new Matrix4();
 export const xVec = new Vector3(1, 0, 0);
 export const yVec = new Vector3(0, 1, 0);
 export const zVec = new Vector3(0, 0, 1);
+
+export const netColor = 0x333333;

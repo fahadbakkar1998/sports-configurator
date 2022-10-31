@@ -7,7 +7,7 @@ import {
   DoubleSide,
   InstancedMesh,
 } from 'three';
-import { tempMatrix1, tempVec1 } from '../../../core/constants';
+import { netColor, tempMatrix1, tempVec1 } from '../../../core/constants';
 import { Dimensioning } from '../../../core/dimensioning';
 
 export class Net extends Group {
@@ -46,7 +46,7 @@ export class Net extends Group {
         false,
       ),
       new MeshLambertMaterial({
-        color: 0x333333,
+        color: netColor,
         side: DoubleSide,
       }),
       verticalCnt,
@@ -83,7 +83,7 @@ export class Net extends Group {
         false,
       ),
       new MeshLambertMaterial({
-        color: 0x333333,
+        color: netColor,
         side: DoubleSide,
       }),
       horizontalCnt,

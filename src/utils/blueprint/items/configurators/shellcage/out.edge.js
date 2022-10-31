@@ -7,6 +7,7 @@ import {
   Geometry,
 } from 'three';
 import { addFaces } from '../../../../../common';
+import { netColor } from '../../../core/constants';
 
 export class OutEdge extends Group {
   constructor() {
@@ -26,7 +27,7 @@ export class OutEdge extends Group {
     addFaces(geometry);
     this.edgeMesh = new Mesh(
       geometry,
-      new MeshBasicMaterial({ side: DoubleSide, color: 0x333333 }),
+      new MeshBasicMaterial({ side: DoubleSide, color: netColor }),
     );
     this.add(this.edgeMesh);
   }
