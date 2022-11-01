@@ -798,9 +798,9 @@ export const items = [
           },
           {
             name: 'Turf Mats',
-            image_path: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
+            image_path: 'assets/models/thumbnails/Turf Mats/Turf Mats.png',
             format: 'configurator',
-            configurator_name: 'horizontality',
+            configurator_name: 'turfMats',
             type: '1',
             unit: 'ft',
             default_size: {
@@ -810,8 +810,8 @@ export const items = [
             },
             max_size: 1000,
             components: {
-              width: { type: 'single', name: 'Width', value: 10 },
-              length: { type: 'single', name: 'Length', value: 10 },
+              length: { type: 'single', name: 'Length', value: 6 },
+              width: { type: 'single', name: 'Width', value: 12 },
               material: {
                 type: 'material',
                 name: 'Material',
@@ -2141,7 +2141,7 @@ export const items = [
                   diameter: {
                     type: 'single',
                     name: 'Diameter',
-                    value: 0.6,
+                    value: 0.2,
                     immutability: true,
                   },
                 },
@@ -2205,9 +2205,9 @@ export const items = [
           },
           {
             name: 'Turf Mats',
-            image_path: 'assets/models/thumbnails/Turf Mats/WinterGreen.jpg',
+            image_path: 'assets/models/thumbnails/Turf Mats/Turf Mats.png',
             format: 'configurator',
-            configurator_name: 'horizontality',
+            configurator_name: 'turfMats',
             type: '5',
             unit: 'ft',
             default_size: {
@@ -2217,8 +2217,8 @@ export const items = [
             },
             max_size: 1000,
             components: {
-              width: { type: 'single', name: 'Width', value: 10 },
               length: { type: 'single', name: 'Length', value: 10 },
+              width: { type: 'single', name: 'Width', value: 10 },
               material: {
                 type: 'material',
                 name: 'Material',

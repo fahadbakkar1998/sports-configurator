@@ -14,6 +14,7 @@ import { Aplomb } from './configurators/aplomb';
 import { Basketball } from './configurators/basketball';
 import { DividerCurtain } from './configurators/divider.curtain';
 import { OpenSided } from './configurators/open.sided';
+import { TurfMats } from './configurators/turf.mats';
 
 export const item_types = {
   0: Item,
@@ -32,6 +33,7 @@ export const item_types = {
   basketball: Basketball,
   dividerCurtain: DividerCurtain,
   openSided: OpenSided,
+  turfMats: TurfMats,
 };
 
 /* Factory class to create items. */
