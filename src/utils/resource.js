@@ -715,7 +715,7 @@ export const items = [
                   diameter: {
                     type: 'single',
                     name: 'Diameter',
-                    value: 0.6,
+                    value: 0.2,
                     immutability: true,
                   },
                 },

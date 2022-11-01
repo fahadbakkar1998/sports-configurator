@@ -90,7 +90,7 @@ export class Container extends Group {
 
   makeEdgeMesh({ radius, length, count }) {
     const geo = new CylinderGeometry(radius, radius, length);
-    const mat = new MeshBasicMaterial({ color: 0xaaaaaa });
+    const mat = new MeshBasicMaterial({ color: 0x111 });
     const instMesh = new InstancedMesh(geo, mat, count);
     return instMesh;
   }
