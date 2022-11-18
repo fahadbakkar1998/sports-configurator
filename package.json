@@ -20,6 +20,7 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "classnames": "^2.3.1",
+    "concurrently": "^7.5.0",
     "console-browserify": "^1.2.0",
     "crypto-browserify": "^3.12.0",
     "draco3dgltf": "^1.5.2",
@@ -74,7 +75,7 @@
     "npm-run-all": "^4.0.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "concurrently \"react-app-rewired start\" \"cd backend && nodemon atlas.server.js\"",
     "build": "craco build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
