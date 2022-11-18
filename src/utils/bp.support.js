@@ -24,9 +24,12 @@ export const saveCart = async ({ productId }) => {
     .join(',');
   // console.log('save design: ', name, info);
   if (productId) {
-    await axios.post(`${backendUrl}/update/${productId}`, { name, info });
+    return await axios.post(`${backendUrl}/update/${productId}`, {
+      name,
+      info,
+    });
   } else {
-    await axios.post(`${backendUrl}/add`, { name, info });
+    return await axios.post(`${backendUrl}/add`, { name, info });
   }
 };
 

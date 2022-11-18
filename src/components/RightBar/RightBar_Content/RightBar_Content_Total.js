@@ -20,6 +20,7 @@ const RightBar_Content_Total = () => {
     setProducts,
     selProductId,
     setSelProductId,
+    setLoading,
   } = useZustand();
 
   useEffect(() => {
@@ -45,7 +46,9 @@ const RightBar_Content_Total = () => {
   }, [bpJS]);
 
   const loadProducts = async () => {
+    setLoading(true);
     const res = await axios.get(`${backendUrl}/`);
+    setLoading(false);
     setProducts(res.data);
     if (res.data && res.data.length && selProductId) {
       const firstProductId = res.data[0]._id;
@@ -56,7 +59,9 @@ const RightBar_Content_Total = () => {
   };
 
   const loadProductScene = async (productId) => {
-    loadCart(productId);
+    setLoading(true);
+    await loadCart(productId);
+    setLoading(false);
     setSelProductId(productId);
   };
 
@@ -94,7 +99,9 @@ const RightBar_Content_Total = () => {
                   className="item-remove"
                   src="assets/images/close.png"
                   onClick={async () => {
+                    setLoading(true);
                     await axios.post(`${backendUrl}/remove/${product._id}`);
+                    setLoading(false);
                     loadProducts();
                   }}
                 />

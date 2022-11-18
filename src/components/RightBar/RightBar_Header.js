@@ -5,7 +5,8 @@ import axios from 'axios';
 import { backendUrl } from '../../constants';
 
 const RightBar_Header = () => {
-  const { selProductId, setProducts } = useZustand();
+  const { selProductId, setProducts, setLoading, setSelProductId } =
+    useZustand();
 
   return (
     <div className="RightBar_Header">
@@ -17,11 +18,16 @@ const RightBar_Header = () => {
       <div
         className="item"
         onClick={async () => {
-          await saveCart({ productId: selProductId });
+          setLoading(true);
+          const res = await saveCart({ productId: selProductId });
+          setSelProductId(res.data.insertedId);
+
           if (!selProductId) {
             const res = await axios.get(`${backendUrl}/`);
             setProducts(res.data);
           }
+
+          setLoading(false);
         }}>
         Save to Cart
       </div>
