@@ -13,17 +13,17 @@ export class FloorItem extends Item {
 
   /* */
   placeInRoom() {
-    if (!this.position_set) {
-      let center = this.model.floorplan.getCenter();
-      this.position.x = center.x;
-      this.position.z = center.z;
-      this.position.y =
-        0.5 *
-          (this.geometry.boundingBox.max.y - this.geometry.boundingBox.min.y) +
-        itemLayerHeight;
-    }
+    // if (!this.position_set) {
+    //   let center = this.model.floorplan.getCenter();
+    //   this.position.x = center.x;
+    //   this.position.z = center.z;
+    //   this.position.y =
+    //     0.5 *
+    //       (this.geometry.boundingBox.max.y - this.geometry.boundingBox.min.y) +
+    //     itemLayerHeight;
+    // }
   }
-
+  
   /* Take action after a resize */
   resized() {
     this.position.y = this.halfSize.y;
@@ -47,22 +47,22 @@ export class FloorItem extends Item {
   isValidPosition(vec3) {
     let corners = this.getCorners('x', 'z', vec3);
 
-    // check if we are in a room
-    let rooms = this.model.floorplan.getRooms();
-    let isInARoom = false;
-    for (let i = 0; i < rooms.length; i++) {
-      const inPolygon = Utils.polygonInsidePolygon(
-        corners,
-        rooms[i].interiorCorners,
-      );
-      if (
-        inPolygon &&
-        !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
-      ) {
-        isInARoom = true;
-      }
-    }
-    if (!isInARoom) return false;
+    // // check if we are in a room
+    // let rooms = this.model.floorplan.getRooms();
+    // let isInARoom = false;
+    // for (let i = 0; i < rooms.length; i++) {
+    //   const inPolygon = Utils.polygonInsidePolygon(
+    //     corners,
+    //     rooms[i].interiorCorners,
+    //   );
+    //   if (
+    //     inPolygon &&
+    //     !Utils.polygonPolygonIntersect(corners, rooms[i].interiorCorners)
+    //   ) {
+    //     isInARoom = true;
+    //   }
+    // }
+    // if (!isInARoom) return false;
 
     // check if we are outside all other objects
     if (this.obstructFloorMoves) {

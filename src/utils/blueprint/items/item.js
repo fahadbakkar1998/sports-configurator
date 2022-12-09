@@ -6,7 +6,7 @@ import {
   MeshBasicMaterial,
   AdditiveBlending,
 } from 'three';
-import { CanvasTexture, PlaneGeometry, DoubleSide } from 'three';
+import { CanvasTexture, PlaneGeometry, DoubleSide, BoxHelper } from 'three';
 import { Color } from 'three';
 import { Utils } from '../core/utils.js';
 import { Dimensioning } from '../core/dimensioning.js';
@@ -447,7 +447,10 @@ export class Item extends Mesh {
     this.placeInRoom();
 
     // adjust size
-    if (this.getWidth() + this.getHeight() + this.getDepth() < 50 * floorPlanerScale) {
+    if (
+      this.getWidth() + this.getHeight() + this.getDepth() <
+      50 * floorPlanerScale
+    ) {
       this.resize({ width: 50, proportionally: true });
     }
 

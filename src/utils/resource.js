@@ -30,9 +30,14 @@ export const items = [
           },
           {
             name: 'Custom Size',
-            image_path: 'assets/models/thumbnails/Building/Custom.png',
-            format: 'building',
-            size_key: 'custom',
+            children: [
+              {
+                name: 'Custom Size',
+                image_path: 'assets/models/thumbnails/Building/Custom.png',
+                format: 'building',
+                size_key: 'custom',
+              },
+            ],
           },
         ],
       },
@@ -160,277 +165,282 @@ export const items = [
           },
           {
             name: 'ShellCage Multi-Lane',
-            image_path: 'assets/models/thumbnails/Shell Cage.png',
-            format: 'configurator',
-            configurator_name: 'shellcage',
-            type: '1',
-            unit: 'ft',
-            default_size: {
-              width: 40,
-              height: 10,
-              length: 60,
-              unit: 'ft',
-            },
-            max_size: 100,
-            components: {
-              lanes: {
-                type: 'select',
-                name: 'Lanes',
-                value: '4',
-                options: [
-                  { name: '1 lane', value: '1' },
-                  { name: '2 lane', value: '2' },
-                  { name: '3 lane', value: '3' },
-                  { name: '4 lane', value: '4' },
-                ],
-              },
-              net: {
-                name: 'Net',
-                value: {
-                  use: {
+            children: [
+              {
+                name: 'ShellCage Multi-Lane',
+                image_path: 'assets/models/thumbnails/Shell Cage.png',
+                format: 'configurator',
+                configurator_name: 'shellcage',
+                type: '1',
+                unit: 'ft',
+                default_size: {
+                  width: 40,
+                  height: 10,
+                  length: 60,
+                  unit: 'ft',
+                },
+                max_size: 100,
+                components: {
+                  lanes: {
                     type: 'select',
-                    name: 'Use',
-                    value: 'baseball',
+                    name: 'Lanes',
+                    value: '4',
                     options: [
-                      { name: 'Baseball', value: 'baseball' },
-                      { name: 'Golf', value: 'golf' },
+                      { name: '1 lane', value: '1' },
+                      { name: '2 lane', value: '2' },
+                      { name: '3 lane', value: '3' },
+                      { name: '4 lane', value: '4' },
                     ],
                   },
-                  net_type: {
-                    type: 'select',
-                    name: 'Net Type',
-                    value: 'nylon21',
-                    options: [
-                      {
-                        name: '#21 Nylon 1-7/8" STANDARD',
+                  net: {
+                    name: 'Net',
+                    value: {
+                      use: {
+                        type: 'select',
+                        name: 'Use',
+                        value: 'baseball',
+                        options: [
+                          { name: 'Baseball', value: 'baseball' },
+                          { name: 'Golf', value: 'golf' },
+                        ],
+                      },
+                      net_type: {
+                        type: 'select',
+                        name: 'Net Type',
                         value: 'nylon21',
-                      },
-                      {
-                        name: '#21 Nylon 1-7/8" LATEX DIP',
-                        value: 'nylon21latex',
-                      },
-                      {
-                        name: '#21 Nylon 1-7/8" DuPont 66-728',
-                        value: 'nylon21dupont',
-                      },
-                      {
-                        name: '#21 Nylon 1-7/8" Varnish Dip',
-                        value: 'nylon21varnish',
-                      },
+                        options: [
+                          {
+                            name: '#21 Nylon 1-7/8" STANDARD',
+                            value: 'nylon21',
+                          },
+                          {
+                            name: '#21 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon21latex',
+                          },
+                          {
+                            name: '#21 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon21dupont',
+                          },
+                          {
+                            name: '#21 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon21varnish',
+                          },
 
-                      {
-                        name: '#36 Nylon 1-7/8" STANDARD',
-                        value: 'nylon36',
-                      },
-                      {
-                        name: '#36 Nylon 1-7/8" LATEX DIP',
-                        value: 'nylon36latex',
-                      },
-                      {
-                        name: '#36 Nylon 1-7/8" DuPont 66-728',
-                        value: 'nylon36dupont',
-                      },
-                      {
-                        name: '#36 Nylon 1-7/8" Varnish Dip',
-                        value: 'nylon36varnish',
-                      },
+                          {
+                            name: '#36 Nylon 1-7/8" STANDARD',
+                            value: 'nylon36',
+                          },
+                          {
+                            name: '#36 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon36latex',
+                          },
+                          {
+                            name: '#36 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon36dupont',
+                          },
+                          {
+                            name: '#36 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon36varnish',
+                          },
 
-                      {
-                        name: '#42 Nylon 1-7/8" STANDARD',
-                        value: 'nylon42',
-                      },
-                      {
-                        name: '#42 Nylon 1-7/8" LATEX DIP',
-                        value: 'nylon42latex',
-                      },
-                      {
-                        name: '#42 Nylon 1-7/8" DuPont 66-728',
-                        value: 'nylon42dupont',
-                      },
-                      {
-                        name: '#42 Nylon 1-7/8" Varnish Dip',
-                        value: 'nylon42varnish',
-                      },
+                          {
+                            name: '#42 Nylon 1-7/8" STANDARD',
+                            value: 'nylon42',
+                          },
+                          {
+                            name: '#42 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon42latex',
+                          },
+                          {
+                            name: '#42 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon42dupont',
+                          },
+                          {
+                            name: '#42 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon42varnish',
+                          },
 
-                      {
-                        name: '#48 Nylon 1-7/8" STANDARD',
-                        value: 'nylon48',
-                      },
-                      {
-                        name: '#48 Nylon 1-7/8" LATEX DIP',
-                        value: 'nylon48latex',
-                      },
+                          {
+                            name: '#48 Nylon 1-7/8" STANDARD',
+                            value: 'nylon48',
+                          },
+                          {
+                            name: '#48 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon48latex',
+                          },
 
-                      {
-                        name: '#60 Nylon 1-7/8" STANDARD',
-                        value: 'nylon60',
-                      },
-                      {
-                        name: '#60 Nylon 1-7/8" LATEX DIP',
-                        value: 'nylon60latex',
-                      },
-                      {
-                        name: '#60 Nylon 1-7/8" DuPont 66-728',
-                        value: 'nylon60dupont',
-                      },
-                      {
-                        name: '#60 Nylon 1-7/8" Varnish Dip',
-                        value: 'nylon60varnish',
-                      },
+                          {
+                            name: '#60 Nylon 1-7/8" STANDARD',
+                            value: 'nylon60',
+                          },
+                          {
+                            name: '#60 Nylon 1-7/8" LATEX DIP',
+                            value: 'nylon60latex',
+                          },
+                          {
+                            name: '#60 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon60dupont',
+                          },
+                          {
+                            name: '#60 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon60varnish',
+                          },
 
+                          {
+                            name: '#96 Nylon 1-7/8" DuPont 66-728',
+                            value: 'nylon96dupont',
+                          },
+                          {
+                            name: '#96 Nylon 1-7/8" Varnish Dip',
+                            value: 'nylon96varnish',
+                          },
+
+                          { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
+
+                          { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
+                        ],
+                      },
+                      hole_size: {
+                        type: 'single',
+                        name: 'HoleSize',
+                        value: 0.6,
+                        immutability: true,
+                      },
+                      diameter: {
+                        type: 'single',
+                        name: 'Diameter',
+                        value: 0.03,
+                        immutability: true,
+                      },
+                    },
+                  },
+                  out_container: {
+                    name: 'Exterior',
+                    value: {
+                      length: { type: 'single', name: 'Length', value: 60 },
+                      width: {
+                        type: 'single',
+                        name: 'Width',
+                        value: 40,
+                        immutability: true,
+                      },
+                      height: { type: 'single', name: 'Height', value: 10 },
+                    },
+                  },
+                  out_edge: {
+                    name: 'Rungs',
+                    value: {
+                      thickness: {
+                        type: 'single',
+                        name: 'Thickness',
+                        value: 0.4,
+                        immutability: true,
+                      },
+                    },
+                    immutability: true,
+                  },
+                  in_container: {
+                    name: 'Interior',
+                    value: {
+                      gap: {
+                        type: 'single',
+                        name: 'Gap',
+                        value: 0.2,
+                        immutability: true,
+                      },
+                      deltaZ: {
+                        type: 'interval',
+                        name: 'Length',
+                        value: [0, 60],
+                      },
+                    },
+                  },
+                  dividers: {
+                    name: 'Dividers',
+                    addition: {
+                      deltaX: {
+                        type: 'single',
+                        type: 'single',
+                        name: 'Lane Width',
+                        value: 10,
+                      },
+                      deltaZ: {
+                        type: 'single',
+                        type: 'interval',
+                        name: 'Length',
+                        value: [0, 60],
+                      },
+                    },
+                    value: [
                       {
-                        name: '#96 Nylon 1-7/8" DuPont 66-728',
-                        value: 'nylon96dupont',
+                        name: 'Divider 1',
+                        value: {
+                          deltaX: {
+                            type: 'single',
+                            name: 'Lane Width',
+                            value: 10,
+                          },
+                          deltaZ: {
+                            type: 'interval',
+                            name: 'Length',
+                            value: [0, 60],
+                          },
+                        },
                       },
                       {
-                        name: '#96 Nylon 1-7/8" Varnish Dip',
-                        value: 'nylon96varnish',
+                        name: 'Divider 2',
+                        value: {
+                          deltaX: {
+                            type: 'single',
+                            name: 'Lane Width',
+                            value: 10,
+                          },
+                          deltaZ: {
+                            type: 'interval',
+                            name: 'Length',
+                            value: [0, 60],
+                          },
+                        },
                       },
-
-                      { name: '#21 Poly 1-7/8" STANDARD', value: 'poly21' },
-
-                      { name: '#36 Poly 1-7/8" STANDARD', value: 'poly36' },
+                      {
+                        name: 'Divider 3',
+                        value: {
+                          deltaX: {
+                            type: 'single',
+                            name: 'Lane Width',
+                            value: 10,
+                          },
+                          deltaZ: {
+                            type: 'interval',
+                            name: 'Length',
+                            value: [0, 60],
+                          },
+                        },
+                      },
                     ],
                   },
-                  hole_size: {
-                    type: 'single',
-                    name: 'HoleSize',
-                    value: 0.6,
-                    immutability: true,
-                  },
-                  diameter: {
-                    type: 'single',
-                    name: 'Diameter',
-                    value: 0.03,
-                    immutability: true,
-                  },
-                },
-              },
-              out_container: {
-                name: 'Exterior',
-                value: {
-                  length: { type: 'single', name: 'Length', value: 60 },
-                  width: {
-                    type: 'single',
-                    name: 'Width',
-                    value: 40,
-                    immutability: true,
-                  },
-                  height: { type: 'single', name: 'Height', value: 10 },
-                },
-              },
-              out_edge: {
-                name: 'Rungs',
-                value: {
-                  thickness: {
-                    type: 'single',
-                    name: 'Thickness',
-                    value: 0.4,
-                    immutability: true,
-                  },
-                },
-                immutability: true,
-              },
-              in_container: {
-                name: 'Interior',
-                value: {
-                  gap: {
-                    type: 'single',
-                    name: 'Gap',
-                    value: 0.2,
-                    immutability: true,
-                  },
-                  deltaZ: {
-                    type: 'interval',
-                    name: 'Length',
-                    value: [0, 60],
-                  },
-                },
-              },
-              dividers: {
-                name: 'Dividers',
-                addition: {
-                  deltaX: {
-                    type: 'single',
-                    type: 'single',
-                    name: 'Lane Width',
-                    value: 10,
-                  },
-                  deltaZ: {
-                    type: 'single',
-                    type: 'interval',
-                    name: 'Length',
-                    value: [0, 60],
-                  },
-                },
-                value: [
-                  {
-                    name: 'Divider 1',
+                  rib_line: {
+                    name: 'RibLine',
                     value: {
-                      deltaX: {
+                      diameter: {
                         type: 'single',
-                        name: 'Lane Width',
-                        value: 10,
+                        name: 'Diameter',
+                        value: 0.2,
+                        immutability: true,
                       },
-                      deltaZ: {
-                        type: 'interval',
-                        name: 'Length',
-                        value: [0, 60],
+                      allowableLaneWidth: {
+                        type: 'single',
+                        name: 'Limit Lane Width',
+                        value: 10,
+                        immutability: true,
                       },
                     },
-                  },
-                  {
-                    name: 'Divider 2',
-                    value: {
-                      deltaX: {
-                        type: 'single',
-                        name: 'Lane Width',
-                        value: 10,
-                      },
-                      deltaZ: {
-                        type: 'interval',
-                        name: 'Length',
-                        value: [0, 60],
-                      },
-                    },
-                  },
-                  {
-                    name: 'Divider 3',
-                    value: {
-                      deltaX: {
-                        type: 'single',
-                        name: 'Lane Width',
-                        value: 10,
-                      },
-                      deltaZ: {
-                        type: 'interval',
-                        name: 'Length',
-                        value: [0, 60],
-                      },
-                    },
-                  },
-                ],
-              },
-              rib_line: {
-                name: 'RibLine',
-                value: {
-                  diameter: {
-                    type: 'single',
-                    name: 'Diameter',
-                    value: 0.2,
-                    immutability: true,
-                  },
-                  allowableLaneWidth: {
-                    type: 'single',
-                    name: 'Limit Lane Width',
-                    value: 10,
+                    price_per_unit: 0.9,
                     immutability: true,
                   },
                 },
-                price_per_unit: 0.9,
-                immutability: true,
               },
-            },
+            ],
           },
           {
             name: 'Electric Retractable Cage',
@@ -723,25 +733,21 @@ export const items = [
               },
             },
           },
+          {
+            name: 'Soccer Goals',
+            image_path: 'assets/models/thumbnails/Goals.png',
+            model_path: 'assets/models/gltf/Goals.glb',
+            type: '1',
+            format: 'gltf',
+            default_size: {
+              name: '24W*8H',
+              unit: 'ft',
+              width: 24,
+              // height: 8,
+              // length: 5,
+            },
+          },
         ],
-      },
-      // {
-      //   name: "Pitcher's Screens",
-      //   image_path: 'logo512.png',
-      // },
-      {
-        name: 'Soccer Goals',
-        image_path: 'assets/models/thumbnails/Goals.png',
-        model_path: 'assets/models/gltf/Goals.glb',
-        type: '1',
-        format: 'gltf',
-        default_size: {
-          name: '24W*8H',
-          unit: 'ft',
-          width: 24,
-          // height: 8,
-          // length: 5,
-        },
       },
       {
         name: 'Surfaces',
@@ -1584,7 +1590,7 @@ export const items = [
             name: 'Varsity',
             image_path: 'assets/models/thumbnails/Outdoor Varsity 70.png',
             model_path: 'assets/models/gltf/Outdoor Varsity 70.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -1681,7 +1687,7 @@ export const items = [
             name: 'Collegiate',
             image_path: 'assets/models/thumbnails/Outdoor Collegiate 70.png',
             model_path: 'assets/models/gltf/Outdoor Collegiate 70.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -1761,7 +1767,7 @@ export const items = [
             name: 'Pro Single',
             image_path: 'assets/models/thumbnails/Outdoor Pro 70.png',
             model_path: 'assets/models/gltf/Outdoor Pro 70.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -1779,70 +1785,12 @@ export const items = [
                 length: 14,
               },
             ],
-            // staticSizes: [
-            //   {
-            //     name: '55W*12H*14L',
-            //     unit: 'ft',
-            //     width: 55,
-            //     height: 12,
-            //     length: 14,
-            //     extraPrice: 44,
-            //   },
-            //   {
-            //     name: '70W*12H*14L',
-            //     unit: 'ft',
-            //     width: 70,
-            //     height: 12,
-            //     length: 14,
-            //     extraPrice: 123,
-            //   },
-            //   {
-            //     name: '80W*12H*14L',
-            //     unit: 'ft',
-            //     width: 80,
-            //     height: 12,
-            //     length: 14,
-            //     extraPrice: 158,
-            //   },
-            //   {
-            //     name: '70W*12H*12L',
-            //     unit: 'ft',
-            //     width: 70,
-            //     height: 12,
-            //     length: 12,
-            //     extraPrice: 213,
-            //   },
-            //   {
-            //     name: '55W*14H*14L',
-            //     unit: 'ft',
-            //     width: 55,
-            //     height: 14,
-            //     length: 14,
-            //     extraPrice: 1169,
-            //   },
-            //   {
-            //     name: '70W*14H*14L',
-            //     unit: 'ft',
-            //     width: 70,
-            //     height: 14,
-            //     length: 14,
-            //     extraPrice: 1310,
-            //   },
-            //   {
-            //     name: '80W*14H*14L',
-            //     unit: 'ft',
-            //     width: 80,
-            //     height: 14,
-            //     length: 14,
-            //     extraPrice: 1424,
-            //   },
-            // ],
           },
           {
             name: 'Pro Double',
             image_path: 'assets/models/thumbnails/Outdoor Pro 2x55.png',
             model_path: 'assets/models/gltf/Outdoor Pro 2x55.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -1919,7 +1867,7 @@ export const items = [
             image_path: 'assets/models/thumbnails/Barrier Net.png',
             format: 'configurator',
             configurator_name: 'net',
-            type: '5',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 40,
@@ -2046,7 +1994,7 @@ export const items = [
             name: 'Tunnel (Single / Double / Triple / Quad)',
             image_path: 'assets/models/thumbnails/Phantom.png',
             model_path: 'assets/models/gltf/Phantom.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               unit: 'ft',
@@ -2089,7 +2037,7 @@ export const items = [
               'assets/models/thumbnails/Open SIded Hitting Cage Out.png',
             format: 'configurator',
             configurator_name: 'openSided',
-            type: '5',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 55,
@@ -2158,7 +2106,7 @@ export const items = [
             image_path: 'assets/models/thumbnails/Turf Rolls/1.jpg',
             format: 'configurator',
             configurator_name: 'horizontality',
-            type: '5',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 12,
@@ -2208,7 +2156,7 @@ export const items = [
             image_path: 'assets/models/thumbnails/Turf Mats/Turf Mats.png',
             format: 'configurator',
             configurator_name: 'turfMats',
-            type: '5',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 10,
@@ -2254,7 +2202,7 @@ export const items = [
             image_path: 'assets/models/thumbnails/Rubber/1.jpg',
             format: 'configurator',
             configurator_name: 'horizontality',
-            type: '5',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 4,
@@ -2304,7 +2252,7 @@ export const items = [
             image_path: 'assets/models/thumbnails/Basketball.png',
             format: 'configurator',
             configurator_name: 'basketball',
-            type: '5',
+            type: '1',
             unit: 'ft',
             default_size: {
               width: 100,
@@ -2913,104 +2861,13 @@ export const items = [
         ],
       },
       {
-        name: 'Windscreens',
-        image_path: 'assets/models/thumbnails/Windscreens/1.png',
-        format: 'configurator',
-        configurator_name: 'aplomb',
-        type: '5',
-        unit: 'ft',
-        default_size: {
-          width: 16,
-          height: 10,
-          unit: 'ft',
-        },
-        max_size: 1000,
-        components: {
-          width: { type: 'single', name: 'Width', value: 16 },
-          height: { type: 'single', name: 'Height', value: 10 },
-          opacity: {
-            type: 'single',
-            name: 'Opacity',
-            value: 0.3,
-            offset: 0.01,
-          },
-          material: {
-            type: 'material',
-            name: 'Material',
-            value: 'assets/models/thumbnails/Windscreens/1.png',
-            piece_size: { width: 30, height: 30 },
-            options: [
-              {
-                name: '1',
-                value: 'assets/models/thumbnails/Windscreens/1.png',
-              },
-              {
-                name: '2',
-                value: 'assets/models/thumbnails/Windscreens/2.png',
-              },
-              {
-                name: '3',
-                value: 'assets/models/thumbnails/Windscreens/3.png',
-              },
-              {
-                name: '4',
-                value: 'assets/models/thumbnails/Windscreens/4.png',
-              },
-              {
-                name: '5',
-                value: 'assets/models/thumbnails/Windscreens/5.png',
-              },
-              {
-                name: '6',
-                value: 'assets/models/thumbnails/Windscreens/6.png',
-              },
-              {
-                name: '7',
-                value: 'assets/models/thumbnails/Windscreens/7.png',
-              },
-              {
-                name: '8',
-                value: 'assets/models/thumbnails/Windscreens/8.png',
-              },
-              {
-                name: '9',
-                value: 'assets/models/thumbnails/Windscreens/9.png',
-              },
-              {
-                name: '10',
-                value: 'assets/models/thumbnails/Windscreens/10.png',
-              },
-            ],
-            immutability: true,
-          },
-        },
-      },
-      // {
-      //   name: "Pitcher's Screens",
-      //   image_path: 'logo512.png',
-      // },
-      {
-        name: 'Soccer Goals',
-        image_path: 'assets/models/thumbnails/Goals.png',
-        model_path: 'assets/models/gltf/Goals.glb',
-        type: '5',
-        format: 'gltf',
-        default_size: {
-          name: '24W*8H',
-          unit: 'ft',
-          width: 24,
-          // height: 8,
-          // length: 5,
-        },
-      },
-      {
         name: 'Training Equipment',
         children: [
           {
             name: 'L-Screen',
             image_path: 'assets/models/thumbnails/L-Screen.png',
             model_path: 'assets/models/gltf/L Screen.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               name: '7W*9H',
@@ -3088,7 +2945,7 @@ export const items = [
             name: 'Softball Screen',
             image_path: 'assets/models/thumbnails/Softball Screen.png',
             model_path: 'assets/models/gltf/Softball Screen.glb',
-            type: '5',
+            type: '1',
             format: 'gltf',
             default_size: {
               name: '5W*7H',
@@ -3161,6 +3018,98 @@ export const items = [
                 ],
               },
             ],
+          },
+        ],
+      },
+      {
+        name: 'Other',
+        children: [
+          {
+            name: 'Windscreens',
+            image_path: 'assets/models/thumbnails/Windscreens/1.png',
+            format: 'configurator',
+            configurator_name: 'aplomb',
+            type: '1',
+            unit: 'ft',
+            default_size: {
+              width: 16,
+              height: 10,
+              unit: 'ft',
+            },
+            max_size: 1000,
+            components: {
+              width: { type: 'single', name: 'Width', value: 16 },
+              height: { type: 'single', name: 'Height', value: 10 },
+              opacity: {
+                type: 'single',
+                name: 'Opacity',
+                value: 0.3,
+                offset: 0.01,
+              },
+              material: {
+                type: 'material',
+                name: 'Material',
+                value: 'assets/models/thumbnails/Windscreens/1.png',
+                piece_size: { width: 30, height: 30 },
+                options: [
+                  {
+                    name: '1',
+                    value: 'assets/models/thumbnails/Windscreens/1.png',
+                  },
+                  {
+                    name: '2',
+                    value: 'assets/models/thumbnails/Windscreens/2.png',
+                  },
+                  {
+                    name: '3',
+                    value: 'assets/models/thumbnails/Windscreens/3.png',
+                  },
+                  {
+                    name: '4',
+                    value: 'assets/models/thumbnails/Windscreens/4.png',
+                  },
+                  {
+                    name: '5',
+                    value: 'assets/models/thumbnails/Windscreens/5.png',
+                  },
+                  {
+                    name: '6',
+                    value: 'assets/models/thumbnails/Windscreens/6.png',
+                  },
+                  {
+                    name: '7',
+                    value: 'assets/models/thumbnails/Windscreens/7.png',
+                  },
+                  {
+                    name: '8',
+                    value: 'assets/models/thumbnails/Windscreens/8.png',
+                  },
+                  {
+                    name: '9',
+                    value: 'assets/models/thumbnails/Windscreens/9.png',
+                  },
+                  {
+                    name: '10',
+                    value: 'assets/models/thumbnails/Windscreens/10.png',
+                  },
+                ],
+                immutability: true,
+              },
+            },
+          },
+          {
+            name: 'Soccer Goals',
+            image_path: 'assets/models/thumbnails/Goals.png',
+            model_path: 'assets/models/gltf/Goals.glb',
+            type: '1',
+            format: 'gltf',
+            default_size: {
+              name: '24W*8H',
+              unit: 'ft',
+              width: 24,
+              // height: 8,
+              // length: 5,
+            },
           },
         ],
       },
